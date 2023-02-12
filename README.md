@@ -24,7 +24,7 @@ vite && yarn dev
 
 ## Folder Structure
 
-```angular2html
+```text
 ├── src
 ├── api
 ├── assets
