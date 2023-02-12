@@ -13,3 +13,11 @@ yarn install && yarn
 ```bash
 vite && yarn dev
 ```
+
+## Stack
+
+- Yarn v2
+- React.js(TypeScript)
+- SCSS
+- React-Query
+- Stackflow
