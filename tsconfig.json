@@ -29,7 +29,7 @@
       "@utils/*": [ "./utils/*" ],
       "@type/*": [ "./types/*" ],
       "@styles/*": [ "./styles/*" ],
-      "@src/*": [ "*" ]
+      "@src/*": [ "./" ]
     }
   },
   "include": ["src"],
