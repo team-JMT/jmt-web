@@ -61,31 +61,10 @@ jobs:
           fields: workflow,job,commit,repo,ref,author,took
           custom_payload: |
             {
-              text: "JMT Live Deploy",
               attachments: [{
-                "author_name": ${process.env.AS_AUTHOR},
-                title: 'CI Result',
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                fields: [{
-                  title: 'Workflow',
-                  value: ${process.env.AS_WORKFLOW},
-                  short: true
-                },
-                {
-                  title: 'Commit',
-                  value: ${process.env.AS_COMMIT},
-                  short: true
-                },
-                {
-                  title: 'Status',
-                  value: ${{ job.status }},
-                  short: true
-                },
-                {
-                  title: 'URL',
-                  value: ${{ steps.run_firebase_deploy.outputs.details_url }},
-                  short: true
-                }]
+                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}\n\n @${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}\n\n URL:  ${{ steps.run_firebase_deploy.outputs.details_url }}`,
+              }]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
