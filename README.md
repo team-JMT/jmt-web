@@ -21,3 +21,21 @@ vite && yarn dev
 - SCSS
 - React-Query
 - Stackflow
+
+## Folder Structure
+
+```text
+├── src
+├── api
+├── assets
+├── Layout
+├── components
+    ├── common
+    ├── animation
+├── fonts
+├── hooks
+├── pages
+├── store
+├── styles
+├── types
+```

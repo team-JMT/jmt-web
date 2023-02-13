@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "jmt-web": "jmt-web",
+    "default": "jmt-web",
+    "staging": "jmt-web"
+  },
+  "targets": {},
+  "etags": {}
+}

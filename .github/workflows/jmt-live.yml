@@ -1,0 +1,71 @@
+name: Deploy to JMT Live Channel
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - ".github/workflows/jmt-live.yml"
+    branches-ignore:
+      - master
+  pull_request:
+    branches-ignore:
+      - master
+      - develop
+    paths:
+      - "src/**"
+      - ".github/workflows/jmt-live.yml"
+jobs:
+  Deploy_Live_channel:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    env:
+      working-directory: ./
+    environment:
+      name: JMT Live
+      url: ${{ steps.run_firebase_deploy.outputs.details_url }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setting .env
+        run: |
+          echo "VITE_FIREBASE_API_KEY=${{ secrets.VITE_FIREBASE_API_KEY }}" >> .env
+          echo "VITE_FIREBASE_AUTH_DOMAIN=${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}" >> .env
+          echo "VITE_FIREBASE_PROJECT_ID=${{ secrets.VITE_FIREBASE_PROJECT_ID }}" >> .env
+          echo "VITE_FIREBASE_STORAGE_BUCKET=${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}" >> .env
+          echo "VITE_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}" >> .env
+          echo "VITE_FIREBASE_APPID=${{ secrets.VITE_FIREBASE_APPID }}" >> .env
+          echo "VITE_FIREBASE_MEASUREMENT_ID=${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}" >> .env
+          cat .env
+        working-directory: ${{ env.working-directory }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+      - name: install package
+        run: yarn install
+      - name: Project Build
+        run: yarn build
+      - uses: HyeokE/action-hosting-deploy@main
+        id: run_firebase_deploy
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JMT_WEB }}'
+          channelId: live
+          projectId: jmt-web
+          target: jmt-web
+          entryPoint: ${{ env.working-directory }}
+      - name: action-slack
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}\n\n @${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}\n\n URL: https://jmt-web.web.app`,
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: always()
