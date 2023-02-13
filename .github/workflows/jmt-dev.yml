@@ -2,11 +2,11 @@ name: Deploy to JMT Preview Channel
 
 on:
   push:
-#    paths:
-#      - "src/**"
-#      - ".github/workflows/jmt-dev.yml"
-#    branches-ignore:
-#      - master
+    paths:
+      - "src/**"
+      - ".github/workflows/jmt-dev.yml"
+    branches-ignore:
+      - master
   pull_request:
     branches-ignore:
       - master
