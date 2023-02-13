@@ -12,13 +12,13 @@ on:
       - master
       - develop
     paths:
-      - "apps/admin/**"
+      - "src/**"
       - ".github/workflows/jmt-dev.yml"
 jobs:
   Deploy_preview_channel:
     runs-on: ubuntu-latest
     env:
-      working-directory: .
+      working-directory: ./
     environment:
       name: JMT Preview
       url: ${{ steps.run_firebase_preview.outputs.details_url }}
@@ -47,7 +47,7 @@ jobs:
         id: run_firebase_preview
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GDSC_DJU }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_JMT_WEB }}'
           projectId: jmt-web
           target: jmt-web
           expires: 3d
