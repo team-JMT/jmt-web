@@ -7,7 +7,7 @@ on:
       - ".github/workflows/jmt-dev.yml"
     branches-ignore:
       - master
-      - feature
+      - feature/*
   pull_request:
     branches-ignore:
       - master
