@@ -1,16 +1,9 @@
-import { useState } from 'react';
+import React from 'react';
 
 import reactLogo from './assets/react.svg';
 import '@styles/App.scss';
-import { androidBridge } from './types/global';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  function showAndroidToast() {
-    androidBridge.showToast('브릿지');
-  }
-
   return (
     <div className="App">
       <div>
@@ -23,7 +16,6 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={showAndroidToast}>브릿지 테스트 버튼</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
