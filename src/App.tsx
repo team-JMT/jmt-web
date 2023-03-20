@@ -2,8 +2,12 @@ import React from 'react';
 
 import reactLogo from './assets/react.svg';
 import '@styles/App.scss';
+import { getAccessToken } from './utils/bridge';
 
 function App() {
+  const getToken = () => {
+    getAccessToken();
+  };
   return (
     <div className="App">
       <div>
@@ -23,6 +27,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <button onClick={getToken}>Get Token123</button>
     </div>
   );
 }
