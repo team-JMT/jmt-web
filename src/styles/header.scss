@@ -1,0 +1,31 @@
+@import "theme/theme";
+
+.screen-header {
+  position: fixed;
+  display: flex;
+  top: 0;
+  height: 4.8rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: $white;
+  z-index: 999;
+}
+.back-button {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translate(0, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.2rem;
+  width: 3.2rem;
+  padding: 0.5rem;
+  color: $main700;
+  background-color: $main100;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
