@@ -9,6 +9,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import App from './App';
 import '@styles/App.scss';
+import '@stackflow/plugin-basic-ui/index.css';
 
 const queryClient = new QueryClient();
 

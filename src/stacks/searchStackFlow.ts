@@ -8,7 +8,7 @@ import PlaceDetail from '../pages/PlaceDetail';
 import Search from '../pages/Search';
 
 export const { Stack: SearchStack, useFlow: useSearchFlow } = stackflow({
-  transitionDuration: 300,
+  transitionDuration: 350,
   plugins: [
     basicRendererPlugin(),
     basicUIPlugin({
