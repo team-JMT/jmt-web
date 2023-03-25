@@ -5,7 +5,6 @@ import { getAccessToken } from './utils/bridge';
 
 function App() {
   getAccessToken();
-
   return <Router />;
 }
 
