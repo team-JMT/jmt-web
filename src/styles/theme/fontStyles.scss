@@ -1,3 +1,4 @@
+@import "colors";
 $title-l: 3.2rem;
 $title-m: 2.4rem;
 $title-s: 2.0rem;
@@ -7,3 +8,61 @@ $text-s: 1.2rem;
 
 $bold: 700;
 $medium: 500;
+
+.main100 {
+  color: $main100
+}
+.main200 {
+  color: $main200
+}
+.main300 {
+  color: $main300
+}
+.main400 {
+  color: $main400
+}
+.main500 {
+  color: $main500
+}
+.main600 {
+  color: $main600
+}
+.main700 {
+  color: $main700
+}
+.main800 {
+  color: $main800
+}
+.main900 {
+  color: $main900
+}
+.white {
+  color: $white
+}
+.gray100 {
+  color: $gray100
+}
+.gray200 {
+  color: $gray200
+}
+.gray300 {
+  color: $gray300
+}
+.gray400 {
+  color: $gray400
+}
+.gray500 {
+  color: $gray500
+}
+.gray600 {
+  color: $gray600
+}
+.gray700 {
+  color: $gray700
+}
+.gray800 {
+  color: $gray800
+}
+.gray900 {
+  color: $gray900
+}

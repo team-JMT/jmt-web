@@ -7,30 +7,22 @@
   border-radius: 0.8rem;
   background: $gray100;
 }
-.reset-input {
+.input-container {
+  display: flex;
+  align-items: center;
   width: 100%;
-  border: none;
-  padding: 1.6rem 1.2rem;
-  border-radius: 0.5rem;
-  background: transparent;
-  font-size: $text-l;
-  font-weight: $medium;
-  color: $gray900;
-  outline: none;
-  transition: all 0.2s ease-in-out;
-  &::placeholder{
-    color: $gray500;
-  }
+  gap: 0.8rem;
+
 }
-.input-right-icon {
+
+
+.input-icon {
   position: absolute;
+  left: 1.2rem;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.2rem;
-  height: 3.2rem;
-  right: 1.2rem;
-  top: 50%;
-  transform: translate(0, -50%);
-  border-radius: 0.5rem;
+  width: 1.8rem;
+  height: 1.8rem;
 }
