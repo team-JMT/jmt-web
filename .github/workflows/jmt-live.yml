@@ -9,7 +9,7 @@ on:
       - master
   pull_request:
     branches-ignore:
-      - master
+
       - develop
     paths:
       - "src/**"
