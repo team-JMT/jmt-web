@@ -1,0 +1,28 @@
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 0.8rem;
+  background: $gray100;
+}
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0.8rem;
+
+}
+
+
+.input-icon {
+  position: absolute;
+  left: 1.2rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+}
