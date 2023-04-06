@@ -5,15 +5,8 @@ on:
     paths:
       - "src/**"
       - ".github/workflows/jmt-live.yml"
-    branches-ignore:
+    branches:
       - master
-  pull_request:
-    branches-ignore:
-
-      - develop
-    paths:
-      - "src/**"
-      - ".github/workflows/jmt-live.yml"
 jobs:
   Deploy_Live_channel:
     if: github.event.pull_request.merged == true
