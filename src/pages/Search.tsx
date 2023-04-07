@@ -34,16 +34,20 @@ const Search = () => {
   ];
 
   return (
-    <AppScreen>
-      <main className={'safe-area-layout-container'}>
-        <nav className={'screen-header'}>
-          <div className={'back-button-container'}>
+    <AppScreen
+      appBar={{
+        title: '검색',
+        backButton: {
+          render: () => (
             <button className={'back-button'}>
               <img src={leftArrowIcon} />
             </button>
-          </div>
-          <span className={'text-l-medium'}>검색</span>
-        </nav>
+          ),
+        },
+        height: '48px',
+      }}
+    >
+      <main className={'safe-area-layout-container'}>
         <div className={'container-inner'}>
           <div className={'search-input-wrapper'}>
             <SearchInput placeholder={'맛집을 검색해보세요'} />
