@@ -8,23 +8,6 @@ import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import searchIcon from '../../assets/icons/search.svg';
 import { colors } from '../../styles/theme/color';
 
-const iconAnimate = {
-  initial: {
-    top: '50%',
-    transform: 'translateY(-50%)',
-    opacity: 0,
-  },
-  animate: {
-    top: '50%',
-    transform: 'translateY(-50%)',
-    opacity: 1,
-  },
-  exit: {
-    top: '50%',
-    transform: 'translateY(-50%)',
-    opacity: 0,
-  },
-};
 const easeAnimate = {
   initial: {
     opacity: 0,
@@ -102,14 +85,14 @@ const SearchInput = ({ onFocus, onBlur, ...rest }: InputProps) => {
 
 const Icon = styled(motion.img)<{ active: boolean }>`
   position: absolute;
-  left: 1.2rem;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 18px;
+  height: 18px;
   visibility: hidden;
   opacity: 0;
   transition: all 0.2s ease-in-out;
@@ -124,15 +107,15 @@ const Icon = styled(motion.img)<{ active: boolean }>`
 export const StyledInput = styled(motion.input)<{ active: boolean }>`
   width: 100%;
   border: none;
-  padding: 1.6rem 1.2rem 1.6rem 3.8rem;
-  border-radius: 0.5rem;
+  padding: 16px 12px 16px 38px;
+  border-radius: 5px;
   background: transparent;
   color: ${colors.gray900};
   outline: none;
   ${({ active }) =>
     active &&
     css`
-      padding-left: 1.2rem;
+      padding-left: 12px;
     `}
   transition: all 0.2s ease-in-out;
   &::placeholder {
