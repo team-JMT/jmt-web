@@ -3,13 +3,12 @@ import React from 'react';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 
 import leftArrowIcon from '../assets/icons/leftArrow.svg';
-import SearchInput from '../components/common/SearchInput';
 import PlaceInfoCard from '../components/search/PlaceInfoCard';
-import { useSearchFlow } from '../stacks/searchStackFlow';
+import { useHomeFlow } from '../stacks/homeStackFlow';
 import './Search.scss';
 
 const Search = () => {
-  const { push } = useSearchFlow();
+  const { push, pop } = useHomeFlow();
 
   const onClick = () => {
     push('PlaceDetail', { placeId: '123' });
@@ -36,10 +35,10 @@ const Search = () => {
   return (
     <AppScreen
       appBar={{
-        title: '검색',
+        title: '검색 페이지',
         backButton: {
           render: () => (
-            <button className={'back-button'}>
+            <button className={'back-button'} onClick={pop}>
               <img src={leftArrowIcon} />
             </button>
           ),
@@ -50,7 +49,8 @@ const Search = () => {
       <main className={'safe-area-layout-container'}>
         <div className={'container-inner'}>
           <div className={'search-input-wrapper'}>
-            <SearchInput placeholder={'맛집을 검색해보세요'} />
+            <input />
+            {/*<SearchInput placeholder={'맛집을 검색해보세요'} />*/}
           </div>
           <section className={'list-container'}>
             {placeListMock.map((place, index) => (

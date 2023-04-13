@@ -3,10 +3,10 @@ import React from 'react';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 
 import leftArrowIcon from '../assets/icons/leftArrow.svg';
-import { useSearchFlow } from '../stacks/searchStackFlow';
+import { useHomeFlow } from '../stacks/homeStackFlow';
 
 const PlaceDetail = () => {
-  const { pop } = useSearchFlow();
+  const { pop } = useHomeFlow();
   return (
     <AppScreen
       appBar={{

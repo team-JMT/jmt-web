@@ -1,16 +1,9 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 
-import NotFound from '../pages/NotFound';
-import { SearchStack } from '../stacks/searchStackFlow';
+import { HomeStack } from '../stacks/homeStackFlow';
 
 const Router = () => {
-  return (
-    <Routes>
-      <Route path={'/*'} element={<NotFound />} />
-      <Route path={'/search'} element={<SearchStack />} />
-    </Routes>
-  );
+  return <HomeStack />;
 };
 
 export default Router;
