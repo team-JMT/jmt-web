@@ -2,11 +2,11 @@ import React, { useRef, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 
+import SearchInput from '@commons/input/SearchInput';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 
 import '../styles/bottomSheet.css';
 import NaverMap from '../components/common/NaverMap';
-import SearchInput from '../components/common/SearchInput';
 import { useHomeFlow } from '../stacks/homeStackFlow';
 
 const Home = () => {
@@ -33,8 +33,7 @@ const Home = () => {
         expandOnContentDrag={expandOnContentDrag}
       >
         <div className={'container-inner'}>
-          <SearchInput />
-          <div onClick={() => push('Search', {})}>asd</div>
+          <SearchInput.Mock onClick={() => push('Search', {})} />
         </div>
       </BottomSheet>
     </AppScreen>
