@@ -1,12 +1,12 @@
 import React from 'react';
 
+import SearchInput from '@commons/input/SearchInput';
+import PlaceInfoCard from '@components/search/PlaceInfoCard';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 
 import leftArrowIcon from '../assets/icons/leftArrow.svg';
-import SearchInput from '../components/common/SearchInput';
-import PlaceInfoCard from '../components/search/PlaceInfoCard';
-import { useHomeFlow } from '../stacks/homeStackFlow';
 import './Search.scss';
+import { useHomeFlow } from '../stacks/homeStackFlow';
 
 const Search = () => {
   const { push, pop } = useHomeFlow();
@@ -36,7 +36,7 @@ const Search = () => {
   return (
     <AppScreen
       appBar={{
-        title: '맛집 검색',
+        title: <h1 className={'text-l-medium'}>맛집 검색</h1>,
         backButton: {
           render: () => (
             <button className={'back-button'} onClick={pop}>

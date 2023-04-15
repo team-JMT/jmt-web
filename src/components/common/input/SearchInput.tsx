@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
 
+import searchIcon from '@assets/icons/search.svg';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { colors } from '../../../styles/theme/color';
-import searchIcon from '../../assets/icons/search.svg';
 
 const easeAnimate = {
   initial: {
