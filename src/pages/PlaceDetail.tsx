@@ -10,6 +10,7 @@ import leftArrowIcon from '../assets/icons/leftArrow.svg';
 import rightArrowIcon from '../assets/icons/rightArrow.svg';
 import shareIcon from '../assets/icons/share.svg';
 import verticalBarIcon from '../assets/icons/verticalBar.svg';
+import BottomBar from '../components/placeDetail/BottomBar';
 import DetailMenu from '../components/placeDetail/DetailMenu';
 import ImgContainer from '../components/placeDetail/ImgContainer';
 import { useSearchFlow } from '../stacks/searchStackFlow';
@@ -40,6 +41,7 @@ const PlaceDetail = () => {
     >
       <main className={'safe-area-layout-container'}>
         <ImgContainer />
+        {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
         <div className={'detail-container'}>
           <div className={'name-box'}>
             <div className={'text-m-medium'}>유저이름&nbsp;&nbsp;</div>
@@ -57,6 +59,7 @@ const PlaceDetail = () => {
           <DetailMenu type={SelectedMenu} onClick={changeSelectedMenu} />
         </div>
       </main>
+      <BottomBar />
     </AppScreen>
   );
 };
