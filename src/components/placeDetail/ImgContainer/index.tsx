@@ -5,9 +5,14 @@ import styled from '@emotion/styled';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import testImg from './img1.png';
-const imgArray = ['./img1.png', './img2.png', './img3.png'];
 
-const ImgContainer = () => {
+const testimgArray = ['./img1.png', './img2.png', './img3.png'];
+
+type ImgProps = {
+  imgArray: string[];
+};
+
+const ImgContainer = ({ imgArray }: ImgProps) => {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex: number) => {
@@ -24,7 +29,7 @@ const ImgContainer = () => {
         nextIcon={<span className="visually-hidden"></span>}
         indicators={false}
       >
-        {imgArray.map((item, index) => (
+        {testimgArray.map((item, index) => (
           <Carousel.Item key={index}>
             <PlaceImg imgUrl={testImg} />
           </Carousel.Item>

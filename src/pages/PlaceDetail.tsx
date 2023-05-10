@@ -18,6 +18,8 @@ import './PlaceDetail.scss';
 
 //import { styled } from '@tanstack/react-query-devtools/build/lib/utils';
 
+const imgArray = ['./img1.png', './img2.png', './img3.png'];
+
 const PlaceDetail = () => {
   const { pop } = useSearchFlow();
   const [SelectedMenu, setSelectedMenu] = useState('recommander');
@@ -40,7 +42,7 @@ const PlaceDetail = () => {
       }}
     >
       <main className={'safe-area-layout-container'}>
-        <ImgContainer />
+        {imgArray.length > 0 ? <ImgContainer imgArray={imgArray} /> : <></>}
         {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
         <div className={'detail-container'}>
           <div className={'name-box'}>
@@ -56,7 +58,11 @@ const PlaceDetail = () => {
             <img src={verticalBarIcon} />
             <div className={'gray'}>중식</div>
           </div>
-          <DetailMenu type={SelectedMenu} onClick={changeSelectedMenu} />
+          <DetailMenu
+            onClick={changeSelectedMenu}
+            type={SelectedMenu}
+            count={121}
+          />
         </div>
       </main>
       <BottomBar />

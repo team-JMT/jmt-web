@@ -6,24 +6,24 @@ import Review from '../Review';
 
 import { DetailMenuWrapper, Menu } from './styled';
 
-const menuList = [
-  {
-    menu: 'recommander',
-    korean: '추천인 리뷰',
-  },
-  {
-    menu: 'information',
-    korean: '가게 정보',
-  },
-  { menu: 'review', korean: '후기' },
-];
-
 type CategoryMenuProps = {
   onClick?: (url: string) => void;
   type: string;
+  count: number;
 };
 
-const DetailMenu: React.FC<CategoryMenuProps> = ({ onClick, type }) => {
+const DetailMenu: React.FC<CategoryMenuProps> = ({ onClick, type, count }) => {
+  const menuList = [
+    {
+      menu: 'recommander',
+      korean: '추천인 리뷰',
+    },
+    {
+      menu: 'information',
+      korean: '가게 정보',
+    },
+    { menu: 'review', korean: '후기(' + count + ')' },
+  ];
   return (
     <>
       <DetailMenuWrapper>
