@@ -13,7 +13,7 @@ import verticalBarIcon from '../assets/icons/verticalBar.svg';
 import BottomBar from '../components/placeDetail/BottomBar';
 import DetailMenu from '../components/placeDetail/DetailMenu';
 import ImgContainer from '../components/placeDetail/ImgContainer';
-import { useSearchFlow } from '../stacks/searchStackFlow';
+import { useHomeFlow } from '../stacks/homeStackFlow';
 import './PlaceDetail.scss';
 
 //import { styled } from '@tanstack/react-query-devtools/build/lib/utils';
@@ -21,7 +21,7 @@ import './PlaceDetail.scss';
 const imgArray = ['./img1.png', './img2.png', './img3.png'];
 
 const PlaceDetail = () => {
-  const { pop } = useSearchFlow();
+  const { pop } = useHomeFlow();
   const [SelectedMenu, setSelectedMenu] = useState('recommander');
 
   const changeSelectedMenu = (menu: string) => {

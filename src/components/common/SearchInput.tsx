@@ -8,23 +8,6 @@ import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import searchIcon from '../../assets/icons/search.svg';
 import { colors } from '../../styles/theme/color';
 
-const iconAnimate = {
-  initial: {
-    top: '50%',
-    transform: 'translateY(-50%)',
-    opacity: 0,
-  },
-  animate: {
-    top: '50%',
-    transform: 'translateY(-50%)',
-    opacity: 1,
-  },
-  exit: {
-    top: '50%',
-    transform: 'translateY(-50%)',
-    opacity: 0,
-  },
-};
 const easeAnimate = {
   initial: {
     opacity: 0,
