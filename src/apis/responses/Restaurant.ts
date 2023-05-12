@@ -1,4 +1,4 @@
-import { PageMeta, Response } from '@apis/types';
+import { PageMeta, Response } from '@apis/common/types';
 
 import { Restaurant } from '../../models/getRestaurantData';
 
