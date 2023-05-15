@@ -55,6 +55,4 @@ export const UserImg = styled.div`
 export const UserText = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  margin-top: 2px;
 `;

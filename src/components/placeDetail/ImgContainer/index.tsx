@@ -36,7 +36,8 @@ const ImgContainer = ({ imgArray }: ImgProps) => {
         ))}
       </StyledCarousel>
       <ImgNumber className={'text-m-medium'}>
-        {index + 1} / {imgArray.length}
+        {index + 1}
+        <span className="gray"> / {imgArray.length}</span>
       </ImgNumber>
     </ImgWrapper>
   );
@@ -50,7 +51,7 @@ const ImgWrapper = styled.div`
 `;
 const PlaceImg = styled.div<{ imgUrl: string }>`
   width: 100%;
-  height: calc(100vw * 0.67);
+  height: calc(67vw);
   background: url(${(props) => props.imgUrl});
   background-size: cover;
 `;
@@ -59,6 +60,10 @@ const ImgNumber = styled.div`
   right: 11px;
   bottom: 7px;
   color: white;
+  .gray {
+    /* gray200 */
+    color: #d4dade;
+  }
 `;
 
 export default ImgContainer;
