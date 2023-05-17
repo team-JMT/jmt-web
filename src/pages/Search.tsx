@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
+import { getRestaurantData } from '@apis/common/restaurant';
 import SearchInput from '@commons/input/SearchInput';
 import PlaceInfoCard from '@components/search/PlaceInfoCard';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
@@ -10,6 +11,12 @@ import { useHomeFlow } from '../stacks/homeStackFlow';
 
 const Search = () => {
   const { push, pop } = useHomeFlow();
+
+  useEffect(() => {
+    getRestaurantData({}).then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   const onClick = () => {
     push('PlaceDetail', { placeId: '123' });
