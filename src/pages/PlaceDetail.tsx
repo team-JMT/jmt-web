@@ -9,8 +9,10 @@ import { AppScreen } from '@stackflow/plugin-basic-ui';
 import leftArrowIcon from '../assets/icons/leftArrow.svg';
 import rightArrowIcon from '../assets/icons/rightArrow.svg';
 import shareIcon from '../assets/icons/share.svg';
+import threeBotsIcon from '../assets/icons/threeBots.svg';
 import verticalBarIcon from '../assets/icons/verticalBar.svg';
 import BottomBar from '../components/placeDetail/BottomBar';
+import DetailBottomSheet from '../components/placeDetail/DetailBottomSheet';
 import DetailMenu from '../components/placeDetail/DetailMenu';
 import ImgContainer from '../components/placeDetail/ImgContainer';
 import { useHomeFlow } from '../stacks/homeStackFlow';
@@ -22,11 +24,25 @@ const imgArray = ['./img1.png', './img2.png', './img3.png'];
 
 const PlaceDetail = () => {
   const { pop } = useHomeFlow();
-  const [SelectedMenu, setSelectedMenu] = useState('recommander');
 
+  const [SelectedMenu, setSelectedMenu] = useState('recommander');
   const changeSelectedMenu = (menu: string) => {
     setSelectedMenu(menu);
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const MoreButton = () => (
+    <div className="more-button" onClick={handleOpen}>
+      <img src={threeBotsIcon} />
+    </div>
+  );
   return (
     <AppScreen
       appBar={{
@@ -38,6 +54,8 @@ const PlaceDetail = () => {
             </button>
           ),
         },
+        appendRight: MoreButton,
+        //https://github.com/daangn/stackflow/blob/main/demo/src/activities/Main.tsx
         height: '48px',
       }}
     >
@@ -66,6 +84,7 @@ const PlaceDetail = () => {
         </div>
       </main>
       <BottomBar />
+      {isOpen && <DetailBottomSheet isOpen={isOpen} onClose={handleClose} />}
     </AppScreen>
   );
 };
