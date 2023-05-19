@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 //import { css } from '@emotion/react';
 //import styled from '@emotion/styled';
 
 import { AppScreen } from '@stackflow/plugin-basic-ui';
-//import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+//import { AnimatePresence } from 'framer-motion';
 
 import leftArrowIcon from '../assets/icons/leftArrow.svg';
 import rightArrowIcon from '../assets/icons/rightArrow.svg';
@@ -12,7 +12,7 @@ import shareIcon from '../assets/icons/share.svg';
 import threeBotsIcon from '../assets/icons/threeBots.svg';
 import verticalBarIcon from '../assets/icons/verticalBar.svg';
 import BottomBar from '../components/placeDetail/BottomBar';
-import DetailBottomSheet from '../components/placeDetail/DetailBottomSheet';
+//import DetailBottomSheet from '../components/placeDetail/DetailBottomSheet';
 import DetailMenu from '../components/placeDetail/DetailMenu';
 import ImgContainer from '../components/placeDetail/ImgContainer';
 import { useHomeFlow } from '../stacks/homeStackFlow';
@@ -59,8 +59,11 @@ const PlaceDetail = () => {
         height: '48px',
       }}
     >
+      {/*<AnimatePresence>
+        <DetailBottomSheet isOpen={isOpen} onClose={handleClose} />
+      </AnimatePresence>*/}
       <main className={'safe-area-layout-container'}>
-        {imgArray.length > 0 ? <ImgContainer imgArray={imgArray} /> : <></>}
+        {imgArray.length > 0 && <ImgContainer imgArray={imgArray} />}
         {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
         <div className={'detail-container'}>
           <div className={'name-box'}>
@@ -84,7 +87,6 @@ const PlaceDetail = () => {
         </div>
       </main>
       <BottomBar />
-      {isOpen && <DetailBottomSheet isOpen={isOpen} onClose={handleClose} />}
     </AppScreen>
   );
 };
