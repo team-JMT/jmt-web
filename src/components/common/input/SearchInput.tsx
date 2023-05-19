@@ -86,12 +86,9 @@ const SearchInputMock = forwardRef<HTMLDivElement, InputProps>(
           <AnimatePresence>
             <Icon src={searchIcon} alt={'search-icon'} active={true} />
             {/*  @ts-ignore */}
-            <StyledInput
-              {...rest}
-              active={false}
-              placeholder={'음식이나 식당명을 검색하세요'}
-              className={classNames('text-l-medium')}
-            />
+            <MockInput {...rest} className={classNames('text-l-medium')}>
+              {'음식이나 식당명을 검색하세요'}
+            </MockInput>
           </AnimatePresence>
         </motion.div>
       </motion.div>
@@ -139,6 +136,16 @@ export const StyledInput = styled(motion.input)<{ active: boolean }>`
   &::placeholder {
     color: ${colors.gray200};
   }
+`;
+
+export const MockInput = styled(motion.div)`
+  width: 100%;
+  border: none;
+  padding: 16px 12px 16px 38px;
+  border-radius: 5px;
+  background: transparent;
+  color: ${colors.gray200};
+  outline: none;
 `;
 
 export default SearchInput;
