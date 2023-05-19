@@ -218,6 +218,9 @@ button {
   background: transparent;
 }
 
+html {
+  user-select: none;
+}
 
 /**
    * Show the overflow in IE.
