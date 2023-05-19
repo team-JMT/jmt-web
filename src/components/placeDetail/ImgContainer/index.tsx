@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import testImg from './img1.png';
-
 const images = [
   'https://d33wubrfki0l68.cloudfront.net/dd23708ebc4053551bb33e18b7174e73b6e1710b/dea24/static/images/wallpapers/shared-colors@2x.png',
   'https://d33wubrfki0l68.cloudfront.net/49de349d12db851952c5556f3c637ca772745316/cfc56/static/images/wallpapers/bridge-02@2x.png',
@@ -118,8 +116,6 @@ const ImgWrapper = styled.div`
 const PlaceImg = styled(motion.img)`
   width: 100%;
   height: 100%;
-  //background: url(${(props) => props.imgUrl});
-  //background-size: cover;
 `;
 const ImgNumber = styled.div`
   position: absolute;
