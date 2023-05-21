@@ -31,25 +31,3 @@ export const Inner = styled(motion.div)`
   z-index: 101;
   background-color: white;
 `;
-
-export const FullTypeInner = styled(motion.div)`
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  z-index: 3;
-  background-color: white;
-`;
-
-export const Content = styled.div`
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: 100%;
-  max-height: calc(500px - 70px);
-  padding-bottom: calc(30px + env(safe-area-inset-bottom));
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-`;
