@@ -2201,10 +2201,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^18.13.0":
-  version: 18.13.0
-  resolution: "@types/node@npm:18.13.0"
-  checksum: 4ea10f8802848b01672bce938f678b6774ca2cee0c9774f12275ab064ae07818419c3e2e41d6257ce7ba846d1ea26c63214aa1dfa4166fa3746291752b8c6416
+"@types/node@npm:^18.15.11":
+  version: 18.15.11
+  resolution: "@types/node@npm:18.15.11"
+  checksum: 977b4ad04708897ff0eb049ecf82246d210939c82461922d20f7d2dcfd81bbc661582ba3af28869210f7e8b1934529dcd46bff7d448551400f9d48b9d3bddec3
   languageName: node
   linkType: hard
 
@@ -7406,7 +7406,7 @@ __metadata:
     "@tanstack/react-query": ^4.24.4
     "@tanstack/react-query-devtools": ^4.24.4
     "@types/navermaps": ^3.6.4
-    "@types/node": ^18.13.0
+    "@types/node": ^18.15.11
     "@types/react": ^18.0.27
     "@types/react-dom": ^18.0.10
     "@typescript-eslint/eslint-plugin": ^5.51.0
@@ -7438,6 +7438,7 @@ __metadata:
     vconsole: ^3.15.0
     vite: ^4.1.0
     vite-plugin-mkcert: ^1.13.3
+    vite-tsconfig-paths: ^4.2.0
   languageName: unknown
   linkType: soft
 
@@ -11104,6 +11105,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tsconfck@npm:^2.1.0":
+  version: 2.1.1
+  resolution: "tsconfck@npm:2.1.1"
+  peerDependencies:
+    typescript: ^4.3.5 || ^5.0.0
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  bin:
+    tsconfck: bin/tsconfck.js
+  checksum: c531525f39763cbbd7e6dbf5e29f12a7ae67eb8712816c14d06a9db6cbdc9dda9ac3cd6db07ef645f8a4cdea906447ab44e2c8679e320871cf9dd598756e8c83
+  languageName: node
+  linkType: hard
+
 "tsconfig-paths@npm:^3.14.1":
   version: 3.14.1
   resolution: "tsconfig-paths@npm:3.14.1"
@@ -11603,6 +11618,22 @@ __metadata:
   peerDependencies:
     vite: ">=3"
   checksum: fb9e8c7242e718698566fba930c5b2836ec9e3148e7c39031fd49b81297953b1160763fa047094ade0df71ce9835b2bd48e4425dc244e4c1cd02b8ad2d276c42
+  languageName: node
+  linkType: hard
+
+"vite-tsconfig-paths@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "vite-tsconfig-paths@npm:4.2.0"
+  dependencies:
+    debug: ^4.1.1
+    globrex: ^0.1.2
+    tsconfck: ^2.1.0
+  peerDependencies:
+    vite: "*"
+  peerDependenciesMeta:
+    vite:
+      optional: true
+  checksum: 73a8467de72d7ac502328454fd00c19571cd4bad2dd5982643b24718bb95e449a3f4153cfc2d58a358bfc8f37e592fb442fc10884b59ae82138c1329160cd952
   languageName: node
   linkType: hard
 

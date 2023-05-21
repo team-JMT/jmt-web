@@ -17,22 +17,23 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@components/*": [ "./components/*" ],
-      "@commons/*": [ "./components/common/*" ],
-      "@layouts/*": [ "./layouts/*" ],
-      "@animations/*": [ "./components/animations/*" ],
-      "@store/*": [ "./store/*" ],
-      "@contents/*": [ "./contents/*" ],
-      "@assets/*": [ "./assets/*" ],
-      "@apis/*": [ "./apis/*" ],
-      "@hooks/*": [ "./hooks/*" ],
-      "@pages/*": [ "./pages/*" ],
-      "@utils/*": [ "./utils/*" ],
-      "@type/*": [ "./types/*" ],
-      "@styles/*": [ "./styles/*" ],
-      "@src/*": [ "./" ]
+      "@components/*": [ "./src/components/*" ],
+      "@commons/*": [ "./src/components/common/*" ],
+      "@layouts/*": [ "./src/layouts/*" ],
+      "@animations/*": [ "./src/components/animations/*" ],
+      "@store/*": [ "./src/store/*" ],
+      "@contents/*": [ "./src/contents/*" ],
+      "@assets/*": [ "./src/assets/*" ],
+      "@apis/*": [ "./src/apis/*" ],
+      "@hooks/*": [ "./src/hooks/*" ],
+      "@pages/*": [ "./src/pages/*" ],
+      "@utils/*": [ "./src/utils/*" ],
+      "@type/*": [ "./src/types/*" ],
+      "@styles/*": [ "./src/styles/*" ],
+      "@/*": ["./src"]
     }
   },
+  "baseUrl": ".",
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

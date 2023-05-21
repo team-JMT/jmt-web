@@ -10,7 +10,7 @@ const PlaceDetail = () => {
   return (
     <AppScreen
       appBar={{
-        title: '상세페이지',
+        title: <h1 className={'text-l-medium'}>맛집 상세</h1>,
         backButton: {
           render: () => (
             <button className={'back-button'} onClick={pop}>

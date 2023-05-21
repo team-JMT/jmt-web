@@ -1,3 +1,7 @@
+*{
+  --rsbs-overlay-rounded: 24px;
+}
+
 [data-rsbs-overlay] {
   border-top-left-radius: 16px;
   border-top-left-radius: var(--rsbs-overlay-rounded,16px);

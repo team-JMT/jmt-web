@@ -1,12 +1,12 @@
-import React, { useLayoutEffect } from 'react';
+import React, { forwardRef } from 'react';
 
+import searchIcon from '@assets/icons/search.svg';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import classNames from 'classnames';
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
-import searchIcon from '../../assets/icons/search.svg';
-import { colors } from '../../styles/theme/color';
+import { colors } from '../../../styles/theme/color';
 
 const easeAnimate = {
   initial: {
@@ -41,47 +41,65 @@ const SearchInput = ({ onFocus, onBlur, ...rest }: InputProps) => {
     setOnFocusState(false);
     onBlur && onBlur(e);
   };
-  useLayoutEffect(() => {
-    if (inputRef.current !== null) {
-      inputRef.current.focus();
-    }
-  }, []);
 
   return (
     <motion.div className={'input-container'}>
-      <LayoutGroup>
+      <motion.div className={'input-wrapper'}>
+        <AnimatePresence>
+          <Icon src={searchIcon} alt={'search-icon'} active={!onFocusState} />
+          {/*  @ts-ignore */}
+          <StyledInput
+            {...rest}
+            onFocus={onHandleFocus}
+            onBlur={onHandleBlur}
+            active={onFocusState}
+            ref={inputRef}
+            placeholder={'음식이나 식당명을 검색하세요'}
+            className={classNames('text-l-medium')}
+          />
+        </AnimatePresence>
+      </motion.div>
+      <AnimatePresence>
+        {onFocusState && (
+          <motion.span
+            key={'cancel-button'}
+            className={classNames('text-m-medium', 'gray600')}
+            variants={easeAnimate}
+            initial={'initial'}
+            animate={'animate'}
+            exit={'exit'}
+            onClick={handleCancel}
+          >
+            취소
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+const SearchInputMock = forwardRef<HTMLDivElement, InputProps>(
+  ({ ...rest }, ref) => {
+    return (
+      <motion.div className={'input-container'} ref={ref}>
         <motion.div className={'input-wrapper'}>
           <AnimatePresence>
-            <Icon src={searchIcon} alt={'search-icon'} active={!onFocusState} />
+            <Icon src={searchIcon} alt={'search-icon'} active={true} />
+            {/*  @ts-ignore */}
             <StyledInput
-              onFocus={onHandleFocus}
-              onBlur={onHandleBlur}
-              active={onFocusState}
-              ref={inputRef}
+              {...rest}
+              active={false}
               placeholder={'음식이나 식당명을 검색하세요'}
               className={classNames('text-l-medium')}
             />
           </AnimatePresence>
         </motion.div>
-        <AnimatePresence>
-          {onFocusState && (
-            <motion.span
-              key={'cancel-button'}
-              className={classNames('text-m-medium', 'gray600')}
-              variants={easeAnimate}
-              initial={'initial'}
-              animate={'animate'}
-              exit={'exit'}
-              onClick={handleCancel}
-            >
-              취소
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </LayoutGroup>
-    </motion.div>
-  );
-};
+      </motion.div>
+    );
+  },
+);
+
+SearchInput.Mock = SearchInputMock;
 
 const Icon = styled(motion.img)<{ active: boolean }>`
   position: absolute;
