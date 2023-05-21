@@ -14,9 +14,7 @@ const Home = () => {
 
   return (
     <>
-      <Modal type={'HOME_PLACE_FILTER'} title="지역">
-        <Modal.List>asdassd</Modal.List>
-      </Modal>
+      <Modal type={'HOME_PLACE_FILTER'} content={<div>Modal test</div>} />
       <AppScreen>
         <NaverMap />
 
