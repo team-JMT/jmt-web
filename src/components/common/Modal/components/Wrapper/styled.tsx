@@ -16,6 +16,7 @@ export const LayerWrapper = styled(motion.div)`
 export const Inner = styled(motion.div)`
   overflow: hidden;
   position: fixed;
+  max-height: calc(100vh - env(safe-area-inset-top) - 5rem);
   min-height: 100px;
   bottom: 0;
   left: 0;
