@@ -25,11 +25,6 @@ const imgArray = ['./img1.png', './img2.png', './img3.png'];
 const PlaceDetail = () => {
   const { pop } = useHomeFlow();
 
-  const [SelectedMenu, setSelectedMenu] = useState('recommander');
-  const changeSelectedMenu = (menu: string) => {
-    setSelectedMenu(menu);
-  };
-
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -79,11 +74,7 @@ const PlaceDetail = () => {
             <img src={verticalBarIcon} />
             <div className={'gray'}>중식</div>
           </div>
-          <DetailMenu
-            onClick={changeSelectedMenu}
-            type={SelectedMenu}
-            count={121}
-          />
+          <DetailMenu />
         </div>
       </main>
       <BottomBar />

@@ -1,48 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import Information from '../Information';
 import Recommander from '../Recommander';
 import Review from '../Review';
 
-import { DetailMenuWrapper, Menu } from './styled';
+import { DetailMenuWrapper, Menu, TextContainer, AnimateBlock } from './styled';
 
-type CategoryMenuProps = {
-  onClick?: (url: string) => void;
-  type: string;
-  count: number;
-};
+const DetailMenu = () => {
+  const [[selectedMenu, pastMenu], setSelectedMenu] = useState([0, 0]);
+  const count = 123;
+  const menuList = ['추천인 리뷰', '가게정보', '후기(' + count + ')'];
 
-const DetailMenu: React.FC<CategoryMenuProps> = ({ onClick, type, count }) => {
-  const menuList = [
-    {
-      menu: 'recommander',
-      korean: '추천인 리뷰',
-    },
-    {
-      menu: 'information',
-      korean: '가게 정보',
-    },
-    { menu: 'review', korean: '후기(' + count + ')' },
-  ];
+  const blockRef = useRef<HTMLDivElement>(null);
+
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const handleResize = () => {
+      if (blockRef.current) {
+        const blockWidth = blockRef.current.offsetWidth;
+        setWidth(blockWidth);
+      }
+    };
+    handleResize(); // 초기값 설정
+  }, []);
+
+  const changeSelectedMenu = (menu: number) => {
+    if (menu !== selectedMenu) {
+      setSelectedMenu([menu, selectedMenu]);
+    }
+  };
+
   return (
     <>
       <DetailMenuWrapper>
-        {menuList.map((item, id) => {
-          return (
-            <Menu
-              className={'text-m-medium'}
-              key={id}
-              active={type === item.menu}
-              onClick={() => onClick && onClick(item.menu)}
-            >
-              {item.korean}
-            </Menu>
-          );
-        })}
+        <AnimateBlock
+          ref={blockRef}
+          initial={{ x: pastMenu * width }}
+          animate={{ x: selectedMenu * width }}
+          transition={{ duration: 0.2 }}
+        />
+        <TextContainer>
+          {menuList.map((item, index) => {
+            return (
+              <Menu
+                className={'text-m-bold'}
+                key={index}
+                active={index === selectedMenu}
+                onClick={() => changeSelectedMenu(index)}
+              >
+                {item}
+              </Menu>
+            );
+          })}
+        </TextContainer>
       </DetailMenuWrapper>
-      {type === 'recommander' ? (
+      {selectedMenu === 0 ? (
         <Recommander />
-      ) : type === 'information' ? (
+      ) : selectedMenu === 1 ? (
         <Information />
       ) : (
         <Review />

@@ -1,37 +1,53 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { motion } from 'framer-motion';
 
 import { colors } from '../../../styles/theme/color';
 
 export const DetailMenuWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   position: relative;
-  left: -2px;
-  width: calc(100% + 4px);
+  width: 100vw- 40px;
   height: 48px;
-  padding: 4px;
   margin: 16px 0 12px 0;
+  border: solid ${colors.gray100} 4px;
   border-radius: 8px;
   background: ${colors.gray100};
+  z-index: 1;
 `;
 
-export const Menu = styled.div<{ active: boolean }>`
+export const AnimateBlock = styled(motion.div)`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 33.3%;
+  height: 40px;
+  background: ${colors.white};
+  color: ${colors.main500};
+  box-shadow: 0px 0px 8px rgba(22, 26, 29, 0.1);
+  border-radius: 4px;
+  z-index: 2;
+`;
+
+export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 40px;
+`;
+
+export const Menu = styled(motion.div)<{ active: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 32%;
+  width: 33.3%;
   height: 40px;
-  border-radius: 4px;
   color: ${colors.gray400};
-  background: ${colors.gray100};
+  z-index: 3;
   ${({ active }) =>
     active &&
     css`
-      font-weight: 600;
-      background: ${colors.white};
-      color: ${colors.main600};
-      box-shadow: 0px 0px 8px rgba(22, 26, 29, 0.1);
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      color: #ff531a;
     `}
 `;
