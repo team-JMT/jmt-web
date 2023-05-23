@@ -29,8 +29,8 @@ export const WayButton = styled.div`
   height: 62px;
   width: 100%;
 
-  /* main600 */
-  background: #20bc2f;
+  /* main500 */
+  background: #ff531a;
   border-radius: 8px;
   color: white;
 `;

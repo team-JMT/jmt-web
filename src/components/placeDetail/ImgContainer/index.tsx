@@ -106,7 +106,7 @@ const ImgContainer = ({ imgArray }: ImgProps) => {
 const ImgWrapper = styled.div`
   position: relative;
   width: 100vw;
-  height: 67vw;
+  height: 80vw;
   background: #151515;
   overflow: hidden;
   display: flex;
