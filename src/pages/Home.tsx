@@ -1,43 +1,40 @@
-import React, { useRef, useState } from 'react';
-import { BottomSheet } from 'react-spring-bottom-sheet';
-import type { BottomSheetRef } from 'react-spring-bottom-sheet';
+import React from 'react';
 
+import Modal from '@commons/Modal';
+import NaverMap from '@components/common/NaverMap';
+import HomeBottomSheet from '@components/home/BottomSheet';
+import BottomSheetHeader from '@components/home/BottomSheetHeader';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
-
 import '../styles/bottomSheet.css';
-import NaverMap from '../components/common/NaverMap';
-import SearchInput from '../components/common/SearchInput';
-import { useHomeFlow } from '../stacks/homeStackFlow';
+import { modalState } from '@store/modal';
+import { useAtom } from 'jotai';
 
 const Home = () => {
-  const [expandOnContentDrag, setExpandOnContentDrag] = useState(true);
-  const focusRef = useRef<HTMLButtonElement>(null);
-  const sheetRef = useRef<BottomSheetRef>(null);
-  const { push } = useHomeFlow();
+  const [modal, setModal] = useAtom(modalState);
 
   return (
-    <AppScreen>
-      <NaverMap />
-      <BottomSheet
-        open
-        skipInitialTransition
-        ref={sheetRef}
-        initialFocusRef={focusRef}
-        blocking={false}
-        defaultSnap={({ maxHeight }) => maxHeight / 2}
-        snapPoints={({ maxHeight }) => [
-          maxHeight - maxHeight / 10,
-          maxHeight / 4,
-          maxHeight * 0.6,
-        ]}
-        expandOnContentDrag={expandOnContentDrag}
-      >
-        <div className={'container-inner'}>
-          <SearchInput />
-          <div onClick={() => push('Search', {})}>asd</div>
-        </div>
-      </BottomSheet>
-    </AppScreen>
+    <>
+      <Modal type={'HOME_PLACE_FILTER'} content={<div>Modal test</div>} />
+      <AppScreen>
+        <NaverMap />
+
+        <HomeBottomSheet>
+          <div className={'container-inner'}>
+            <BottomSheetHeader />
+            <button
+              onClick={() =>
+                setModal({
+                  ...modal,
+                  HOME_PLACE_FILTER: !modal.HOME_PLACE_FILTER,
+                })
+              }
+            >
+              open
+            </button>
+          </div>
+        </HomeBottomSheet>
+      </AppScreen>
+    </>
   );
 };
 
