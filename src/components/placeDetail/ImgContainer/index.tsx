@@ -45,7 +45,7 @@ function wrap(min: number, max: number, value: number): number {
  * Should accomodate longer swipes and short flicks without having binary checks on
  * just distance thresholds and velocity > 0.
  */
-const swipeConfidenceThreshold = 10000;
+const swipeConfidenceThreshold = 1000;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
@@ -116,6 +116,7 @@ const ImgWrapper = styled.div`
 const PlaceImg = styled(motion.img)`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `;
 const ImgNumber = styled.div`
   position: absolute;

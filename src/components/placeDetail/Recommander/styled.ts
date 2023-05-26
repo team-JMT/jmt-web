@@ -55,4 +55,5 @@ export const UserImg = styled.div`
 export const UserText = styled.div`
   display: flex;
   flex-direction: column;
+  line-height: 150%;
 `;

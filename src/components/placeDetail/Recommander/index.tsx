@@ -29,7 +29,7 @@ const Recommander = () => {
           </MenuItem>
         ))}
       </MenuContainer>
-      <Text className={'text-m-medium'}>술과 함께 즐길 수 있어요</Text>
+      <Text className={'text-m-medium'}>술과 함께 즐길 수 있어요 🍻</Text>
       <GrayBox className={'text-l-medium'}>소주랑 먹으면 죽여요</GrayBox>
       <GrayBar />
       <UserWrapper>
@@ -40,7 +40,7 @@ const Recommander = () => {
         </UserText>
       </UserWrapper>
       <GrayBar />
-      <Text className={'text-m-medium'}>멤버의 추천 한마디</Text>
+      <Text className={'text-m-medium'}>멤버의 추천 한마디 ✍️</Text>
       <div className={'text-l-medium'}>
         너무 맛있어서 키절 안먹으면 바보 안녕하세요? 너무 맛있어서 키절 안먹으면
         바보 안녕하세요? 너무 맛있어서 키절 안먹으면 바보 안녕하세요?너 무
