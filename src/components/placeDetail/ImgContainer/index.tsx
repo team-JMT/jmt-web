@@ -69,14 +69,13 @@ const ImgContainer = ({ imgArray }: ImgProps) => {
         <PlaceImg
           key={page}
           src={images[imageIndex]}
-          //src={testImg}
           custom={direction}
           variants={variants}
           initial="enter"
           animate="center"
           exit="exit"
           transition={{
-            x: { type: 'spring', stiffness: 300, damping: 30 },
+            x: { type: 'spring', stiffness: 300, damping: 40 },
             opacity: { duration: 0.2 },
           }}
           drag="x"
@@ -107,17 +106,19 @@ const ImgWrapper = styled.div`
   position: relative;
   width: 100vw;
   height: 80vw;
-  background: #151515;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #151515;
 `;
+
 const PlaceImg = styled(motion.img)`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
 `;
+
 const ImgNumber = styled.div`
   position: absolute;
   right: 11px;
@@ -131,7 +132,6 @@ const ImgNumber = styled.div`
     font-weight: 500;
   }
 `;
-
 const PageButton = styled.div<{ direction: string }>`
   position: absolute;
   background: white;
