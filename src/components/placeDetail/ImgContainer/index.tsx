@@ -95,7 +95,7 @@ const ImgContainer = ({ imgArray }: ImgProps) => {
       </AnimatePresence>
       <PageButton direction={'right'} onClick={() => paginate(1)} />
       <PageButton direction={'left'} onClick={() => paginate(-1)} />
-      <ImgNumber className={'text-m-medium'}>
+      <ImgNumber className={'text-s-bold'}>
         {imageIndex + 1}
         <span className="gray"> / {imgArray.length}</span>
       </ImgNumber>
@@ -127,6 +127,8 @@ const ImgNumber = styled.div`
   .gray {
     /* gray200 */
     color: #d4dade;
+    font-size: 12px;
+    font-weight: 500;
   }
 `;
 

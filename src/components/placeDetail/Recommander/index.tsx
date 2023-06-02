@@ -36,7 +36,7 @@ const Recommander = () => {
         <UserImg />
         <UserText>
           <div className={'title-s-bold'}>asdfdf</div>
-          <div className={'text-s-medium'}>as</div>
+          <div className={'gray'}>as</div>
         </UserText>
       </UserWrapper>
       <GrayBar />

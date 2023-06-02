@@ -1,5 +1,4 @@
 /* eslint-disable import/order */
-import { useRef } from 'react';
 
 //import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -47,8 +46,13 @@ const PlaceDetail = () => {
         type={'HOME_PLACE_FILTER'}
         content={
           <BottomSheet>
-            <BottomSheetButton>수정하기</BottomSheetButton>
-            <BottomSheetButton onClick={() => onclose}>
+            <BottomSheetButton className={'text-l-medium'}>
+              수정하기
+            </BottomSheetButton>
+            <BottomSheetButton
+              onClick={() => onclose}
+              className={'text-l-medium'}
+            >
               삭제하기
             </BottomSheetButton>
           </BottomSheet>
@@ -95,7 +99,7 @@ const PlaceDetail = () => {
   );
 };
 const BottomSheet = styled(motion.div)`
-  margin-bottom: 30px;
+  margin-bottom: 36px;
 `;
 
 const BottomSheetButton = styled.div`
@@ -107,6 +111,8 @@ const BottomSheetButton = styled.div`
   /* gray100 */
   border: 2px solid #f1f3f4;
   border-radius: 8px;
-  margin-bottom: 12px;
+  & + & {
+    margin-top: 12px;
+  }
 `;
 export default PlaceDetail;

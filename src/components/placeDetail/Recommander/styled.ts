@@ -55,5 +55,13 @@ export const UserImg = styled.div`
 export const UserText = styled.div`
   display: flex;
   flex-direction: column;
-  line-height: 150%;
+  div {
+    line-height: 150%;
+  }
+  .gray {
+    /* gray500 */
+    color: #7d909c;
+    font-size: 12px;
+    font-weight: 500;
+  }
 `;
