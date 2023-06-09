@@ -1,33 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 
 import { getRestaurantData } from '@apis/common/restaurant';
+import ExitIcon from '@assets/icons/ExitIcon';
+import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import Chip from '@commons/Chip';
 import SearchInput from '@commons/input/SearchInput';
-import PlaceInfoCard from '@components/search/PlaceInfoCard';
+import SearchPreview from '@components/layouts/Search/SearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import classNames from 'classnames';
 
-import leftArrowIcon from '../assets/icons/leftArrow.svg';
 import './Search.scss';
 import { useHomeFlow } from '../stacks/homeStackFlow';
-
-const placeListMock = [
-  {
-    name: '맛집1',
-    address: '서울시 강남구',
-    distance: 100,
-  },
-  {
-    name: '맛집2',
-    address: '서울시 강남구',
-    distance: 100,
-  },
-  {
-    name: '맛집3',
-    address: '서울시 강남구',
-    distance: 100,
-  },
-];
 
 const searchLogData = [
   '메뉴이름',
@@ -46,10 +29,6 @@ const Search = () => {
     getRestaurantData({}).then((res) => {});
   }, []);
 
-  const onClick = () => {
-    push('PlaceDetail', { placeId: '123' });
-  };
-
   const saveSearchLog = (value: string) => {
     localStorage.setItem('search-log', value);
   };
@@ -61,7 +40,7 @@ const Search = () => {
         backButton: {
           render: () => (
             <button className={'back-button'} onClick={pop}>
-              <img src={leftArrowIcon} />
+              <LeftArrowIcon />
             </button>
           ),
         },
@@ -88,14 +67,15 @@ const Search = () => {
         <section className={'search-log-list'}>
           <div className={'search-log-list-wrapper'}>
             {searchLogData.map((data, index) => (
-              <Chip key={`${data}${index}`}>{data}</Chip>
+              <Chip key={`${data}${index}`}>
+                {data}
+                <ExitIcon />
+              </Chip>
             ))}
           </div>
-        </section>
-        <section className={'list-container'}>
-          {placeListMock.map((place, index) => (
-            <PlaceInfoCard {...place} key={index} onClick={onClick} />
-          ))}
+          <Suspense fallback={'loading'}>
+            <SearchPreview inputValue={inputValue} />
+          </Suspense>
         </section>
       </main>
     </AppScreen>

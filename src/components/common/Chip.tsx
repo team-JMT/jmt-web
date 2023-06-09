@@ -20,11 +20,10 @@ export const StyledChip = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 6px 16px;
+  padding: 0.6px 1.2rem;
   white-space: nowrap;
-  gap: 4px;
-  width: 80px;
-  height: 33px;
+  gap: 0.4rem;
+  height: 3.3rem;
   border: 1px solid ${colors.gray200};
   border-radius: 50px;
 `;
