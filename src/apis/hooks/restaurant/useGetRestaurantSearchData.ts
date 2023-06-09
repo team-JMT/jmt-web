@@ -13,8 +13,10 @@ export const useGetRestaurantSearchData = (keyword?: string) => {
     },
   );
   return {
-    restaurantSearchData: data && data.data,
+    restaurantSearchData: data && data.data.data,
     restaurantSearchError: error,
+    data,
+    error,
     ...rest,
   };
 };

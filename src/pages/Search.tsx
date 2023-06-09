@@ -73,7 +73,7 @@ const Search = () => {
               </Chip>
             ))}
           </div>
-          <Suspense fallback={'loading'}>
+          <Suspense fallback={<div>로오오오오오오오오오오오오오오딩</div>}>
             <SearchPreview inputValue={inputValue} />
           </Suspense>
         </section>

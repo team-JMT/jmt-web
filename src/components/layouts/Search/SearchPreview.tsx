@@ -3,6 +3,8 @@ import React from 'react';
 import { useGetRestaurantSearchData } from '@apis/hooks/restaurant/useGetRestaurantSearchData';
 import PlaceInfoCard from '@components/search/PlaceInfoCard';
 
+import useDebounce from '@hooks/useDebounce';
+
 import { useHomeFlow } from '../../../stacks/homeStackFlow';
 
 const placeListMock = [
@@ -28,8 +30,9 @@ interface SearchResultProps {
 }
 const SearchPreview = ({ inputValue }: SearchResultProps) => {
   const { push, pop } = useHomeFlow();
+  const debouncedValue = useDebounce(inputValue, 500);
 
-  const { restaurantSearchData } = useGetRestaurantSearchData(inputValue);
+  const { restaurantSearchData } = useGetRestaurantSearchData(debouncedValue);
   const onSearch = () => {
     push('SearchResult', { keyword: 'inputValue' });
   };
