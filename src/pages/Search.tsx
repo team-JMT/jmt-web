@@ -52,9 +52,11 @@ const Search = () => {
               placeholder={'맛집을 검색해보세요'}
               onChange={(e) => setInputValue(e.target.value)}
               onSearch={() => {
-                push('SearchResult', {
-                  searchValue: inputValue,
-                });
+                if (typeof inputValue === 'string') {
+                  push('SearchResult', {
+                    keyword: encodeURI(inputValue),
+                  });
+                }
               }}
             />
           </div>

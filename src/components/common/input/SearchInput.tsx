@@ -48,6 +48,7 @@ const SearchInput = ({ onFocus, onBlur, onSearch, ...rest }: InputProps) => {
   };
 
   const handleOnPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(e.key);
     if (e.key === 'Enter') {
       onSearch && onSearch(e);
     }
