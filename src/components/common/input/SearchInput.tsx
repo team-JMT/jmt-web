@@ -100,7 +100,7 @@ const SearchInputMock = forwardRef<HTMLDivElement, InputProps>(
             <Icon src={searchIcon} alt={'search-icon'} active={true} />
             {/*  @ts-ignore */}
             <MockInput {...rest} className={classNames('text-l-medium')}>
-              {'음식이나 식당명을 검색하세요'}
+              음식이나 식당명을 검색하세요
             </MockInput>
           </AnimatePresence>
         </SearchInputWrapper>
