@@ -11,8 +11,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 1.6rem;
-  margin-top: 0.4rem;
-  margin-bottom: 2.4rem;
+  margin-top: 1.4rem;
 `;
 
 const BottomSheetHeader = () => {

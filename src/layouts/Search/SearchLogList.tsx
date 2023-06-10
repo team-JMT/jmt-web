@@ -32,7 +32,12 @@ const SearchLogList = () => {
             className={'search-log-chip'}
           >
             {log.name}
-            <ExitIcon onClick={() => removeSearchLog(log)} />
+            <ExitIcon
+              onClick={(e) => {
+                e.stopPropagation();
+                removeSearchLog(log);
+              }}
+            />
           </Chip>
         ))}
       </div>
