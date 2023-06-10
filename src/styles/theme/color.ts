@@ -20,4 +20,6 @@ export const colors = {
   gray700: '#4b5c65',
   gray800: '#374248',
   gray900: '#161a1d',
-};
+} as const;
+
+export type ColorToken = keyof typeof colors;

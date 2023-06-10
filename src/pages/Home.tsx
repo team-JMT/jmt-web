@@ -6,12 +6,11 @@ import HomeBottomSheet from '@components/home/BottomSheet';
 import BottomSheetHeader from '@components/home/BottomSheetHeader';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import '../styles/bottomSheet.css';
-import { modalState } from '@store/modalAtom';
-import { useAtom } from 'jotai';
+import AddPlaceCard from '@components/home/AddPlaceCard';
+import Tab from '@components/common/Tab/Tab';
+import './Home.scss';
 
 const Home = () => {
-  const [modal, setModal] = useAtom(modalState);
-
   return (
     <>
       <Modal type={'HOME_PLACE_FILTER'} content={<div>Modal test</div>} />
@@ -19,17 +18,18 @@ const Home = () => {
         <NaverMap />
         <HomeBottomSheet>
           <div className={'container-inner'}>
-            <BottomSheetHeader />
-            <button
-              onClick={() =>
-                setModal({
-                  ...modal,
-                  HOME_PLACE_FILTER: !modal.HOME_PLACE_FILTER,
-                })
-              }
-            >
-              open
-            </button>
+            <div className={'home-content-container'}>
+              <BottomSheetHeader />
+              <AddPlaceCard />
+              <Tab.Root defaultId={'AROUND'}>
+                <Tab id={'AROUND'} color={'main500'}>
+                  둘러 보기
+                </Tab>
+                <Tab id={'ALL'} color={'main500'}>
+                  전체 보기
+                </Tab>
+              </Tab.Root>
+            </div>
           </div>
         </HomeBottomSheet>
       </AppScreen>

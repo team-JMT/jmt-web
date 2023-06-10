@@ -16,7 +16,7 @@ export const StyledButton = styled.button`
   padding: 1.2rem 1.8rem;
   border: none;
   border-radius: 0.8rem;
-  box-shadow: 0px 0px 1.2rem rgba(22, 26, 29, 0.1);
+  box-shadow: 0px 0px 12px rgba(22, 26, 29, 0.1);
 `;
 interface Props extends HTMLAttributes<HTMLButtonElement> {}
 const AddressButton = ({ children, ...rest }: Props) => {

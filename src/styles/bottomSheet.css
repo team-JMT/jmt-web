@@ -142,6 +142,10 @@
   -ms-scroll-chaining: none;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+
+/*  hide scrollbar*/
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 [data-rsbs-scroll]:focus {
@@ -154,7 +158,7 @@
 
 [data-rsbs-content] {
   /* The overflow hidden is to ensure any margin on child nodes are included when the resize observer is measuring the height */
-  overflow: hidden;
+  overflow: visible;
 }
 
 [data-rsbs-footer] {
@@ -162,7 +166,7 @@
   0 2px 0 #fff;
   box-shadow: 0 -1px 0 rgba(46, 59, 66, calc(var(--rsbs-content-opacity,1) * 0.125)),
   0 2px 0 var(--rsbs-bg,#fff);
-  overflow: hidden;
+  overflow: visible;
   z-index: 1;
   padding-bottom: calc(16px + env(safe-area-inset-bottom));
 }
