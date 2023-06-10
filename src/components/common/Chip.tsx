@@ -7,9 +7,9 @@ import classNames from 'classnames';
 export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
-const Chip = ({ children }: ChipProps) => {
+const Chip = ({ children, ...rest }: ChipProps) => {
   return (
-    <StyledChip className={classNames('text-m-medium', 'gray900')}>
+    <StyledChip className={classNames('text-m-medium', 'gray900')} {...rest}>
       {children}
     </StyledChip>
   );

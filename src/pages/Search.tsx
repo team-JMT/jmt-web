@@ -1,16 +1,18 @@
 import React, { Suspense, useEffect, useState } from 'react';
 
 import { getRestaurantData } from '@apis/common/restaurant';
-import ExitIcon from '@assets/icons/ExitIcon';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
-import Chip from '@commons/Chip';
 import SearchInput from '@commons/input/SearchInput';
-import SearchPreview from '@components/layouts/Search/SearchPreview';
+import SearchLogList from '@layouts/Search/SearchLogList';
+import SearchPreview from '@layouts/Search/SearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
-import classNames from 'classnames';
+import { useHomeFlow } from '@stacks/homeStackFlow';
+import { searchLogAtom } from '@store/searchLogAtom';
 
 import './Search.scss';
-import { useHomeFlow } from '../stacks/homeStackFlow';
+import classNames from 'classnames';
+import { useAtom } from 'jotai';
+import { RESET } from 'jotai/utils';
 
 const searchLogData = [
   '메뉴이름',
@@ -22,16 +24,12 @@ const searchLogData = [
 ];
 const Search = () => {
   const { push, pop } = useHomeFlow();
-
+  const [searchLog, setSearchLog] = useAtom(searchLogAtom);
   const [inputValue, setInputValue] = useState<string>();
 
   useEffect(() => {
     getRestaurantData({}).then((res) => {});
   }, []);
-
-  const saveSearchLog = (value: string) => {
-    localStorage.setItem('search-log', value);
-  };
 
   return (
     <AppScreen
@@ -59,24 +57,18 @@ const Search = () => {
             <span className={classNames('text-l-bold', 'gray900')}>
               최근 검색
             </span>
-            <button className={classNames('text-l-medium', 'gray400')}>
+            <button
+              className={classNames('text-l-medium', 'gray400')}
+              onClick={() => setSearchLog(RESET)}
+            >
               전체삭제
             </button>
           </div>
         </div>
-        <section className={'search-log-list'}>
-          <div className={'search-log-list-wrapper'}>
-            {searchLogData.map((data, index) => (
-              <Chip key={`${data}${index}`}>
-                {data}
-                <ExitIcon />
-              </Chip>
-            ))}
-          </div>
-          <Suspense fallback={<div>로오오오오오오오오오오오오오오딩</div>}>
-            <SearchPreview inputValue={inputValue} />
-          </Suspense>
-        </section>
+        <SearchLogList />
+        <Suspense fallback={<div>로오오오오오오오오오오오오오오딩</div>}>
+          <SearchPreview inputValue={inputValue} />
+        </Suspense>
       </main>
     </AppScreen>
   );

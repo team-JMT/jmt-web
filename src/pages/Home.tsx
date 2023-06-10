@@ -6,7 +6,7 @@ import HomeBottomSheet from '@components/home/BottomSheet';
 import BottomSheetHeader from '@components/home/BottomSheetHeader';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import '../styles/bottomSheet.css';
-import { modalState } from '@store/modal';
+import { modalState } from '@store/modalAtom';
 import { useAtom } from 'jotai';
 
 const Home = () => {

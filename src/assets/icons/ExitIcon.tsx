@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 
-const ExitIcon = () => {
+interface ExitIconProps extends HTMLAttributes<HTMLOrSVGElement> {}
+
+const ExitIcon = (props: ExitIconProps) => {
   return (
     <svg
+      {...props}
       width="18"
       height="19"
       viewBox="0 0 18 19"
