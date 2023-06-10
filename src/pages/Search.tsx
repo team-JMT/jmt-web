@@ -51,6 +51,11 @@ const Search = () => {
             <SearchInput
               placeholder={'맛집을 검색해보세요'}
               onChange={(e) => setInputValue(e.target.value)}
+              onSearch={() => {
+                push('SearchResult', {
+                  searchValue: inputValue,
+                });
+              }}
             />
           </div>
           <div className={'search-log-menu'}>

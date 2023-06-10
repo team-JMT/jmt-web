@@ -18,7 +18,7 @@ const SearchLogList = () => {
   const removeSearchLog = useSetAtom(removeSearchLogAtom);
 
   const handleSearch = (currentLog: SearchLog) => {
-    push('SearchResult', { keyword: currentLog.id });
+    push('SearchResult', { keyword: currentLog.name });
     addSearchLog(currentLog);
   };
 

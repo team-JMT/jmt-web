@@ -17,7 +17,6 @@ const Home = () => {
       <Modal type={'HOME_PLACE_FILTER'} content={<div>Modal test</div>} />
       <AppScreen>
         <NaverMap />
-
         <HomeBottomSheet>
           <div className={'container-inner'}>
             <BottomSheetHeader />

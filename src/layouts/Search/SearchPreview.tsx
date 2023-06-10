@@ -21,7 +21,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
 
   const { restaurantSearchData } = useGetRestaurantSearchData(debouncedValue);
   const onSearch = (place: Restaurant) => {
-    push('SearchResult', { keyword: place.id });
+    push('SearchResult', { keyword: place.name });
     addSearchLog({ name: place.name, id: String(place.id) });
   };
 
