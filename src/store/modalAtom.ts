@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-const MODAL = 'Modal';
+const ModalAtom = 'Modal';
 export const MODAL_KEY = {
   HOME_PLACE_FILTER: 'HOME_PLACE_FILTER',
   POSITION: 'POSITION',

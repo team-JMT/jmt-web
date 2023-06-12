@@ -2,15 +2,14 @@ import React from 'react';
 
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
+import { useHomeFlow } from '@stacks/homeStackFlow';
 
-import { useHomeFlow } from '../stacks/homeStackFlow';
-
-const PlaceDetail = () => {
+const SearchResult = () => {
   const { pop } = useHomeFlow();
   return (
     <AppScreen
       appBar={{
-        title: <h1 className={'text-l-medium'}>맛집 상세</h1>,
+        title: <h1 className={'text-l-medium'}>검색 결과</h1>,
         backButton: {
           render: () => (
             <button className={'back-button'} onClick={pop}>
@@ -21,9 +20,9 @@ const PlaceDetail = () => {
         height: '48px',
       }}
     >
-      PlaceDetail adasdasdasda
+      <div></div>
     </AppScreen>
   );
 };
 
-export default PlaceDetail;
+export default SearchResult;

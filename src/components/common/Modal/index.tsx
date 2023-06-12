@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { modalState, MODAL_KEY } from '@store/modal';
+import { modalState, MODAL_KEY } from '@store/modalAtom';
 import { AnimatePresence } from 'framer-motion';
 import { useAtom } from 'jotai';
 

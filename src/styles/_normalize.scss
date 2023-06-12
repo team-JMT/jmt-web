@@ -213,6 +213,15 @@ textarea {
   margin: 0; /* 2 */
 }
 
+button {
+  border: 0;
+  background: transparent;
+}
+
+html {
+  user-select: none;
+}
+
 /**
    * Show the overflow in IE.
    * 1. Show the overflow in Edge.

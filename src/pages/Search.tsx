@@ -1,53 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 
 import { getRestaurantData } from '@apis/common/restaurant';
+import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import SearchInput from '@commons/input/SearchInput';
-import PlaceInfoCard from '@components/search/PlaceInfoCard';
+import SearchLogList from '@layouts/Search/SearchLogList';
+import SearchPreview from '@layouts/Search/SearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
+import { useHomeFlow } from '@stacks/homeStackFlow';
+import { searchLogAtom } from '@store/searchLogAtom';
 
-import leftArrowIcon from '../assets/icons/leftArrow.svg';
 import './Search.scss';
-import { useHomeFlow } from '../stacks/homeStackFlow';
+import classNames from 'classnames';
+import { useAtom } from 'jotai';
+import { RESET } from 'jotai/utils';
 
+const searchLogData = [
+  '메뉴이름',
+  '메뉴',
+  '마라탕',
+  '메뉴이름',
+  '메뉴',
+  '마라탕',
+];
 const Search = () => {
   const { push, pop } = useHomeFlow();
+  const [searchLog, setSearchLog] = useAtom(searchLogAtom);
+  const [inputValue, setInputValue] = useState<string>();
 
   useEffect(() => {
-    getRestaurantData({}).then((res) => {
-      console.log(res);
-    });
+    getRestaurantData({}).then((res) => {});
   }, []);
-
-  const onClick = () => {
-    push('PlaceDetail', { placeId: '123' });
-  };
-
-  const placeListMock = [
-    {
-      name: '맛집1',
-      address: '서울시 강남구',
-      distance: 100,
-    },
-    {
-      name: '맛집2',
-      address: '서울시 강남구',
-      distance: 100,
-    },
-    {
-      name: '맛집3',
-      address: '서울시 강남구',
-      distance: 100,
-    },
-  ];
 
   return (
     <AppScreen
       appBar={{
-        title: <h1 className={'text-l-medium'}>맛집 검색</h1>,
+        title: <h1 className={'text-l-medium'}>검색</h1>,
         backButton: {
           render: () => (
             <button className={'back-button'} onClick={pop}>
-              <img src={leftArrowIcon} />
+              <LeftArrowIcon />
             </button>
           ),
         },
@@ -57,14 +48,34 @@ const Search = () => {
       <main className={'safe-area-layout-container'}>
         <div className={'container-inner'}>
           <div className={'search-input-wrapper'}>
-            <SearchInput placeholder={'맛집을 검색해보세요'} />
+            <SearchInput
+              placeholder={'맛집을 검색해보세요'}
+              onChange={(e) => setInputValue(e.target.value)}
+              onSearch={() => {
+                if (typeof inputValue === 'string') {
+                  push('SearchResult', {
+                    keyword: encodeURI(inputValue),
+                  });
+                }
+              }}
+            />
           </div>
-          <section className={'list-container'}>
-            {placeListMock.map((place, index) => (
-              <PlaceInfoCard {...place} key={index} onClick={onClick} />
-            ))}
-          </section>
+          <div className={'search-log-menu'}>
+            <span className={classNames('text-l-bold', 'gray900')}>
+              최근 검색
+            </span>
+            <button
+              className={classNames('text-l-medium', 'gray400')}
+              onClick={() => setSearchLog(RESET)}
+            >
+              전체삭제
+            </button>
+          </div>
         </div>
+        <SearchLogList />
+        <Suspense fallback={<div>로오오오오오오오오오오오오오오딩</div>}>
+          <SearchPreview inputValue={inputValue} />
+        </Suspense>
       </main>
     </AppScreen>
   );
