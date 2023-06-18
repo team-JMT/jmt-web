@@ -8,6 +8,7 @@ import OutsideClickHandler from '@utils/OutsideClickHandler';
 
 import List from './components/List';
 import Wrapper from './components/Wrapper';
+import CenterWrapper from './components/Wrapper/Center';
 import { LayerWrapper } from './components/Wrapper/styled';
 
 export type $Values<T extends object> = T[keyof T];
@@ -51,10 +52,13 @@ const Modal = ({
               setModal({ ...modal, [type]: !modal[type] });
             }}
           >
-            <Modal.Wrapper>
-              {header}
-              {content}
-            </Modal.Wrapper>
+            {type === 'HOME_PLACE_FILTER' && (
+              <Modal.Wrapper>
+                {header}
+                {content}
+              </Modal.Wrapper>
+            )}
+            {type === 'CENTER' && <Modal.Center>{content}</Modal.Center>}
           </OutsideClickHandler>
         </LayerWrapper>
       )}
@@ -64,5 +68,6 @@ const Modal = ({
 
 Modal.List = List;
 Modal.Wrapper = Wrapper;
+Modal.Center = CenterWrapper;
 
 export default Modal;
