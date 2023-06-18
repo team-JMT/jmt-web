@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Modal = ({
-  type = MODAL_KEY.HOME_PLACE_FILTER,
+  type = MODAL_KEY.IS_OPEN,
   header,
   content,
   canOutsideClick = true,

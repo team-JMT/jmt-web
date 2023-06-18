@@ -13,7 +13,7 @@ import './Home.scss';
 const Home = () => {
   return (
     <>
-      <Modal type={'HOME_PLACE_FILTER'} content={<div>Modal test</div>} />
+      <Modal type={'IS_OPEN'} content={<div>Modal test</div>} />
       <AppScreen>
         <NaverMap />
         <HomeBottomSheet>
