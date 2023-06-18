@@ -6,8 +6,6 @@ import { motion } from 'framer-motion';
 
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
-
-import leftArrowIcon from '../assets/icons/leftArrow.svg';
 import rightArrowIcon from '../assets/icons/rightArrow.svg';
 import shareIcon from '../assets/icons/share.svg';
 import threeBotsIcon from '../assets/icons/threeBots.svg';
