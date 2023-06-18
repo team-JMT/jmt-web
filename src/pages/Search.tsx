@@ -1,8 +1,8 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
 import { getRestaurantData } from '@apis/common/restaurant';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
-import SearchInput from '@commons/input/SearchInput';
+import SearchInput from '@components/common/input/SearchInput';
 import SearchLogList from '@layouts/Search/SearchLogList';
 import SearchPreview from '@layouts/Search/SearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
@@ -26,6 +26,7 @@ const Search = () => {
   const { push, pop } = useHomeFlow();
   const [searchLog, setSearchLog] = useAtom(searchLogAtom);
   const [inputValue, setInputValue] = useState<string>();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     getRestaurantData({}).then((res) => {});
@@ -49,6 +50,7 @@ const Search = () => {
         <div className={'container-inner'}>
           <div className={'search-input-wrapper'}>
             <SearchInput
+              ref={searchRef}
               placeholder={'맛집을 검색해보세요'}
               onChange={(e) => setInputValue(e.target.value)}
               onSearch={() => {
