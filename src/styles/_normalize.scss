@@ -44,6 +44,12 @@
   -webkit-tap-highlight-color: transparent;
   transition: color, background-color 0.3s ease-in-out;
   font-family: 'Pretendard', sans-serif;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+
+}
+*::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }
 /* Document
    ========================================================================== */
@@ -211,6 +217,15 @@ textarea {
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
+}
+
+button {
+  border: 0;
+  background: transparent;
+}
+
+html {
+  user-select: none;
 }
 
 /**

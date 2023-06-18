@@ -3,3 +3,28 @@
   width: 100%;
   margin-top: 12px;
 }
+.search-log-menu {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 24px 0 12px 0;
+}
+.search-log-list {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.search-log-list::-webkit-scrollbar {
+  display: none;
+}
+.search-log-list-wrapper {
+  margin: 0 20px;
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+.search-log-list-wrapper > .search-log-chip:last-child {
+  margin-right: 2rem;
+}

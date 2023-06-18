@@ -17,7 +17,7 @@ const HomeBottomSheet = ({ children }: Props) => {
       initialFocusRef={focusRef}
       blocking={false}
       defaultSnap={({ maxHeight }) => 226}
-      snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, 226]}
+      snapPoints={({ maxHeight }) => [maxHeight - maxHeight / 10, 248]}
       expandOnContentDrag={true}
     >
       {children}

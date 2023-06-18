@@ -4,6 +4,7 @@
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
 
+import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 
 import leftArrowIcon from '../assets/icons/leftArrow.svg';
@@ -99,7 +100,7 @@ const PlaceDetail = () => {
           backButton: {
             render: () => (
               <button className={'back-button'} onClick={pop}>
-                <img src={leftArrowIcon} />
+                <LeftArrowIcon />
               </button>
             ),
           },
