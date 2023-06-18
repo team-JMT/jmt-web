@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import { modalState, MODAL_KEY } from '@store/modalAtom';
+import { BOTTOM_SHEET_KEY, bottomSheetState } from '@store/bottomSheetAtom';
+import { MODAL_KEY } from '@store/modalAtom';
 import { AnimatePresence } from 'framer-motion';
 import { useAtom } from 'jotai';
 
@@ -8,7 +9,6 @@ import OutsideClickHandler from '@utils/OutsideClickHandler';
 
 import List from './components/List';
 import Wrapper from './components/Wrapper';
-import CenterWrapper from './components/Wrapper/Center';
 import { LayerWrapper } from './components/Wrapper/styled';
 
 export type $Values<T extends object> = T[keyof T];
@@ -21,18 +21,18 @@ interface Props {
   onOutsideClick?: () => void;
 }
 
-const Modal = ({
-  type = MODAL_KEY.IS_OPEN,
+const BottomSheet = ({
+  type = BOTTOM_SHEET_KEY.IS_OPEN,
   header,
   content,
   canOutsideClick = true,
   onOutsideClick,
 }: Props) => {
-  const [modal, setModal] = useAtom(modalState);
+  const [bottomSheet, setBottomSheet] = useAtom(bottomSheetState);
 
   return (
     <AnimatePresence>
-      {modal[type] && (
+      {bottomSheet[type] && (
         <LayerWrapper
           initial={{ opacity: 0 }}
           animate={{
@@ -49,16 +49,13 @@ const Modal = ({
                 return;
               }
               onOutsideClick && onOutsideClick();
-              setModal({ ...modal, [type]: !modal[type] });
+              setBottomSheet({ ...bottomSheet, [type]: !bottomSheet[type] });
             }}
           >
-            {type === 'HOME_PLACE_FILTER' && (
-              <Modal.Wrapper>
-                {header}
-                {content}
-              </Modal.Wrapper>
-            )}
-            {type === 'CENTER' && <Modal.Center>{content}</Modal.Center>}
+            <BottomSheet.Wrapper>
+              {header}
+              {content}
+            </BottomSheet.Wrapper>
           </OutsideClickHandler>
         </LayerWrapper>
       )}
@@ -66,8 +63,7 @@ const Modal = ({
   );
 };
 
-Modal.List = List;
-Modal.Wrapper = Wrapper;
-Modal.Center = CenterWrapper;
+BottomSheet.List = List;
+BottomSheet.Wrapper = Wrapper;
 
-export default Modal;
+export default BottomSheet;

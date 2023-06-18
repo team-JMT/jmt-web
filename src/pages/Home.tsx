@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Modal from '@commons/Modal';
+import BottomSheet from '@commons/BottomSheet';
 import NaverMap from '@components/common/NaverMap';
 import HomeBottomSheet from '@components/home/BottomSheet';
 import BottomSheetHeader from '@components/home/BottomSheetHeader';
@@ -13,7 +13,7 @@ import './Home.scss';
 const Home = () => {
   return (
     <>
-      <Modal type={'IS_OPEN'} content={<div>Modal test</div>} />
+      <BottomSheet type={'IS_OPEN'} content={<div>Modal test</div>} />
       <AppScreen>
         <NaverMap />
         <HomeBottomSheet>
