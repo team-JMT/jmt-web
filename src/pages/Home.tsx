@@ -2,15 +2,21 @@ import React from 'react';
 
 import BottomSheet from '@commons/BottomSheet';
 import NaverMap from '@components/common/NaverMap';
+import Tab from '@components/common/Tab/Tab';
+import AddPlaceCard from '@components/home/AddPlaceCard';
 import HomeBottomSheet from '@components/home/BottomSheet';
 import BottomSheetHeader from '@components/home/BottomSheetHeader';
+import HomeAround from '@layouts/Home/HomeAround';
+import HomeSeeAll from '@layouts/Home/HomeSeeAll';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import '../styles/bottomSheet.css';
-import AddPlaceCard from '@components/home/AddPlaceCard';
-import Tab from '@components/common/Tab/Tab';
+
 import './Home.scss';
+import { AnimatePresence } from 'framer-motion';
 
 const Home = () => {
+  const [tab, setTab] = React.useState('AROUND');
+
   return (
     <>
       <BottomSheet type={'IS_OPEN'} content={<div>Modal test</div>} />
@@ -21,7 +27,7 @@ const Home = () => {
             <div className={'home-content-container'}>
               <BottomSheetHeader />
               <AddPlaceCard />
-              <Tab.Root defaultId={'AROUND'}>
+              <Tab.Root defaultId={tab} setState={setTab}>
                 <Tab id={'AROUND'} color={'main500'}>
                   둘러 보기
                 </Tab>
@@ -29,6 +35,9 @@ const Home = () => {
                   전체 보기
                 </Tab>
               </Tab.Root>
+              <AnimatePresence mode="wait">
+                {tab === 'AROUND' ? <HomeAround /> : <HomeSeeAll />}
+              </AnimatePresence>
             </div>
           </div>
         </HomeBottomSheet>

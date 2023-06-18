@@ -11,7 +11,6 @@ export const TabContext = createContext<
     }
   | undefined
 >(undefined);
-
 export const useTab = () => {
   const context = useContext(TabContext);
   if (!context) {
