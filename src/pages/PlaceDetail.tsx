@@ -13,28 +13,27 @@ import verticalBarIcon from '../assets/icons/verticalBar.svg';
 import BottomBar from '../components/placeDetail/BottomBar';
 import DetailMenu from '../components/placeDetail/DetailMenu';
 import ImgContainer from '../components/placeDetail/ImgContainer';
+
+import BottomSheet from '../components/common/BottomSheet';
+import Modal from '../components/common/Modal';
 import { useHomeFlow } from '../stacks/homeStackFlow';
 import './PlaceDetail.scss';
 
-import { modalState } from '@store/modal';
-import { useAtom } from 'jotai';
-import Modal from '@components/common/Modal';
+import { BOTTOM_SHEET_KEY, toggleBottomSheet } from '@store/bottomSheetAtom';
+import { MODAL_KEY, toggleModal } from '@store/modalAtom';
+import { useSetAtom } from 'jotai';
 
 const imgArray = ['./img1.png', './img2.png', './img3.png'];
 
 const PlaceDetail = () => {
   const { pop } = useHomeFlow();
 
-  const [modal, setModal] = useAtom(modalState);
+  const toggleBS = useSetAtom(toggleBottomSheet);
+  const toggleM = useSetAtom(toggleModal);
   const MoreButton = () => (
     <div
       className="more-button"
-      onClick={() =>
-        setModal({
-          ...modal,
-          HOME_PLACE_FILTER: !modal.HOME_PLACE_FILTER,
-        })
-      }
+      onClick={() => toggleBS(BOTTOM_SHEET_KEY.IS_OPEN)}
     >
       <img src={threeBotsIcon} />
     </div>
@@ -42,30 +41,27 @@ const PlaceDetail = () => {
 
   return (
     <>
-      <Modal
-        type={'HOME_PLACE_FILTER'}
+      <BottomSheet
+        type={'IS_OPEN'}
         content={
-          <BottomSheet>
+          <BottomSheetWrapper>
             <BottomSheetButton className={'text-l-medium'}>
               수정하기
             </BottomSheetButton>
             <BottomSheetButton
-              onClick={() =>
-                setModal({
-                  ...modal,
-                  HOME_PLACE_FILTER: !modal.HOME_PLACE_FILTER,
-                  CENTER: !modal.CENTER,
-                })
-              }
+              onClick={() => {
+                toggleBS(BOTTOM_SHEET_KEY.IS_OPEN);
+                toggleM(MODAL_KEY.IS_OPEN);
+              }}
               className={'text-l-medium'}
             >
               삭제하기
             </BottomSheetButton>
-          </BottomSheet>
+          </BottomSheetWrapper>
         }
       />
       <Modal
-        type={'CENTER'}
+        type={'IS_OPEN'}
         content={
           <>
             <Title className={'title-s-bold'}>맛집을 삭제할까요?</Title>
@@ -79,12 +75,7 @@ const PlaceDetail = () => {
               <ModalButton className={'text-m-medium'}>삭제하기</ModalButton>
               <ModalButton
                 className={'text-m-medium'}
-                onClick={() =>
-                  setModal({
-                    ...modal,
-                    CENTER: !modal.CENTER,
-                  })
-                }
+                onClick={() => toggleM(MODAL_KEY.IS_OPEN)}
               >
                 유지하기
               </ModalButton>
@@ -132,7 +123,7 @@ const PlaceDetail = () => {
     </>
   );
 };
-const BottomSheet = styled(motion.div)`
+const BottomSheetWrapper = styled(motion.div)`
   margin-bottom: 36px;
 `;
 

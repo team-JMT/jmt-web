@@ -32,18 +32,3 @@ export const Inner = styled(motion.div)`
   z-index: 101;
   background-color: white;
 `;
-
-export const CenterInner = styled(motion.div)`
-  margin: auto;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 20px;
-  height: 200px;
-  width: 335px;
-  position: relative;
-  top: calc(50vh - 100px);
-  z-index: 130;
-`;
