@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import Information from '../Information';
-import Recommander from '../Recommander';
-import Review from '../Review';
+import Information from '@components/placeDetail/Information';
+import Recommander from '@components/placeDetail/Recommander';
+import Review from '@components/placeDetail/Review';
 
 import { DetailMenuWrapper, Menu, TextContainer, AnimateBlock } from './styled';
 
