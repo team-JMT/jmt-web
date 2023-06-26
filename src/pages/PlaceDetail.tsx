@@ -10,6 +10,8 @@ import rightArrowIcon from '../assets/icons/rightArrow.svg';
 import shareIcon from '../assets/icons/share.svg';
 import threeBotsIcon from '../assets/icons/threeBots.svg';
 import verticalBarIcon from '../assets/icons/verticalBar.svg';
+import PencilIcon from '@assets/icons/PencilIcon';
+import TrashIcon from '@assets/icons/TrashIcon';
 import BottomBar from '../components/placeDetail/BottomBar';
 import DetailMenu from '../components/placeDetail/DetailMenu';
 import ImgContainer from '../components/placeDetail/ImgContainer';
@@ -39,6 +41,10 @@ const PlaceDetail = () => {
     </div>
   );
 
+  const Delete = () => {
+    toggleM(MODAL_KEY.IS_OPEN);
+    pop();
+  };
   return (
     <>
       <BottomSheet
@@ -46,6 +52,7 @@ const PlaceDetail = () => {
         content={
           <BottomSheetWrapper>
             <BottomSheetButton className={'text-l-medium'}>
+              <PencilIcon />
               수정하기
             </BottomSheetButton>
             <BottomSheetButton
@@ -55,6 +62,7 @@ const PlaceDetail = () => {
               }}
               className={'text-l-medium'}
             >
+              <TrashIcon />
               삭제하기
             </BottomSheetButton>
           </BottomSheetWrapper>
@@ -72,7 +80,9 @@ const PlaceDetail = () => {
               <div className={'text-m-medium'}>정말 삭제할까요?</div>
             </Explain>
             <ButtonWrapper>
-              <ModalButton className={'text-m-medium'}>삭제하기</ModalButton>
+              <ModalButton className={'text-m-medium'} onClick={Delete}>
+                삭제하기
+              </ModalButton>
               <ModalButton
                 className={'text-m-medium'}
                 onClick={() => toggleM(MODAL_KEY.IS_OPEN)}
@@ -136,6 +146,7 @@ const BottomSheetButton = styled.div`
   /* gray100 */
   border: 2px solid #f1f3f4;
   border-radius: 8px;
+  gap: 2px;
   & + & {
     margin-top: 12px;
   }
