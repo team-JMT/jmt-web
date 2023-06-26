@@ -10,18 +10,18 @@ interface Props {
   content?: ReactNode;
 }
 
-const AlertBox = ({ icon, content }: Props) => {
+const NoticeBox = ({ icon, content }: Props) => {
   return (
-    <AlertWrapper>
+    <NoticeWrapper>
       {icon}
-      <AlertMessage>{content}</AlertMessage>
-    </AlertWrapper>
+      <NoticeMessage>{content}</NoticeMessage>
+    </NoticeWrapper>
   );
 };
 
-export default AlertBox;
+export default NoticeBox;
 
-const AlertWrapper = styled(motion.div)`
+const NoticeWrapper = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,7 +34,7 @@ const AlertWrapper = styled(motion.div)`
   box-shadow: 0px 2px 16px 0px rgba(22, 26, 29, 0.08);
 `;
 
-const AlertMessage = styled.div`
+const NoticeMessage = styled.div`
   /*800*/
   color: #374248;
   text-align: center;
