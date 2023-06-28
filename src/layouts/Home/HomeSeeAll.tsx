@@ -22,6 +22,7 @@ const HomeSeeAll = () => {
         <FilterChip>종류</FilterChip>
         <FilterChip>주류 여부</FilterChip>
       </aside>
+      <div></div>
     </motion.div>
   );
 };

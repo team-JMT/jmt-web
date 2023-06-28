@@ -35,7 +35,7 @@ const Home = () => {
                   전체 보기
                 </Tab>
               </Tab.Root>
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="sync">
                 {tab === 'AROUND' ? <HomeAround /> : <HomeSeeAll />}
               </AnimatePresence>
             </div>

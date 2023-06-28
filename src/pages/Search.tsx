@@ -1,6 +1,5 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 
-import { getRestaurantData } from '@apis/common/restaurant';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import SearchInput from '@components/common/input/SearchInput';
 import SearchLogList from '@layouts/Search/SearchLogList';
@@ -27,10 +26,6 @@ const Search = () => {
   const [searchLog, setSearchLog] = useAtom(searchLogAtom);
   const [inputValue, setInputValue] = useState<string>();
   const searchRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    getRestaurantData({}).then((res) => {});
-  }, []);
 
   return (
     <AppScreen

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useGetRestaurantSearchData } from '@apis/hooks/restaurant/useGetRestaurantSearchData';
+import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
 import PlaceInfoCard from '@components/search/PlaceInfoCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { addSearchLogAtom } from '@store/searchLogAtom';
@@ -19,11 +19,14 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
   const addSearchLog = useSetAtom(addSearchLogAtom);
   const debouncedValue = useDebounce(inputValue, 500);
 
-  const { restaurantSearchData } = useGetRestaurantSearchData(debouncedValue);
+  const { restaurantSearchData } =
+    useGetRestaurantSearchDataInfinite(debouncedValue);
   const onSearch = (place: Restaurant) => {
     push('SearchResult', { keyword: place.name });
     addSearchLog({ name: place.name, id: String(place.id) });
   };
+
+  console.log(restaurantSearchData?.restaurants);
 
   return (
     <section className={'list-container'}>
