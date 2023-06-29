@@ -1,19 +1,24 @@
 import React from 'react';
 
 //import { css } from '@emotion/react';
+
+import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import styled from '@emotion/styled';
+const id = 1;
 
 const Information = () => {
+  const { DetailData } = useGetRestaurantDetailData(id);
+
   return (
     <>
       <MapContainer></MapContainer>
       <AddressConatiner>
         <AddressInfo className={'text-l-bold'}>
-          서울시 어쩌구 저쩌구 123 32
+          {DetailData?.roadAddress}
         </AddressInfo>
         <AddressCopy className={'text-s-medium'}>주소복사</AddressCopy>
       </AddressConatiner>
-      <Telephone className={'text-m-medium'}>02-1234-5678</Telephone>
+      <Telephone className={'text-m-medium'}>{DetailData?.phone}</Telephone>
     </>
   );
 };

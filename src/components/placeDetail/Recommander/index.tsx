@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
+
 import {
   Text,
   MenuContainer,
@@ -10,27 +12,33 @@ import {
   UserImg,
   UserText,
 } from './styled';
-const recomandMenuMock = [
-  '마라탕',
-  '마라샹궈',
-  '마라밥',
-  '마라',
-  '마라볶음밥',
-  '마라전골',
-];
+const id = 1;
+
 const Recommander = () => {
+  const { DetailData } = useGetRestaurantDetailData(id);
+  const str = DetailData?.recommendMenu;
+  const recommendMenuArray = str
+    ?.split('#')
+    .filter((item: string) => item !== '');
+
   return (
     <>
       <Text className={'text-m-medium'}>추천메뉴</Text>
       <MenuContainer>
-        {recomandMenuMock.map((menu, index) => (
+        {recommendMenuArray?.map((menu: string, index: number) => (
           <MenuItem key={index} className={'text-m-medium'}>
             {menu}
           </MenuItem>
         ))}
       </MenuContainer>
-      <Text className={'text-m-medium'}>술과 함께 즐길 수 있어요 🍻</Text>
-      <GrayBox className={'text-l-medium'}>소주랑 먹으면 죽여요</GrayBox>
+      {DetailData?.canDrinkLiquor && (
+        <>
+          <Text className={'text-m-medium'}>술과 함께 즐길 수 있어요 🍻</Text>
+          <GrayBox className={'text-l-medium'}>
+            {DetailData?.goWellWithLiquor}와(과) 먹으면 죽는 맛 입니다!
+          </GrayBox>
+        </>
+      )}
       <GrayBar />
       <UserWrapper>
         <UserImg />

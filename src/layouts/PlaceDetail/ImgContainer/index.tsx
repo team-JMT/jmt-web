@@ -9,10 +9,6 @@ const images = [
   'https://d33wubrfki0l68.cloudfront.net/594de66469079c21fc54c14db0591305a1198dd6/3f4b1/static/images/wallpapers/bridge-01@2x.png',
 ];
 
-type ImgProps = {
-  imgArray: string[];
-};
-
 const variants = {
   enter: (direction: number) => {
     return {
@@ -50,7 +46,7 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-const ImgContainer = ({ imgArray }: ImgProps) => {
+const ImgContainer = () => {
   const [[page, direction], setPage] = useState([0, 0]);
 
   // We only have 3 images, but we paginate them absolutely (ie 1, 2, 3, 4, 5...) and
@@ -63,7 +59,7 @@ const ImgContainer = ({ imgArray }: ImgProps) => {
     setPage([page + newDirection, newDirection]);
   };
 
-  return (
+  return images.length > 0 ? (
     <ImgWrapper>
       <AnimatePresence initial={false} custom={direction}>
         <PlaceImg
@@ -96,9 +92,11 @@ const ImgContainer = ({ imgArray }: ImgProps) => {
       <PageButton direction={'left'} onClick={() => paginate(-1)} />
       <ImgNumber className={'text-s-bold'}>
         {imageIndex + 1}
-        <span className="gray"> / {imgArray.length}</span>
+        <span className="gray"> / {images.length}</span>
       </ImgNumber>
     </ImgWrapper>
+  ) : (
+    <></>
   );
 };
 
