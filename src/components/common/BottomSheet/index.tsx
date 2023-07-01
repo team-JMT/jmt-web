@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 import { BOTTOM_SHEET_KEY, bottomSheetState } from '@store/bottomSheetAtom';
-import { MODAL_KEY } from '@store/modalAtom';
 import { AnimatePresence } from 'framer-motion';
 import { useAtom } from 'jotai';
 
@@ -15,7 +14,7 @@ import { LayerWrapper } from './components/Wrapper/styled';
 export type $Values<T extends object> = T[keyof T];
 
 interface Props {
-  type: $Values<typeof MODAL_KEY>;
+  type: $Values<typeof BOTTOM_SHEET_KEY>;
   header?: ReactNode;
   content?: ReactNode;
   canOutsideClick?: boolean;
@@ -23,7 +22,7 @@ interface Props {
 }
 
 const BottomSheet = ({
-  type = BOTTOM_SHEET_KEY.IS_OPEN,
+  type = BOTTOM_SHEET_KEY.FOOD_CATEGORY,
   header,
   content,
   canOutsideClick = true,

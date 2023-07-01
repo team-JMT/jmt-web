@@ -56,15 +56,15 @@ const HomeSeeAll = () => {
       key={'ALL'}
     >
       <aside className={'see-all-filter'}>
-        <Chip onClick={() => handleOpenBottomSheet('IS_OPEN')}>
+        <Chip onClick={() => handleOpenBottomSheet('SORT_BY')}>
           가까운 순
           <DownArrow />
         </Chip>
         <div className={classNames('filter-divider', 'gray200')} />
-        <FilterChip onClick={() => handleOpenBottomSheet('IS_OPEN')}>
+        <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
           종류
         </FilterChip>
-        <FilterChip onClick={() => handleOpenBottomSheet('IS_OPEN')}>
+        <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
           주류 여부
         </FilterChip>
       </aside>
@@ -77,7 +77,8 @@ const HomeSeeAll = () => {
           <div className={'infinite-observe'} ref={observeRef} />
         )}
       </section>
-      <BottomSheet type={'IS_OPEN'}>asd</BottomSheet>
+      <BottomSheet type={'FOOD_CATEGORY'}>asd</BottomSheet>
+      <BottomSheet type={'SORT_BY'}>asd</BottomSheet>
     </motion.div>
   );
 };
