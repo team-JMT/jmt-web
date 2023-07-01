@@ -23,7 +23,7 @@ export const useGetRestaurantSearchDataInfinite = (keyword?: string) => {
     },
   );
   return {
-    restaurantSearchData: data && data,
+    restaurantSearchData: data && data.pages,
     restaurantSearchError: error,
     data,
     error,

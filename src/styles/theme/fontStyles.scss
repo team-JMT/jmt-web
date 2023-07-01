@@ -1,4 +1,4 @@
-@import "colors";
+@use "colors";
 $title-l: 32px;
 $title-m: 24px;
 $title-s: 20px;
@@ -10,59 +10,59 @@ $bold: 700;
 $medium: 500;
 
 .main100 {
-  color: $main100
+  color: colors.$main100
 }
 .main200 {
-  color: $main200
+  color: colors.$main200
 }
 .main300 {
-  color: $main300
+  color: colors.$main300
 }
 .main400 {
-  color: $main400
+  color: colors.$main400
 }
 .main500 {
-  color: $main500
+  color: colors.$main500
 }
 .main600 {
-  color: $main600
+  color: colors.$main600
 }
 .main700 {
-  color: $main700
+  color: colors.$main700
 }
 .main800 {
-  color: $main800
+  color: colors.$main800
 }
 .main900 {
-  color: $main900
+  color: colors.$main900
 }
 .white {
-  color: $white
+  color: colors.$white
 }
 .gray100 {
-  color: $gray100
+  color: colors.$gray100
 }
 .gray200 {
-  color: $gray200
+  color: colors.$gray200
 }
 .gray300 {
-  color: $gray300
+  color: colors.$gray300
 }
 .gray400 {
-  color: $gray400
+  color: colors.$gray400
 }
 .gray500 {
-  color: $gray500
+  color: colors.$gray500
 }
 .gray600 {
-  color: $gray600
+  color: colors.$gray600
 }
 .gray700 {
-  color: $gray700
+  color: colors.$gray700
 }
 .gray800 {
-  color: $gray800
+  color: colors.$gray800
 }
 .gray900 {
-  color: $gray900
+  color: colors.$gray900
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
 import PlaceInfoCard from '@components/search/PlaceInfoCard';
@@ -7,8 +7,8 @@ import { addSearchLogAtom } from '@store/searchLogAtom';
 import { useSetAtom } from 'jotai';
 
 import useDebounce from '@hooks/useDebounce';
+import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
-import { searchResultMock } from '../../mocks/searchResult';
 import { Restaurant } from '../../models/getRestaurantData';
 
 interface SearchResultProps {
@@ -18,21 +18,52 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
   const { push, pop } = useHomeFlow();
   const addSearchLog = useSetAtom(addSearchLogAtom);
   const debouncedValue = useDebounce(inputValue, 500);
+  const observeRef = useRef<HTMLDivElement>(null);
 
-  const { restaurantSearchData } =
+  const { restaurantSearchData, fetchNextPage } =
     useGetRestaurantSearchDataInfinite(debouncedValue);
   const onSearch = (place: Restaurant) => {
     push('SearchResult', { keyword: place.name });
     addSearchLog({ name: place.name, id: String(place.id) });
   };
 
-  console.log(restaurantSearchData?.restaurants);
+  const mappingRestaurantSearch = restaurantSearchData
+    ?.flatMap((data) => data.data.restaurants)
+    .map((data) => data);
+
+  const isLastPage = () => {
+    if (!restaurantSearchData) {
+      return;
+    }
+    return restaurantSearchData[0].data.page.pageLast;
+  };
+
+  const handleIntersect = () => {
+    if (isLastPage()) {
+      fetchNextPage();
+      console.log('intersect');
+    }
+  };
+
+  // 무한 스크롤 로직
+  useInsertionObserver<HTMLDivElement>({
+    observeRef,
+    onIntersect: handleIntersect,
+  });
 
   return (
     <section className={'list-container'}>
-      {searchResultMock.map((place, index) => (
-        <PlaceInfoCard {...place} key={index} onClick={() => onSearch(place)} />
-      ))}
+      {mappingRestaurantSearch &&
+        mappingRestaurantSearch.map((place, index) => (
+          <PlaceInfoCard
+            {...place}
+            key={index}
+            onClick={() => onSearch(place)}
+          />
+        ))}
+      {!isLastPage() && (
+        <div className={'infinite-observer'} ref={observeRef} />
+      )}
     </section>
   );
 };

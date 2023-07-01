@@ -5,17 +5,20 @@ import SadImage from '@assets/icons/SadImage';
 import { motion } from 'framer-motion';
 
 const HomeAround = () => {
-  const { restaurantData } = useGetRestaurantDataInfinite({});
+  const { restaurantData } = useGetRestaurantDataInfinite({
+    page: 0,
+    size: 10,
+  });
 
   const mappingRestaurantData = React.useMemo(
-    () => restaurantData?.flatMap((page) => page.data.restaurant),
+    () => restaurantData?.flatMap((page) => page.data.restaurants),
     [restaurantData],
   );
   return (
     <motion.div
       initial="hidden"
       animate="visible"
-      exit={{ opacity: 0, transition: { duration: 0.5 } }}
+      exit={{ opacity: 30, transition: { duration: 0.5 } }}
       className={'home-tab-container'}
       key={'AROUND'}
     >

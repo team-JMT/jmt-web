@@ -7,8 +7,6 @@ import SearchPreview from '@layouts/Search/SearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { searchLogAtom } from '@store/searchLogAtom';
-
-import './Search.scss';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import { RESET } from 'jotai/utils';

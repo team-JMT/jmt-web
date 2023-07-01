@@ -10,9 +10,7 @@ const fetchGetRestaurantData = async ({ page, size, sort }: Pagination) => {
     size,
     sort,
   });
-  return {
-    data: res.data.data,
-  };
+  return res.data;
 };
 
 export const useGetRestaurantDataInfinite = ({
