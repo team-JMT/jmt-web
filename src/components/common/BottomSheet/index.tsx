@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 
 import { BOTTOM_SHEET_KEY, bottomSheetState } from '@store/bottomSheetAtom';
 import { MODAL_KEY } from '@store/modalAtom';
@@ -30,7 +31,7 @@ const BottomSheet = ({
 }: Props) => {
   const [bottomSheet, setBottomSheet] = useAtom(bottomSheetState);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {bottomSheet[type] && (
         <LayerWrapper
@@ -41,7 +42,7 @@ const BottomSheet = ({
           exit={{ opacity: 0 }}
           transition={{ type: 'spring', duration: 0.3 }}
           key={type}
-          layoutId={type}
+          className={'some-container'}
         >
           <OutsideClickHandler
             outsideClick={() => {
@@ -49,7 +50,10 @@ const BottomSheet = ({
                 return;
               }
               onOutsideClick && onOutsideClick();
-              setBottomSheet({ ...bottomSheet, [type]: !bottomSheet[type] });
+              setBottomSheet({
+                ...bottomSheet,
+                [type]: !bottomSheet[type],
+              });
             }}
           >
             <BottomSheet.Wrapper>
@@ -59,7 +63,8 @@ const BottomSheet = ({
           </OutsideClickHandler>
         </LayerWrapper>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.getElementById('modal') as Element,
   );
 };
 

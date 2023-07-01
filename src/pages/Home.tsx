@@ -1,6 +1,5 @@
 import React from 'react';
 
-import BottomSheet from '@commons/BottomSheet';
 import NaverMap from '@components/common/NaverMap';
 import Tab from '@components/common/Tab/Tab';
 import AddPlaceCard from '@components/home/AddPlaceCard';
@@ -18,7 +17,6 @@ const Home = () => {
 
   return (
     <>
-      <BottomSheet type={'IS_OPEN'} content={<div>Modal test</div>} />
       <AppScreen>
         <NaverMap />
         <HomeBottomSheet>

@@ -28,3 +28,9 @@
   height: 14px;
   width: 1px;
 }
+.place-detail-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
