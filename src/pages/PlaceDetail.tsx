@@ -4,6 +4,7 @@ import rightArrowIcon from '@assets/icons/rightArrow.svg';
 import shareIcon from '@assets/icons/share.svg';
 import threeBotsIcon from '@assets/icons/threeBots.svg';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
+import NoticeBox from '@components/placeDetail/NoticeBox';
 import BottomBar from '@layouts/PlaceDetail/BottomBar';
 import BottomSheet from '@layouts/PlaceDetail/BottomSheet';
 import DetailMenu from '@layouts/PlaceDetail/DetailMenu';
@@ -75,6 +76,7 @@ const PlaceDetail = () => {
           </main>
           <BottomBar />
         </AppScreen>
+        <NoticeBox icon={'success'} content={'완료되었습니다.'} />
       </>
     );
   }
