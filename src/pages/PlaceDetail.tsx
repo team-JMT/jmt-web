@@ -29,11 +29,12 @@ const PlaceDetail = () => {
       <img src={threeBotsIcon} />
     </div>
   );
-  const { DetailData, DetailError, isLoading } = useGetRestaurantDetailData(1);
+  const { DetailData, DetailMessage, DetailError, isLoading } =
+    useGetRestaurantDetailData(1);
 
-  // 에러가 발생한 경우에는 에러 메시지를 표시할 수 있습니다.
-  if (DetailError) {
-    return <div>Error</div>;
+  // 에러가 발생한 경우
+  if (Boolean(DetailError)) {
+    return { DetailError };
   } else {
     return (
       <>
@@ -76,7 +77,7 @@ const PlaceDetail = () => {
           </main>
           <BottomBar />
         </AppScreen>
-        <NoticeBox icon={'success'} content={'완료되었습니다.'} />
+        <NoticeBox isError={Boolean(DetailError)} content={DetailMessage} />
       </>
     );
   }

@@ -7,10 +7,11 @@ const useGetRestaurantDetailData = (id?: number) => {
   const { data, error, ...rest } = useQuery(
     [Keys.RESTAURANT_DETAIL, id],
     () => getRestaurantDetailData(id!),
-    { enabled: Boolean(id), suspense: true },
+    { enabled: Boolean(id), suspense: true, staleTime: 20000 },
   );
   return {
     DetailData: data && data.data.data,
+    DetailMessage: data && data.data.message,
     DetailError: error,
     ...rest,
   };

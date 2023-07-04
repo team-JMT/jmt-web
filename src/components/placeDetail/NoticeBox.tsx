@@ -6,11 +6,11 @@ import styled from '@emotion/styled';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Props {
-  icon?: string;
+  isError?: boolean;
   content?: string;
 }
 
-const NoticeBox = ({ icon, content }: Props) => {
+const NoticeBox = ({ isError, content }: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowBox(false);
@@ -29,7 +29,7 @@ const NoticeBox = ({ icon, content }: Props) => {
           exit={{ y: 10, opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          {icon === 'success' ? <Success /> : <Reject />}
+          {isError ? <Reject /> : <Success />}
           <NoticeMessage>{content}</NoticeMessage>
         </NoticeWrapper>
       )}
@@ -47,7 +47,7 @@ const NoticeWrapper = styled(motion.div)`
   position: fixed;
   bottom: 126px;
   height: 56px;
-  width: calc(100% - 40px);
+  width: calc(100vw - 40px);
   margin-left: 20px;
   border-radius: 8px;
   background: #fff;
