@@ -77,8 +77,9 @@ const HomeSeeAll = () => {
           <div className={'infinite-observe'} ref={observeRef} />
         )}
       </section>
-      <BottomSheet type={'FOOD_CATEGORY'}>asd</BottomSheet>
-      <BottomSheet type={'SORT_BY'}>asd</BottomSheet>
+      <BottomSheet type={'FOOD_CATEGORY'} content={<div>FOOD_CATEGORY</div>} />
+
+      <BottomSheet type={'SORT_BY'} content={<div>SORT_BY</div>} />
     </motion.div>
   );
 };
