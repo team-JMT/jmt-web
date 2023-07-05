@@ -9,7 +9,7 @@ export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
 }
 const Chip = ({ children, ...rest }: ChipProps) => {
   return (
-    <StyledChip className={classNames('text-m-medium', 'gray900')} {...rest}>
+    <StyledChip className={classNames('text-s-medium', 'gray900')} {...rest}>
       {children}
     </StyledChip>
   );
@@ -20,10 +20,10 @@ export const StyledChip = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0.6px 1.2rem;
+  padding: 0.4rem 1.2rem 0.4rem 1rem;
   white-space: nowrap;
   gap: 0.4rem;
-  height: 3.3rem;
+  width: fit-content;
   border: 1px solid ${colors.gray200};
   border-radius: 50px;
 `;

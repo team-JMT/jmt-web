@@ -15,10 +15,15 @@ export interface FilterChipProps
     FilterChipOptionProps {
   children: ReactNode;
 }
-const FilterChip = ({ children, active = false, ...rest }: FilterChipProps) => {
+const FilterChip = ({
+  children,
+  active,
+
+  ...rest
+}: FilterChipProps) => {
   return (
     <StyledFilterChip
-      className={classNames('text-m-medium', 'gray900')}
+      className={classNames('text-s-medium', 'gray900')}
       active={active}
       {...rest}
     >
@@ -36,13 +41,15 @@ export const StyledFilterChip = styled.div<FilterChipOptionProps>`
   padding: 0.4rem 1.2rem 0.4rem 1rem;
   white-space: nowrap;
   gap: 0.4rem;
-  height: 2.6rem;
-  border: 1px solid ${colors.gray200};
+  width: fit-content;
+  border: 0 solid;
+  background: ${colors.gray100};
   border-radius: 5rem;
   ${({ active }) =>
     active &&
     css`
       background: ${colors.white};
+      border: 1px solid ${colors.gray200};
     `};
 `;
 

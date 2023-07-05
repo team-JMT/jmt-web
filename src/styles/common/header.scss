@@ -1,4 +1,4 @@
-@import "theme/theme";
+@use "../theme";
 
 .screen-header {
   position: fixed;
@@ -8,7 +8,7 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  background: $white;
+  background: theme.$white;
   z-index: 999;
 }
 .back-button-container {

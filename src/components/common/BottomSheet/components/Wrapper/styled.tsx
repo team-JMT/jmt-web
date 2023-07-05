@@ -8,8 +8,6 @@ export const LayerWrapper = styled(motion.div)`
   bottom: 0;
   left: 0;
   background-color: rgba(22, 26, 29, 0.3);
-  opacity: 1;
-  content: '';
   z-index: 100;
 `;
 
