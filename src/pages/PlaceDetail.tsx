@@ -13,7 +13,8 @@ import Modal from '@layouts/PlaceDetail/Modal';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { BOTTOM_SHEET_KEY, toggleBottomSheet } from '@store/bottomSheetAtom';
-import { useSetAtom } from 'jotai';
+import { detailAtom } from '@store/DetailAtom';
+import { useAtom, useSetAtom } from 'jotai';
 
 import './PlaceDetail.scss';
 
@@ -29,8 +30,11 @@ const PlaceDetail = () => {
       <img src={threeBotsIcon} />
     </div>
   );
+
+  const [detailId, setDetailId] = useAtom(detailAtom);
+  setDetailId(2);
   const { DetailData, DetailMessage, DetailError, isLoading } =
-    useGetRestaurantDetailData(1);
+    useGetRestaurantDetailData(detailId);
 
   // 에러가 발생한 경우
   if (Boolean(DetailError)) {

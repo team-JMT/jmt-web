@@ -1,6 +1,8 @@
 import React from 'react';
 
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
+import { detailAtom } from '@store/DetailAtom';
+import { useAtom } from 'jotai';
 
 import {
   Text,
@@ -12,10 +14,10 @@ import {
   UserImg,
   UserText,
 } from './styled';
-const id = 1;
 
 const Recommander = () => {
-  const { DetailData } = useGetRestaurantDetailData(id);
+  const [detailId] = useAtom(detailAtom);
+  const { DetailData } = useGetRestaurantDetailData(detailId);
   const str = DetailData?.recommendMenu;
   const recommendMenuArray = str
     ?.split('#')

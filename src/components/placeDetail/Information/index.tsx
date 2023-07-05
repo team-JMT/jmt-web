@@ -4,10 +4,21 @@ import React from 'react';
 
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import styled from '@emotion/styled';
-const id = 1;
+import { detailAtom } from '@store/DetailAtom';
+import { useAtom } from 'jotai';
 
 const Information = () => {
-  const { DetailData } = useGetRestaurantDetailData(id);
+  const [detailId] = useAtom(detailAtom);
+  const { DetailData } = useGetRestaurantDetailData(detailId);
+
+  const copyToClipboard = (text: string) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  };
 
   return (
     <>
@@ -16,7 +27,12 @@ const Information = () => {
         <AddressInfo className={'text-l-bold'}>
           {DetailData?.roadAddress}
         </AddressInfo>
-        <AddressCopy className={'text-s-medium'}>주소복사</AddressCopy>
+        <AddressCopy
+          className={'text-s-medium'}
+          onClick={() => copyToClipboard(DetailData!.roadAddress)}
+        >
+          주소복사
+        </AddressCopy>
       </AddressConatiner>
       <Telephone className={'text-m-medium'}>{DetailData?.phone}</Telephone>
     </>
