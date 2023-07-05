@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 
-import { modalState, MODAL_KEY } from '@store/modalAtom';
+import { BOTTOM_SHEET_KEY, bottomSheetState } from '@store/bottomSheetAtom';
 import { AnimatePresence } from 'framer-motion';
 import { useAtom } from 'jotai';
 
@@ -13,25 +14,25 @@ import { LayerWrapper } from './components/Wrapper/styled';
 export type $Values<T extends object> = T[keyof T];
 
 interface Props {
-  type: $Values<typeof MODAL_KEY>;
+  type: $Values<typeof BOTTOM_SHEET_KEY>;
   header?: ReactNode;
   content?: ReactNode;
   canOutsideClick?: boolean;
   onOutsideClick?: () => void;
 }
 
-const Modal = ({
-  type = MODAL_KEY.IS_OPEN,
+const BottomSheet = ({
+  type = BOTTOM_SHEET_KEY.FOOD_CATEGORY,
   header,
   content,
   canOutsideClick = true,
   onOutsideClick,
 }: Props) => {
-  const [modal, setModal] = useAtom(modalState);
+  const [bottomSheet, setBottomSheet] = useAtom(bottomSheetState);
 
-  return (
+  return createPortal(
     <AnimatePresence>
-      {modal[type] && (
+      {bottomSheet[type] && (
         <LayerWrapper
           initial={{ opacity: 0 }}
           animate={{
@@ -40,7 +41,7 @@ const Modal = ({
           exit={{ opacity: 0 }}
           transition={{ type: 'spring', duration: 0.3 }}
           key={type}
-          layoutId={type}
+          className={'some-container'}
         >
           <OutsideClickHandler
             outsideClick={() => {
@@ -48,21 +49,25 @@ const Modal = ({
                 return;
               }
               onOutsideClick && onOutsideClick();
-              setModal({ ...modal, [type]: !modal[type] });
+              setBottomSheet({
+                ...bottomSheet,
+                [type]: !bottomSheet[type],
+              });
             }}
           >
-            <Modal.Wrapper>
+            <BottomSheet.Wrapper>
               {header}
               {content}
-            </Modal.Wrapper>
+            </BottomSheet.Wrapper>
           </OutsideClickHandler>
         </LayerWrapper>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.getElementById('modal') as Element,
   );
 };
 
-Modal.List = List;
-Modal.Wrapper = Wrapper;
+BottomSheet.List = List;
+BottomSheet.Wrapper = Wrapper;
 
-export default Modal;
+export default BottomSheet;

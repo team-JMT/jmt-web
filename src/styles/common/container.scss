@@ -1,7 +1,7 @@
-@import "theme/colors";
+@use "../theme";
 .safe-area-layout-container {
   position: relative;
-  background: $white;
+  background: theme.$white;
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
