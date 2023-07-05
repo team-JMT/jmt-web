@@ -1,5 +1,6 @@
-import React, { Suspense, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
+import { getRestaurantData } from '@apis/common/restaurant';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import SearchInput from '@components/common/input/SearchInput';
 import SearchLogList from '@layouts/Search/SearchLogList';
@@ -7,6 +8,8 @@ import SearchPreview from '@layouts/Search/SearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { searchLogAtom } from '@store/searchLogAtom';
+
+import './Search.scss';
 import classNames from 'classnames';
 import { useAtom } from 'jotai';
 import { RESET } from 'jotai/utils';
@@ -24,6 +27,10 @@ const Search = () => {
   const [searchLog, setSearchLog] = useAtom(searchLogAtom);
   const [inputValue, setInputValue] = useState<string>();
   const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    getRestaurantData({}).then((res) => {});
+  }, []);
 
   return (
     <AppScreen

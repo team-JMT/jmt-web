@@ -2,11 +2,11 @@ import { atom } from 'jotai';
 
 const ModalAtom = 'Modal';
 export const MODAL_KEY = {
-  DELETE_CHECK: 'DELETE_CHECK',
+  IS_OPEN: 'IS_OPEN',
 } as const;
 
 export const ModalState = {
-  [MODAL_KEY.DELETE_CHECK]: false,
+  [MODAL_KEY.IS_OPEN]: false,
 };
 
 export const modalState = atom<typeof ModalState>(ModalState);

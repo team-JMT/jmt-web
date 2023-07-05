@@ -1,8 +1,8 @@
-import { PageMeta } from '@apis/common/types';
+import { PageMeta, Response } from '@apis/common/types';
 
 import { Restaurant } from '../../models/getRestaurantData';
 
-export type GetRestaurantDataResponse = {
-  restaurants: Restaurant[];
+export type GetRestaurantDataResponse = Response<{
+  restaurant: Restaurant[];
   page: PageMeta;
-};
+}>;

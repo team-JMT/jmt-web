@@ -2,15 +2,11 @@ import { atom } from 'jotai';
 
 const BottomSheetAtom = 'BottomSheet';
 export const BOTTOM_SHEET_KEY = {
-  FOOD_CATEGORY: 'FOOD_CATEGORY',
-  SORT_BY: 'SORT_BY',
-  DRINK_CATEGORY: 'DRINK_CATEGORY',
+  IS_OPEN: 'IS_OPEN',
 } as const;
 
 export const BottomSheetState = {
-  [BOTTOM_SHEET_KEY.FOOD_CATEGORY]: false,
-  [BOTTOM_SHEET_KEY.SORT_BY]: false,
-  [BOTTOM_SHEET_KEY.DRINK_CATEGORY]: false,
+  [BOTTOM_SHEET_KEY.IS_OPEN]: false,
 };
 
 export const bottomSheetState = atom<typeof BottomSheetState>(BottomSheetState);
