@@ -11,12 +11,12 @@ const Modal = () => {
   const { pop } = useHomeFlow();
   const toggleM = useSetAtom(toggleModal);
   const Delete = () => {
-    toggleM(MODAL_KEY.IS_OPEN);
+    toggleM(MODAL_KEY.DELETE_CHECK);
     pop();
   };
   return (
     <ModalComponent
-      type={'IS_OPEN'}
+      type={'DELETE_CHECK'}
       content={
         <>
           <Title className={'title-s-bold'}>맛집을 삭제할까요?</Title>
@@ -32,7 +32,7 @@ const Modal = () => {
             </ModalButton>
             <ModalButton
               className={'text-m-medium'}
-              onClick={() => toggleM(MODAL_KEY.IS_OPEN)}
+              onClick={() => toggleM(MODAL_KEY.DELETE_CHECK)}
             >
               유지하기
             </ModalButton>

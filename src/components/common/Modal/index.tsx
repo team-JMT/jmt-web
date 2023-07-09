@@ -19,7 +19,7 @@ interface Props {
 }
 
 const Modal = ({
-  type = MODAL_KEY.IS_OPEN,
+  type = MODAL_KEY.DELETE_CHECK,
   header,
   content,
   canOutsideClick = true,
@@ -45,7 +45,7 @@ const Modal = ({
                 return;
               }
               onOutsideClick && onOutsideClick();
-              toggleM(MODAL_KEY.IS_OPEN);
+              toggleM(MODAL_KEY.DELETE_CHECK);
             }}
           >
             <CenterInner>{content}</CenterInner>

@@ -8,7 +8,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import App from './App';
-import '@styles/App.scss';
+import '@styles/_normalize.scss';
+import '@styles/common/_index.scss';
+import '@styles/pages/_index.scss';
+import '@styles/theme/_index.scss';
+
 import '@stackflow/plugin-basic-ui/index.css';
 
 const queryClient = new QueryClient();

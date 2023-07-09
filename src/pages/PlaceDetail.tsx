@@ -25,14 +25,14 @@ const PlaceDetail = () => {
   const MoreButton = () => (
     <div
       className="more-button"
-      onClick={() => toggleBS(BOTTOM_SHEET_KEY.IS_OPEN)}
+      onClick={() => toggleBS(BOTTOM_SHEET_KEY.PLACE_DETAIL)}
     >
       <ThreeDotsIcon />
     </div>
   );
 
   const [detailId, setDetailId] = useAtom(detailAtom);
-  setDetailId(2);
+  //setDetailId(2);
   const { DetailData, DetailMessage, DetailError, isLoading } =
     useGetRestaurantDetailData(detailId);
 

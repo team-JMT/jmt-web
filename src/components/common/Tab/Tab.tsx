@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { useEffect, useId } from 'react';
 
 import { TabContext, useTab } from '@commons/Tab/useTab';
 import { css } from '@emotion/react';
@@ -7,8 +7,9 @@ import { colors, ColorToken } from '@styles/theme/color';
 import { motion } from 'framer-motion';
 
 interface TabRootProps {
+  setState?: React.Dispatch<React.SetStateAction<string>>;
   children: React.ReactNode;
-  defaultId?: string;
+  defaultId: string;
 }
 
 const RootContainer = styled.div`
@@ -17,12 +18,25 @@ const RootContainer = styled.div`
   align-items: center;
   width: 100%;
 `;
-const TabRoot = ({ children, defaultId }: TabRootProps) => {
+const TabRoot = ({ children, defaultId, setState }: TabRootProps) => {
   const [value, setValue] = React.useState({
     id: defaultId || '',
     label: '',
   });
   const tabID = useId();
+
+  useEffect(() => {
+    if (setState) {
+      setState(defaultId);
+    }
+  }, [defaultId]);
+
+  useEffect(() => {
+    if (setState) {
+      setState(value.id);
+    }
+  }, [value]);
+
   return (
     <TabContext.Provider value={{ tabID, value, setValue }}>
       <RootContainer>{children}</RootContainer>

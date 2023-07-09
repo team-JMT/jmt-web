@@ -1,0 +1,36 @@
+@use '../theme';
+
+.home-content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+.home-tab-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.see-all-filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 1.2rem;
+}
+.filter-divider {
+  background: theme.$gray200;
+  display: flex;
+  min-height: 14px;
+  min-width: 1px;
+  height: 14px;
+  width: 1px;
+}
+.place-detail-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
