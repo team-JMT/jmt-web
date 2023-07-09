@@ -2,7 +2,7 @@ import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantD
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import rightArrowIcon from '@assets/icons/rightArrow.svg';
 import shareIcon from '@assets/icons/share.svg';
-import threeBotsIcon from '@assets/icons/threeBots.svg';
+import ThreeDotsIcon from '@assets/icons/ThreeDots';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
 import NoticeBox from '@components/placeDetail/NoticeBox';
 import BottomBar from '@layouts/PlaceDetail/BottomBar';
@@ -27,7 +27,7 @@ const PlaceDetail = () => {
       className="more-button"
       onClick={() => toggleBS(BOTTOM_SHEET_KEY.IS_OPEN)}
     >
-      <img src={threeBotsIcon} />
+      <ThreeDotsIcon />
     </div>
   );
 
