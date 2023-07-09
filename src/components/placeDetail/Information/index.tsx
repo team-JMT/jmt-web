@@ -3,6 +3,7 @@ import React from 'react';
 //import { css } from '@emotion/react';
 
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
+import NaverMapProp from '@components/common/NaverMapProp';
 import styled from '@emotion/styled';
 import { detailAtom } from '@store/DetailAtom';
 import { useAtom } from 'jotai';
@@ -22,7 +23,9 @@ const Information = () => {
 
   return (
     <>
-      <MapContainer></MapContainer>
+      <MapContainer>
+        <NaverMapProp x={DetailData!.x} y={DetailData!.y} />
+      </MapContainer>
       <AddressConatiner>
         <AddressInfo className={'text-l-bold'}>
           {DetailData?.roadAddress}
