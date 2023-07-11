@@ -14,7 +14,7 @@ const BottomSheet = () => {
   const toggleM = useSetAtom(toggleModal);
   return (
     <BottomSheetCompoenet
-      type={'IS_OPEN'}
+      type={'PLACE_DETAIL'}
       content={
         <BottomSheetWrapper>
           <BottomSheetButton className={'text-l-medium'}>
@@ -23,8 +23,8 @@ const BottomSheet = () => {
           </BottomSheetButton>
           <BottomSheetButton
             onClick={() => {
-              toggleBS(BOTTOM_SHEET_KEY.IS_OPEN);
-              toggleM(MODAL_KEY.IS_OPEN);
+              toggleBS(BOTTOM_SHEET_KEY.PLACE_DETAIL);
+              toggleM(MODAL_KEY.DELETE_CHECK);
             }}
             className={'text-l-medium'}
           >

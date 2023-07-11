@@ -18,7 +18,7 @@ const NaverMapProp = ({ x, y }: { x: number; y: number }) => {
     }
 
     // 지도에 표시할 위치의 위도와 경도 좌표를 파라미터로 넣어줍니다.
-    const location: naver.maps.LatLng = new naver.maps.LatLng(x, y);
+    const location: naver.maps.LatLng = new naver.maps.LatLng(y, x);
     const mapOptions: naver.maps.MapOptions = {
       center: location,
       zoom: 17,

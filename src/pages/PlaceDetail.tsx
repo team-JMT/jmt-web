@@ -12,21 +12,18 @@ import ImgContainer from '@layouts/PlaceDetail/ImgContainer';
 import Modal from '@layouts/PlaceDetail/Modal';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
-import { BOTTOM_SHEET_KEY, toggleBottomSheet } from '@store/bottomSheetAtom';
+import { openBottomSheet } from '@store/bottomSheetAtom';
 import { detailAtom } from '@store/DetailAtom';
 import { useAtom, useSetAtom } from 'jotai';
 
-import './PlaceDetail.scss';
+import '../styles/pages/PlaceDetail.scss';
 
 const PlaceDetail = () => {
   const { pop } = useHomeFlow();
 
-  const toggleBS = useSetAtom(toggleBottomSheet);
+  const openBS = useSetAtom(openBottomSheet);
   const MoreButton = () => (
-    <div
-      className="more-button"
-      onClick={() => toggleBS(BOTTOM_SHEET_KEY.PLACE_DETAIL)}
-    >
+    <div className="more-button" onClick={() => openBS('PLACE_DETAIL')}>
       <ThreeDotsIcon />
     </div>
   );
@@ -38,7 +35,7 @@ const PlaceDetail = () => {
 
   // 에러가 발생한 경우
   if (Boolean(DetailError)) {
-    return { DetailError };
+    return <div>에러가 났어요 </div>;
   } else {
     return (
       <>
