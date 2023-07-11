@@ -19,7 +19,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import '../styles/pages/PlaceDetail.scss';
 
 const PlaceDetail = () => {
-  const { pop } = useHomeFlow();
+  const { push, pop } = useHomeFlow();
 
   const openBS = useSetAtom(openBottomSheet);
   const MoreButton = () => (
@@ -60,7 +60,10 @@ const PlaceDetail = () => {
             <ImgContainer />
             {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
             <div className={'detail-container'}>
-              <div className={'name-box'}>
+              <div
+                className={'name-box'}
+                onClick={() => push('OtherProfile', { userName: 'hungry' })}
+              >
                 <div className={'text-m-medium'}>유저이름&nbsp;&nbsp;</div>
                 <img src={rightArrowIcon} />
               </div>
