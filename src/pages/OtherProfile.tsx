@@ -8,7 +8,6 @@ import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
-import '@styles/pages/OtherProfile.scss';
 
 const OtherProfile = () => {
   const { pop } = useHomeFlow();

@@ -6,6 +6,8 @@ import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantD
 import NaverMapProp from '@components/common/NaverMapProp';
 import styled from '@emotion/styled';
 import { detailAtom } from '@store/DetailAtom';
+import { colors } from '@styles/theme/color';
+import classNames from 'classnames';
 import { useAtom } from 'jotai';
 
 const Information = () => {
@@ -27,9 +29,9 @@ const Information = () => {
         <NaverMapProp x={DetailData!.x} y={DetailData!.y} />
       </MapContainer>
       <AddressConatiner>
-        <AddressInfo className={'text-l-bold'}>
+        <p className={classNames('text-l-bold', 'gray900')}>
           {DetailData?.roadAddress}
-        </AddressInfo>
+        </p>
         <AddressCopy
           className={'text-s-medium'}
           onClick={() => copyToClipboard(DetailData!.roadAddress)}
@@ -52,19 +54,12 @@ const AddressConatiner = styled.div`
   gap: 8px;
   margin-top: 16px;
 `;
-const AddressInfo = styled.div`
-  /* gray900 */
-  color: #161a1d;
-`;
 const AddressCopy = styled.div`
-  margin-top: 2px;
   text-decoration: underline;
-  /* gray400 */
-  color: #9aa9b2;
+  color: ${colors.gray400};
 `;
 const Telephone = styled.div`
   margin: 8px 0 20px 0;
-  /* gray600 */
-  color: #637782;
+  color: ${colors.gray600};
 `;
 export default Information;

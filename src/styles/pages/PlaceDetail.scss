@@ -1,3 +1,5 @@
+@use '../theme';
+
 .detail-container {
   flex: 1 0 auto;
   display: flex;
@@ -19,28 +21,21 @@
   background-color: gray;
 }
 .name-box {
-  height: 21px;
-  margin: 17px 0 4px 2px;
   display: flex;
   align-items: center;
+  margin: 17px 0 4px 2px;
   letter-spacing: -0.02em;
-
-  /* gray500 */
-  color: #7d909c;
+  color: theme.$gray500;
 }
 .title-box {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 30px;
   left: 20px;
   width: 100%;
-  /* identical to box height, or 30px */
-  display: flex;
-  align-items: center;
   letter-spacing: -0.02em;
-
-  /* gray900 */
-  color: #161a1d;
+  color: theme.$gray900;
   overflow: hidden;
 }
 .add-box {
@@ -48,33 +43,4 @@
   flex-direction: row;
   margin-top: 4px;
   gap: 12px;
-  div {
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 150%;
-  }
-  .gray {
-    /* gray700 */
-    color: #4d5c65;
-  }
-}
-
-.menu-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-.menu-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 16px;
-  width: auto;
-  height: 33px;
-  border: 1px solid #d4dade;
-  border-radius: 50px;
 }

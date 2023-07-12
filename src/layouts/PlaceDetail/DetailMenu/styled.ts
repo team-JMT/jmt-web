@@ -6,9 +6,9 @@ import { colors } from '../../../styles/theme/color';
 
 export const DetailMenuWrapper = styled.div`
   position: relative;
-  width: 100vw- 40px;
+  width: calc(100vw - 40px);
   height: 48px;
-  margin: 16px 0 12px 0;
+  margin: 16px 0;
   border: solid ${colors.gray100} 4px;
   border-radius: 8px;
   background: ${colors.gray100};
@@ -48,6 +48,6 @@ export const Menu = styled(motion.div)<{ active: boolean }>`
     css`
       letter-spacing: -0.02em;
       font-weight: 700;
-      color: #ff531a;
+      color: ${colors.main500};
     `}
 `;

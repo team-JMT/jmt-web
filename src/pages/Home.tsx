@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 import React from 'react';
 
 import NaverMap from '@components/common/NaverMap';
@@ -9,6 +8,7 @@ import BottomSheetHeader from '@components/home/BottomSheetHeader';
 import HomeAround from '@layouts/Home/HomeAround';
 import HomeSeeAll from '@layouts/Home/HomeSeeAll';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
+
 import '../styles//common/bottomSheet.css';
 
 import { AnimatePresence } from 'framer-motion';

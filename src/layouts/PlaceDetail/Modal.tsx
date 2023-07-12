@@ -4,7 +4,7 @@ import ModalComponent from '@components/common/Modal';
 import styled from '@emotion/styled';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { MODAL_KEY, toggleModal } from '@store/modalAtom';
-//import { motion } from 'framer-motion';
+import { colors } from '@styles/theme/color';
 import { useSetAtom } from 'jotai';
 
 const Modal = () => {
@@ -48,14 +48,13 @@ export default Modal;
 const Title = styled.div`
   letter-spacing: -0.02em;
   line-height: 150%;
-  /* gray900 */
-  color: #161a1d;
+  color: ${colors.gray900};
 `;
 const Explain = styled.div`
   margin: 12px 0;
   div {
     /* gray600 */
-    color: #637782;
+    color: ${colors.gray600};
     font-weight: 500;
     line-height: 150%;
     text-align: center;
@@ -71,15 +70,13 @@ const ModalButton = styled.button`
   width: 140px;
   height: 48px;
   padding: 0px;
-  border: 1px solid #e53900;
+  border: 1px solid ${colors.main600};
   border-radius: 8px;
-  background: #ffffff;
   letter-spacing: -0.02em;
-  /* main600 */
-  color: #e53900;
+  background: ${colors.white};
+  color: ${colors.main600};
   & + & {
-    /* main500 */
-    background: #ff531a;
-    color: #ffffff;
+    background: ${colors.main500};
+    color: ${colors.white};
   }
 `;

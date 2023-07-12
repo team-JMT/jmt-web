@@ -29,7 +29,6 @@
     "jotai": "^2.1.0",
     "localtunnel": "^2.0.2",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-spring-bottom-sheet": "3.5.0-alpha.0",

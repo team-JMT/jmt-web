@@ -14,6 +14,7 @@ import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
 import { detailAtom } from '@store/DetailAtom';
+import classNames from 'classnames';
 import { useAtom, useSetAtom } from 'jotai';
 
 import '../styles/pages/PlaceDetail.scss';
@@ -64,17 +65,21 @@ const PlaceDetail = () => {
                 className={'name-box'}
                 onClick={() => push('OtherProfile', { userName: 'hungry' })}
               >
-                <div className={'text-m-medium'}>유저이름&nbsp;&nbsp;</div>
+                <a className={'text-m-medium'}>유저이름&nbsp;&nbsp;</a>
                 <img src={rightArrowIcon} />
               </div>
               <div className={'title-box'}>
-                <div className={'title-s-bold'}>{DetailData?.name}</div>
+                <a className={'title-s-bold'}>{DetailData?.name}</a>
                 <img src={shareIcon} />
               </div>
               <div className={'add-box'}>
-                <div>위치에서 2020m</div>
+                <a className={classNames('text-l-medium', 'gray900')}>
+                  위치에서 2020m
+                </a>
                 <img src={verticalBarIcon} />
-                <div className={'gray'}>{DetailData?.category}</div>
+                <a className={classNames('text-l-medium', 'gray700')}>
+                  {DetailData?.category}
+                </a>
               </div>
               <DetailMenu />
             </div>
