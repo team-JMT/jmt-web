@@ -35,6 +35,7 @@ const Recommander = () => {
       </MenuContainer>
       {DetailData?.canDrinkLiquor && (
         <>
+          <br /> <br />
           <Text className={'text-m-medium'}>술과 함께 즐길 수 있어요 🍻</Text>
           <GrayBox className={'text-l-medium'}>
             {DetailData?.goWellWithLiquor}와(과) 먹으면 죽는 맛 입니다!

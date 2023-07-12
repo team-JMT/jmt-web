@@ -11,7 +11,6 @@ export const MenuContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 20px;
 `;
 export const MenuItem = styled.div`
   display: flex;
