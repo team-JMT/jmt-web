@@ -13,11 +13,11 @@ import Modal from '@layouts/PlaceDetail/Modal';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
-import { detailAtom } from '@store/DetailAtom';
 import classNames from 'classnames';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
 import '../styles/pages/PlaceDetail.scss';
+import getUrlValue from '@hooks/getUrlValue';
 
 const PlaceDetail = () => {
   const { push, pop } = useHomeFlow();
@@ -29,8 +29,7 @@ const PlaceDetail = () => {
     </div>
   );
 
-  const [detailId, setDetailId] = useAtom(detailAtom);
-  //setDetailId(2);
+  const detailId = getUrlValue();
   const { DetailData, DetailMessage, DetailError, isLoading } =
     useGetRestaurantDetailData(detailId);
 

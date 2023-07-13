@@ -1,17 +1,15 @@
 import React from 'react';
 
-//import { css } from '@emotion/react';
-
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import NaverMapProp from '@components/common/NaverMapProp';
 import styled from '@emotion/styled';
-import { detailAtom } from '@store/DetailAtom';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
-import { useAtom } from 'jotai';
+
+import getUrlValue from '@hooks/getUrlValue';
 
 const Information = () => {
-  const [detailId] = useAtom(detailAtom);
+  const detailId = getUrlValue();
   const { DetailData } = useGetRestaurantDetailData(detailId);
 
   const copyToClipboard = (text: string) => {
