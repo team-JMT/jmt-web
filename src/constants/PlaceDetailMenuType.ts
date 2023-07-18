@@ -1,0 +1,5 @@
+export enum PlaceDetailMenuType {
+  RECOMMANDER = 'RECOMMANDER',
+  INFORMATION = 'INFORMATION',
+  REVIEW = 'REVIEW',
+}

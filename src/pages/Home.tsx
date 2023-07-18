@@ -8,6 +8,7 @@ import BottomSheetHeader from '@components/home/BottomSheetHeader';
 import HomeAround from '@layouts/Home/HomeAround';
 import HomeSeeAll from '@layouts/Home/HomeSeeAll';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
+
 import '../styles//common/bottomSheet.css';
 
 import { AnimatePresence } from 'framer-motion';
