@@ -15,11 +15,20 @@ export const DetailMenuWrapper = styled.div`
   z-index: 1;
 `;
 
+export const MenuWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 33.3%;
+`;
+
 export const AnimateBlock = styled(motion.div)`
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 33.3%;
+  width: 100%;
   height: 40px;
   background: ${colors.white};
   color: ${colors.main500};
@@ -39,7 +48,7 @@ export const Menu = styled(motion.div)<{ active: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 33.3%;
+  width: 100%;
   height: 40px;
   color: ${colors.gray400};
   z-index: 3;
