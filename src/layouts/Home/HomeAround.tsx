@@ -2,9 +2,12 @@ import React from 'react';
 
 import { useGetRestaurantDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantDataInfinite';
 import SadImage from '@assets/icons/SadImage';
+import SearchResultCard from '@components/SearchResult/SearchResultCard';
+import { useHomeFlow } from '@stacks/homeStackFlow';
 import { motion } from 'framer-motion';
 
 const HomeAround = () => {
+  const { push } = useHomeFlow();
   const { restaurantData } = useGetRestaurantDataInfinite({
     page: 0,
     size: 10,
@@ -23,7 +26,13 @@ const HomeAround = () => {
       key={'AROUND'}
     >
       {mappingRestaurantData &&
-        mappingRestaurantData.map((data) => <div>{data.name}</div>)}
+        mappingRestaurantData.map((data) => (
+          <SearchResultCard
+            key={data.id}
+            restaurantInfo={data}
+            onClick={() => push('PlaceDetail', { placeId: String(data.id) })}
+          />
+        ))}
       <SadImage />
     </motion.div>
   );

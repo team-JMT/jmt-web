@@ -5,7 +5,8 @@ import DownArrow from '@assets/icons/DownArrow';
 import BottomSheet from '@commons/BottomSheet';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
-import PlaceDetailCard from '@components/home/PlaceDetailCard';
+import SearchResultCard from '@components/SearchResult/SearchResultCard';
+import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -16,6 +17,7 @@ import { useInsertionObserver } from '@hooks/useInsertionObserver';
 const HomeSeeAll = () => {
   const handleOpenBottomSheet = useSetAtom(openBottomSheet);
   const observeRef = useRef<HTMLDivElement>(null);
+  const { push } = useHomeFlow();
 
   const { restaurantData, fetchNextPage, isFetchingNextPage } =
     useGetRestaurantDataInfinite({
@@ -71,7 +73,11 @@ const HomeSeeAll = () => {
       <section className={'place-detail-section'}>
         {mappingRestaurantData &&
           mappingRestaurantData.map((data) => (
-            <PlaceDetailCard restaurant={data} key={data.id} />
+            <SearchResultCard
+              key={data.id}
+              restaurantInfo={data}
+              onClick={() => push('PlaceDetail', { placeId: String(data.id) })}
+            />
           ))}
         {!isLastPage() && (
           <div className={'infinite-observe'} ref={observeRef} />
