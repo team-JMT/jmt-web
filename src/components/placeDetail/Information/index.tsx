@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 
-import getUrlValue from '@hooks/getUrlValue';
+import getUrlValue from '@utils/getUrlValue';
 
 const Information = () => {
   const detailId = getUrlValue();

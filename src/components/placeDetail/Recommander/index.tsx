@@ -2,7 +2,7 @@ import React from 'react';
 
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 
-import getUrlValue from '@hooks/getUrlValue';
+import getUrlValue from '@utils/getUrlValue';
 
 import {
   Text,
