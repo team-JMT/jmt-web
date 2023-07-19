@@ -6,6 +6,8 @@ import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 
+import { Restaurant } from '../../models/getRestaurantData';
+
 const CardContainer = styled.div`
   display: flex;
   align-items: center;
@@ -46,19 +48,27 @@ const UserImg = styled.div`
   margin-right: 4px;
 `;
 
-const SearchResultCard = () => {
+interface SearchResultCardProps {
+  restaurantInfo: Restaurant;
+  onClick?: () => void;
+}
+
+const SearchResultCard = ({
+  restaurantInfo,
+  onClick,
+}: SearchResultCardProps) => {
   return (
-    <CardContainer>
+    <CardContainer onClick={onClick}>
       <ImgBox>
         <Jmteng />
       </ImgBox>
       <ContentsBox>
         <span className={classNames('text-l-bold', 'gray900')}>
-          여기는 가게 제목
+          {restaurantInfo.name}
         </span>
         <Detail>
           <span className={classNames('text-m-medium', 'gray700')}>
-            내 위치에서 얼마얼마
+            내 위치에서 100m
           </span>
           <img src={verticalBarIcon} />
           <span className={classNames('text-m-medium', 'gray700')}>카테</span>

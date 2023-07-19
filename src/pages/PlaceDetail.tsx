@@ -17,21 +17,20 @@ import classNames from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import '../styles/pages/PlaceDetail.scss';
-import getUrlValue from '@hooks/getUrlValue';
 
-const PlaceDetail = () => {
+interface PlaceDetailProps {
+  params: {
+    placeId: string;
+  };
+}
+
+const PlaceDetail = ({ params }: PlaceDetailProps) => {
   const { push, pop } = useHomeFlow();
 
   const openBS = useSetAtom(openBottomSheet);
-  const MoreButton = () => (
-    <div className="more-button" onClick={() => openBS('PLACE_DETAIL')}>
-      <ThreeDotsIcon />
-    </div>
-  );
 
-  const detailId = getUrlValue();
   const { DetailData, DetailMessage, DetailError, isLoading } =
-    useGetRestaurantDetailData(detailId);
+    useGetRestaurantDetailData(Number(params.placeId));
 
   // 에러가 발생한 경우
   if (Boolean(DetailError)) {
@@ -51,7 +50,14 @@ const PlaceDetail = () => {
                 </button>
               ),
             },
-            appendRight: MoreButton,
+            appendRight: () => (
+              <div
+                className="more-button"
+                onClick={() => openBS('PLACE_DETAIL')}
+              >
+                <ThreeDotsIcon />
+              </div>
+            ),
             //https://github.com/daangn/stackflow/blob/main/demo/src/activities/Main.tsx
             height: '48px',
           }}
