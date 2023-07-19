@@ -5,7 +5,7 @@ import DownArrow from '@assets/icons/DownArrow';
 import BottomSheet from '@commons/BottomSheet';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
-import PlaceDetailCard from '@components/home/PlaceDetailCard';
+import SearchResultCard from '@components/SearchResult/SearchResultCard';
 import { openBottomSheet } from '@store/bottomSheetAtom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -71,7 +71,7 @@ const LikePlace = () => {
       <section className={'place-detail-section'}>
         {mappingRestaurantData &&
           mappingRestaurantData.map((data) => (
-            <PlaceDetailCard restaurant={data} key={data.id} />
+            <SearchResultCard restaurantInfo={data} key={data.id} />
           ))}
         {!isLastPage() && (
           <div className={'infinite-observe'} ref={observeRef} />
