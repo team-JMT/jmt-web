@@ -1,8 +1,8 @@
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
+import MoreIcon from '@assets/icons/MoreIcon';
 import rightArrowIcon from '@assets/icons/rightArrow.svg';
 import shareIcon from '@assets/icons/share.svg';
-import ThreeDotsIcon from '@assets/icons/ThreeDots';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
 import NoticeBox from '@components/placeDetail/NoticeBox';
 import BottomBar from '@layouts/PlaceDetail/BottomBar';
@@ -55,7 +55,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
                 className="more-button"
                 onClick={() => openBS('PLACE_DETAIL')}
               >
-                <ThreeDotsIcon />
+                <MoreIcon />
               </div>
             ),
             //https://github.com/daangn/stackflow/blob/main/demo/src/activities/Main.tsx
