@@ -64,3 +64,6 @@ export const UserText = styled.div`
     font-weight: 500;
   }
 `;
+export const Introduce = styled.div`
+  min-height: 50px;
+`;

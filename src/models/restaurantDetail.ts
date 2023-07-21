@@ -7,8 +7,11 @@ export type RestaurantDetail = {
   roadAddress: string;
   x: number;
   y: number;
+  introduce: string;
   canDrinkLiquor: boolean;
   goWellWithLiquor: string;
   recommendMenu: string;
   aggregateId: string;
+  pictures: string[];
+  userId: number;
 };

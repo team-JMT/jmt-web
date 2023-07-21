@@ -13,6 +13,7 @@ import {
   UserWrapper,
   UserImg,
   UserText,
+  Introduce,
 } from './styled';
 
 const Recommander = () => {
@@ -52,13 +53,7 @@ const Recommander = () => {
       </UserWrapper>
       <GrayBar />
       <Text className={'text-m-medium'}>멤버의 추천 한마디 ✍️</Text>
-      <div className={'text-l-medium'}>
-        너무 맛있어서 키절 안먹으면 바보 안녕하세요? 너무 맛있어서 키절 안먹으면
-        바보 안녕하세요? 너무 맛있어서 키절 안먹으면 바보 안녕하세요?너 무
-        맛있어서 키절 안먹으면 바보 안녕하세요?너무 맛있어서 키절 안먹으면 바보
-        안녕하세요?너무 맛있어서 키절 안먹으면 바보 안녕하세요?너무 맛있어서
-        키절 안먹으면 바보 안녕하세요?너무 맛있어서 키절
-      </div>
+      <Introduce className={'text-l-medium'}>{DetailData?.introduce}</Introduce>
     </>
   );
 };

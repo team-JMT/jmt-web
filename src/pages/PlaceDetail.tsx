@@ -63,7 +63,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
           }}
         >
           <main className={'safe-area-layout-container'}>
-            <ImgContainer />
+            <ImgContainer images={DetailData?.pictures || []} />
             {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
             <div className={'detail-container'}>
               <div
