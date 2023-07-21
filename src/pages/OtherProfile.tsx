@@ -48,6 +48,7 @@ const OtherProfile = () => {
               좋아한 맛집
             </Tab>
           </Tab.Root>
+          <br />
           <AnimatePresence mode="sync">
             {tab === 'POST' ? <PostPlace /> : <LikePlace />}
           </AnimatePresence>

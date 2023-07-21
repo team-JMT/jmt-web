@@ -53,7 +53,6 @@ const Title = styled.div`
 const Explain = styled.div`
   margin: 12px 0;
   div {
-    /* gray600 */
     color: ${colors.gray600};
     font-weight: 500;
     line-height: 150%;
