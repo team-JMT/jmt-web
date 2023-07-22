@@ -84,7 +84,6 @@ const HomeSeeAll = () => {
         )}
       </section>
       <BottomSheet type={'FOOD_CATEGORY'} content={<div>FOOD_CATEGORY</div>} />
-
       <BottomSheet type={'SORT_BY'} content={<div>SORT_BY</div>} />
     </motion.div>
   );

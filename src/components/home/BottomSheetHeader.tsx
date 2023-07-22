@@ -19,9 +19,10 @@ const BottomSheetHeader = () => {
   return (
     <Container>
       <AddressButton>서울시 어쩌고 저쩌고</AddressButton>
-      <SearchInputMock onClick={() => push('Search', {})}>
-        음식이나 식당명을 검색하세요
-      </SearchInputMock>
+      <SearchInputMock
+        placeholder={'음식이나 식당명을 검색하세요'}
+        onClick={() => push('Search', {})}
+      />
     </Container>
   );
 };

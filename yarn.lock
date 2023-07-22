@@ -1907,9 +1907,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stackflow/plugin-history-sync@npm:^1.3.2":
-  version: 1.3.7
-  resolution: "@stackflow/plugin-history-sync@npm:1.3.7"
+"@stackflow/plugin-history-sync@npm:^1.3.8":
+  version: 1.3.8
+  resolution: "@stackflow/plugin-history-sync@npm:1.3.8"
   dependencies:
     history: ^5.3.0
     url-pattern: ^1.0.3
@@ -1918,7 +1918,7 @@ __metadata:
     "@stackflow/react": ^1.0.0
     "@types/react": ">=16.8.0"
     react: ">=16.8.0"
-  checksum: 568cbe7bd69bf936dd21e7a54e5e4159090bd9b62a43d44b61b39b913746699bed797e6774b6f2af3113200f83c58b6a144bec676b83129a84b81a8ae946940e
+  checksum: da47b926a98856ceea04bd52e2170b3a23a7b0daf8509f04bc36158aceefffa8c3d6894104bf2c29c0ebefb5886b3363be9f98387ee255cb9e5a39d11cc16591
   languageName: node
   linkType: hard
 
@@ -7624,7 +7624,7 @@ __metadata:
     "@emotion/styled": ^11.10.6
     "@stackflow/core": ^1.0.0
     "@stackflow/plugin-basic-ui": ^1.2.2
-    "@stackflow/plugin-history-sync": ^1.3.2
+    "@stackflow/plugin-history-sync": ^1.3.8
     "@stackflow/plugin-renderer-basic": ^1.1.1
     "@stackflow/react": ^1.0.0
     "@tanstack/react-query": ^4.24.4
