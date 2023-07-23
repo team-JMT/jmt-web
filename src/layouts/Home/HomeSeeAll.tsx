@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useGetRestaurantDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantDataInfinite';
 import DownArrow from '@assets/icons/DownArrow';
@@ -8,6 +8,7 @@ import FilterChip from '@commons/FilterChip';
 import SearchResultCard from '@components/SearchResult/SearchResultCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
+import { setPlacesAtom } from '@store/placesAtom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useSetAtom } from 'jotai';
@@ -18,7 +19,7 @@ const HomeSeeAll = () => {
   const handleOpenBottomSheet = useSetAtom(openBottomSheet);
   const observeRef = useRef<HTMLDivElement>(null);
   const { push } = useHomeFlow();
-
+  const setPlaces = useSetAtom(setPlacesAtom);
   const { restaurantData, fetchNextPage, isFetchingNextPage } =
     useGetRestaurantDataInfinite({
       page: 0,
@@ -40,7 +41,6 @@ const HomeSeeAll = () => {
   const handleIntersect = () => {
     if (isLastPage()) {
       fetchNextPage();
-      console.log('intersect');
     }
   };
   // 무한 스크롤 로직
@@ -48,6 +48,13 @@ const HomeSeeAll = () => {
     observeRef,
     onIntersect: handleIntersect,
   });
+
+  useEffect(() => {
+    if (!mappingRestaurantData) {
+      return;
+    }
+    setPlaces(mappingRestaurantData);
+  }, [mappingRestaurantData]);
 
   return (
     <motion.div

@@ -7,5 +7,7 @@ export type Restaurant = {
   roadAddress: string;
   introduce: string;
   category: string;
-  aggregateId: string;
+
+  x: number;
+  y: number;
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { NavermapsProvider } from 'react-naver-maps';
 import { BrowserRouter } from 'react-router-dom';
 
 import VConsole from 'vconsole';
@@ -21,11 +22,13 @@ const vConsole = new VConsole();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <NavermapsProvider ncpClientId="4mc8nybxwl">
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </NavermapsProvider>
   </React.StrictMode>,
 );
