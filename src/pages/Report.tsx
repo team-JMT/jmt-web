@@ -23,37 +23,35 @@ const Report = () => {
   const detailId = getUrlValue();
   const { DetailData } = useGetRestaurantDetailData(detailId);
 
-  if (DetailData !== undefined) {
-    return (
-      <AppScreen
-        appBar={{
-          title: <h1 className={'text-l-medium'}>신고하기</h1>,
-          backButton: {
-            render: () => (
-              <button className={'back-button'} onClick={pop}>
-                <LeftArrowIcon />
-              </button>
-            ),
-          },
-          height: '48px',
-        }}
-      >
-        <main className={'safe-area-layout-container'}>
-          <div className={'report-container'}>
-            <p className={'report-text'}>선택된 글</p>
-            <SearchResultCard restaurantInfo={DetailData} />
-            <div className={'gray-bar'} />
-            <p className={'report-text'}>신고하는 사유를 알려주세요.(필수)</p>
-            <div className={'reason-container'}>
-              {reportArr.map((item, index) => {
-                return <Reason key={index}>{item}</Reason>;
-              })}
-            </div>
+  return (
+    <AppScreen
+      appBar={{
+        title: <h1 className={'text-l-medium'}>신고하기</h1>,
+        backButton: {
+          render: () => (
+            <button className={'back-button'} onClick={pop}>
+              <LeftArrowIcon />
+            </button>
+          ),
+        },
+        height: '48px',
+      }}
+    >
+      <main className={'safe-area-layout-container'}>
+        <div className={'report-container'}>
+          <p className={'report-text'}>선택된 글</p>
+          <SearchResultCard restaurantInfo={DetailData!} />
+          <div className={'gray-bar'} />
+          <p className={'report-text'}>신고하는 사유를 알려주세요.(필수)</p>
+          <div className={'reason-container'}>
+            {reportArr.map((item, index) => {
+              return <Reason key={index}>{item}</Reason>;
+            })}
           </div>
-        </main>
-      </AppScreen>
-    );
-  }
+        </div>
+      </main>
+    </AppScreen>
+  );
 };
 
 export default Report;
