@@ -21,7 +21,7 @@ export const useGetRestaurantSearchDataInfinite = (keyword?: string) => {
         }
         return undefined;
       },
-      enabled: Boolean(keyword),
+      enabled: keyword !== undefined,
       suspense: true,
     },
   );

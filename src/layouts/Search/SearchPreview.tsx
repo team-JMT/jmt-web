@@ -1,9 +1,12 @@
 import React, { useRef } from 'react';
 
 import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
+import { fadeInOut } from '@components/motion/fade-in-out';
+import { variantKey } from '@components/motion/variantKey';
 import PlaceInfoCard from '@components/search/PlaceInfoCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { addSearchLogAtom } from '@store/searchLogAtom';
+import { motion } from 'framer-motion';
 import { useSetAtom } from 'jotai';
 
 import useDebounce from '@hooks/useDebounce';
@@ -28,7 +31,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
     push('SearchResult', {
       keyword: decodeName,
     });
-    addSearchLog({ name: place.name, id: String(place.id) });
+    addSearchLog({ name: place.name });
   };
 
   const mappingRestaurantSearch = restaurantSearchData
@@ -37,7 +40,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
 
   const isLastPage = () => {
     if (!restaurantSearchData) {
-      return;
+      return null;
     }
     return (
       restaurantSearchData[0].data.page.currentPage ===
@@ -46,7 +49,11 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
   };
 
   const handleIntersect = () => {
-    if (!isLastPage()) {
+    const isLast = isLastPage();
+    if (isLast === null) {
+      return;
+    }
+    if (!isLast) {
       fetchNextPage();
     }
   };
@@ -58,7 +65,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
   });
 
   return (
-    <div>
+    <motion.div variants={fadeInOut} {...variantKey}>
       {mappingRestaurantSearch &&
         mappingRestaurantSearch.map((place, index) => (
           <div onClick={() => onSearch(place)} key={place.id}>
@@ -68,7 +75,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
       {!isLastPage() && (
         <div className={'infinite-observer'} ref={observeRef} />
       )}
-    </div>
+    </motion.div>
   );
 };
 

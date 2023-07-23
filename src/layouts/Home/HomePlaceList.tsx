@@ -33,7 +33,7 @@ const HomePlaceList = () => {
 
   const isLastPage = () => {
     if (!restaurantData) {
-      return;
+      return null;
     }
 
     return (
@@ -43,7 +43,11 @@ const HomePlaceList = () => {
   };
 
   const handleIntersect = () => {
-    if (!isLastPage()) {
+    const isLast = isLastPage();
+    if (isLast === null) {
+      return;
+    }
+    if (!isLast) {
       fetchNextPage();
     }
   };

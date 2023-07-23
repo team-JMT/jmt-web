@@ -27,7 +27,7 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
 
   const isLastPage = () => {
     if (!restaurantSearchData) {
-      return;
+      return null;
     }
 
     return (
@@ -37,7 +37,11 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
   };
 
   const handleIntersect = () => {
-    if (!isLastPage()) {
+    const isLast = isLastPage();
+    if (isLast === null) {
+      return;
+    }
+    if (!isLast) {
       fetchNextPage();
     }
   };

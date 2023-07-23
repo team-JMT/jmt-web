@@ -13,7 +13,6 @@ const PlaceInfoCard = ({ name, address, onClick }: PlaceInfoCardProps) => {
     <CardContainer onClick={onClick}>
       <div className={'text-l-bold'}>{name}</div>
       <div className={'text-m-medium'}>내 위치에서 100m</div>
-      <div className={'text-m-medium'}>{address}</div>
     </CardContainer>
   );
 };
