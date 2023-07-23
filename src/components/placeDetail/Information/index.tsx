@@ -60,6 +60,7 @@ const AddressCopy = styled.div`
   color: ${colors.gray400};
   border-bottom: 1px solid ${colors.gray400};
   line-height: 100%;
+  padding-right: 3px;
 `;
 const Telephone = styled.div`
   margin: 4px 0 20px 0;
