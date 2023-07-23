@@ -22,7 +22,7 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
       routes: {
         Home: '/',
         Search: '/search',
-        SearchResult: '/search/:keyword',
+        SearchResult: '/result/:keyword',
         PlaceDetail: '/detail/:placeId',
         OtherProfile: '/profile/:userName',
         NotFound: '/error',

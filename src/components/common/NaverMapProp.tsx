@@ -35,6 +35,9 @@ const NaverMapProp = ({ x, y }: { x: number; y: number }) => {
     new naver.maps.Marker({
       position: location,
       map,
+      icon: {
+        url: '/assets/icons/MapMarker.svg',
+      },
     });
   }, []);
   return <MapContainer ref={mapElement} />;
