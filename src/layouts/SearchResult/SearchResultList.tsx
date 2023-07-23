@@ -29,11 +29,15 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
     if (!restaurantSearchData) {
       return;
     }
-    return restaurantSearchData[0].data.page.pageLast;
+
+    return (
+      restaurantSearchData[0].data.page.currentPage ===
+      restaurantSearchData[0].data.page.totalPage
+    );
   };
 
   const handleIntersect = () => {
-    if (isLastPage()) {
+    if (!isLastPage()) {
       fetchNextPage();
     }
   };

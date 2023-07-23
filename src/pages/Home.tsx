@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 
 import HomeBottomSheet from '@components/home/BottomSheet';
 import FixedPlaceDetail from '@components/home/FixedPlaceDetail';
@@ -32,7 +32,9 @@ const Home = () => {
           <HomeBottomSheet ref={bottomRef}>
             <div className={'container-inner'}>
               <div className={'home-content-container'}>
-                <HomePlaceList />
+                <Suspense fallback={'로오딩'}>
+                  <HomePlaceList />
+                </Suspense>
               </div>
             </div>
           </HomeBottomSheet>
