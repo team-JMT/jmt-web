@@ -1,0 +1,24 @@
+.other-profile-container {
+  margin: 0 20px;
+}
+.user-info-container {
+  display: flex;
+  margin: 24px 0px 24px 10px;
+  align-items: center;
+}
+.user-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  background: url('./link'), yellow;
+  margin-right: 28px;
+}
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+.post {
+  display: flex;
+  margin-top: 4px;
+  gap: 4px;
+}

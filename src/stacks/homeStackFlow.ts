@@ -3,6 +3,9 @@ import { historySyncPlugin } from '@stackflow/plugin-history-sync';
 import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic';
 import { stackflow } from '@stackflow/react';
 
+import OtherProfile from '@pages/OtherProfile';
+import SearchResult from '@pages/SearchResult';
+
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import PlaceDetail from '../pages/PlaceDetail';
@@ -19,7 +22,9 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
       routes: {
         Home: '/',
         Search: '/search',
+        SearchResult: '/result/:keyword',
         PlaceDetail: '/detail/:placeId',
+        OtherProfile: '/profile/:userName',
         NotFound: '/error',
       },
       fallbackActivity: () => 'NotFound',
@@ -29,7 +34,9 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
   activities: {
     Home,
     Search,
+    SearchResult,
     PlaceDetail,
+    OtherProfile,
     NotFound,
   },
   // initialActivity: () => 'Home',

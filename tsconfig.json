@@ -27,6 +27,7 @@
       "@apis/*": [ "./src/apis/*" ],
       "@hooks/*": [ "./src/hooks/*" ],
       "@pages/*": [ "./src/pages/*" ],
+      "@stacks/*": [ "./src/stacks/*" ],
       "@utils/*": [ "./src/utils/*" ],
       "@type/*": [ "./src/types/*" ],
       "@styles/*": [ "./src/styles/*" ],

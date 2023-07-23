@@ -1,51 +1,76 @@
-@import "fontStyles";
+@use "fontStyles";
+
 
 .title-l-bold {
-  font-size: $title-l;
-  font-weight: $bold;
+  font-size: fontStyles.$title-l;
+  font-weight: fontStyles.$bold;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .title-m-bold {
-  font-size: $title-m;
-  font-weight: $bold;
+  font-size: fontStyles.$title-m;
+  font-weight: fontStyles.$bold;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .title-s-bold {
-  font-size: $title-s;
-  font-weight: $bold;
+  font-size: fontStyles.$title-s;
+  font-weight: fontStyles.$bold;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .text-l-bold {
-  font-size: $text-l;
-  font-weight: $bold;
+  font-size: fontStyles.$text-l;
+  font-weight: fontStyles.$bold;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .text-m-bold {
-  font-size: $text-m;
-  font-weight: $bold;
+  font-size: fontStyles.$text-m;
+  font-weight: fontStyles.$bold;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .text-s-bold {
-  font-size: $text-s;
-  font-weight: $bold;
+  font-size: fontStyles.$text-s;
+  font-weight: fontStyles.$bold;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .title-l-medium {
-  font-size: $title-l;
-  font-weight: $medium;
+  font-size: fontStyles.$title-l;
+  font-weight: fontStyles.$medium;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .title-m-medium {
-  font-size: $title-m;
-  font-weight: $medium;
+  font-size: fontStyles.$title-m;
+  font-weight: fontStyles.$medium;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .title-s-medium {
-  font-size: $title-s;
-  font-weight: $medium;
+  font-size: fontStyles.$title-s;
+  font-weight: fontStyles.$medium;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .text-l-medium {
-  font-size: $text-l;
-  font-weight: $medium;
+  font-size: fontStyles.$text-l;
+  font-weight: fontStyles.$medium;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .text-m-medium {
-  font-size: $text-m;
-  font-weight: $medium;
+  font-size: fontStyles.$text-m;
+  font-weight: fontStyles.$medium;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 .text-s-medium {
-  font-size: $text-s;
-  font-weight: $medium;
+  font-size: fontStyles.$text-s;
+  font-weight: fontStyles.$medium;
+  letter-spacing: -0.02em;
+  line-height: 150%;
 }
 

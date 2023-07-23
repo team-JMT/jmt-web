@@ -1,0 +1,46 @@
+@use '../theme';
+
+.detail-container {
+  flex: 1 0 auto;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  padding: 0 20px;
+  scroll-behavior: smooth;
+  position: relative;
+}
+.more-button {
+  display: flex;
+  justify-content: center;
+  padding: 7px 14px;
+}
+
+.imgs-box {
+  width: 100%;
+  height: 240px;
+  background-color: gray;
+}
+.name-box {
+  display: flex;
+  align-items: center;
+  margin: 17px 0 4px 2px;
+  letter-spacing: -0.02em;
+  color: theme.$gray500;
+}
+.title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  left: 20px;
+  width: 100%;
+  letter-spacing: -0.02em;
+  color: theme.$gray900;
+  overflow: hidden;
+}
+.add-box {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4px;
+  gap: 12px;
+}
