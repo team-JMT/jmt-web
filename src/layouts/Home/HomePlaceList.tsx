@@ -5,7 +5,7 @@ import DownArrow from '@assets/icons/DownArrow';
 import BottomSheet from '@commons/BottomSheet';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
-import SearchResultCard from '@components/SearchResult/SearchResultCard';
+import PlaceDetailCard from '@components/home/PlaceDetailCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
 import { setPlacesAtom } from '@store/placesAtom';
@@ -15,7 +15,7 @@ import { useSetAtom } from 'jotai';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
-const HomeSeeAll = () => {
+const HomePlaceList = () => {
   const handleOpenBottomSheet = useSetAtom(openBottomSheet);
   const observeRef = useRef<HTMLDivElement>(null);
   const { push } = useHomeFlow();
@@ -80,9 +80,9 @@ const HomeSeeAll = () => {
       <section className={'place-detail-section'}>
         {mappingRestaurantData &&
           mappingRestaurantData.map((data) => (
-            <SearchResultCard
+            <PlaceDetailCard
               key={data.id}
-              restaurantInfo={data}
+              restaurant={data}
               onClick={() => push('PlaceDetail', { placeId: String(data.id) })}
             />
           ))}
@@ -96,4 +96,4 @@ const HomeSeeAll = () => {
   );
 };
 
-export default HomeSeeAll;
+export default HomePlaceList;

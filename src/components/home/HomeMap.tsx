@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import {
   Marker,
   NaverMap,
@@ -7,7 +7,9 @@ import {
 } from 'react-naver-maps';
 
 import { focusedPlaceAtom, placesAtom } from '@store/placesAtom';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
+
+import { createBounds } from '@utils/createBounds';
 
 interface HomeMapProps {
   handleMarkerClick?: () => void;
@@ -15,10 +17,16 @@ interface HomeMapProps {
 
 const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
-  const [focusedPlace, setFocusedPlace] = useAtom(focusedPlaceAtom);
+  const setFocusedPlace = useSetAtom(focusedPlaceAtom);
+  const places = useAtomValue(placesAtom);
 
   const navermaps = useNavermaps();
   const placesAtomValue = useAtomValue(placesAtom);
+
+  useEffect(() => {
+    const bounds = createBounds(places);
+    map?.fitBounds(bounds);
+  }, [places]);
 
   return (
     <MapDiv
