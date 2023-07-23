@@ -95,15 +95,22 @@ const SearchInput = forwardRef<HTMLInputElement, InputProps>(
 );
 
 export const SearchInputMock = forwardRef<HTMLDivElement, InputProps>(
-  ({ children, ...rest }, ref) => {
+  ({ placeholder, value, ...rest }, ref) => {
     return (
       <SearchInputContainer ref={ref}>
         <SearchInputWrapper className={'input-wrapper'}>
           <AnimatePresence>
             <Icon src={searchIcon} alt={'search-icon'} active={true} />
-            {/*  @ts-ignore */}
-            <MockInput {...rest} className={classNames('text-l-medium')}>
-              {children}
+
+            {/*  @ts-ignore*/}
+            <MockInput
+              {...rest}
+              className={classNames(
+                'text-l-medium',
+                value ? 'gray900' : 'gray200',
+              )}
+            >
+              {value ?? placeholder}
             </MockInput>
           </AnimatePresence>
         </SearchInputWrapper>

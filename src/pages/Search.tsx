@@ -1,7 +1,7 @@
 import React, { Suspense, useRef, useState } from 'react';
 
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
-import SearchInput from '@components/common/input/SearchInput';
+import SearchInput from '@commons/input/SearchInput';
 import SearchLogList from '@layouts/Search/SearchLogList';
 import SearchPreview from '@layouts/Search/SearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';

@@ -1,35 +1,25 @@
 import React, { useRef } from 'react';
 
 import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
-import PlaceInfoCard from '@components/search/PlaceInfoCard';
+import SearchResultCard from '@components/SearchResult/SearchResultCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { addSearchLogAtom } from '@store/searchLogAtom';
-import { useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai/index';
 
-import useDebounce from '@hooks/useDebounce';
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
-import { Restaurant } from '../../models/getRestaurantData';
-
-interface SearchResultProps {
-  inputValue?: string;
+interface SearchResultListProps {
+  keyword?: string;
 }
-const SearchPreview = ({ inputValue }: SearchResultProps) => {
-  const { push, pop } = useHomeFlow();
+
+const SearchResultList = ({ keyword }: SearchResultListProps) => {
+  const { push } = useHomeFlow();
   const addSearchLog = useSetAtom(addSearchLogAtom);
-  const debouncedValue = useDebounce(inputValue, 500);
+
   const observeRef = useRef<HTMLDivElement>(null);
 
   const { restaurantSearchData, fetchNextPage } =
-    useGetRestaurantSearchDataInfinite(debouncedValue);
-  const onSearch = (place: Restaurant) => {
-    const decodeName = encodeURI(place.name);
-
-    push('SearchResult', {
-      keyword: decodeName,
-    });
-    addSearchLog({ name: place.name, id: String(place.id) });
-  };
+    useGetRestaurantSearchDataInfinite(keyword);
 
   const mappingRestaurantSearch = restaurantSearchData
     ?.flatMap((data) => data.data.restaurants)
@@ -55,18 +45,20 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
   });
 
   return (
-    <div>
+    <section className={'list-container'}>
       {mappingRestaurantSearch &&
         mappingRestaurantSearch.map((place, index) => (
-          <div onClick={() => onSearch(place)} key={place.id}>
-            <PlaceInfoCard {...place} />
-          </div>
+          <SearchResultCard
+            restaurantInfo={place}
+            key={place.id}
+            onClick={() => push('PlaceDetail', { placeId: String(place.id) })}
+          />
         ))}
       {!isLastPage() && (
         <div className={'infinite-observer'} ref={observeRef} />
       )}
-    </div>
+    </section>
   );
 };
 
-export default SearchPreview;
+export default SearchResultList;

@@ -64,6 +64,5 @@ export const MockInput = styled(motion.div)`
   padding: 16px 12px 16px 38px;
   border-radius: 5px;
   background: transparent;
-  color: ${colors.gray200};
   outline: none;
 `;
