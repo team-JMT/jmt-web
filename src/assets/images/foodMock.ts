@@ -1,3 +1,4 @@
+import bar from './bar.png';
 import cafe from './cafe.png';
 import chinese from './chinese.png';
 import fusion from './fusion.png';
@@ -13,4 +14,5 @@ export const FoodMock = {
   KOREAN: korean,
   OTHER: other,
   WESTERN: western,
+  BAR: bar,
 };

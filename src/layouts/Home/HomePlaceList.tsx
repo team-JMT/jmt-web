@@ -35,11 +35,15 @@ const HomePlaceList = () => {
     if (!restaurantData) {
       return;
     }
-    return restaurantData[0].data.page.pageLast;
+
+    return (
+      restaurantData[0].data.page.currentPage ===
+      restaurantData[0].data.page.totalPage
+    );
   };
 
   const handleIntersect = () => {
-    if (isLastPage()) {
+    if (!isLastPage()) {
       fetchNextPage();
     }
   };

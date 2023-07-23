@@ -55,9 +55,6 @@ const Search = () => {
               }}
             />
           </div>
-          <button onClick={() => push('PlaceDetail', { placeId: '3' })}>
-            못생긴 버튼
-          </button>
           <div className={'search-log-menu'}>
             <span className={classNames('text-l-bold', 'gray900')}>
               최근 검색
