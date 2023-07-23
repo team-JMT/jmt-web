@@ -7,6 +7,7 @@ import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 
 import { Restaurant } from '../../models/getRestaurantData';
+import { RestaurantDetail } from '../../models/restaurantDetail';
 
 const CardContainer = styled.div`
   display: flex;
@@ -49,7 +50,7 @@ const UserImg = styled.div`
 `;
 
 interface SearchResultCardProps {
-  restaurantInfo: Restaurant;
+  restaurantInfo: Restaurant | RestaurantDetail;
   onClick?: () => void;
 }
 

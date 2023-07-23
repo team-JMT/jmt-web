@@ -9,6 +9,7 @@ import SearchResult from '@pages/SearchResult';
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import PlaceDetail from '../pages/PlaceDetail';
+import Report from '../pages/Report';
 import Search from '../pages/Search';
 
 export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
@@ -25,6 +26,7 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
         SearchResult: '/search/:keyword',
         PlaceDetail: '/detail/:placeId',
         OtherProfile: '/profile/:userName',
+        Report: '/report/:placeId',
         NotFound: '/error',
       },
       fallbackActivity: () => 'NotFound',
@@ -37,6 +39,7 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
     SearchResult,
     PlaceDetail,
     OtherProfile,
+    Report,
     NotFound,
   },
   // initialActivity: () => 'Home',
