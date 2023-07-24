@@ -30,7 +30,6 @@ function wrap(min: number, max: number, value: number): number {
   const normalizedValue = (value - min) % range;
   return normalizedValue >= 0 ? normalizedValue + min : normalizedValue + max;
 }
-
 const swipeConfidenceThreshold = 1000;
 const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;

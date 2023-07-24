@@ -1,22 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useGetRestaurantDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantDataInfinite';
 import DownArrow from '@assets/icons/DownArrow';
 import BottomSheet from '@commons/BottomSheet';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
-import SearchResultCard from '@components/SearchResult/SearchResultCard';
+import FilterBottomSheet from '@components/common/FilterBottomSheet';
+import PlaceDetailCard from '@components/home/PlaceDetailCard';
+import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
+import { setPlacesAtom } from '@store/placesAtom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useSetAtom } from 'jotai';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
-const LikePlace = () => {
+const HomePlaceList = () => {
   const handleOpenBottomSheet = useSetAtom(openBottomSheet);
   const observeRef = useRef<HTMLDivElement>(null);
-
+  const { push } = useHomeFlow();
+  const setPlaces = useSetAtom(setPlacesAtom);
   const { restaurantData, fetchNextPage, isFetchingNextPage } =
     useGetRestaurantDataInfinite({
       page: 0,
@@ -32,6 +36,7 @@ const LikePlace = () => {
     if (!restaurantData) {
       return null;
     }
+
     return (
       restaurantData[0].data.page.currentPage ===
       restaurantData[0].data.page.totalPage
@@ -45,7 +50,6 @@ const LikePlace = () => {
     }
     if (!isLast) {
       fetchNextPage();
-      //console.log('intersect');
     }
   };
   // 무한 스크롤 로직
@@ -53,6 +57,13 @@ const LikePlace = () => {
     observeRef,
     onIntersect: handleIntersect,
   });
+
+  useEffect(() => {
+    if (!mappingRestaurantData) {
+      return;
+    }
+    setPlaces(mappingRestaurantData);
+  }, [mappingRestaurantData]);
 
   return (
     <motion.div
@@ -71,24 +82,28 @@ const LikePlace = () => {
         <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
           종류
         </FilterChip>
-        <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
+        <FilterChip onClick={() => handleOpenBottomSheet('DRINK_CATEGORY')}>
           주류 여부
         </FilterChip>
       </aside>
       <section className={'place-detail-section'}>
         {mappingRestaurantData &&
           mappingRestaurantData.map((data) => (
-            <SearchResultCard restaurantInfo={data} key={data.id} />
+            <PlaceDetailCard
+              key={data.id}
+              restaurant={data}
+              onClick={() => push('PlaceDetail', { placeId: String(data.id) })}
+            />
           ))}
         {!isLastPage() && (
           <div className={'infinite-observe'} ref={observeRef} />
         )}
       </section>
-      <BottomSheet type={'FOOD_CATEGORY'} content={<div>FOOD_CATEGORY</div>} />
-
       <BottomSheet type={'SORT_BY'} content={<div>SORT_BY</div>} />
+      <FilterBottomSheet type={'FOOD_CATEGORY'}>음식</FilterBottomSheet>
+      <FilterBottomSheet type={'DRINK_CATEGORY'}>주류여부</FilterBottomSheet>
     </motion.div>
   );
 };
 
-export default LikePlace;
+export default HomePlaceList;

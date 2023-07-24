@@ -14,11 +14,14 @@ export const useGetRestaurantSearchDataInfinite = (keyword?: string) => {
     ({ pageParam }) => fetchRestaurantSearch(keyword!),
     {
       getNextPageParam: (data) => {
-        if (!data.data.page.pageLast) {
-          return data.data.page.currentPage + 1;
+        const { currentPage, totalPage } = data.data.page;
+
+        if (currentPage < totalPage) {
+          return currentPage + 1;
         }
+        return undefined;
       },
-      enabled: Boolean(keyword),
+      enabled: keyword !== undefined,
       suspense: true,
     },
   );

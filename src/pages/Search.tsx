@@ -1,14 +1,17 @@
-import React, { Suspense, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
-import SearchInput from '@components/common/input/SearchInput';
+import SearchInput from '@commons/input/SearchInput';
+import { fadeInOut } from '@components/motion/fade-in-out';
+import { variantKey } from '@components/motion/variantKey';
 import SearchLogList from '@layouts/Search/SearchLogList';
 import SearchPreview from '@layouts/Search/SearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
-import { searchLogAtom } from '@store/searchLogAtom';
+import { addSearchLogAtom, searchLogAtom } from '@store/searchLogAtom';
 import classNames from 'classnames';
-import { useAtom } from 'jotai';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useAtom, useSetAtom } from 'jotai';
 import { RESET } from 'jotai/utils';
 
 const searchLogData = [
@@ -22,8 +25,28 @@ const searchLogData = [
 const Search = () => {
   const { push, pop } = useHomeFlow();
   const [searchLog, setSearchLog] = useAtom(searchLogAtom);
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+  const addSearchLog = useSetAtom(addSearchLogAtom);
   const [inputValue, setInputValue] = useState<string>();
   const searchRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    const handleFocus = () => {
+      setIsFocus(true);
+    };
+    const handleBlur = () => {
+      setIsFocus(false);
+    };
+    if (searchRef.current) {
+      searchRef.current.addEventListener('focus', handleFocus);
+      searchRef.current.addEventListener('blur', handleBlur);
+    }
+    return () => {
+      if (searchRef.current) {
+        searchRef.current.removeEventListener('focus', handleFocus);
+        searchRef.current.removeEventListener('blur', handleBlur);
+      }
+    };
+  }, []);
 
   return (
     <AppScreen
@@ -41,39 +64,51 @@ const Search = () => {
     >
       <main className={'safe-area-layout-container'}>
         <div className={'container-inner'}>
-          <div className={'search-input-wrapper'}>
-            <SearchInput
-              ref={searchRef}
-              placeholder={'맛집을 검색해보세요'}
-              onChange={(e) => setInputValue(e.target.value)}
-              onSearch={() => {
-                if (typeof inputValue === 'string') {
-                  push('SearchResult', {
-                    keyword: encodeURI(inputValue),
-                  });
-                }
-              }}
-            />
-          </div>
-          <button onClick={() => push('PlaceDetail', { placeId: '3' })}>
-            못생긴 버튼
-          </button>
-          <div className={'search-log-menu'}>
-            <span className={classNames('text-l-bold', 'gray900')}>
-              최근 검색
-            </span>
-            <button
-              className={classNames('text-l-medium', 'gray400')}
-              onClick={() => setSearchLog(RESET)}
-            >
-              전체삭제
-            </button>
-          </div>
+          <AnimatePresence>
+            <div className={'search-input-wrapper'}>
+              <SearchInput
+                ref={searchRef}
+                placeholder={'맛집을 검색해보세요'}
+                onChange={(e) => setInputValue(e.target.value)}
+                onSearch={() => {
+                  if (typeof inputValue === 'string') {
+                    addSearchLog({
+                      name: inputValue,
+                    });
+                    push('SearchResult', {
+                      keyword: encodeURI(inputValue),
+                    });
+                  }
+                }}
+              />
+            </div>
+            {!isFocus && (
+              <motion.div
+                className={'search-log-menu'}
+                variants={fadeInOut}
+                {...variantKey}
+              >
+                <span className={classNames('text-l-bold', 'gray900')}>
+                  최근 검색
+                </span>
+                <button
+                  className={classNames('text-m-medium', 'gray400')}
+                  onClick={() => setSearchLog(RESET)}
+                >
+                  전체삭제
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-        <SearchLogList />
-        <Suspense fallback={<div>로오오오오오오오오오오오오오오딩</div>}>
-          <SearchPreview inputValue={inputValue} />
-        </Suspense>
+        <AnimatePresence>
+          {!isFocus && <SearchLogList />}
+          {isFocus && (
+            <Suspense fallback={<div>로오오오오오오오오오오오오오오딩</div>}>
+              <SearchPreview inputValue={inputValue} />
+            </Suspense>
+          )}
+        </AnimatePresence>
       </main>
     </AppScreen>
   );
