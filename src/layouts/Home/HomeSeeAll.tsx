@@ -5,6 +5,7 @@ import DownArrow from '@assets/icons/DownArrow';
 import BottomSheet from '@commons/BottomSheet';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
+import FilterBottomSheet from '@components/common/FilterBottomSheet';
 import SearchResultCard from '@components/SearchResult/SearchResultCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
@@ -66,7 +67,7 @@ const HomeSeeAll = () => {
         <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
           종류
         </FilterChip>
-        <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
+        <FilterChip onClick={() => handleOpenBottomSheet('DRINK_CATEGORY')}>
           주류 여부
         </FilterChip>
       </aside>
@@ -83,9 +84,12 @@ const HomeSeeAll = () => {
           <div className={'infinite-observe'} ref={observeRef} />
         )}
       </section>
-      <BottomSheet type={'FOOD_CATEGORY'} content={<div>FOOD_CATEGORY</div>} />
 
       <BottomSheet type={'SORT_BY'} content={<div>SORT_BY</div>} />
+      <FilterBottomSheet type={'FOOD_CATEGORY'}>
+        음식 카테고리
+      </FilterBottomSheet>
+      <FilterBottomSheet type={'DRINK_CATEGORY'}>주류 여부</FilterBottomSheet>
     </motion.div>
   );
 };
