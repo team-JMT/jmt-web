@@ -26,6 +26,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
   const { restaurantSearchData, fetchNextPage } =
     useGetRestaurantSearchDataInfinite(debouncedValue);
   const onSearch = (place: Restaurant) => {
+    console.log(place);
     const decodeName = encodeURI(place.name);
 
     push('SearchResult', {
