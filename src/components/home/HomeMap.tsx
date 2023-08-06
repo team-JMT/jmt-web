@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { createRef, memo, RefObject, useEffect, useState } from 'react';
 import {
   Marker,
   NaverMap,
@@ -6,6 +6,7 @@ import {
   Container as MapDiv,
 } from 'react-naver-maps';
 
+import MarkerCluster from '@components/home/MarkerGluster';
 import { focusedPlaceAtom, placesAtom } from '@store/placesAtom';
 import { useAtomValue, useSetAtom } from 'jotai';
 
@@ -22,6 +23,17 @@ const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
 
   const navermaps = useNavermaps();
   const placesAtomValue = useAtomValue(placesAtom);
+  const [elRefs, setElRefs] = useState<Array<RefObject<naver.maps.Marker>>>([]);
+
+  console.log(elRefs);
+
+  useEffect(() => {
+    setElRefs((elRefs) =>
+      Array(placesAtomValue.length)
+        .fill('')
+        .map((_, i) => elRefs[i] || createRef()),
+    );
+  }, [placesAtomValue]);
 
   useEffect(() => {
     const bounds = createBounds(places);
@@ -36,9 +48,14 @@ const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
       }}
     >
       <NaverMap ref={setMap}>
-        {placesAtomValue.map((place) => {
+        <MarkerCluster markers={elRefs} markerInfo={placesAtomValue} />
+        {placesAtomValue.map((place, index) => {
           return (
             <Marker
+              ref={elRefs[index]}
+              icon={{
+                url: 'assets/PlacePin.svg',
+              }}
               onClick={(e) => {
                 if (!map) {
                   return;
