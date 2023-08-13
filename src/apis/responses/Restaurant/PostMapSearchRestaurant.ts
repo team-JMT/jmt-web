@@ -1,4 +1,4 @@
-import { PageMeta, Response } from '@apis/common/types';
+import { PageMeta } from '@apis/common/types';
 
 import { Restaurant } from '../../../models/getRestaurantData';
 
@@ -17,8 +17,6 @@ export type PostRestaurantSearchRequest = {
   };
   page: PageMeta;
 };
-export type PostRestaurantSearchResponse = Response<
-  {
-    data: Restaurant[];
-  } & PageMeta
->;
+export type PostRestaurantSearchResponse = {
+  data: Restaurant[];
+} & PageMeta;

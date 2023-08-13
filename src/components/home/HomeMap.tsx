@@ -29,6 +29,30 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
   const lat = useAtomValue(mapAtom);
   const setLat = useSetAtom(mapAtom);
 
+  const setLatHandler = () => {
+    const mapLat = map?.getBounds();
+    if (mapLat) {
+      setLat({
+        남서_좌표: {
+          // @ts-ignore
+          x: mapLat?._sw.x,
+          // @ts-ignore
+          y: mapLat?._sw.y,
+        },
+        북동_좌표: {
+          // @ts-ignore
+          x: mapLat?._ne.x,
+          // @ts-ignore
+          y: mapLat?._ne.y,
+        },
+      });
+    }
+  };
+
+  const onCenterChanged = () => {
+    setLatHandler();
+  };
+
   useEffect(() => {
     setElRefs((elRefs) =>
       Array(placesAtomValue.length)
@@ -49,29 +73,8 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
         height: '100vh',
       }}
     >
-      <NaverMap
-        ref={setMap}
-        onCenterChanged={() => {
-          const mapLat = map?.getBounds();
-          if (mapLat) {
-            setLat({
-              남서_좌표: {
-                // @ts-ignore
-                x: mapLat?._sw.x,
-                // @ts-ignore
-                y: mapLat?._sw.y,
-              },
-              북동_좌표: {
-                // @ts-ignore
-                x: mapLat?._ne.x,
-                // @ts-ignore
-                y: mapLat?._ne.y,
-              },
-            });
-          }
-        }}
-      >
-        <MarkerCluster markers={elRefs} markerInfo={placesAtomValue} />
+      <NaverMap ref={setMap} onCenterChanged={onCenterChanged}>
+        <MarkerCluster markers={elRefs} />
         {placesAtomValue.map((place, index) => {
           return (
             <Marker

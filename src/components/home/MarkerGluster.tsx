@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from 'react';
+import { memo, RefObject, useEffect, useState } from 'react';
 import { Overlay, useMap, useNavermaps } from 'react-naver-maps';
 
 import { useGetClusterIcon } from '@hooks/useGetClusterIcon';
@@ -12,7 +12,7 @@ function MarkerCluster({
   markerInfo,
 }: {
   markers: Array<RefObject<naver.maps.Marker>>;
-  markerInfo: Restaurant[];
+  markerInfo?: Restaurant[];
 }) {
   const navermaps = useNavermaps();
   const map = useMap();
@@ -48,16 +48,16 @@ function MarkerCluster({
 
   // Customize Overlay 참고
   // https://zeakd.github.io/react-naver-maps/guides/customize-overlays/
-  const [cluster, setCluster] = useState(getCluster());
+  // 타입이 따로 없어서 any처리
+  const [cluster, setCluster] = useState<any>(null);
 
   useEffect(() => {
+    const cluster = getCluster();
     // 클러스트 객체 생성해서, 상태에 저장
-    setCluster(getCluster());
+    setCluster(cluster);
   }, [markers]);
 
-  return (
-    <Overlay element={{ ...cluster, setMap: () => null, getMap: () => null }} />
-  );
+  return <>{cluster && <Overlay element={cluster} />}</>;
 }
 
-export default MarkerCluster;
+export default memo(MarkerCluster);
