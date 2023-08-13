@@ -11,7 +11,7 @@ import '../styles//common/bottomSheet.css';
 
 import { AnimatePresence } from 'framer-motion';
 
-import { BottomSheetRef } from 'react-spring-bottom-sheet';
+import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 const Home = () => {
   const [tab, setTab] = useState('AROUND');

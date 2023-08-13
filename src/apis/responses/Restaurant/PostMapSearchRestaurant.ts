@@ -1,14 +1,8 @@
 import { PageMeta, Response } from '@apis/common/types';
 
-import { Restaurant } from '../../models/getRestaurantData';
+import { Restaurant } from '../../../models/getRestaurantData';
 
-export type GetRestaurantSearchResponse = Response<
-  {
-    content: Restaurant[];
-  } & PageMeta
->;
-
-export type GetRestaurantSearchRequest = {
+export type PostRestaurantSearchRequest = {
   x: string;
   y: string;
   radius: number;
@@ -17,7 +11,6 @@ export type GetRestaurantSearchRequest = {
     isCanDrinkLiquor: boolean;
   };
 };
-
 export type PostRestaurantSearchResponse = Response<
   {
     data: Restaurant[];
