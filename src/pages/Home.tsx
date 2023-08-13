@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react';
-import type { BottomSheetRef } from 'react-spring-bottom-sheet';
+import React, { Suspense, useRef, useState } from 'react';
 
 import HomeBottomSheet from '@components/home/BottomSheet';
 import FixedPlaceDetail from '@components/home/FixedPlaceDetail';
@@ -7,18 +6,17 @@ import HomeHeader from '@components/home/HomeHeader';
 import HomeMap from '@components/home/HomeMap';
 import HomePlaceList from '@layouts/Home/HomePlaceList';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
-import { mapAtom } from '@store/mapAtom';
+
+import '../styles//common/bottomSheet.css';
+
 import { AnimatePresence } from 'framer-motion';
-import { useAtomValue } from 'jotai';
+
+import { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 const Home = () => {
   const [tab, setTab] = useState('AROUND');
-  const [map, setMap] = useState<naver.maps.Map | null>(null);
 
   const bottomRef = useRef<BottomSheetRef>(null);
-  const lat = useAtomValue(mapAtom);
-
-  console.log(lat);
 
   const handleMarkerClick = () => {
     bottomRef.current?.snapTo(97);
@@ -29,16 +27,14 @@ const Home = () => {
       <AppScreen>
         <AnimatePresence>
           <HomeHeader />
-          <HomeMap
-            map={map}
-            setMap={setMap}
-            handleMarkerClick={handleMarkerClick}
-          />
+          <HomeMap handleMarkerClick={handleMarkerClick} />
           <FixedPlaceDetail />
           <HomeBottomSheet ref={bottomRef}>
             <div className={'container-inner'}>
               <div className={'home-content-container'}>
-                <HomePlaceList />
+                <Suspense fallback={'로오딩'}>
+                  <HomePlaceList />
+                </Suspense>
               </div>
             </div>
           </HomeBottomSheet>
