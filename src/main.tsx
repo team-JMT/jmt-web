@@ -4,7 +4,6 @@ import { NavermapsProvider } from 'react-naver-maps';
 import { BrowserRouter } from 'react-router-dom';
 
 import { queryClient } from '@apis/queryClient';
-import VConsole from 'vconsole';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -16,8 +15,6 @@ import '@styles/pages/_index.scss';
 import '@styles/theme/_index.scss';
 
 import '@stackflow/plugin-basic-ui/index.css';
-
-const vConsole = new VConsole();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

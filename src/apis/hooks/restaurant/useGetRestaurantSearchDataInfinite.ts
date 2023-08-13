@@ -14,7 +14,7 @@ export const useGetRestaurantSearchDataInfinite = (keyword?: string) => {
     ({ pageParam }) => fetchRestaurantSearch(keyword!),
     {
       getNextPageParam: (data) => {
-        if (!data.data.page.pageLast) {
+        if (!(data.data.page.currentPage === data.data.page.totalPage)) {
           return data.data.page.currentPage + 1;
         }
       },

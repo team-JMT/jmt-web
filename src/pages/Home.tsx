@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import HomeBottomSheet from '@components/home/BottomSheet';
@@ -38,7 +38,9 @@ const Home = () => {
           <HomeBottomSheet ref={bottomRef}>
             <div className={'container-inner'}>
               <div className={'home-content-container'}>
-                <HomePlaceList />
+                <Suspense fallback={'loading'}>
+                  <HomePlaceList />
+                </Suspense>
               </div>
             </div>
           </HomeBottomSheet>
