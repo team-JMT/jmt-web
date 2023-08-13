@@ -1,5 +1,5 @@
 import React, { forwardRef, memo, useImperativeHandle, useRef } from 'react';
-import { BottomSheetRef } from 'react-spring-bottom-sheet';
+import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import { StyledBottomSheet } from '@commons/BottomSheet/StyledBottomSheet';
 import { focusedPlaceAtom } from '@store/placesAtom';
