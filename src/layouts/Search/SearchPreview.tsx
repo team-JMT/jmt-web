@@ -45,7 +45,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
     }
     return (
       restaurantSearchData[0].data.page.currentPage ===
-      restaurantSearchData[0].data.page.totalPage
+      restaurantSearchData[0].data.page.totalPages
     );
   };
 

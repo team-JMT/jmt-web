@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { createRef, memo, RefObject, useEffect, useState } from 'react';
 import {
   Marker,
   NaverMap,
@@ -6,22 +6,36 @@ import {
   Container as MapDiv,
 } from 'react-naver-maps';
 
+import MarkerCluster from '@components/home/MarkerGluster';
+import { mapAtom } from '@store/mapAtom';
 import { focusedPlaceAtom, placesAtom } from '@store/placesAtom';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { createBounds } from '@utils/createBounds';
 
 interface HomeMapProps {
+  map: naver.maps.Map | null;
+  setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
   handleMarkerClick?: () => void;
 }
 
-const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
-  const [map, setMap] = useState<naver.maps.Map | null>(null);
+const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
   const setFocusedPlace = useSetAtom(focusedPlaceAtom);
   const places = useAtomValue(placesAtom);
 
   const navermaps = useNavermaps();
   const placesAtomValue = useAtomValue(placesAtom);
+  const [elRefs, setElRefs] = useState<Array<RefObject<naver.maps.Marker>>>([]);
+  const lat = useAtomValue(mapAtom);
+  const setLat = useSetAtom(mapAtom);
+
+  useEffect(() => {
+    setElRefs((elRefs) =>
+      Array(placesAtomValue.length)
+        .fill('')
+        .map((_, i) => elRefs[i] || createRef()),
+    );
+  }, [placesAtomValue]);
 
   useEffect(() => {
     const bounds = createBounds(places);
@@ -35,10 +49,36 @@ const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
         height: '100vh',
       }}
     >
-      <NaverMap ref={setMap}>
-        {placesAtomValue.map((place) => {
+      <NaverMap
+        ref={setMap}
+        onCenterChanged={() => {
+          const mapLat = map?.getBounds();
+          if (mapLat) {
+            setLat({
+              남서_좌표: {
+                // @ts-ignore
+                x: mapLat?._sw.x,
+                // @ts-ignore
+                y: mapLat?._sw.y,
+              },
+              북동_좌표: {
+                // @ts-ignore
+                x: mapLat?._ne.x,
+                // @ts-ignore
+                y: mapLat?._ne.y,
+              },
+            });
+          }
+        }}
+      >
+        <MarkerCluster markers={elRefs} markerInfo={placesAtomValue} />
+        {placesAtomValue.map((place, index) => {
           return (
             <Marker
+              ref={elRefs[index]}
+              icon={{
+                url: 'assets/PlacePin.svg',
+              }}
               onClick={(e) => {
                 if (!map) {
                   return;

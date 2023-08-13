@@ -38,7 +38,7 @@ const HomePlaceList = () => {
 
     return (
       restaurantData[0].data.page.currentPage ===
-      restaurantData[0].data.page.totalPage
+      restaurantData[0].data.page.totalPages
     );
   };
 
