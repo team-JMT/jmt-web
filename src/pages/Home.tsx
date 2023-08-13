@@ -9,15 +9,21 @@ import { AppScreen } from '@stackflow/plugin-basic-ui';
 
 import '../styles//common/bottomSheet.css';
 
+import { mapAtom } from '@store/mapAtom';
 import { AnimatePresence } from 'framer-motion';
 
 import type { BottomSheetRef } from 'react-spring-bottom-sheet';
+
+import { useAtomValue } from 'jotai/index';
 
 const Home = () => {
   const [tab, setTab] = useState('AROUND');
   const [map, setMap] = useState<naver.maps.Map | null>(null);
 
   const bottomRef = useRef<BottomSheetRef>(null);
+  const lat = useAtomValue(mapAtom);
+
+  console.log(lat);
 
   const handleMarkerClick = () => {
     bottomRef.current?.snapTo(97);

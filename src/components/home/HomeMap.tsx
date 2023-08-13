@@ -26,6 +26,7 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
   const navermaps = useNavermaps();
   const placesAtomValue = useAtomValue(placesAtom);
   const [elRefs, setElRefs] = useState<Array<RefObject<naver.maps.Marker>>>([]);
+  const lat = useAtomValue(mapAtom);
   const setLat = useSetAtom(mapAtom);
 
   useEffect(() => {
@@ -40,26 +41,6 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
     const bounds = createBounds(places);
     map?.fitBounds(bounds);
   }, [places]);
-  const mapLat = map?.getBounds();
-
-  useEffect(() => {
-    if (mapLat) {
-      setLat({
-        남서_좌표: {
-          // @ts-ignore
-          x: mapLat?._sw.x,
-          // @ts-ignore
-          y: mapLat?._sw.y,
-        },
-        북동_좌표: {
-          // @ts-ignore
-          x: mapLat?._ne.x,
-          // @ts-ignore
-          y: mapLat?._ne.y,
-        },
-      });
-    }
-  }, [mapLat]);
 
   return (
     <MapDiv
@@ -68,7 +49,38 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
         height: '100vh',
       }}
     >
-      <NaverMap ref={setMap}>
+      <NaverMap
+        ref={setMap}
+        onCenterChanged={() => {
+          const mapLat = map?.getBounds();
+          if (mapLat) {
+            setLat({
+              남서_좌표: {
+                // @ts-ignore
+                x: mapLat?._sw.x,
+                // @ts-ignore
+                y: mapLat?._sw.y,
+              },
+              북동_좌표: {
+                // @ts-ignore
+                x: mapLat?._ne.x,
+                // @ts-ignore
+                y: mapLat?._ne.y,
+              },
+            });
+          }
+        }}
+      >
+        {lat && (
+          <Marker
+            position={new navermaps.LatLng(lat?.남서_좌표.y, lat?.남서_좌표.x)}
+          />
+        )}
+        {lat && (
+          <Marker
+            position={new navermaps.LatLng(lat?.북동_좌표.y, lat?.북동_좌표.x)}
+          />
+        )}
         <MarkerCluster markers={elRefs} markerInfo={placesAtomValue} />
         {placesAtomValue.map((place, index) => {
           return (
