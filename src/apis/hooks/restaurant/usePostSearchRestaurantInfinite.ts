@@ -1,41 +1,40 @@
-import { Keys } from '@apis/common/Keys';
-import { getRestaurantData } from '@apis/common/restaurant';
-import { Pagination } from '@apis/common/types';
+import { searchMapRestaurantData } from '@apis/common/restaurant';
+import { PostRestaurantSearchRequest } from '@apis/responses/Restaurant/PostMapSearchRestaurant';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
-
-const fetchGetRestaurantData = async ({ page, size, sort }: Pagination) => {
-  const res = await getRestaurantData({
+const fetchPostSearchRestaurantData = async ({
+  page,
+  startLocation,
+  endLocation,
+  filter,
+}: PostRestaurantSearchRequest) => {
+  const res = await searchMapRestaurantData({
     page,
-    size,
-    sort,
+    startLocation,
+    endLocation,
+    filter,
   });
   return res.data;
 };
 
-export const useGetRestaurantDataInfinite = ({
-  page = 0,
-  size = 10,
-  sort,
-}: Pagination) => {
-  const { data, ...rest } = useInfiniteQuery(
-    [Keys.RESTAURANT, page, size, sort],
-    ({ pageParam = 0 }) =>
-      fetchGetRestaurantData({
-        page: pageParam,
-        size,
-        sort,
-      }),
-    {
-      getNextPageParam: (data) => {
-        if (data.data.page.pageLast) {
-          return data.data.page.currentPage + 1;
-        }
-      },
-    },
-  );
-  return {
-    restaurantData: data && data.pages,
-    ...rest,
-  };
-};
+// export const usePostSearchRestaurantInfinite = ({
+//   page: { size = 10 },
+// }: PostRestaurantSearchRequest) => {
+//   const { data, ...rest } = useInfiniteQuery(
+//     [Keys.RESTAURANT, page, size, sort],
+//     ({ pageParam = 0 }) =>
+//       fetchPostSearchRestaurantData({
+//         page: pageParam,
+//       }),
+//     {
+//       getNextPageParam: (data) => {
+//         if (data.data.page.pageLast) {
+//           return data.data.page.currentPage + 1;
+//         }
+//       },
+//     },
+//   );
+//   return {
+//     restaurantData: data && data.pages,
+//     ...rest,
+//   };
+// };

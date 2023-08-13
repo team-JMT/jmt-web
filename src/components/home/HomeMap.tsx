@@ -7,25 +7,26 @@ import {
 } from 'react-naver-maps';
 
 import MarkerCluster from '@components/home/MarkerGluster';
+import { mapAtom } from '@store/mapAtom';
 import { focusedPlaceAtom, placesAtom } from '@store/placesAtom';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { createBounds } from '@utils/createBounds';
 
 interface HomeMapProps {
+  map: naver.maps.Map | null;
+  setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
   handleMarkerClick?: () => void;
 }
 
-const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
-  const [map, setMap] = useState<naver.maps.Map | null>(null);
+const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
   const setFocusedPlace = useSetAtom(focusedPlaceAtom);
   const places = useAtomValue(placesAtom);
 
   const navermaps = useNavermaps();
   const placesAtomValue = useAtomValue(placesAtom);
   const [elRefs, setElRefs] = useState<Array<RefObject<naver.maps.Marker>>>([]);
-
-  console.log(elRefs);
+  const setLat = useSetAtom(mapAtom);
 
   useEffect(() => {
     setElRefs((elRefs) =>
@@ -39,6 +40,23 @@ const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
     const bounds = createBounds(places);
     map?.fitBounds(bounds);
   }, [places]);
+  const mapLat = map?.getBounds();
+
+  useEffect(() => {
+    if (mapLat) {
+      console.log(mapLat);
+      setLat({
+        남서_좌표: {
+          x: mapLat?._sw.x,
+          y: mapLat?._sw.y,
+        },
+        북동_좌표: {
+          x: mapLat?._ne.x,
+          y: mapLat?._ne.y,
+        },
+      });
+    }
+  }, [mapLat]);
 
   return (
     <MapDiv

@@ -3,13 +3,19 @@ import { PageMeta, Response } from '@apis/common/types';
 import { Restaurant } from '../../../models/getRestaurantData';
 
 export type PostRestaurantSearchRequest = {
-  x: string;
-  y: string;
-  radius: number;
-  filter: {
-    categoryFilter: string;
-    isCanDrinkLiquor: boolean;
+  startLocation: {
+    x: string;
+    y: string;
   };
+  endLocation: {
+    x: string;
+    y: string;
+  };
+  filter: {
+    categoryFilter?: string;
+    isCanDrinkLiquor?: boolean;
+  };
+  page: PageMeta;
 };
 export type PostRestaurantSearchResponse = Response<
   {

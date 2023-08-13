@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom/client';
 import { NavermapsProvider } from 'react-naver-maps';
 import { BrowserRouter } from 'react-router-dom';
 
+import { queryClient } from '@apis/queryClient';
 import VConsole from 'vconsole';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import App from './App';
@@ -15,8 +16,6 @@ import '@styles/pages/_index.scss';
 import '@styles/theme/_index.scss';
 
 import '@stackflow/plugin-basic-ui/index.css';
-
-const queryClient = new QueryClient();
 
 const vConsole = new VConsole();
 

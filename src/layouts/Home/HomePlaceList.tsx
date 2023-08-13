@@ -8,10 +8,11 @@ import FilterChip from '@commons/FilterChip';
 import PlaceDetailCard from '@components/home/PlaceDetailCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
+import { mapAtom } from '@store/mapAtom';
 import { setPlacesAtom } from '@store/placesAtom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
@@ -20,6 +21,7 @@ const HomePlaceList = () => {
   const observeRef = useRef<HTMLDivElement>(null);
   const { push } = useHomeFlow();
   const setPlaces = useSetAtom(setPlacesAtom);
+  const lat = useAtomValue(mapAtom);
   const { restaurantData, fetchNextPage, isFetchingNextPage } =
     useGetRestaurantDataInfinite({
       page: 0,

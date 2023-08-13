@@ -15,6 +15,7 @@ import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 const Home = () => {
   const [tab, setTab] = useState('AROUND');
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
 
   const bottomRef = useRef<BottomSheetRef>(null);
 
@@ -27,7 +28,11 @@ const Home = () => {
       <AppScreen>
         <AnimatePresence>
           <HomeHeader />
-          <HomeMap handleMarkerClick={handleMarkerClick} />
+          <HomeMap
+            map={map}
+            setMap={setMap}
+            handleMarkerClick={handleMarkerClick}
+          />
           <FixedPlaceDetail />
           <HomeBottomSheet ref={bottomRef}>
             <div className={'container-inner'}>
