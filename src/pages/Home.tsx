@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import HomeBottomSheet from '@components/home/BottomSheet';
 import FixedPlaceDetail from '@components/home/FixedPlaceDetail';
@@ -6,15 +7,9 @@ import HomeHeader from '@components/home/HomeHeader';
 import HomeMap from '@components/home/HomeMap';
 import HomePlaceList from '@layouts/Home/HomePlaceList';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
-
-import '../styles//common/bottomSheet.css';
-
 import { mapAtom } from '@store/mapAtom';
 import { AnimatePresence } from 'framer-motion';
-
-import type { BottomSheetRef } from 'react-spring-bottom-sheet';
-
-import { useAtomValue } from 'jotai/index';
+import { useAtomValue } from 'jotai';
 
 const Home = () => {
   const [tab, setTab] = useState('AROUND');

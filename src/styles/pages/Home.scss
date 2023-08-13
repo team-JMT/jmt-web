@@ -1,20 +1,5 @@
 @use '../theme';
 
-.home-map-container {
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.bottom-sheet-container {
-  display: flex;
-  flex-direction: column;
-  margin: calc(100vh - 100px) 0 0 0;
-  z-index: 90;
-  background: #ffffff;
-}
 .home-content-container {
   display: flex;
   flex-direction: column;

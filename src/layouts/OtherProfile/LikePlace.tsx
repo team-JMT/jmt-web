@@ -30,13 +30,20 @@ const LikePlace = () => {
 
   const isLastPage = () => {
     if (!restaurantData) {
-      return;
+      return null;
     }
-    return restaurantData[0].data.page.pageLast;
+    return (
+      restaurantData[0].data.page.currentPage ===
+      restaurantData[0].data.page.totalPage
+    );
   };
 
   const handleIntersect = () => {
-    if (isLastPage()) {
+    const isLast = isLastPage();
+    if (isLast === null) {
+      return;
+    }
+    if (!isLast) {
       fetchNextPage();
       //console.log('intersect');
     }

@@ -71,16 +71,6 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
           }
         }}
       >
-        {lat && (
-          <Marker
-            position={new navermaps.LatLng(lat?.남서_좌표.y, lat?.남서_좌표.x)}
-          />
-        )}
-        {lat && (
-          <Marker
-            position={new navermaps.LatLng(lat?.북동_좌표.y, lat?.북동_좌표.x)}
-          />
-        )}
         <MarkerCluster markers={elRefs} markerInfo={placesAtomValue} />
         {placesAtomValue.map((place, index) => {
           return (

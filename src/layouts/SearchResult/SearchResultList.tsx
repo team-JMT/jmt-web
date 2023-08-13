@@ -27,13 +27,21 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
 
   const isLastPage = () => {
     if (!restaurantSearchData) {
-      return;
+      return null;
     }
-    return restaurantSearchData[0].data.page.pageLast;
+
+    return (
+      restaurantSearchData[0].data.page.currentPage ===
+      restaurantSearchData[0].data.page.totalPage
+    );
   };
 
   const handleIntersect = () => {
-    if (isLastPage()) {
+    const isLast = isLastPage();
+    if (isLast === null) {
+      return;
+    }
+    if (!isLast) {
       fetchNextPage();
     }
   };
