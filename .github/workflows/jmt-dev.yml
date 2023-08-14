@@ -14,9 +14,14 @@ on:
     paths:
       - "src/**"
       - ".github/workflows/jmt-dev.yml"
+      -
+
 jobs:
   Deploy_preview_channel:
     runs-on: ubuntu-latest
+    permissions: read-all|write-all
+
+
     env:
       working-directory: ./
     environment:
