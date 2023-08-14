@@ -34,16 +34,18 @@ const Search = () => {
       setIsFocus(true);
     };
     const handleBlur = () => {
-      setIsFocus(false);
+      setTimeout(() => {
+        setIsFocus(false);
+      }, 0);
     };
     if (searchRef.current) {
       searchRef.current.addEventListener('focus', handleFocus);
-      searchRef.current.addEventListener('blur', handleBlur);
+      searchRef.current.addEventListener('focusout', handleBlur);
     }
     return () => {
       if (searchRef.current) {
         searchRef.current.removeEventListener('focus', handleFocus);
-        searchRef.current.removeEventListener('blur', handleBlur);
+        searchRef.current.removeEventListener('focusout', handleBlur);
       }
     };
   }, []);
