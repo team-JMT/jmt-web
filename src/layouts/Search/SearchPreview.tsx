@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, MouseEvent } from 'react';
 
 import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
 import { fadeInOut } from '@components/motion/fade-in-out';
@@ -25,14 +25,15 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
 
   const { restaurantSearchData, fetchNextPage } =
     useGetRestaurantSearchDataInfinite(debouncedValue);
-  const onSearch = (place: Restaurant) => {
-    console.log(place);
-    const decodeName = encodeURI(place.name);
-
-    push('SearchResult', {
-      keyword: decodeName,
-    });
-    addSearchLog({ name: place.name });
+  const onSearch = (e: MouseEvent<HTMLDivElement>) => (place: Restaurant) => {
+    e.stopPropagation();
+    setTimeout(() => {
+      const decodeName = encodeURI(place.name);
+      push('SearchResult', {
+        keyword: decodeName,
+      });
+      addSearchLog({ name: place.name });
+    }, 0);
   };
 
   const mappingRestaurantSearch = restaurantSearchData
@@ -43,10 +44,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
     if (!restaurantSearchData) {
       return null;
     }
-    return (
-      restaurantSearchData[0].data.page.currentPage ===
-      restaurantSearchData[0].data.page.totalPage
-    );
+    return restaurantSearchData[0].data.page.pageLast;
   };
 
   const handleIntersect = () => {
@@ -69,7 +67,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
     <motion.div variants={fadeInOut} {...variantKey}>
       {mappingRestaurantSearch &&
         mappingRestaurantSearch.map((place, index) => (
-          <div onClick={() => onSearch(place)} key={place.id}>
+          <div onClick={(e) => onSearch(e)(place)} key={place.id}>
             <PlaceInfoCard {...place} />
           </div>
         ))}

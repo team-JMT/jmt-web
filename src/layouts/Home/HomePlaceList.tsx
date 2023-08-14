@@ -36,10 +36,7 @@ const HomePlaceList = () => {
       return null;
     }
 
-    return (
-      restaurantData[0].data.page.currentPage ===
-      restaurantData[0].data.page.totalPage
-    );
+    return restaurantData[0].data.page.pageLast;
   };
 
   const handleIntersect = () => {

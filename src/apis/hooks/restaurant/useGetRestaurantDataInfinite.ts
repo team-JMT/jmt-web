@@ -28,9 +28,9 @@ export const useGetRestaurantDataInfinite = ({
       }),
     {
       getNextPageParam: (data) => {
-        const { currentPage, totalPage } = data.data.page;
+        const { pageLast, currentPage } = data.data.page;
 
-        if (currentPage < totalPage) {
+        if (!pageLast) {
           return currentPage + 1;
         }
         return undefined;

@@ -36,8 +36,10 @@ export const usePostSearchRestaurantInfinite = ({
       }),
     {
       getNextPageParam: (data) => {
-        if (data.data.currentPage !== data.data.totalPage) {
-          return data.data.currentPage + 1;
+        const { pageLast, currentPage } = data.data;
+
+        if (!pageLast) {
+          return currentPage + 1;
         }
       },
     },

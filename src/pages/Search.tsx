@@ -25,9 +25,10 @@ const searchLogData = [
 const Search = () => {
   const { push, pop } = useHomeFlow();
   const [searchLog, setSearchLog] = useAtom(searchLogAtom);
-  const [isFocus, setIsFocus] = useState<boolean>(false);
+
   const addSearchLog = useSetAtom(addSearchLogAtom);
   const [inputValue, setInputValue] = useState<string>();
+  const [isFocus, setIsFocus] = useState<boolean>(false);
   const searchRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     const handleFocus = () => {
@@ -35,17 +36,18 @@ const Search = () => {
     };
     const handleBlur = () => {
       setTimeout(() => {
+        console.log('blur');
         setIsFocus(false);
-      }, 0);
+      }, 100);
     };
     if (searchRef.current) {
       searchRef.current.addEventListener('focus', handleFocus);
-      searchRef.current.addEventListener('focusout', handleBlur);
+      searchRef.current.addEventListener('blur', handleBlur);
     }
     return () => {
       if (searchRef.current) {
         searchRef.current.removeEventListener('focus', handleFocus);
-        searchRef.current.removeEventListener('focusout', handleBlur);
+        searchRef.current.removeEventListener('blur', handleBlur);
       }
     };
   }, []);
