@@ -30,13 +30,24 @@ const Search = () => {
   const [inputValue, setInputValue] = useState<string>();
   const [isFocus, setIsFocus] = useState<boolean>(false);
   const searchRef = useRef<HTMLInputElement>(null);
+
+  const handleSearch = () => {
+    if (typeof inputValue === 'string') {
+      addSearchLog({
+        name: inputValue,
+      });
+      push('SearchResult', {
+        keyword: encodeURI(inputValue),
+      });
+    }
+  };
+
   useEffect(() => {
     const handleFocus = () => {
       setIsFocus(true);
     };
     const handleBlur = () => {
       setTimeout(() => {
-        console.log('blur');
         setIsFocus(false);
       }, 100);
     };
@@ -74,16 +85,7 @@ const Search = () => {
                 ref={searchRef}
                 placeholder={'맛집을 검색해보세요'}
                 onChange={(e) => setInputValue(e.target.value)}
-                onSearch={() => {
-                  if (typeof inputValue === 'string') {
-                    addSearchLog({
-                      name: inputValue,
-                    });
-                    push('SearchResult', {
-                      keyword: encodeURI(inputValue),
-                    });
-                  }
-                }}
+                onSearch={() => handleSearch()}
               />
             </div>
             {!isFocus && (
