@@ -5,7 +5,6 @@ on:
     branches:
       - master
     paths:
-      - "src/**"
       - ".github/workflows/jmt-live.yml"
   pull_request:
     branches:
@@ -13,7 +12,6 @@ on:
     types:
       - closed
     paths:
-      - "src/**"
       - ".github/workflows/jmt-live.yml"
 jobs:
   Deploy_Live_channel:
