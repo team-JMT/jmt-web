@@ -35,15 +35,15 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
       setLat({
         남서_좌표: {
           // @ts-ignore
-          x: mapLat?._sw.x,
+          x: String(mapLat?._sw.x),
           // @ts-ignore
-          y: mapLat?._sw.y,
+          y: String(mapLat?._sw.y),
         },
         북동_좌표: {
           // @ts-ignore
-          x: mapLat?._ne.x,
+          x: String(mapLat?._ne.x),
           // @ts-ignore
-          y: mapLat?._ne.y,
+          y: String(mapLat?._ne.y),
         },
       });
     }

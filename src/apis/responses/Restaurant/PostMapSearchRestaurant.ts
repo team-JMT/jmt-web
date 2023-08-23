@@ -1,22 +1,23 @@
-import { PageMeta } from '@apis/common/types';
+import { PageMeta, Pagination } from '@apis/common/types';
 
 import { Restaurant } from '../../../models/getRestaurantData';
 
 export type PostRestaurantSearchRequest = {
   startLocation: {
-    x: string;
-    y: string;
+    x?: string;
+    y?: string;
   };
   endLocation: {
-    x: string;
-    y: string;
+    x?: string;
+    y?: string;
   };
   filter: {
     categoryFilter?: string;
     isCanDrinkLiquor?: boolean;
   };
-  page: PageMeta;
+  params: Pagination;
 };
 export type PostRestaurantSearchResponse = {
-  data: Restaurant[];
-} & PageMeta;
+  restaurant: Restaurant[];
+  page: PageMeta;
+};

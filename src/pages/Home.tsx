@@ -11,14 +11,14 @@ import { mapAtom } from '@store/mapAtom';
 import { AnimatePresence } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 
+import { backDisable, backEnable, getAccessToken } from '@utils/bridge';
+
 const Home = () => {
   const [tab, setTab] = useState('AROUND');
   const [map, setMap] = useState<naver.maps.Map | null>(null);
 
   const bottomRef = useRef<BottomSheetRef>(null);
   const lat = useAtomValue(mapAtom);
-
-  console.log(lat);
 
   const handleMarkerClick = () => {
     bottomRef.current?.snapTo(97);
@@ -38,6 +38,24 @@ const Home = () => {
           <HomeBottomSheet ref={bottomRef}>
             <div className={'container-inner'}>
               <div className={'home-content-container'}>
+                <button
+                  onClick={() => getAccessToken()}
+                  className={'text-m-medium'}
+                >
+                  getAccessToken
+                </button>
+                <button
+                  onClick={() => backEnable()}
+                  className={'text-m-medium'}
+                >
+                  backEnable
+                </button>
+                <button
+                  onClick={() => backDisable()}
+                  className={'text-m-medium'}
+                >
+                  backDisable
+                </button>
                 <Suspense fallback={'loading'}>
                   <HomePlaceList />
                 </Suspense>

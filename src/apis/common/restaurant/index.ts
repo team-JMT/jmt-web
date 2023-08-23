@@ -6,6 +6,7 @@ import {
   PostRestaurantSearchRequest,
   PostRestaurantSearchResponse,
 } from '@apis/responses/Restaurant/PostMapSearchRestaurant';
+import qs from 'qs';
 
 import { RestaurantDetail } from '../../../models/restaurantDetail';
 
@@ -17,14 +18,14 @@ export const getRestaurantData = async (params: Pagination) =>
     },
   );
 
-export const searchMapRestaurantData = async (
-  params: PostRestaurantSearchRequest,
-) =>
+export const searchMapRestaurantData = async ({
+  params,
+  ...rest
+}: PostRestaurantSearchRequest) =>
   await instance.post<Response<PostRestaurantSearchResponse>>(
-    '/api/v1/restaurant/search',
-    params,
+    `/api/v1/restaurant/search/map?${qs.stringify(params)}`,
+    rest,
   );
-
 export const getRestaurantDetailData = async (id: number) =>
   await instance.get<Response<RestaurantDetail>>('/api/v1/restaurant/' + id);
 

@@ -5,13 +5,15 @@ import { PostRestaurantSearchRequest } from '@apis/responses/Restaurant/PostMapS
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 const fetchPostSearchRestaurantData = async ({
-  page,
+  params: { page = 0 },
   startLocation,
   endLocation,
   filter,
 }: PostRestaurantSearchRequest) => {
   const res = await searchMapRestaurantData({
-    page,
+    params: {
+      page,
+    },
     startLocation,
     endLocation,
     filter,
@@ -20,7 +22,7 @@ const fetchPostSearchRestaurantData = async ({
 };
 
 export const usePostSearchRestaurantInfinite = ({
-  page: { size = 10 },
+  params,
   startLocation,
   endLocation,
   filter,
@@ -29,15 +31,15 @@ export const usePostSearchRestaurantInfinite = ({
     [Keys.RESTAURANT, startLocation, endLocation, filter],
     ({ pageParam = 0 }) =>
       fetchPostSearchRestaurantData({
-        page: pageParam,
+        params,
         startLocation,
         endLocation,
         filter,
       }),
     {
+      enabled: Boolean(startLocation && endLocation),
       getNextPageParam: (data) => {
-        const { pageLast, currentPage } = data.data;
-
+        const { pageLast, currentPage } = data.data.page;
         if (!pageLast) {
           return currentPage + 1;
         }
@@ -46,6 +48,7 @@ export const usePostSearchRestaurantInfinite = ({
   );
   return {
     restaurantData: data && data.pages,
+    isEmpty: data && data.pages[0].data.page.empty,
     ...rest,
   };
 };

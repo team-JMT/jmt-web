@@ -19,6 +19,7 @@ if (window) {
 
 export function getAccessToken() {
   if (window.webkit) {
+    console.log('accessToken');
     window.webkit.messageHandlers.callbackHandler.postMessage(
       JSON.stringify({
         event: 'token',
@@ -28,14 +29,29 @@ export function getAccessToken() {
     window?.webviewBridge?.token();
   }
 }
-
-export function backSwipe() {
+export function backEnable() {
   if (window.webkit) {
+    console.log('enable');
     window.webkit.messageHandlers.callbackHandler.postMessage(
       JSON.stringify({
-        event: 'back',
+        event: 'enable',
       }),
     );
+  } else {
+    window?.webviewBridge?.enable();
+  }
+}
+
+export function backDisable() {
+  if (window.webkit) {
+    console.log('backDisable');
+    window.webkit.messageHandlers.callbackHandler.postMessage(
+      JSON.stringify({
+        event: 'disable',
+      }),
+    );
+  } else {
+    window?.webviewBridge?.disable();
   }
 }
 
