@@ -7,7 +7,8 @@ import { getAccessToken } from './utils/bridge';
 
 function App() {
   getAccessToken();
-  import.meta.env.MODE === 'development' && new VConsole();
+  // import.meta.env.MODE === 'development' && new VConsole();
+  new VConsole();
 
   window.localStorage.setItem(
     'accessToken',
