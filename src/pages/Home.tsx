@@ -11,7 +11,13 @@ import { mapAtom } from '@store/mapAtom';
 import { AnimatePresence } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 
-import { backDisable, backEnable, getAccessToken } from '@utils/bridge';
+import {
+  backEnable,
+  getAccessToken,
+  handleNativeShare,
+  navigateNativeRoute,
+  navigationEnable,
+} from '@utils/bridge';
 
 const Home = () => {
   const [tab, setTab] = useState('AROUND');
@@ -51,10 +57,34 @@ const Home = () => {
                   backEnable
                 </button>
                 <button
-                  onClick={() => backDisable()}
+                  onClick={() => backEnable(false)}
                   className={'text-m-medium'}
                 >
                   backDisable
+                </button>
+                <button
+                  onClick={() => navigationEnable()}
+                  className={'text-m-medium'}
+                >
+                  navigationEnable
+                </button>
+                <button
+                  onClick={() => navigationEnable(false)}
+                  className={'text-m-medium'}
+                >
+                  navigationDisable
+                </button>
+                <button
+                  onClick={() => handleNativeShare()}
+                  className={'text-m-medium'}
+                >
+                  handleNativeShare
+                </button>
+                <button
+                  onClick={() => navigateNativeRoute('editRestaurantInfo')}
+                  className={'text-m-medium'}
+                >
+                  navigateNativeRoute
                 </button>
                 <Suspense fallback={'loading'}>
                   <HomePlaceList />

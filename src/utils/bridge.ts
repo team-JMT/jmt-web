@@ -26,42 +26,81 @@ export function getAccessToken() {
       }),
     );
   } else {
+    console.log('accessToken');
     window?.webviewBridge?.token();
   }
 }
-export function backEnable() {
+export function backEnable(enable = true) {
   if (window.webkit) {
-    console.log('enable');
+    // ios
+    console.log('backEnable', enable);
     window.webkit.messageHandlers.callbackHandler.postMessage(
       JSON.stringify({
-        event: 'enable',
+        event: 'back',
+        isEnableBack: enable,
       }),
     );
   } else {
-    window?.webviewBridge?.enable();
+    // android
+    console.log('backEnable', enable);
+    window?.webviewBridge?.back({
+      isEnableBack: enable,
+    });
   }
 }
 
-export function backDisable() {
+export function navigationEnable(visible = true) {
   if (window.webkit) {
-    console.log('backDisable');
+    // ios
+    console.log('navigation', visible);
+
     window.webkit.messageHandlers.callbackHandler.postMessage(
       JSON.stringify({
-        event: 'disable',
+        event: 'navigation',
+        isVisible: visible,
       }),
     );
   } else {
-    window?.webviewBridge?.disable();
+    // android
+    console.log('navigation', visible);
+    window?.webviewBridge?.navigation({
+      isVisible: visible,
+    });
   }
 }
 
-export function setToEnabledSwipe(enabled = true) {
+export function handleNativeShare() {
   if (window.webkit) {
+    // ios
+    console.log('share');
     window.webkit.messageHandlers.callbackHandler.postMessage(
       JSON.stringify({
-        event: 'swipe',
-        isEnableSwipe: enabled,
+        event: 'share',
       }),
     );
+  } else {
+    // android
+    console.log('share');
+    window?.webviewBridge?.share();
+  }
+}
+
+export function navigateNativeRoute(route: string) {
+  if (window.webkit) {
+    // ios
+    console.log('navigate', route);
+    window.webkit.messageHandlers.callbackHandler.postMessage(
+      JSON.stringify({
+        event: 'navigate',
+        route: route,
+      }),
+    );
+  } else {
+    // android
+
+    console.log('navigate', route);
+    window?.webviewBridge?.navigate({
+      route: route,
+    });
   }
 }
