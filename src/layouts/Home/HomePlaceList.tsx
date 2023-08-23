@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-import { useGetRestaurantDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantDataInfinite';
+import { usePostSearchRestaurantInfinite } from '@apis/hooks/restaurant/usePostSearchRestaurantInfinite';
 import DownArrow from '@assets/icons/DownArrow';
 import BottomSheet from '@commons/BottomSheet';
 import Chip from '@commons/Chip';
@@ -8,38 +8,48 @@ import FilterChip from '@commons/FilterChip';
 import PlaceDetailCard from '@components/home/PlaceDetailCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
+import { mapAtom } from '@store/mapAtom';
 import { setPlacesAtom } from '@store/placesAtom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtomValue } from 'jotai';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
 const HomePlaceList = () => {
+  const { push } = useHomeFlow();
+
   const handleOpenBottomSheet = useSetAtom(openBottomSheet);
   const observeRef = useRef<HTMLDivElement>(null);
-  const { push } = useHomeFlow();
+
+  const lat = useAtomValue(mapAtom);
   const setPlaces = useSetAtom(setPlacesAtom);
-  const { restaurantData, fetchNextPage, isFetchingNextPage } =
-    useGetRestaurantDataInfinite({
-      page: 0,
-      size: 10,
+  const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
+    usePostSearchRestaurantInfinite({
+      startLocation: lat?.북동_좌표,
+      endLocation: lat?.남서_좌표,
+      filter: {
+        categoryFilter: undefined,
+        isCanDrinkLiquor: true,
+      },
+      params: {
+        page: 0,
+        size: 10,
+      },
     });
 
   const mappingRestaurantData = React.useMemo(
-    () => restaurantData?.flatMap((page) => page.data.restaurants),
+    () => restaurantData?.flatMap((page) => page.data.restaurant),
     [restaurantData],
   );
+  console.log('isEmpty', isEmpty);
 
   const isLastPage = () => {
     if (!restaurantData) {
       return null;
     }
 
-    return (
-      restaurantData[0].data.page.currentPage ===
-      restaurantData[0].data.page.totalPage
-    );
+    return restaurantData[0].data.page.pageLast;
   };
 
   const handleIntersect = () => {
@@ -58,9 +68,14 @@ const HomePlaceList = () => {
   });
 
   useEffect(() => {
+    console.log('mappingRestaurantData', mappingRestaurantData);
     if (!mappingRestaurantData) {
       return;
     }
+    if (!Boolean(mappingRestaurantData[0]) || isEmpty) {
+      return;
+    }
+
     setPlaces(mappingRestaurantData);
   }, [mappingRestaurantData]);
 
@@ -86,17 +101,27 @@ const HomePlaceList = () => {
         </FilterChip>
       </aside>
       <section className={'place-detail-section'}>
-        {mappingRestaurantData &&
-          mappingRestaurantData.map((data) => (
-            <PlaceDetailCard
-              key={data.id}
-              restaurant={data}
-              onClick={() => push('PlaceDetail', { placeId: String(data.id) })}
-            />
-          ))}
-        {!isLastPage() && (
-          <div className={'infinite-observe'} ref={observeRef} />
-        )}
+        <>
+          {isEmpty ? (
+            <div>111</div>
+          ) : (
+            <>
+              {mappingRestaurantData &&
+                mappingRestaurantData.map((data, _index) => (
+                  <PlaceDetailCard
+                    key={_index}
+                    restaurant={data}
+                    onClick={() =>
+                      push('PlaceDetail', { placeId: String(data.id) })
+                    }
+                  />
+                ))}
+              {!isLastPage() && (
+                <div className={'infinite-observe'} ref={observeRef} />
+              )}
+            </>
+          )}
+        </>
       </section>
       <BottomSheet type={'FOOD_CATEGORY'} content={<div>FOOD_CATEGORY</div>} />
       <BottomSheet type={'SORT_BY'} content={<div>SORT_BY</div>} />

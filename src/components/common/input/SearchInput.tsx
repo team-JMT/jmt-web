@@ -101,7 +101,6 @@ export const SearchInputMock = forwardRef<HTMLDivElement, InputProps>(
         <SearchInputWrapper className={'input-wrapper'}>
           <AnimatePresence>
             <Icon src={searchIcon} alt={'search-icon'} active={true} />
-
             {/*  @ts-ignore*/}
             <MockInput
               {...rest}

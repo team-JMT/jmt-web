@@ -3,6 +3,9 @@ import axios from 'axios';
 export const instance = axios.create({
   baseURL: 'https://api.jmt-matzip.dev',
   timeout: 60000,
+  headers: {
+    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+  },
 });
 instance.interceptors.request.use(
   function (config) {

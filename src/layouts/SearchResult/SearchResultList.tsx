@@ -30,10 +30,7 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
       return null;
     }
 
-    return (
-      restaurantSearchData[0].data.page.currentPage ===
-      restaurantSearchData[0].data.page.totalPage
-    );
+    return restaurantSearchData[0].data.page.pageLast;
   };
 
   const handleIntersect = () => {

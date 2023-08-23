@@ -25,10 +25,23 @@ const searchLogData = [
 const Search = () => {
   const { push, pop } = useHomeFlow();
   const [searchLog, setSearchLog] = useAtom(searchLogAtom);
-  const [isFocus, setIsFocus] = useState<boolean>(false);
+
   const addSearchLog = useSetAtom(addSearchLogAtom);
   const [inputValue, setInputValue] = useState<string>();
+  const [isFocus, setIsFocus] = useState<boolean>(false);
   const searchRef = useRef<HTMLInputElement>(null);
+
+  const handleSearch = () => {
+    if (typeof inputValue === 'string') {
+      addSearchLog({
+        name: inputValue,
+      });
+      push('SearchResult', {
+        keyword: encodeURI(inputValue),
+      });
+    }
+  };
+
   useEffect(() => {
     const handleFocus = () => {
       setIsFocus(true);
@@ -36,16 +49,16 @@ const Search = () => {
     const handleBlur = () => {
       setTimeout(() => {
         setIsFocus(false);
-      }, 0);
+      }, 100);
     };
     if (searchRef.current) {
       searchRef.current.addEventListener('focus', handleFocus);
-      searchRef.current.addEventListener('focusout', handleBlur);
+      searchRef.current.addEventListener('blur', handleBlur);
     }
     return () => {
       if (searchRef.current) {
         searchRef.current.removeEventListener('focus', handleFocus);
-        searchRef.current.removeEventListener('focusout', handleBlur);
+        searchRef.current.removeEventListener('blur', handleBlur);
       }
     };
   }, []);
@@ -72,16 +85,7 @@ const Search = () => {
                 ref={searchRef}
                 placeholder={'맛집을 검색해보세요'}
                 onChange={(e) => setInputValue(e.target.value)}
-                onSearch={() => {
-                  if (typeof inputValue === 'string') {
-                    addSearchLog({
-                      name: inputValue,
-                    });
-                    push('SearchResult', {
-                      keyword: encodeURI(inputValue),
-                    });
-                  }
-                }}
+                onSearch={() => handleSearch()}
               />
             </div>
             {!isFocus && (
