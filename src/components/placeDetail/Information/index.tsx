@@ -1,8 +1,8 @@
 import React from 'react';
+import { Container as MapDiv, NaverMap, Marker } from 'react-naver-maps';
 
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import CopyIcon from '@assets/icons/CopyIcon';
-import NaverMapProp from '@components/common/NaverMapProp';
 import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
@@ -24,9 +24,17 @@ const Information = () => {
 
   return (
     <>
-      <MapContainer>
-        <NaverMapProp x={DetailData!.x} y={DetailData!.y} />
-      </MapContainer>
+      <MapDiv
+        style={{
+          height: 180,
+        }}
+      >
+        <NaverMap>
+          <Marker
+            defaultPosition={{ lat: DetailData!.y, lng: DetailData!.x }}
+          />
+        </NaverMap>
+      </MapDiv>
       <AddressConatiner>
         <p className={classNames('text-l-bold', 'gray900')}>
           {DetailData?.roadAddress}
@@ -41,10 +49,6 @@ const Information = () => {
   );
 };
 
-const MapContainer = styled.div`
-  height: calc(53vw);
-  background: gray;
-`;
 const AddressConatiner = styled.div`
   display: flex;
   align-items: center;

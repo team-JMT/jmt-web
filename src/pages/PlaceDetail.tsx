@@ -6,7 +6,7 @@ import shareIcon from '@assets/icons/share.svg';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
 import NoticeBox from '@components/placeDetail/NoticeBox';
 import BottomBar from '@layouts/PlaceDetail/BottomBar';
-import BottomSheet from '@layouts/PlaceDetail/BottomSheet';
+import PlaceBottomSheet from '@layouts/PlaceDetail/BottomSheet';
 import DetailMenu from '@layouts/PlaceDetail/DetailMenu';
 import ImgContainer from '@layouts/PlaceDetail/ImgContainer';
 import Modal from '@layouts/PlaceDetail/Modal';
@@ -38,7 +38,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
   } else {
     return (
       <>
-        <BottomSheet />
+        <PlaceBottomSheet />
         <Modal />
         <AppScreen
           appBar={{
