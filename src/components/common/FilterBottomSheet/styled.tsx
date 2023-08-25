@@ -2,13 +2,29 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 
+export const FilterTitle = styled.div`
+  display: flex;
+  margin-left: 20px;
+  gap: 28px;
+  div {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.32px;
+    color: ${colors.gray400};
+  }
+  .active {
+    color: #000;
+  }
+`;
 export const FilterContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 12px;
-  min-height: 300px;
-  max-height: 346px;
+  //min-height: 300px;
+  max-height: 335px;
   overflow: scroll;
 `;
 export const FilterBox = styled.div<{ active: boolean }>`

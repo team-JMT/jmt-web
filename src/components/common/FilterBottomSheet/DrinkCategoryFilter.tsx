@@ -6,7 +6,7 @@ import { LiquorKey, drinkCategoryState, drinkCheck } from '@store/filterAtom';
 import { useAtom } from 'jotai';
 
 import FooterButton from './components/FooterButton';
-import { FilterIcon, FilterBox, FilterContainer } from './styled';
+import { FilterIcon, FilterBox, FilterContainer, FilterTitle } from './styled';
 
 const DrinkCategoryFilter = () => {
   const [bottomSheet, setBottomSheet] = useAtom(bottomSheetState);
@@ -27,6 +27,10 @@ const DrinkCategoryFilter = () => {
       type={'DRINK_CATEGORY'}
       content={
         <>
+          <FilterTitle>
+            <div>종류</div>
+            <div className={'active'}>주류여부</div>
+          </FilterTitle>
           <FilterContainer>
             {Object.keys(LiquorKey).map((item: string) => {
               const value = LiquorKey[item as keyof typeof LiquorKey];

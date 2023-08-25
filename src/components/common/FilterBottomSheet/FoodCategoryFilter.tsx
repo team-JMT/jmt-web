@@ -6,7 +6,7 @@ import { FoodKey, foodCategoryState, foodCheck } from '@store/filterAtom';
 import { useAtom } from 'jotai';
 
 import FooterButton from './components/FooterButton';
-import { FilterIcon, FilterBox, FilterContainer } from './styled';
+import { FilterIcon, FilterBox, FilterContainer, FilterTitle } from './styled';
 
 const FoodCategoryFilter = () => {
   const [bottomSheet, setBottomSheet] = useAtom(bottomSheetState);
@@ -27,7 +27,10 @@ const FoodCategoryFilter = () => {
       type={'FOOD_CATEGORY'}
       content={
         <>
-          종류
+          <FilterTitle>
+            <div className={'active'}>종류</div>
+            <div>주류여부</div>
+          </FilterTitle>
           <FilterContainer>
             {Object.keys(FoodKey).map((item: string) => {
               const value = FoodKey[item as keyof typeof FoodKey];

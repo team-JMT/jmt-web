@@ -63,7 +63,7 @@ export default FooterButton;
 const Wrapper = styled.div`
   display: flex;
   gap: 8px;
-  margin: 12px 0px 10px;
+  margin-bottom: 10px;
 `;
 const ResetButton = styled.div`
   border-radius: 8px;
