@@ -1,13 +1,59 @@
 import React from 'react';
 
 import styled from '@emotion/styled';
+import { BOTTOM_SHEET_KEY, toggleBottomSheet } from '@store/bottomSheetAtom';
+import {
+  FoodKey,
+  foodCategoryState,
+  LiquorKey,
+  drinkCategoryState,
+} from '@store/filterAtom';
 import { colors } from '@styles/theme/color';
+import { useAtom, useSetAtom } from 'jotai';
 
-const FooterButton = () => {
+interface FooterButtonProps {
+  type: keyof typeof BOTTOM_SHEET_KEY;
+  foodChecked?: keyof typeof FoodKey;
+  drinkChecked?: keyof typeof LiquorKey;
+}
+const FooterButton: React.FC<FooterButtonProps> = ({
+  type,
+  foodChecked,
+  drinkChecked,
+}) => {
+  const [, setFoodState] = useAtom(foodCategoryState);
+  const [, setDrinkState] = useAtom(drinkCategoryState);
+
+  const toggleBS = useSetAtom(toggleBottomSheet);
+
   return (
     <Wrapper>
-      <ResetButton className={'title-s-medium'}>초기화</ResetButton>
-      <CheckButton className={'title-s-medium'}>확인</CheckButton>
+      <ResetButton
+        className={'title-s-medium'}
+        onClick={() => {
+          if (foodChecked) {
+            setFoodState('');
+          } else if (drinkChecked) {
+            setDrinkState('');
+          }
+          toggleBS(type);
+        }}
+      >
+        초기화
+      </ResetButton>
+      <CheckButton
+        className={'title-s-medium'}
+        onClick={() => {
+          if (foodChecked) {
+            setFoodState(foodChecked);
+          } else if (drinkChecked) {
+            setDrinkState(drinkChecked);
+          }
+          toggleBS(type);
+        }}
+      >
+        확인
+      </CheckButton>
     </Wrapper>
   );
 };
@@ -17,7 +63,7 @@ export default FooterButton;
 const Wrapper = styled.div`
   display: flex;
   gap: 8px;
-  margin-bottom: 10px;
+  margin: 12px 0px 10px;
 `;
 const ResetButton = styled.div`
   border-radius: 8px;

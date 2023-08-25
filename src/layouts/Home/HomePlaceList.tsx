@@ -5,14 +5,16 @@ import DownArrow from '@assets/icons/DownArrow';
 import BottomSheet from '@commons/BottomSheet';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
-import FilterBottomSheet from '@components/common/FilterBottomSheet';
+import DrinkCategoryFilter from '@components/common/FilterBottomSheet/DrinkCategoryFilter';
+import FoodCategoryFilter from '@components/common/FilterBottomSheet/FoodCategoryFilter';
 import PlaceDetailCard from '@components/home/PlaceDetailCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
+import { foodCategoryState, drinkCategoryState } from '@store/filterAtom';
 import { setPlacesAtom } from '@store/placesAtom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
@@ -65,6 +67,9 @@ const HomePlaceList = () => {
     setPlaces(mappingRestaurantData);
   }, [mappingRestaurantData]);
 
+  const [foodState] = useAtom(foodCategoryState);
+  const [drinkState] = useAtom(drinkCategoryState);
+
   return (
     <motion.div
       initial="hidden"
@@ -79,10 +84,16 @@ const HomePlaceList = () => {
           <DownArrow />
         </Chip>
         <div className={classNames('filter-divider', 'gray200')} />
-        <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
+        <FilterChip
+          active={foodState !== ''}
+          onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}
+        >
           종류
         </FilterChip>
-        <FilterChip onClick={() => handleOpenBottomSheet('DRINK_CATEGORY')}>
+        <FilterChip
+          active={drinkState !== ''}
+          onClick={() => handleOpenBottomSheet('DRINK_CATEGORY')}
+        >
           주류 여부
         </FilterChip>
       </aside>
@@ -100,8 +111,8 @@ const HomePlaceList = () => {
         )}
       </section>
       <BottomSheet type={'SORT_BY'} content={<div>SORT_BY</div>} />
-      <FilterBottomSheet type={'FOOD_CATEGORY'}>음식</FilterBottomSheet>
-      <FilterBottomSheet type={'DRINK_CATEGORY'}>주류여부</FilterBottomSheet>
+      <FoodCategoryFilter />
+      <DrinkCategoryFilter />
     </motion.div>
   );
 };
