@@ -1,9 +1,9 @@
-import React, { useRef, MouseEvent } from 'react';
+import React, { MouseEvent, useRef } from 'react';
 
-import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
+import { useGetLocationSearchInfinite } from '@apis/hooks/location/useGetLocationSearchInfinite';
+import LocationPreviewCard from '@components/changeLocation/LocationPreviewCard';
 import { fadeInOut } from '@components/motion/fade-in-out';
 import { variantKey } from '@components/motion/variantKey';
-import PlaceInfoCard from '@components/search/PlaceInfoCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { addSearchLogAtom } from '@store/searchLogAtom';
 import { motion } from 'framer-motion';
@@ -17,14 +17,17 @@ import { Restaurant } from '../../models/getRestaurantData';
 interface SearchResultProps {
   inputValue?: string;
 }
-const SearchPreview = ({ inputValue }: SearchResultProps) => {
+
+const LocationSearchPreview = ({ inputValue }: SearchResultProps) => {
   const { push, pop } = useHomeFlow();
   const addSearchLog = useSetAtom(addSearchLogAtom);
   const debouncedValue = useDebounce(inputValue, 500);
   const observeRef = useRef<HTMLDivElement>(null);
 
-  const { restaurantSearchData, fetchNextPage } =
-    useGetRestaurantSearchDataInfinite(debouncedValue);
+  // TODO 변경필요
+  const { locationSearchData, fetchNextPage } = useGetLocationSearchInfinite({
+    query: debouncedValue,
+  });
   const onSearch = (e: MouseEvent<HTMLDivElement>) => (place: Restaurant) => {
     e.stopPropagation();
     setTimeout(() => {
@@ -36,15 +39,17 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
     }, 0);
   };
 
-  const mappingRestaurantSearch = restaurantSearchData
-    ?.flatMap((data) => data.data.restaurants)
+  const mappingRestaurantSearch = locationSearchData
+    ?.flatMap((data) => data.data.data)
     .map((data) => data);
 
+  console.log(mappingRestaurantSearch);
+
   const isLastPage = () => {
-    if (!restaurantSearchData) {
+    if (!locationSearchData) {
       return null;
     }
-    return restaurantSearchData[0].data.page.pageLast;
+    // return locationSearchData[0].data.page.pageLast;
   };
 
   const handleIntersect = () => {
@@ -67,18 +72,18 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
     <motion.div variants={fadeInOut} {...variantKey}>
       {mappingRestaurantSearch &&
         mappingRestaurantSearch.map((place, index) => (
-          <PlaceInfoCard
-            {...place}
+          <LocationPreviewCard
             inputValue={inputValue}
+            place_name={place.place_name}
             onClick={(e) => onSearch(e)(place)}
-            key={place.id}
+            key={index}
           />
         ))}
-      {!isLastPage() && (
-        <div className={'infinite-observer'} ref={observeRef} />
-      )}
+      {/*{!isLastPage() && (*/}
+      {/*  <div className={'infinite-observer'} ref={observeRef} />*/}
+      {/*)}*/}
     </motion.div>
   );
 };
 
-export default SearchPreview;
+export default LocationSearchPreview;

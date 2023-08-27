@@ -60,7 +60,7 @@ const HomeHeader = () => {
         placeholder={'음식이나 식당명을 검색하세요'}
         onClick={() => push('Search', {})}
       />
-      <MyPlaceContainer onClick={() => push('ChangeLocation', {})}>
+      <MyPlaceContainer onClick={() => push('LocationSearch', {})}>
         <span className={classNames('text-m-medium', 'gray900')}>
           서울특별시시 동대문구 전농동
         </span>

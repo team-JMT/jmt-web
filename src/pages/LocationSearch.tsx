@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import RemoveIcon from '@assets/icons/RemoveIcon';
@@ -6,6 +6,7 @@ import SearchInput from '@commons/input/SearchInput';
 import SearchLocationLogCard from '@components/changeLocation/SearchLocationLogCard';
 import { fadeInOut } from '@components/motion/fade-in-out';
 import { variantKey } from '@components/motion/variantKey';
+import LocationSearchPreview from '@layouts/ChangeLocation/LocationSearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import {
@@ -18,7 +19,7 @@ import { motion } from 'framer-motion';
 import { useAtom, useSetAtom } from 'jotai';
 import { RESET } from 'jotai/utils';
 
-const ChangeLocation = () => {
+const LocationSearch = () => {
   const { pop } = useHomeFlow();
   const [{ locationLog }, setSearchLog] = useAtom(locationAtom);
 
@@ -44,6 +45,27 @@ const ChangeLocation = () => {
       name: log,
     });
   };
+
+  useEffect(() => {
+    const handleFocus = () => {
+      setIsFocus(true);
+    };
+    const handleBlur = () => {
+      setTimeout(() => {
+        setIsFocus(false);
+      }, 100);
+    };
+    if (searchRef.current) {
+      searchRef.current.addEventListener('focus', handleFocus);
+      searchRef.current.addEventListener('blur', handleBlur);
+    }
+    return () => {
+      if (searchRef.current) {
+        searchRef.current.removeEventListener('focus', handleFocus);
+        searchRef.current.removeEventListener('blur', handleBlur);
+      }
+    };
+  }, []);
 
   return (
     <AppScreen
@@ -87,16 +109,22 @@ const ChangeLocation = () => {
             </motion.div>
           )}
         </div>
-        {locationLog &&
+        {!isFocus &&
+          locationLog &&
           locationLog.map((log, index) => (
             <SearchLocationLogCard key={`${log}${index}`}>
               {log.name}
               <RemoveIcon onClick={() => handleRemoveLog(log.name)} />
             </SearchLocationLogCard>
           ))}
+        {isFocus && (
+          <Suspense fallback={<div>로딩 중</div>}>
+            <LocationSearchPreview inputValue={inputValue} />
+          </Suspense>
+        )}
       </main>
     </AppScreen>
   );
 };
 
-export default ChangeLocation;
+export default LocationSearch;
