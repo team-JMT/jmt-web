@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import FilterIcon from '@assets/filter';
 import BottomSheetCompoenet from '@components/common/BottomSheet';
 import { bottomSheetState } from '@store/bottomSheetAtom';
-import { LiquorKey, drinkCategoryState, drinkCheck } from '@store/filterAtom';
+import { LiquorKey, drinkCategoryState, DrinkCheck } from '@store/filterAtom';
 import { colors } from '@styles/theme/color';
 import { useAtom } from 'jotai';
 
@@ -11,7 +11,7 @@ import FooterButton from './components/FooterButton';
 import { FilterBox, FilterContainer, FilterTitle } from './styled';
 
 const DrinkCategoryFilter = () => {
-  const [bottomSheet, setBottomSheet] = useAtom(bottomSheetState);
+  const [bottomSheet] = useAtom(bottomSheetState);
 
   const [drinkState, setDrinkState] = useAtom(drinkCategoryState);
   const [localDrink, setLocalDrink] = useState('');
@@ -22,7 +22,7 @@ const DrinkCategoryFilter = () => {
   }, [bottomSheet]);
 
   const changeLocal = (item: string) => {
-    setLocalDrink(item as drinkCheck);
+    setLocalDrink(item as DrinkCheck);
   };
   return (
     <BottomSheetCompoenet
