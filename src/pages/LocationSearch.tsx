@@ -3,10 +3,10 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import RemoveIcon from '@assets/icons/RemoveIcon';
 import SearchInput from '@commons/input/SearchInput';
-import SearchLocationLogCard from '@components/changeLocation/SearchLocationLogCard';
+import SearchLocationLogCard from '@components/locationSearch/SearchLocationLogCard';
 import { fadeInOut } from '@components/motion/fade-in-out';
 import { variantKey } from '@components/motion/variantKey';
-import LocationSearchPreview from '@layouts/ChangeLocation/LocationSearchPreview';
+import LocationSearchPreview from '@layouts/LocationSearch/LocationSearchPreview';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import {
@@ -20,7 +20,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { RESET } from 'jotai/utils';
 
 const LocationSearch = () => {
-  const { pop } = useHomeFlow();
+  const { pop, push } = useHomeFlow();
   const [{ locationLog }, setSearchLog] = useAtom(locationAtom);
 
   const addLocationSearchLog = useSetAtom(addLocationSearchLogAtom);
@@ -40,6 +40,13 @@ const LocationSearch = () => {
     }
   };
 
+  const handleLogClick = (placeName: string) => {
+    const encodeName = encodeURI(placeName);
+    push('LocationResult', {
+      keyword: encodeName,
+    });
+    addLocationSearchLog({ name: placeName });
+  };
   const handleRemoveLog = (log: string) => {
     removeLocationSearchLog({
       name: log,
@@ -53,7 +60,7 @@ const LocationSearch = () => {
     const handleBlur = () => {
       setTimeout(() => {
         setIsFocus(false);
-      }, 100);
+      }, 200);
     };
     if (searchRef.current) {
       searchRef.current.addEventListener('focus', handleFocus);
@@ -86,7 +93,7 @@ const LocationSearch = () => {
           <div className={'search-input-wrapper'}>
             <SearchInput
               ref={searchRef}
-              placeholder={'맛집을 검색해보세요'}
+              placeholder={'지번, 도로명, 건물명 등으로 검색하세요'}
               onChange={(e) => setInputValue(e.target.value)}
               onSearch={handleSearch}
             />
@@ -112,7 +119,10 @@ const LocationSearch = () => {
         {!isFocus &&
           locationLog &&
           locationLog.map((log, index) => (
-            <SearchLocationLogCard key={`${log}${index}`}>
+            <SearchLocationLogCard
+              key={`${log}${index}`}
+              onClick={() => handleLogClick(log.name)}
+            >
               {log.name}
               <RemoveIcon onClick={() => handleRemoveLog(log.name)} />
             </SearchLocationLogCard>

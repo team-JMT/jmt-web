@@ -2,13 +2,13 @@ import { getLocationSearch } from '@apis/common/Address';
 import { Keys } from '@apis/common/Keys';
 import { GetLocationSearchRequest } from '@apis/responses/Location/GetLocationSearch';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-export const useGetLocationSearchInfinite = ({
+export const useGetLocationSearch = ({
   query,
   page = 1,
 }: Partial<GetLocationSearchRequest>) => {
-  const { data, ...rest } = useInfiniteQuery(
+  const { data, ...rest } = useQuery(
     [Keys.LOCATION_SEARCH, query, page],
     () =>
       getLocationSearch({
@@ -16,21 +16,13 @@ export const useGetLocationSearchInfinite = ({
         page,
       }),
     {
-      // getNextPageParam: (data) => {
-      //   const { pageLast, currentPage } = data.data.data;
-      //
-      //   if (!pageLast) {
-      //     return currentPage + 1;
-      //   }
-      //   return undefined;
-      // },
       suspense: true,
       enabled: Boolean(query),
     },
   );
 
   return {
-    locationSearchData: data && data.pages,
+    locationSearchData: data && data.data.data,
     ...rest,
   };
 };

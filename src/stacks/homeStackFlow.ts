@@ -3,6 +3,7 @@ import { historySyncPlugin } from '@stackflow/plugin-history-sync';
 import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic';
 import { stackflow } from '@stackflow/react';
 
+import LocationResult from '@pages/LocationResult';
 import LocationSearch from '@pages/LocationSearch';
 import OtherProfile from '@pages/OtherProfile';
 import SearchResult from '@pages/SearchResult';
@@ -23,6 +24,7 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
       routes: {
         Home: '/',
         LocationSearch: '/location-search',
+        LocationResult: '/location-result/:keyword',
         Search: '/search',
         SearchResult: '/result/:keyword',
         PlaceDetail: '/detail/:placeId',
@@ -41,6 +43,7 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
     OtherProfile,
     NotFound,
     LocationSearch,
+    LocationResult,
   },
   // initialActivity: () => 'Home',
 });

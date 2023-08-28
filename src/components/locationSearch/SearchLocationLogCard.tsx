@@ -23,13 +23,17 @@ const Container = styled.div`
   }
 `;
 
-interface SearchLocationLogCardProps {
+interface SearchLocationLogCardProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-const SearchLocationLogCard = ({ children }: SearchLocationLogCardProps) => {
+const SearchLocationLogCard = ({
+  children,
+  ...rest
+}: SearchLocationLogCardProps) => {
   return (
-    <Container>
+    <Container {...rest}>
       <span className={classNames('text-l-bold', 'gray900')}>{children}</span>
     </Container>
   );
