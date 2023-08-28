@@ -4,15 +4,11 @@ on:
   push:
     branches:
       - master
-    paths:
-      - ".github/workflows/jmt-live.yml"
   pull_request:
     branches:
       - master
     types:
       - closed
-    paths:
-      - ".github/workflows/jmt-live.yml"
 jobs:
   Deploy_Live_channel:
     if: github.event.pull_request.merged == true
