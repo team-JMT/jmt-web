@@ -12,10 +12,9 @@ export const FoodKey = {
   ETC: '기타',
 } as const;
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export type foodCheck = keyof typeof FoodKey | '';
+export type FoodCheck = keyof typeof FoodKey | '';
 
-export const foodCategoryState = atom<foodCheck>('');
+export const foodCategoryState = atom<FoodCheck>('');
 
 // export const FoodCategoryState = {
 //   KOREAN: false,
@@ -32,8 +31,13 @@ export const LiquorKey = {
   POSSIBLE: '주류 가능',
   IMPOSSIBLE: '주류 불가능/모름',
 } as const;
+export type DrinkCheck = keyof typeof LiquorKey | '';
+export const drinkCategoryState = atom<DrinkCheck>('');
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export type drinkCheck = keyof typeof LiquorKey | '';
-
-export const drinkCategoryState = atom<drinkCheck>('');
+export const SortKey = {
+  NEAR: '가까운 순',
+  LIEK: '좋아요 순',
+  RECENT: '최신 순',
+} as const;
+export type SortCheck = keyof typeof SortKey;
+export const sortByState = atom<SortCheck>('NEAR');
