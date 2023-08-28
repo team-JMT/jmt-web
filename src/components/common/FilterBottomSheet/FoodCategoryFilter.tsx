@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
+import FilterIcon from '@assets/filter';
 import BottomSheetCompoenet from '@components/common/BottomSheet';
 import { bottomSheetState } from '@store/bottomSheetAtom';
 import { FoodKey, foodCategoryState, foodCheck } from '@store/filterAtom';
+import { colors } from '@styles/theme/color';
 import { useAtom } from 'jotai';
 
 import FooterButton from './components/FooterButton';
-import { FilterIcon, FilterBox, FilterContainer, FilterTitle } from './styled';
+import { FilterBox, FilterContainer, FilterTitle } from './styled';
 
 const FoodCategoryFilter = () => {
   const [bottomSheet, setBottomSheet] = useAtom(bottomSheetState);
@@ -41,7 +43,10 @@ const FoodCategoryFilter = () => {
                   className={'title-s-medium'}
                   onClick={() => changeLocal(item)}
                 >
-                  <FilterIcon />
+                  <FilterIcon
+                    iconName={item}
+                    color={localFood === item ? colors.main500 : colors.gray300}
+                  />
                   {value}
                 </FilterBox>
               );

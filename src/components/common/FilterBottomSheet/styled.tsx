@@ -42,10 +42,5 @@ export const FilterBox = styled.div<{ active: boolean }>`
     active &&
     css`
       border: 2px solid ${colors.main500};
-    `}
-`;
-export const FilterIcon = styled.div`
-  width: 30px;
-  height: 30px;
-  background-color: gray;
+    `};
 `;

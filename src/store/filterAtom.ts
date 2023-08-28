@@ -2,14 +2,14 @@
 import { atom } from 'jotai';
 
 export const FoodKey = {
-  KOREAN: '한식',
-  JAPANESE: '일식',
-  CHINESE: '중식',
-  WESTERN: '양식',
+  KOREA: '한식',
+  JAPAN: '일식',
+  CHINA: '중식',
+  FOREIGN: '양식',
   FUSION: '퓨전',
   CAFE: '카페',
   BAR: '주점',
-  OTHERS: '기타',
+  ETC: '기타',
 } as const;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
