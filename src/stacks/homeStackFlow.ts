@@ -25,7 +25,7 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
         Search: '/search',
         SearchResult: '/search/:keyword',
         PlaceDetail: '/detail/:placeId',
-        OtherProfile: '/profile/:userName',
+        OtherProfile: '/profile/:userId',
         Report: '/report/:placeId',
         NotFound: '/error',
       },
