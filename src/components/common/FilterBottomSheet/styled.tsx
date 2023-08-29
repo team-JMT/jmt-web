@@ -23,8 +23,8 @@ export const FilterContainer = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 12px;
-  //min-height: 300px;
-  max-height: 335px;
+  //max-height: 270px;
+  max-height: 100%;
   overflow: scroll;
 `;
 export const FilterBox = styled.div<{ active: boolean }>`

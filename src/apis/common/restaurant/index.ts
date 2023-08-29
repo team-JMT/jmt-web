@@ -12,6 +12,25 @@ export const getRestaurantData = async (params: Pagination) =>
     },
   );
 
+export interface RestaurantByUser {
+  params: Pagination;
+  id: number;
+}
+export const getRestaurantByUser = async (params: Pagination) =>
+  await instance.get<Response<GetRestaurantDataResponse>>(
+    '/api/v1/restaurant/search/53', //+ id,
+    {
+      params,
+      data: {
+        userLocation: {
+          x: '127.0596',
+          y: '37.6633',
+        },
+        filter: { categoryFilter: '', isCanDrinkLiquor: true },
+      },
+    },
+  );
+
 export const getRestaurantDetailData = async (id: number) =>
   await instance.get<Response<RestaurantDetail>>('/api/v1/restaurant/' + id);
 
