@@ -3,6 +3,7 @@ import { historySyncPlugin } from '@stackflow/plugin-history-sync';
 import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic';
 import { stackflow } from '@stackflow/react';
 
+import ChangeLocation from '@pages/ChangeLocation';
 import OtherProfile from '@pages/OtherProfile';
 import SearchResult from '@pages/SearchResult';
 
@@ -22,6 +23,7 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
     historySyncPlugin({
       routes: {
         Home: '/',
+        ChangeLocation: '/change-location',
         Search: '/search',
         SearchResult: '/search/:keyword',
         PlaceDetail: '/detail/:placeId',
@@ -41,6 +43,7 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
     OtherProfile,
     Report,
     NotFound,
+    ChangeLocation,
   },
   // initialActivity: () => 'Home',
 });

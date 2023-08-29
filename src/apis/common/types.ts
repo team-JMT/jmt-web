@@ -6,8 +6,13 @@ export type Pagination = {
 
 export type PageMeta = {
   currentPage: number;
+  empty: boolean;
+  numberOfElements: number;
+  pageFirst: boolean;
+  pageLast: boolean;
   size: number;
-  totalPage: number;
+  totalElements: number;
+  totalPages: number;
 };
 
 export type Response<T> = {

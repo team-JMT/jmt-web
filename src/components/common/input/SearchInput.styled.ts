@@ -7,6 +7,7 @@ export const SearchInputContainer = styled(motion.div)`
   display: flex;
   align-items: center;
   width: 100%;
+  height: 56px;
   gap: 8px;
 `;
 export const SearchInputWrapper = styled(motion.div)`
@@ -14,6 +15,7 @@ export const SearchInputWrapper = styled(motion.div)`
   display: flex;
   align-items: center;
   width: 100%;
+  height: 100%;
   border-radius: 8px;
   background: ${colors.gray100};
 `;

@@ -25,16 +25,31 @@ const searchLogData = [
 const Search = () => {
   const { push, pop } = useHomeFlow();
   const [searchLog, setSearchLog] = useAtom(searchLogAtom);
-  const [isFocus, setIsFocus] = useState<boolean>(false);
+
   const addSearchLog = useSetAtom(addSearchLogAtom);
   const [inputValue, setInputValue] = useState<string>();
+  const [isFocus, setIsFocus] = useState<boolean>(false);
   const searchRef = useRef<HTMLInputElement>(null);
+
+  const handleSearch = () => {
+    if (typeof inputValue === 'string') {
+      addSearchLog({
+        name: inputValue,
+      });
+      push('SearchResult', {
+        keyword: encodeURI(inputValue),
+      });
+    }
+  };
+
   useEffect(() => {
     const handleFocus = () => {
       setIsFocus(true);
     };
     const handleBlur = () => {
-      setIsFocus(false);
+      setTimeout(() => {
+        setIsFocus(false);
+      }, 100);
     };
     if (searchRef.current) {
       searchRef.current.addEventListener('focus', handleFocus);
@@ -70,16 +85,7 @@ const Search = () => {
                 ref={searchRef}
                 placeholder={'맛집을 검색해보세요'}
                 onChange={(e) => setInputValue(e.target.value)}
-                onSearch={() => {
-                  if (typeof inputValue === 'string') {
-                    addSearchLog({
-                      name: inputValue,
-                    });
-                    push('SearchResult', {
-                      keyword: encodeURI(inputValue),
-                    });
-                  }
-                }}
+                onSearch={() => handleSearch()}
               />
             </div>
             {!isFocus && (
