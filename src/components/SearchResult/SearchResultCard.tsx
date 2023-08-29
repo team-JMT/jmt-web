@@ -7,16 +7,16 @@ import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 
 import { Restaurant } from '../../models/getRestaurantData';
-import { RestaurantDetail } from '../../models/restaurantDetail';
+import { RestaurantDetail } from '../../models/getRestaurantDetail';
 
 const CardContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   height: 100px;
-  & + & {
+  /* & + & {
     margin-top: 20px;
-  }
+  } */
 `;
 const ImgBox = styled.div`
   display: flex;
@@ -41,11 +41,11 @@ const User = styled.div`
   display: flex;
   align-items: center;
 `;
-const UserImg = styled.div`
+const UserImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background: url('link'), ${colors.gray200} 0% / cover no-repeat;
+  background: ${colors.gray200} 0% / cover no-repeat;
   margin-right: 4px;
 `;
 
@@ -72,11 +72,15 @@ const SearchResultCard = ({
             내 위치에서 100m
           </span>
           <img src={verticalBarIcon} />
-          <span className={classNames('text-m-medium', 'gray700')}>카테</span>
+          <span className={classNames('text-m-medium', 'gray700')}>
+            {restaurantInfo.category}
+          </span>
         </Detail>
         <User>
-          <UserImg />
-          <span className={classNames('text-s-medium')}>유저이름</span>
+          <UserImg src={restaurantInfo.userProfileImageUrl} />
+          <span className={classNames('text-s-medium')}>
+            {restaurantInfo.userNickName}
+          </span>
         </User>
       </ContentsBox>
     </CardContainer>

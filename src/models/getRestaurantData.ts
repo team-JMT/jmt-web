@@ -10,4 +10,7 @@ export type Restaurant = {
 
   x: number;
   y: number;
+
+  userNickName: string;
+  userProfileImageUrl: string;
 };

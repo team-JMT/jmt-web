@@ -33,7 +33,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
     useGetRestaurantDetailData(Number(params.placeId));
 
   // 에러가 발생한 경우
-  if (Boolean(DetailError)) {
+  if (Boolean(DetailError) || DetailData === undefined) {
     return <div>에러가 났어요 </div>;
   } else {
     return (
@@ -68,9 +68,13 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
             <div className={'detail-container'}>
               <div
                 className={'name-box'}
-                onClick={() => push('OtherProfile', { userName: 'hungry' })}
+                onClick={() =>
+                  push('OtherProfile', { userId: DetailData.userId })
+                }
               >
-                <a className={'text-m-medium'}>유저이름&nbsp;&nbsp;</a>
+                <a className={'text-m-medium'}>
+                  {DetailData?.userNickName}&nbsp;&nbsp;
+                </a>
                 <img src={rightArrowIcon} />
               </div>
               <div className={'title-box'}>

@@ -45,10 +45,10 @@ const Recommander = () => {
       )}
       <GrayBar />
       <UserWrapper>
-        <UserImg />
+        <UserImg src={DetailData?.userProfileImageUrl} />
         <UserText>
-          <div className={'title-s-bold'}>asdfdf</div>
-          <div className={'gray'}>as</div>
+          <div className={'title-s-bold'}>{DetailData?.userNickName}</div>
+          <div className={'gray'}>추천한 맛집이예요!</div>
         </UserText>
       </UserWrapper>
       <GrayBar />

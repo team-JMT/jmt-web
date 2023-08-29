@@ -11,7 +11,8 @@ export type RestaurantDetail = {
   canDrinkLiquor: boolean;
   goWellWithLiquor: string;
   recommendMenu: string;
-  aggregateId: string;
   pictures: string[];
   userId: number;
+  userNickName: string;
+  userProfileImageUrl: string;
 };

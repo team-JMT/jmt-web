@@ -44,11 +44,10 @@ export const UserWrapper = styled.div`
   flex-wrap: wrap;
   height: 46px;
 `;
-export const UserImg = styled.div`
+export const UserImg = styled.img`
   width: 46px;
   height: 46px;
   margin-right: 12px;
-  background: yellow; //url(.jpg);
   border-radius: 50px;
 `;
 export const UserText = styled.div`

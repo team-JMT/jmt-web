@@ -2,7 +2,7 @@ import { instance } from '@apis/common/Api';
 import { Pagination, Response } from '@apis/common/types';
 import { GetRestaurantDataResponse } from '@apis/responses/Restaurant';
 
-import { RestaurantDetail } from '../../../models/restaurantDetail';
+import { RestaurantDetail } from '../../../models/getRestaurantDetail';
 
 export const getRestaurantData = async (params: Pagination) =>
   await instance.get<Response<GetRestaurantDataResponse>>(
