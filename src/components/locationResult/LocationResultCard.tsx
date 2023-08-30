@@ -37,9 +37,10 @@ const LocationResultCard = ({
   placeName,
   addressName,
   roadAddressName,
+  ...rest
 }: LocationResultCardProps) => {
   return (
-    <Container>
+    <Container {...rest}>
       <PlaceName className={classNames('text-l-bold', 'gray900')}>
         {placeName}
       </PlaceName>
