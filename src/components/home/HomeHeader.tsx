@@ -6,8 +6,10 @@ import RefreshIcon from '@assets/icons/RefreshIcon';
 import SolidDownArrow from '@assets/icons/SolidDownArrow';
 import { SearchInputMock } from '@commons/input/SearchInput';
 import styled from '@emotion/styled';
+import { getCurrentLocationAtom } from '@store/locationAtom';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
+import { useAtomValue } from 'jotai';
 
 import { useHomeFlow } from '../../stacks/homeStackFlow';
 
@@ -49,6 +51,7 @@ export const MyPlaceContainer = styled.div`
 
 const HomeHeader = () => {
   const { push } = useHomeFlow();
+  const { addressName } = useAtomValue(getCurrentLocationAtom);
 
   const handleRefresh = async () => {
     await queryClient.invalidateQueries([Keys.RESTAURANT]);
@@ -60,9 +63,9 @@ const HomeHeader = () => {
         placeholder={'음식이나 식당명을 검색하세요'}
         onClick={() => push('Search', {})}
       />
-      <MyPlaceContainer onClick={() => push('ChangeLocation', {})}>
+      <MyPlaceContainer onClick={() => push('LocationSearch', {})}>
         <span className={classNames('text-m-medium', 'gray900')}>
-          서울특별시시 동대문구 전농동
+          {addressName}
         </span>
         <SolidDownArrow />
       </MyPlaceContainer>

@@ -36,7 +36,7 @@ const NaverMapProp = ({ x, y }: { x: number; y: number }) => {
       position: location,
       map,
       icon: {
-        url: '/assets/icons/MapMarker.svg',
+        url: '/assets/PlacePin.svg',
       },
     });
   }, []);

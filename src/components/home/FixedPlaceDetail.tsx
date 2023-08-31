@@ -1,11 +1,11 @@
 import React from 'react';
 
+import PlaceInfoCard from '@commons/PlaceInfoCard';
 import { fadeInOut } from '@components/motion/fade-in-out';
 import styled from '@emotion/styled';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { focusedPlaceAtom } from '@store/placesAtom';
 import { colors } from '@styles/theme/color';
-import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 
@@ -48,18 +48,13 @@ const FixedPlaceDetail = () => {
           animate={'animate'}
           exit={'exit'}
         >
-          <CardContainer
+          <PlaceInfoCard
             onClick={() =>
               push('PlaceDetail', { placeId: String(focusedPlace.id) })
             }
-          >
-            <PlaceContent>
-              <span className={'title-s-medium'}>{focusedPlace.name}</span>
-              <span className={classNames('text-l-medium', 'gray500')}>
-                {focusedPlace.address}
-              </span>
-            </PlaceContent>
-          </CardContainer>
+            placeName={focusedPlace.name}
+            addressName={focusedPlace.address}
+          />
         </Container>
       )}
     </>

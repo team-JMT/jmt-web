@@ -6,14 +6,66 @@ export type SearchLog = {
 };
 
 export type LocationAtom = {
-  currentLocation: string;
+  selectedLocation: {
+    placeName: string;
+    addressName: string;
+    x: string;
+    y: string;
+  };
+  currentLocation: {
+    placeName: string;
+    addressName: string;
+    x: string;
+    y: string;
+  };
   locationLog: SearchLog[];
 };
 
 export const locationAtom = atomWithStorage<LocationAtom>('location-log', {
-  currentLocation: '',
+  selectedLocation: {
+    placeName: '',
+    addressName: '',
+    x: '',
+    y: '',
+  },
+  currentLocation: {
+    placeName: '',
+    addressName: '',
+    x: '',
+    y: '',
+  },
   locationLog: [],
 });
+
+export const setCurrentLocationAtom = atom(
+  null,
+  (get, set, arg: LocationAtom['currentLocation']) => {
+    const location = get(locationAtom);
+    set(locationAtom, {
+      ...location,
+      currentLocation: arg,
+    });
+  },
+);
+
+export const getCurrentLocationAtom = atom(
+  (get) => get(locationAtom).currentLocation,
+);
+
+export const getSelectedLocationAtom = atom(
+  (get) => get(locationAtom).selectedLocation,
+);
+
+export const setSelectedLocationAtom = atom(
+  null,
+  (get, set, arg: LocationAtom['selectedLocation']) => {
+    const location = get(locationAtom);
+    set(locationAtom, {
+      ...location,
+      selectedLocation: arg,
+    });
+  },
+);
 
 export const addLocationSearchLogAtom = atom(
   null,
