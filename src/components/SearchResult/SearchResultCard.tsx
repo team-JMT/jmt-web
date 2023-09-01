@@ -24,7 +24,7 @@ const ImgBox = styled.div`
   justify-content: center;
   width: 100px;
   height: 100px;
-  background: url('@assets/mock/FoodMock.png'), lightgray 50% / cover no-repeat;
+  background: lightgray 50% / cover no-repeat;
   border-radius: 10px;
   margin-right: 1.6rem;
 `;
@@ -58,33 +58,37 @@ const SearchResultCard = ({
   restaurantInfo,
   onClick,
 }: SearchResultCardProps) => {
-  return (
-    <CardContainer onClick={onClick}>
-      <ImgBox>
-        <Jmteng />
-      </ImgBox>
-      <ContentsBox>
-        <span className={classNames('text-l-bold', 'gray900')}>
-          {restaurantInfo.name}
-        </span>
-        <Detail>
-          <span className={classNames('text-m-medium', 'gray700')}>
-            내 위치에서 100m
+  if (restaurantInfo === undefined) {
+    return <>카드 오류에요</>;
+  } else {
+    return (
+      <CardContainer onClick={onClick}>
+        <ImgBox>
+          <Jmteng />
+        </ImgBox>
+        <ContentsBox>
+          <span className={classNames('text-l-bold', 'gray900')}>
+            {restaurantInfo.name}
           </span>
-          <img src={verticalBarIcon} />
-          <span className={classNames('text-m-medium', 'gray700')}>
-            {restaurantInfo.category}
-          </span>
-        </Detail>
-        <User>
-          <UserImg src={restaurantInfo.userProfileImageUrl} />
-          <span className={classNames('text-s-medium')}>
-            {restaurantInfo.userNickName}
-          </span>
-        </User>
-      </ContentsBox>
-    </CardContainer>
-  );
+          <Detail>
+            <span className={classNames('text-m-medium', 'gray700')}>
+              내 위치에서 100m
+            </span>
+            <img src={verticalBarIcon} />
+            <span className={classNames('text-m-medium', 'gray700')}>
+              {restaurantInfo.category}
+            </span>
+          </Detail>
+          <User>
+            <UserImg src={restaurantInfo.userProfileImageUrl} />
+            <span className={classNames('text-s-medium')}>
+              {restaurantInfo.userNickName}
+            </span>
+          </User>
+        </ContentsBox>
+      </CardContainer>
+    );
+  }
 };
 
 export default SearchResultCard;

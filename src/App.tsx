@@ -12,7 +12,7 @@ function App() {
 
   window.localStorage.setItem(
     'accessToken',
-    'eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiTUVNQkVSIiwiZW1haWwiOiJ0ZXN0QG5hdmVyLmNvbSIsImV4cCI6MTY5MjA3MTk5NX0.c_n6M_ZItHc29DzlgHs6lIa9lakX_g-jQ_e8Jro51IHJH7e6gVnEoYd3hSWpj3_hu9sTHQ3dBS6VTtdPQAkcXQ',
+    'eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6InRlc3RAbmF2ZXIuY29tIiwiYXV0aCI6Ik1FTUJFUiIsImV4cCI6MTY5MzU0NjA2MX0.cfSVugwNjnCCl5H2qA-zb7EvAgkYaeKafclyTyGFPTodpR4FXqaCxsXEnw26bylY0jRtYKEddpuzAQDQ8_HCoQ',
   );
 
   return <Router />;
