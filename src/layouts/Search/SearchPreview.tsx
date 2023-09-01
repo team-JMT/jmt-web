@@ -67,9 +67,12 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
     <motion.div variants={fadeInOut} {...variantKey}>
       {mappingRestaurantSearch &&
         mappingRestaurantSearch.map((place, index) => (
-          <div onClick={(e) => onSearch(e)(place)} key={place.id}>
-            <PlaceInfoCard {...place} />
-          </div>
+          <PlaceInfoCard
+            {...place}
+            inputValue={inputValue}
+            onClick={(e) => onSearch(e)(place)}
+            key={place.id}
+          />
         ))}
       {!isLastPage() && (
         <div className={'infinite-observer'} ref={observeRef} />

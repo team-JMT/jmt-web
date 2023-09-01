@@ -5,22 +5,23 @@ import { colors } from '@styles/theme/color';
 
 import { highlightText } from '@utils/highlightText';
 
-import { Restaurant } from '../../models/getRestaurantData';
+import { LocationSearchData } from '../../models/locationSearchData';
 
-interface PlaceInfoCardProps extends Restaurant {
-  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+interface LocationPreviewCardProps
+  extends Pick<LocationSearchData, 'place_name'> {
   inputValue?: string;
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
-const PlaceInfoCard = ({
-  name,
-  address,
-  onClick,
+const LocationPreviewCard = ({
+  place_name,
   inputValue,
-}: PlaceInfoCardProps) => {
+  onClick,
+}: LocationPreviewCardProps) => {
   return (
     <CardContainer onClick={onClick}>
-      <div className={'text-l-bold'}>{highlightText(name, inputValue)}</div>
-      <div className={'text-m-medium'}>내 위치에서 100m</div>
+      <span className={'text-l-bold'}>
+        {highlightText(place_name, inputValue)}
+      </span>
     </CardContainer>
   );
 };
@@ -35,4 +36,4 @@ const CardContainer = styled.div`
   border-bottom: 2px solid ${colors.gray100};
 `;
 
-export default PlaceInfoCard;
+export default LocationPreviewCard;
