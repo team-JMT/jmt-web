@@ -85,7 +85,7 @@ export function handleNativeShare() {
   }
 }
 
-export function navigateNativeRoute(route: string) {
+export function navigateNativeRoute(route: string, params?: any) {
   if (window.webkit) {
     // ios
     console.log('navigate', route);
@@ -93,14 +93,21 @@ export function navigateNativeRoute(route: string) {
       JSON.stringify({
         event: 'navigate',
         route: route,
+        ...params,
       }),
     );
   } else {
     // android
-
     console.log('navigate', route);
     window?.webviewBridge?.navigate({
       route: route,
+      ...params,
     });
   }
 }
+
+export const navigateToEditRestaurant = (restaurantId: string) => {
+  navigateNativeRoute('editRestaurant', {
+    restaurantId,
+  });
+};
