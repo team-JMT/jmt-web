@@ -1,45 +1,51 @@
 import { Keys } from '@apis/common/Keys';
-import { RestaurantByUser, getRestaurantByUser } from '@apis/common/restaurant';
-import { Pagination } from '@apis/common/types';
+import { getRestaurantByUser } from '@apis/common/restaurant';
+import { RestaurantByUserRequest } from '@apis/responses/Restaurant/GetRestaurantByUser';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-const fetchGetRestaurantData = async ({ page, size, sort }: Pagination) => {
+const fetchGetRestaurantByUser = async ({
+  params: { page = 0 },
+  userLocation,
+  filter,
+}: RestaurantByUserRequest) => {
   const res = await getRestaurantByUser({
-    page,
-    size,
-    sort,
+    params: {
+      page,
+    },
+    userLocation,
+    filter,
   });
+
   return res.data;
 };
 
 export const useGetRestaurantByUser = ({
-  page = 0,
-  size = 10,
-  sort,
-}: Pagination) => {
+  params,
+  userLocation,
+  filter,
+}: RestaurantByUserRequest) => {
   const { data, ...rest } = useInfiniteQuery(
-    [Keys.RESTAURANT, page, size, sort],
+    [Keys.USER_RESTAURANT, userLocation, filter],
     ({ pageParam = 0 }) =>
-      fetchGetRestaurantData({
-        page: pageParam,
-        size,
-        sort,
+      fetchGetRestaurantByUser({
+        params,
+        userLocation,
+        filter,
       }),
     {
       getNextPageParam: (data) => {
-        const { currentPage, totalPage } = data.data.page;
-
-        if (currentPage < totalPage) {
+        const { pageLast, currentPage } = data.data.page;
+        if (!pageLast) {
           return currentPage + 1;
         }
-        return undefined;
       },
       suspense: true,
     },
   );
   return {
     restaurantData: data && data.pages,
+    isEmpty: data && data.pages[0].data.page.empty,
     ...rest,
   };
 };
