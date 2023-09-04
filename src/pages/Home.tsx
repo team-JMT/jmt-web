@@ -15,7 +15,7 @@ import {
   backEnable,
   getAccessToken,
   handleNativeShare,
-  navigateNativeRoute,
+  navigateToEditRestaurant,
   navigationEnable,
 } from '@utils/bridge';
 
@@ -29,6 +29,8 @@ const Home = () => {
   const handleMarkerClick = () => {
     bottomRef.current?.snapTo(97);
   };
+
+  const mockRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
@@ -51,7 +53,7 @@ const Home = () => {
                   getAccessToken
                 </button>
                 <button
-                  onClick={() => backEnable()}
+                  onClick={() => backEnable(true)}
                   className={'text-m-medium'}
                 >
                   backEnable
@@ -63,7 +65,7 @@ const Home = () => {
                   backDisable
                 </button>
                 <button
-                  onClick={() => navigationEnable()}
+                  onClick={() => navigationEnable(true)}
                   className={'text-m-medium'}
                 >
                   navigationEnable
@@ -81,10 +83,14 @@ const Home = () => {
                   handleNativeShare
                 </button>
                 <button
-                  onClick={() => navigateNativeRoute('editRestaurantInfo')}
+                  onClick={() => {
+                    navigateToEditRestaurant(mockRef.current?.value ?? '');
+                    console.log('restaurantId', mockRef.current?.value);
+                  }}
                   className={'text-m-medium'}
                 >
-                  navigateNativeRoute
+                  <input ref={mockRef} />
+                  goToEditRestaurantInfo
                 </button>
                 <Suspense fallback={'loading'}>
                   <HomePlaceList />
