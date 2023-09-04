@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Suspense } from 'react';
 
 import { useGetRestaurantByUser } from '@apis/hooks/restaurant/useGetRestaurantByUser';
 import useGetUserInfo from '@apis/hooks/user/useGetUserInfo';
@@ -25,8 +25,6 @@ import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
 import { useAtom, useSetAtom } from 'jotai';
 
-import { useInsertionObserver } from '@hooks/useInsertionObserver';
-import SearchResultCard from '@components/SearchResult/SearchResultCard';
 interface OtherProfileProps {
   params: {
     userId: number;
@@ -41,8 +39,6 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
   const [foodState] = useAtom(foodCategoryState);
   const [drinkState] = useAtom(drinkCategoryState);
   const [sortState] = useAtom(sortByState);
-
-  const observeRef = useRef<HTMLDivElement>(null);
 
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
     useGetRestaurantByUser({
@@ -59,22 +55,6 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
       },
     });
 
-  const mappingRestaurantData = React.useMemo(
-    () => restaurantData?.flatMap((page) => page.data.restaurants),
-    [restaurantData],
-  );
-  console.log(restaurantData);
-
-  console.log(mappingRestaurantData);
-
-  const isLastPage = () => {
-    if (!restaurantData) {
-      return null;
-    }
-
-    return restaurantData[0].data.page.pageLast;
-  };
-
   const totalElement = () => {
     if (!restaurantData) {
       return null;
@@ -83,20 +63,6 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
     return restaurantData[0].data.page.totalElements;
   };
 
-  const handleIntersect = () => {
-    const isLast = isLastPage();
-    if (isLast === null) {
-      return;
-    }
-    if (!isLast) {
-      fetchNextPage();
-    }
-  };
-  // 무한 스크롤 로직
-  useInsertionObserver<HTMLDivElement>({
-    observeRef,
-    onIntersect: handleIntersect,
-  });
   const handleOpenBottomSheet = useSetAtom(openBottomSheet);
 
   if (UserData === undefined) {
@@ -162,18 +128,11 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
                 주류 여부
               </FilterChip>
             </aside>
-            {/* <AnimatePresence mode="sync">
-              {tab === 'POST' ? <PostPlace /> : <LikePlace />}
-            </AnimatePresence> */}
-            <section className={'place-detail-section'}>
-              {mappingRestaurantData &&
-                mappingRestaurantData.map((data, index) => (
-                  <SearchResultCard restaurantInfo={data} key={index} />
-                ))}
-              {!isLastPage() && (
-                <div className={'infinite-observe'} ref={observeRef} />
-              )}
-            </section>
+            <AnimatePresence mode="sync">
+              <Suspense fallback={<></>}>
+                {tab === 'POST' ? <PostPlace /> : <LikePlace />}
+              </Suspense>
+            </AnimatePresence>
           </div>
         </main>
         <SortBy />

@@ -41,3 +41,13 @@ export const SortKey = {
 } as const;
 export type SortCheck = keyof typeof SortKey;
 export const sortByState = atom<SortCheck>('NEAR');
+
+export const drinkToBoolean = (drink: DrinkCheck) => {
+  if (drink === 'POSSIBLE') {
+    return true;
+  } else if (drink === 'IMPOSSIBLE') {
+    return false;
+  } else {
+    return undefined;
+  }
+};
