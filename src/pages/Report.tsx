@@ -3,7 +3,7 @@ import React from 'react';
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import Reason from '@components/report/Reason';
-import SearchResultCard from '@components/SearchResult/SearchResultCard';
+import SearchResultCard from '@components/searchResult/SearchResultCard';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 //import classNames from 'classnames';

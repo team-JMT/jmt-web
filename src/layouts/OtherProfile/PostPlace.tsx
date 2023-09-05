@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
 import { useGetRestaurantByUser } from '@apis/hooks/restaurant/useGetRestaurantByUser';
-import SearchResultCard from '@components/SearchResult/SearchResultCard';
+import SearchResultCard from '@components/searchResult/SearchResultCard';
 import {
   foodCategoryState,
   drinkCategoryState,
