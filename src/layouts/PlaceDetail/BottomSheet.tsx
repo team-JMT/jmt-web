@@ -1,22 +1,41 @@
 import React from 'react';
 
 import PencilIcon from '@assets/icons/PencilIcon';
+import ReportIcon from '@assets/icons/ReportIcon';
+import Share from '@assets/icons/Share';
 import TrashIcon from '@assets/icons/TrashIcon';
 import BottomSheetCompoenet from '@components/common/BottomSheet';
 import styled from '@emotion/styled';
+import { useHomeFlow } from '@stacks/homeStackFlow';
 import { BOTTOM_SHEET_KEY, toggleBottomSheet } from '@store/bottomSheetAtom';
 import { MODAL_KEY, toggleModal } from '@store/modalAtom';
 import { motion } from 'framer-motion';
 import { useSetAtom } from 'jotai';
 
+import getUrlValue from '@utils/getUrlValue';
+
 const BottomSheet = () => {
   const toggleBS = useSetAtom(toggleBottomSheet);
   const toggleM = useSetAtom(toggleModal);
+  const { push, pop } = useHomeFlow();
+
+  const detailId = getUrlValue();
+
   return (
     <BottomSheetCompoenet
       type={'PLACE_DETAIL'}
       content={
         <BottomSheetWrapper>
+          <BottomSheetButton
+            onClick={() => {
+              toggleBS(BOTTOM_SHEET_KEY.PLACE_DETAIL);
+              push('Report', { placeId: detailId });
+            }}
+            className={'text-l-medium'}
+          >
+            <ReportIcon />
+            신고하기
+          </BottomSheetButton>
           <BottomSheetButton className={'text-l-medium'}>
             <PencilIcon />
             수정하기
@@ -30,6 +49,10 @@ const BottomSheet = () => {
           >
             <TrashIcon />
             삭제하기
+          </BottomSheetButton>
+          <BottomSheetButton className={'text-l-medium'}>
+            <Share />
+            공유하기
           </BottomSheetButton>
         </BottomSheetWrapper>
       }
@@ -52,7 +75,7 @@ const BottomSheetButton = styled.div`
   /* gray100 */
   border: 2px solid #f1f3f4;
   border-radius: 8px;
-  gap: 2px;
+  gap: 6px;
   & + & {
     margin-top: 12px;
   }
