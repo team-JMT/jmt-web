@@ -2,7 +2,7 @@ import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantD
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import MoreIcon from '@assets/icons/MoreIcon';
 import rightArrowIcon from '@assets/icons/rightArrow.svg';
-import shareIcon from '@assets/icons/share.svg';
+import Share from '@assets/icons/Share';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
 import NoticeBox from '@components/placeDetail/NoticeBox';
 import BottomBar from '@layouts/PlaceDetail/BottomBar';
@@ -79,7 +79,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
               </div>
               <div className={'title-box'}>
                 <a className={'title-s-bold'}>{DetailData?.name}</a>
-                <img src={shareIcon} />
+                <Share />
               </div>
               <div className={'add-box'}>
                 <a className={classNames('text-l-medium', 'gray900')}>

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Jmteng from '@assets/icons/Jmteng';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
+import { FoodMock } from '@assets/images/foodMock';
 import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
@@ -24,9 +25,13 @@ const ImgBox = styled.div`
   justify-content: center;
   width: 100px;
   height: 100px;
-  background: lightgray 50% / cover no-repeat;
-  border-radius: 10px;
   margin-right: 1.6rem;
+`;
+const RestaurantImage = styled.img`
+  width: 100%;
+  border-radius: 10px;
+  //overflow: hidden;
+  object-fit: cover;
 `;
 const ContentsBox = styled.div`
   display: flex;
@@ -61,9 +66,25 @@ const SearchResultCard = ({
   if (restaurantInfo === undefined) {
     return <>카드 오류에요</>;
   } else {
+    const distance = parseInt(restaurantInfo.differenceInDistance);
+    const calculateDistance = () => {
+      if (distance >= 1000) {
+        return (distance / 1000).toFixed(2) + 'km';
+      } else if (distance < 1000) {
+        return distance + 'm';
+      } else {
+        return '??m';
+      }
+    };
     return (
       <CardContainer onClick={onClick}>
         <ImgBox>
+          <RestaurantImage
+            src={
+              FoodMock[restaurantInfo.category as keyof typeof FoodMock] ??
+              FoodMock.CAFE
+            }
+          />
           <Jmteng />
         </ImgBox>
         <ContentsBox>
@@ -72,7 +93,7 @@ const SearchResultCard = ({
           </span>
           <Detail>
             <span className={classNames('text-m-medium', 'gray700')}>
-              내 위치에서 100m
+              내 위치에서 {calculateDistance()}
             </span>
             <img src={verticalBarIcon} />
             <span className={classNames('text-m-medium', 'gray700')}>

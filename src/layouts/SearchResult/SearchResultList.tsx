@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
 import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
-import SearchResultCard from '@components/searchResult/SearchResultCard';
+import SearchResultCard from '@components/SearchResult/SearchResultCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { addSearchLogAtom } from '@store/searchLogAtom';
 import { useSetAtom } from 'jotai/index';

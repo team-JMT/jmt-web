@@ -13,4 +13,5 @@ export type Restaurant = {
 
   userNickName: string;
   userProfileImageUrl: string;
+  differenceInDistance: string;
 };
