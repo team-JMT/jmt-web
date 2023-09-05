@@ -3,6 +3,8 @@ import { PageMeta, Pagination } from '@apis/common/types';
 import { Restaurant } from '../../../models/getRestaurantData';
 
 export type RestaurantByUserRequest = {
+  params: Pagination;
+  userId: string;
   userLocation: {
     x?: string;
     y?: string;
@@ -11,7 +13,6 @@ export type RestaurantByUserRequest = {
     categoryFilter?: string;
     isCanDrinkLiquor?: boolean;
   };
-  params: Pagination;
 };
 export type RestaurantByUserResponse = {
   restaurants: Restaurant[];

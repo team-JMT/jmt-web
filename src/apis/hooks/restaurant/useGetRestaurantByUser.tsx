@@ -6,6 +6,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 const fetchGetRestaurantByUser = async ({
   params: { page = 0 },
+  userId,
   userLocation,
   filter,
 }: RestaurantByUserRequest) => {
@@ -13,6 +14,7 @@ const fetchGetRestaurantByUser = async ({
     params: {
       page,
     },
+    userId,
     userLocation,
     filter,
   });
@@ -22,6 +24,7 @@ const fetchGetRestaurantByUser = async ({
 
 export const useGetRestaurantByUser = ({
   params,
+  userId,
   userLocation,
   filter,
 }: RestaurantByUserRequest) => {
@@ -30,6 +33,7 @@ export const useGetRestaurantByUser = ({
     ({ pageParam = 0 }) =>
       fetchGetRestaurantByUser({
         params,
+        userId,
         userLocation,
         filter,
       }),

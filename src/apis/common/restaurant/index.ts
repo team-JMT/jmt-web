@@ -33,10 +33,11 @@ export const searchMapRestaurantData = async ({
 
 export const getRestaurantByUser = async ({
   params,
+  userId,
   ...rest
 }: RestaurantByUserRequest) =>
   await instance.post<Response<RestaurantByUserResponse>>(
-    `/api/v1/restaurant/search/18?${qs.stringify(params)}`, //+ id,
+    `/api/v1/restaurant/search/${userId}?${qs.stringify(params)}`,
     rest,
   );
 

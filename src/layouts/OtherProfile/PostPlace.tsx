@@ -13,7 +13,11 @@ import { useAtom } from 'jotai';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
-const PostPlace = () => {
+interface UserIdProp {
+  userId: number;
+}
+const PostPlace = ({ userId }: UserIdProp) => {
+  const Id = userId.toString();
   const observeRef = useRef<HTMLDivElement>(null);
 
   const [foodState] = useAtom(foodCategoryState);
@@ -22,6 +26,7 @@ const PostPlace = () => {
 
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
     useGetRestaurantByUser({
+      userId: Id,
       userLocation: {
         x: '127.0596',
         y: '37.6633',

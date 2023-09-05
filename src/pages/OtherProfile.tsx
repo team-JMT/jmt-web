@@ -35,6 +35,7 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
   const [tab, setTab] = React.useState('POST');
 
   const { UserData } = useGetUserInfo(params.userId);
+  const Id = params.userId.toString();
 
   const [foodState] = useAtom(foodCategoryState);
   const [drinkState] = useAtom(drinkCategoryState);
@@ -42,6 +43,7 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
 
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
     useGetRestaurantByUser({
+      userId: Id,
       userLocation: {
         x: '127.0596',
         y: '37.6633',
@@ -130,7 +132,11 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
             </aside>
             <AnimatePresence mode="sync">
               <Suspense fallback={<></>}>
-                {tab === 'POST' ? <PostPlace /> : <LikePlace />}
+                {tab === 'POST' ? (
+                  <PostPlace userId={params.userId} />
+                ) : (
+                  <LikePlace />
+                )}
               </Suspense>
             </AnimatePresence>
           </div>
