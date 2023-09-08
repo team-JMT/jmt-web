@@ -11,21 +11,8 @@ export const FoodKey = {
   BAR: '주점',
   ETC: '기타',
 } as const;
-
 export type FoodCheck = keyof typeof FoodKey | '';
-
 export const foodCategoryState = atom<FoodCheck>('');
-
-// export const FoodCategoryState = {
-//   KOREAN: false,
-//   JAPANESE: false,
-//   CHINESE: false,
-//   WESTERN: false,
-//   FUSION: false,
-//   CAFE: false,
-//   BAR: false,
-//   OTHERS: false,
-// };
 
 export const LiquorKey = {
   POSSIBLE: '주류 가능',
@@ -33,14 +20,6 @@ export const LiquorKey = {
 } as const;
 export type DrinkCheck = keyof typeof LiquorKey | '';
 export const drinkCategoryState = atom<DrinkCheck>('');
-
-export const SortKey = {
-  NEAR: '가까운 순',
-  LIEK: '좋아요 순',
-  RECENT: '최신 순',
-} as const;
-export type SortCheck = keyof typeof SortKey;
-export const sortByState = atom<SortCheck>('NEAR');
 
 export const drinkToBoolean = (drink: DrinkCheck) => {
   if (drink === 'POSSIBLE') {
@@ -51,3 +30,11 @@ export const drinkToBoolean = (drink: DrinkCheck) => {
     return undefined;
   }
 };
+
+export const SortKey = {
+  NEAR: '가까운 순',
+  LIEK: '좋아요 순',
+  RECENT: '최신 순',
+} as const;
+export type SortCheck = keyof typeof SortKey;
+export const sortByState = atom<SortCheck>('NEAR');

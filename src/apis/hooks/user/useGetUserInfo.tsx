@@ -7,7 +7,7 @@ const useGetUserInfo = (id: number) => {
   const { data, ...rest } = useQuery(
     [Keys.USER_INFO, id],
     () => getUserInfo(id),
-    //{ enabled: Boolean(id), suspense: true, staleTime: 20000 },
+    { enabled: Boolean(id), suspense: true },
   );
   return {
     UserData: data && data.data.data,
