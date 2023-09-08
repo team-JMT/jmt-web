@@ -1,16 +1,16 @@
 import { Keys } from '@apis/common/Keys';
-import { getRestaurantByUser } from '@apis/common/restaurant';
+import { searchRestaurantByUser } from '@apis/common/restaurant';
 import { RestaurantByUserRequest } from '@apis/responses/Restaurant/GetRestaurantByUser';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-const fetchGetRestaurantByUser = async ({
+const fetchSearchRestaurantByUser = async ({
   params: { page = 0 },
   userId,
   userLocation,
   filter,
 }: RestaurantByUserRequest) => {
-  const res = await getRestaurantByUser({
+  const res = await searchRestaurantByUser({
     params: {
       page,
     },
@@ -22,7 +22,7 @@ const fetchGetRestaurantByUser = async ({
   return res.data;
 };
 
-export const useGetRestaurantByUser = ({
+export const useSearchRestaurantByUser = ({
   params,
   userId,
   userLocation,
@@ -31,7 +31,7 @@ export const useGetRestaurantByUser = ({
   const { data, ...rest } = useInfiniteQuery(
     [Keys.USER_RESTAURANT, userLocation, filter],
     ({ pageParam = 0 }) =>
-      fetchGetRestaurantByUser({
+      fetchSearchRestaurantByUser({
         params,
         userId,
         userLocation,

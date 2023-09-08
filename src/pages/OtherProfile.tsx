@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-import { useGetRestaurantByUser } from '@apis/hooks/restaurant/useGetRestaurantByUser';
+import { useSearchRestaurantByUser } from '@apis/hooks/restaurant/useSearchRestaurantByUser';
 import useGetUserInfo from '@apis/hooks/user/useGetUserInfo';
 import DownArrow from '@assets/icons/DownArrow';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
@@ -42,7 +42,7 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
   const [sortState] = useAtom(sortByState);
 
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
-    useGetRestaurantByUser({
+    useSearchRestaurantByUser({
       userId: Id,
       userLocation: {
         x: '127.0596',

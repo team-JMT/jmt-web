@@ -31,7 +31,7 @@ export const searchMapRestaurantData = async ({
     rest,
   );
 
-export const getRestaurantByUser = async ({
+export const searchRestaurantByUser = async ({
   params,
   userId,
   ...rest
