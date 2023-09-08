@@ -9,9 +9,9 @@ import { useSetAtom } from 'jotai';
 
 const Modal = () => {
   const { pop } = useHomeFlow();
-  const toggleM = useSetAtom(toggleModal);
+  const useToggleModal = useSetAtom(toggleModal);
   const Delete = () => {
-    toggleM(MODAL_KEY.DELETE_CHECK);
+    useToggleModal(MODAL_KEY.DELETE_CHECK);
     pop();
   };
   return (
@@ -32,7 +32,7 @@ const Modal = () => {
             </ModalButton>
             <ModalButton
               className={'text-m-medium'}
-              onClick={() => toggleM(MODAL_KEY.DELETE_CHECK)}
+              onClick={() => useToggleModal(MODAL_KEY.DELETE_CHECK)}
             >
               유지하기
             </ModalButton>

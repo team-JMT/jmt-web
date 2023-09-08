@@ -24,7 +24,7 @@ const FooterButton: React.FC<FooterButtonProps> = ({
   const [, setFoodState] = useAtom(foodCategoryState);
   const [, setDrinkState] = useAtom(drinkCategoryState);
 
-  const toggleBS = useSetAtom(toggleBottomSheet);
+  const useToggleBottomSheet = useSetAtom(toggleBottomSheet);
 
   return (
     <Wrapper>
@@ -36,7 +36,7 @@ const FooterButton: React.FC<FooterButtonProps> = ({
           } else if (drinkChecked) {
             setDrinkState('');
           }
-          toggleBS(type);
+          useToggleBottomSheet(type);
         }}
       >
         초기화
@@ -49,7 +49,7 @@ const FooterButton: React.FC<FooterButtonProps> = ({
           } else if (drinkChecked) {
             setDrinkState(drinkChecked);
           }
-          toggleBS(type);
+          useToggleBottomSheet(type);
         }}
       >
         확인

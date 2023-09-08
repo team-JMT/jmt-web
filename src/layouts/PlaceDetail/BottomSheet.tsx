@@ -15,8 +15,8 @@ import { useSetAtom } from 'jotai';
 import getUrlValue from '@utils/getUrlValue';
 
 const BottomSheet = () => {
-  const toggleBS = useSetAtom(toggleBottomSheet);
-  const toggleM = useSetAtom(toggleModal);
+  const useToggleBottomSheet = useSetAtom(toggleBottomSheet);
+  const useToggleModal = useSetAtom(toggleModal);
   const { push, pop } = useHomeFlow();
 
   const detailId = getUrlValue();
@@ -28,7 +28,7 @@ const BottomSheet = () => {
         <BottomSheetWrapper>
           <BottomSheetButton
             onClick={() => {
-              toggleBS(BOTTOM_SHEET_KEY.PLACE_DETAIL);
+              useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
               push('Report', { placeId: detailId });
             }}
             className={'text-l-medium'}
@@ -42,8 +42,8 @@ const BottomSheet = () => {
           </BottomSheetButton>
           <BottomSheetButton
             onClick={() => {
-              toggleBS(BOTTOM_SHEET_KEY.PLACE_DETAIL);
-              toggleM(MODAL_KEY.DELETE_CHECK);
+              useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
+              useToggleModal(MODAL_KEY.DELETE_CHECK);
             }}
             className={'text-l-medium'}
           >
