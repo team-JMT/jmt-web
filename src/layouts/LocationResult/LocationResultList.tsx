@@ -21,8 +21,8 @@ const LocationResultList = ({ keyword }: LocationResultListProps) => {
 
   const handleCardClick = (location: LocationSearchData) => {
     setSelectedLocation({
-      placeName: location.place_name,
-      addressName: location.road_address_name ?? location.address_name,
+      placeName: location.placeName,
+      addressName: location.roadAddressName ?? location.addressName,
       x: location.x,
       y: location.y,
     });
@@ -36,9 +36,9 @@ const LocationResultList = ({ keyword }: LocationResultListProps) => {
           <LocationResultCard
             key={index}
             onClick={() => handleCardClick(place)}
-            addressName={place.address_name}
-            roadAddressName={place.road_address_name}
-            placeName={place.place_name}
+            addressName={place.addressName}
+            roadAddressName={place.roadAddressName}
+            placeName={place.placeName}
           />
         ))}
     </section>

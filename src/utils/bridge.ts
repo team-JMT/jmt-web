@@ -1,9 +1,22 @@
+import { LocationSearchData } from '../models/locationSearchData';
+
 import { nativeInfo } from './storage';
 
 function setAccessToken(accessToken: string) {
   console.log('setAccessToken', accessToken);
+  const prevState = nativeInfo.getData();
   nativeInfo.setData({
+    ...prevState,
     accessToken: accessToken,
+  });
+}
+
+function setUserPosition(userPosition: string) {
+  const position = JSON.parse(userPosition) as LocationSearchData;
+  const prevState = nativeInfo.getData();
+  nativeInfo.setData({
+    ...prevState,
+    userPosition: position,
   });
 }
 
@@ -14,6 +27,7 @@ function backEvent() {
 
 if (window) {
   window.setAccessToken = setAccessToken;
+  window.setUserPosition = setUserPosition;
   window.backEvent = backEvent;
 }
 
@@ -30,6 +44,21 @@ export function getAccessToken() {
     window?.webviewBridge?.token();
   }
 }
+
+export function getUserPosition() {
+  if (window.webkit) {
+    console.log('userPosition');
+    window.webkit.messageHandlers.callbackHandler.postMessage(
+      JSON.stringify({
+        event: 'userPosition',
+      }),
+    );
+  } else {
+    console.log('userPosition');
+    window?.webviewBridge?.userPosition();
+  }
+}
+
 export function backEnable(enable = true) {
   if (window.webkit) {
     // ios
