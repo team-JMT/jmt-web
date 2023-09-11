@@ -5,6 +5,7 @@ export type Restaurant = {
   phone: string;
   address: string;
   roadAddress: string;
+  restaurantImageUrl: string;
   introduce: string;
   category: string;
 

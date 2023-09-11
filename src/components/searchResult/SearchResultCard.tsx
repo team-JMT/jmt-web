@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Jmteng from '@assets/icons/Jmteng';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
-import { FoodMock } from '@assets/images/foodMock';
+//import { FoodMock } from '@assets/images/foodMock';
 import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 
 import { Restaurant } from '../../models/getRestaurantData';
-import { RestaurantDetail } from '../../models/getRestaurantDetail';
 
 const CardContainer = styled.div`
   display: flex;
@@ -28,9 +26,9 @@ const ImgBox = styled.div`
   margin-right: 1.6rem;
 `;
 const RestaurantImage = styled.img`
-  width: 100%;
+  width: 100px;
+  height: 100px;
   border-radius: 10px;
-  //overflow: hidden;
   object-fit: cover;
 `;
 const ContentsBox = styled.div`
@@ -55,7 +53,7 @@ const UserImg = styled.img`
 `;
 
 interface SearchResultCardProps {
-  restaurantInfo: Restaurant | RestaurantDetail;
+  restaurantInfo: Restaurant;
   onClick?: () => void;
 }
 
@@ -68,24 +66,19 @@ const SearchResultCard = ({
   } else {
     const distance = parseInt(restaurantInfo.differenceInDistance);
     const calculateDistance = () => {
-      if (distance >= 1000) {
-        return (distance / 1000).toFixed(2) + 'km';
-      } else if (distance < 1000) {
-        return distance + 'm';
-      } else {
-        return '??m';
-      }
+      return '??m';
+      //유저 위치 받아와서 계산한 뒤 반환필요
     };
     return (
       <CardContainer onClick={onClick}>
         <ImgBox>
           <RestaurantImage
             src={
-              FoodMock[restaurantInfo.category as keyof typeof FoodMock] ??
-              FoodMock.CAFE
+              restaurantInfo.restaurantImageUrl
+              // FoodMock[restaurantInfo.category as keyof typeof FoodMock] ??
+              // FoodMock.CAFE
             }
           />
-          <Jmteng />
         </ImgBox>
         <ContentsBox>
           <span className={classNames('text-l-bold', 'gray900')}>
