@@ -2,7 +2,7 @@ import React from 'react';
 
 import PencilIcon from '@assets/icons/PencilIcon';
 import ReportIcon from '@assets/icons/ReportIcon';
-import Share from '@assets/icons/Share';
+import SmallShare from '@assets/icons/SmallShare';
 import TrashIcon from '@assets/icons/TrashIcon';
 import BottomSheetCompoenet from '@components/common/BottomSheet';
 import styled from '@emotion/styled';
@@ -12,14 +12,19 @@ import { MODAL_KEY, toggleModal } from '@store/modalAtom';
 import { motion } from 'framer-motion';
 import { useSetAtom } from 'jotai';
 
+import { handleNativeShare, navigateNativeRouteType } from '@utils/bridge';
 import getUrlValue from '@utils/getUrlValue';
 
 const BottomSheet = () => {
-  const useToggleBottomSheet = useSetAtom(toggleBottomSheet);
-  const useToggleModal = useSetAtom(toggleModal);
   const { push, pop } = useHomeFlow();
 
+  const useToggleBottomSheet = useSetAtom(toggleBottomSheet);
+  const useToggleModal = useSetAtom(toggleModal);
+
   const detailId = getUrlValue();
+  const params = {
+    restaurantId: detailId.toString(),
+  };
 
   return (
     <BottomSheetCompoenet
@@ -36,7 +41,13 @@ const BottomSheet = () => {
             <ReportIcon />
             신고하기
           </BottomSheetButton>
-          <BottomSheetButton className={'text-l-medium'}>
+          <BottomSheetButton
+            className={'text-l-medium'}
+            onClick={() => {
+              useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
+              navigateNativeRouteType('editRestaurantInfo', params);
+            }}
+          >
             <PencilIcon />
             수정하기
           </BottomSheetButton>
@@ -50,8 +61,14 @@ const BottomSheet = () => {
             <TrashIcon />
             삭제하기
           </BottomSheetButton>
-          <BottomSheetButton className={'text-l-medium'}>
-            <Share />
+          <BottomSheetButton
+            className={'text-l-medium'}
+            onClick={() => {
+              useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
+              handleNativeShare();
+            }}
+          >
+            <SmallShare />
             공유하기
           </BottomSheetButton>
         </BottomSheetWrapper>

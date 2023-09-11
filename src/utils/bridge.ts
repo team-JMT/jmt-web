@@ -104,3 +104,37 @@ export function navigateNativeRoute(route: string) {
     });
   }
 }
+
+type NativeRoute = {
+  editRestaurantInfo: {
+    params: {
+      restaurantId: string;
+    };
+  };
+};
+
+type NativeRouteKey = keyof NativeRoute;
+type NativeRouteParams<T extends NativeRouteKey> = NativeRoute[T]['params'];
+
+export function navigateNativeRouteType<T extends NativeRouteKey>(
+  route: T,
+  params: NativeRouteParams<T>,
+) {
+  if (window.webkit) {
+    // ios
+    window.webkit.messageHandlers.callbackHandler.postMessage(
+      JSON.stringify({
+        event: 'navigate',
+        route: route,
+        ...params,
+      }),
+    );
+  } else {
+    // android
+    console.log('navigate');
+    window?.webviewBridge?.navigate({
+      route: route,
+      ...params,
+    });
+  }
+}
