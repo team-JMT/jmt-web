@@ -14,6 +14,7 @@ function setAccessToken(accessToken: string) {
 function setUserPosition(userPosition: string) {
   const position = JSON.parse(userPosition) as LocationSearchData;
   const prevState = nativeInfo.getData();
+  console.log('setUserPosition', position);
   nativeInfo.setData({
     ...prevState,
     userPosition: position,
