@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import Reason from '@components/report/Reason';
-import SearchResultCard from '@components/searchResult/SearchResultCard';
+import ReportPlace from '@components/report/ReportPlace';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 //import classNames from 'classnames';
@@ -18,10 +18,12 @@ const reportArr = [
   '개인정보가 노출되어있어요.',
   '다른 사유에요.',
 ];
+
 const Report = () => {
   const { pop } = useHomeFlow();
   const detailId = getUrlValue();
   const { DetailData } = useGetRestaurantDetailData(detailId);
+  const [report, setReport] = useState('');
 
   return (
     <AppScreen
@@ -40,7 +42,7 @@ const Report = () => {
       <main className={'safe-area-layout-container'}>
         <div className={'report-container'}>
           <p className={'report-text'}>선택된 글</p>
-          <SearchResultCard restaurantInfo={DetailData!} />
+          <ReportPlace restaurantInfo={DetailData!} />
           <div className={'gray-bar'} />
           <p className={'report-text'}>신고하는 사유를 알려주세요.(필수)</p>
           <div className={'reason-container'}>
