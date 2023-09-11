@@ -18,7 +18,9 @@ import '@stackflow/plugin-basic-ui/index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <NavermapsProvider ncpClientId="4mc8nybxwl">
+    <NavermapsProvider
+      ncpClientId={import.meta.env.VITE_CONFIG_NAVER_CLIENT_ID}
+    >
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <App />

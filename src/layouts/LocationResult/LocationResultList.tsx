@@ -29,6 +29,8 @@ const LocationResultList = ({ keyword }: LocationResultListProps) => {
     push('LocationMapPreview', {});
   };
 
+  console.log(locationSearchData);
+
   return (
     <section className={'list-container'}>
       {locationSearchData &&
