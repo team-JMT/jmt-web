@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import FilterIcon from '@assets/filter';
 import BottomSheetCompoenet from '@components/common/BottomSheet';
 import { bottomSheetState } from '@store/bottomSheetAtom';
-import { LiquorKey, drinkCategoryState, DrinkCheck } from '@store/filterAtom';
+import { LiquorKey, drinkCategoryState } from '@store/filterAtom';
 import { colors } from '@styles/theme/color';
 import { useAtom } from 'jotai';
 
@@ -16,14 +16,13 @@ const DrinkCategoryFilter = () => {
   const [drinkState, setDrinkState] = useAtom(drinkCategoryState);
   const [localDrink, setLocalDrink] = useState('');
 
+  const liquorKeyList = Object.keys(LiquorKey);
+
   //바텀시트가 닫히고 열릴 때 마다 local정보 초기화 = 확인 버튼 클릭 전 정보 초기화
   useEffect(() => {
     setLocalDrink(drinkState);
   }, [bottomSheet]);
 
-  const changeLocal = (item: string) => {
-    setLocalDrink(item as DrinkCheck);
-  };
   return (
     <BottomSheetCompoenet
       type={'DRINK_CATEGORY'}
@@ -34,14 +33,14 @@ const DrinkCategoryFilter = () => {
             <div className={'active'}>주류여부</div>
           </FilterTitle>
           <FilterContainer>
-            {Object.keys(LiquorKey).map((item: string) => {
+            {liquorKeyList.map((item: string) => {
               const value = LiquorKey[item as keyof typeof LiquorKey];
               return (
                 <FilterBox
                   key={item}
                   active={localDrink === item}
                   className={'title-s-medium'}
-                  onClick={() => changeLocal(item)}
+                  onClick={() => setLocalDrink(item)}
                 >
                   <FilterIcon
                     iconName={item}

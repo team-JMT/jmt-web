@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import FilterIcon from '@assets/filter';
 import BottomSheetCompoenet from '@components/common/BottomSheet';
 import { bottomSheetState } from '@store/bottomSheetAtom';
-import { FoodKey, foodCategoryState, FoodCheck } from '@store/filterAtom';
+import { FoodKey, foodCategoryState } from '@store/filterAtom';
 import { colors } from '@styles/theme/color';
 import { useAtom } from 'jotai';
 
@@ -16,13 +16,11 @@ const FoodCategoryFilter = () => {
   const [foodState, setFoodState] = useAtom(foodCategoryState);
   const [localFood, setLocalFood] = useState('');
 
+  const foodKeyList = Object.keys(FoodKey);
+
   useEffect(() => {
     setLocalFood(foodState);
   }, [bottomSheet]);
-
-  const changeLocal = (item: string) => {
-    setLocalFood(item as FoodCheck);
-  };
 
   return (
     <BottomSheetCompoenet
@@ -34,14 +32,14 @@ const FoodCategoryFilter = () => {
             <div>주류여부</div>
           </FilterTitle>
           <FilterContainer>
-            {Object.keys(FoodKey).map((item: string) => {
+            {foodKeyList.map((item: string) => {
               const value = FoodKey[item as keyof typeof FoodKey];
               return (
                 <FilterBox
                   key={item}
                   active={localFood === item}
                   className={'title-s-medium'}
-                  onClick={() => changeLocal(item)}
+                  onClick={() => setLocalFood(item)}
                 >
                   <FilterIcon
                     iconName={item}
