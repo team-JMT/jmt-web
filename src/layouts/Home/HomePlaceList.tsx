@@ -39,10 +39,9 @@ const HomePlaceList = () => {
     });
 
   const mappingRestaurantData = React.useMemo(
-    () => restaurantData?.flatMap((page) => page.data.restaurant),
+    () => restaurantData?.flatMap((page) => page.data.restaurants),
     [restaurantData],
   );
-  console.log('isEmpty', isEmpty);
 
   const isLastPage = () => {
     if (!restaurantData) {
@@ -68,7 +67,6 @@ const HomePlaceList = () => {
   });
 
   useEffect(() => {
-    console.log('mappingRestaurantData', mappingRestaurantData);
     if (!mappingRestaurantData) {
       return;
     }
@@ -103,7 +101,7 @@ const HomePlaceList = () => {
       <section className={'place-detail-section'}>
         <>
           {isEmpty ? (
-            <div>111</div>
+            <div>비어있어요.</div>
           ) : (
             <>
               {mappingRestaurantData &&

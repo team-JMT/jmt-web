@@ -11,7 +11,6 @@
     "release:patch": "standard-version --release-as patch && git push --follow-tags origin main",
     "release:minor": "standard-version --release-as minor && git push --follow-tags origin main"
   },
-  "proxy": "https://naveropenapi.apigw.ntruss.com",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

@@ -21,12 +21,23 @@ const ImgBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  min-width: 100px;
   height: 100px;
   background: url('@assets/mock/FoodMock.png'), lightgray 50% / cover no-repeat;
   border-radius: 10px;
   margin-right: 1.6rem;
 `;
+
+const PlaceName = styled.span`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+`;
+
 const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -63,9 +74,9 @@ const SearchResultCard = ({
         <Jmteng />
       </ImgBox>
       <ContentsBox>
-        <span className={classNames('text-l-bold', 'gray900')}>
+        <PlaceName className={classNames('text-l-bold', 'gray900')}>
           {restaurantInfo.name}
-        </span>
+        </PlaceName>
         <Detail>
           <span className={classNames('text-m-medium', 'gray700')}>
             내 위치에서 100m

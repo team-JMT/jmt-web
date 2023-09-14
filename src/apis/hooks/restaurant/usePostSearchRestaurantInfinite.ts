@@ -37,7 +37,7 @@ export const usePostSearchRestaurantInfinite = ({
         filter,
       }),
     {
-      enabled: Boolean(startLocation && endLocation),
+      enabled: false,
       getNextPageParam: (data) => {
         const { pageLast, currentPage } = data.data.page;
         if (!pageLast) {

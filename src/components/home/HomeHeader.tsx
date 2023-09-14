@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { Keys } from '@apis/common/Keys';
+import { usePostSearchRestaurantInfinite } from '@apis/hooks/restaurant/usePostSearchRestaurantInfinite';
 import { queryClient } from '@apis/queryClient';
 import RefreshIcon from '@assets/icons/RefreshIcon';
 import SolidDownArrow from '@assets/icons/SolidDownArrow';
 import { SearchInputMock } from '@commons/input/SearchInput';
 import styled from '@emotion/styled';
 import { getCurrentLocationAtom } from '@store/locationAtom';
+import { mapAtom } from '@store/mapAtom';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
@@ -52,6 +54,19 @@ export const MyPlaceContainer = styled.div`
 const HomeHeader = () => {
   const { push } = useHomeFlow();
   const { addressName } = useAtomValue(getCurrentLocationAtom);
+  const lat = useAtomValue(mapAtom);
+  const { refetch } = usePostSearchRestaurantInfinite({
+    startLocation: lat?.북동_좌표,
+    endLocation: lat?.남서_좌표,
+    filter: {
+      categoryFilter: undefined,
+      isCanDrinkLiquor: true,
+    },
+    params: {
+      page: 0,
+      size: 10,
+    },
+  });
 
   const handleRefresh = async () => {
     await queryClient.invalidateQueries([Keys.RESTAURANT]);
@@ -70,7 +85,7 @@ const HomeHeader = () => {
         <SolidDownArrow />
       </MyPlaceContainer>
 
-      <RefreshIconWrapper onClick={handleRefresh}>
+      <RefreshIconWrapper onClick={() => refetch()}>
         <RefreshIcon />
       </RefreshIconWrapper>
     </Container>

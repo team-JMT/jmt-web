@@ -49,9 +49,9 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
     }
   };
 
-  const onCenterChanged = () => {
+  useEffect(() => {
     setLatHandler();
-  };
+  }, [map]);
 
   useEffect(() => {
     setElRefs((elRefs) =>
@@ -64,7 +64,7 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
   useEffect(() => {
     const bounds = createBounds(places);
     map?.fitBounds(bounds);
-  }, [places]);
+  }, []);
 
   return (
     <MapDiv
@@ -73,7 +73,7 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
         height: '100vh',
       }}
     >
-      <NaverMap ref={setMap} onCenterChanged={onCenterChanged}>
+      <NaverMap ref={setMap} onCenterChanged={() => setLatHandler()}>
         <MarkerCluster markers={elRefs} />
         {placesAtomValue.map((place, index) => {
           return (

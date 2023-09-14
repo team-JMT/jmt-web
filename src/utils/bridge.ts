@@ -26,12 +26,6 @@ function backEvent() {
   history.back();
 }
 
-if (window) {
-  window.setAccessToken = setAccessToken;
-  window.setUserPosition = setUserPosition;
-  window.backEvent = backEvent;
-}
-
 export function getAccessToken() {
   if (window.webkit) {
     console.log('accessToken');
@@ -147,3 +141,9 @@ export const navigateToEditRestaurant = (restaurantId: string) => {
     restaurantId,
   });
 };
+
+if (window) {
+  window.setAccessToken = setAccessToken;
+  window.setUserPosition = setUserPosition;
+  window.backEvent = backEvent;
+}
