@@ -78,7 +78,7 @@ const Search = () => {
       }}
     >
       <main className={'safe-area-layout-container'}>
-        <div className={'container-inner'}>
+        <div className={'container-inner-padding'}>
           <AnimatePresence>
             <div className={'search-input-wrapper'}>
               <SearchInput

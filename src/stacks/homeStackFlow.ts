@@ -9,7 +9,7 @@ import LocationSearch from '@pages/LocationSearch';
 import OtherProfile from '@pages/OtherProfile';
 import SearchResult from '@pages/SearchResult';
 
-import Home, { Test } from '../pages/Home';
+import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import PlaceDetail from '../pages/PlaceDetail';
 import Search from '../pages/Search';
@@ -32,7 +32,6 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
         PlaceDetail: '/detail/:placeId',
         OtherProfile: '/profile/:userName',
         NotFound: '/error',
-        Test: '/test',
       },
       fallbackActivity: () => 'NotFound',
       useHash: false,
@@ -48,7 +47,6 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
     LocationSearch,
     LocationResult,
     LocationMapPreview,
-    Test,
   },
   // initialActivity: () => 'Home',
 });

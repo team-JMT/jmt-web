@@ -75,7 +75,7 @@ export function backEnable(enable = true) {
   }
 }
 
-export function navigationEnable(visible = true) {
+export function navigationHandler(visible = true) {
   if (window.webkit) {
     // ios
     console.log('navigation', visible);

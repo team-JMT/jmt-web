@@ -7,22 +7,21 @@ import HomeHeader from '@components/home/HomeHeader';
 import HomeMap from '@components/home/HomeMap';
 import HomePlaceList from '@layouts/Home/HomePlaceList';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
-import { useStack } from '@stackflow/react';
+
+import { useCheckTopActivity } from '@hooks/useCheckTopActivity';
+import { useHandleNavigationBar } from '@hooks/useHandleNavigationBar';
 
 const Home = () => {
   const [map, setMap] = useState<naver.maps.Map | null>(null);
 
+  const isHomeTop = useCheckTopActivity('Home');
   const bottomRef = useRef<BottomSheetRef>(null);
 
   const handleMarkerClick = () => {
     bottomRef.current?.snapTo(97);
   };
 
-  const stack = useStack();
-
-  const findHomeActivity = stack.activities.find(
-    (activity) => activity.name === 'Home',
-  );
+  useHandleNavigationBar();
 
   return (
     <AppScreen>
@@ -33,7 +32,7 @@ const Home = () => {
         handleMarkerClick={handleMarkerClick}
       />
       <FixedPlaceDetail />
-      {findHomeActivity?.isTop && (
+      {isHomeTop && (
         <HomeBottomSheet ref={bottomRef}>
           <div className={'container-inner'}>
             <div className={'home-content-container'}>
