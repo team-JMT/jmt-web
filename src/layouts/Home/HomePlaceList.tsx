@@ -24,7 +24,7 @@ const HomePlaceList = () => {
 
   const lat = useAtomValue(mapAtom);
   const setPlaces = useSetAtom(setPlacesAtom);
-  const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
+  const { restaurantData, fetchNextPage, isEmpty, refetch } =
     usePostSearchRestaurantInfinite({
       startLocation: lat?.북동_좌표,
       endLocation: lat?.남서_좌표,
@@ -48,7 +48,7 @@ const HomePlaceList = () => {
       return null;
     }
 
-    return restaurantData[0].data.page.pageLast;
+    return restaurantData[restaurantData.length - 1].data.page.pageLast;
   };
 
   const handleIntersect = () => {

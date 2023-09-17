@@ -43,7 +43,6 @@ const LocationMapPreview = () => {
       addressName,
     });
     pop(99);
-    // push('Home', {});
   };
 
   return (

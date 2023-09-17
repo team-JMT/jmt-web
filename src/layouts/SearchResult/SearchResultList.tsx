@@ -33,7 +33,8 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
       return null;
     }
 
-    return restaurantSearchData[0].data.page.pageLast;
+    return restaurantSearchData[restaurantSearchData.length - 1].data.page
+      .pageLast;
   };
 
   const handleIntersect = () => {

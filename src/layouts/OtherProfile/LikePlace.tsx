@@ -32,7 +32,7 @@ const LikePlace = () => {
     if (!restaurantData) {
       return null;
     }
-    return restaurantData[0].data.page.pageLast;
+    return restaurantData[restaurantData.length - 1].data.page.pageLast;
   };
 
   const handleIntersect = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Keys } from '@apis/common/Keys';
+import { useGetCurrentLocation } from '@apis/hooks/location/useGetCurrentLocation';
 import { usePostSearchRestaurantInfinite } from '@apis/hooks/restaurant/usePostSearchRestaurantInfinite';
 import { queryClient } from '@apis/queryClient';
 import RefreshIcon from '@assets/icons/RefreshIcon';
@@ -12,6 +13,8 @@ import { mapAtom } from '@store/mapAtom';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 import { useAtomValue } from 'jotai';
+
+import { nativeInfo } from '@utils/storage';
 
 import { useHomeFlow } from '../../stacks/homeStackFlow';
 
@@ -55,6 +58,10 @@ const HomeHeader = () => {
   const { push } = useHomeFlow();
   const { addressName } = useAtomValue(getCurrentLocationAtom);
   const lat = useAtomValue(mapAtom);
+  const currentLocation = nativeInfo.getData();
+  const { currentLocationData } = useGetCurrentLocation(
+    currentLocation.userPosition,
+  );
   const { refetch } = usePostSearchRestaurantInfinite({
     startLocation: lat?.북동_좌표,
     endLocation: lat?.남서_좌표,
@@ -69,6 +76,7 @@ const HomeHeader = () => {
   });
 
   const handleRefresh = async () => {
+    await refetch();
     await queryClient.invalidateQueries([Keys.RESTAURANT]);
   };
 
@@ -80,12 +88,14 @@ const HomeHeader = () => {
       />
       <MyPlaceContainer onClick={() => push('LocationSearch', {})}>
         <span className={classNames('text-m-medium', 'gray900')}>
-          {addressName}
+          {addressName ??
+            currentLocationData?.address ??
+            currentLocationData?.roadAddress}
         </span>
         <SolidDownArrow />
       </MyPlaceContainer>
 
-      <RefreshIconWrapper onClick={() => refetch()}>
+      <RefreshIconWrapper onClick={() => handleRefresh()}>
         <RefreshIcon />
       </RefreshIconWrapper>
     </Container>
