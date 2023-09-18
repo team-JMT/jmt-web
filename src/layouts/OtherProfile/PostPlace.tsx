@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import { useSearchRestaurantByUser } from '@apis/hooks/restaurant/useSearchRestaurantByUser';
+import { useSearchRestaurantByUserInfinite } from '@apis/hooks/restaurant/useSearchRestaurantByUserInfinite';
 import SearchResultCard from '@components/searchResult/SearchResultCard';
 import {
   foodCategoryState,
@@ -25,7 +25,7 @@ const PostPlace = ({ userId }: UserIdProp) => {
   const [sortState] = useAtom(sortByState);
 
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
-    useSearchRestaurantByUser({
+    useSearchRestaurantByUserInfinite({
       userId: Id,
       userLocation: {
         x: '127.0596',

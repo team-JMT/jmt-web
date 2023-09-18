@@ -22,7 +22,7 @@ const fetchSearchRestaurantByUser = async ({
   return res.data;
 };
 
-export const useSearchRestaurantByUser = ({
+export const useSearchRestaurantByUserInfinite = ({
   params,
   userId,
   userLocation,
@@ -32,7 +32,7 @@ export const useSearchRestaurantByUser = ({
     [Keys.USER_RESTAURANT, userLocation, filter],
     ({ pageParam = 0 }) =>
       fetchSearchRestaurantByUser({
-        params,
+        params: { page: pageParam },
         userId,
         userLocation,
         filter,

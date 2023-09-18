@@ -1,14 +1,11 @@
 import React, { Suspense } from 'react';
 
-import { useSearchRestaurantByUser } from '@apis/hooks/restaurant/useSearchRestaurantByUser';
+import { useSearchRestaurantByUserInfinite } from '@apis/hooks/restaurant/useSearchRestaurantByUserInfinite';
 import useGetUserInfo from '@apis/hooks/user/useGetUserInfo';
 import DownArrow from '@assets/icons/DownArrow';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
-import DrinkCategoryFilter from '@components/common/FilterBottomSheet/DrinkCategoryFilter';
-import FoodCategoryFilter from '@components/common/FilterBottomSheet/FoodCategoryFilter';
-import SortBy from '@components/common/FilterBottomSheet/SortBy';
 import Tab from '@components/common/Tab/Tab';
 import LikePlace from '@layouts/OtherProfile/LikePlace';
 import PostPlace from '@layouts/OtherProfile/PostPlace';
@@ -42,7 +39,7 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
   const [sortState] = useAtom(sortByState);
 
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
-    useSearchRestaurantByUser({
+    useSearchRestaurantByUserInfinite({
       userId: Id,
       userLocation: {
         x: '127.0596',
@@ -141,9 +138,6 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
             </AnimatePresence>
           </div>
         </main>
-        <SortBy />
-        <FoodCategoryFilter />
-        <DrinkCategoryFilter />
       </AppScreen>
     );
   }
