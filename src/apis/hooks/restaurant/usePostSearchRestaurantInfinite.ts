@@ -31,7 +31,7 @@ export const usePostSearchRestaurantInfinite = ({
     [Keys.RESTAURANT, startLocation, endLocation, filter],
     ({ pageParam = 0 }) =>
       fetchPostSearchRestaurantData({
-        params,
+        params: { page: pageParam },
         startLocation,
         endLocation,
         filter,
