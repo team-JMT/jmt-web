@@ -5,9 +5,14 @@ export type Restaurant = {
   phone: string;
   address: string;
   roadAddress: string;
+  restaurantImageUrl: string;
   introduce: string;
   category: string;
 
   x: number;
   y: number;
+
+  userNickName: string;
+  userProfileImageUrl: string;
+  differenceInDistance: string;
 };

@@ -9,7 +9,7 @@ export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
 }
 const Chip = ({ children, ...rest }: ChipProps) => {
   return (
-    <StyledChip className={classNames('text-m-medium', 'gray900')} {...rest}>
+    <StyledChip className={classNames('text-s-medium', 'gray900')} {...rest}>
       {children}
     </StyledChip>
   );

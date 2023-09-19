@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Jmteng from '@assets/icons/Jmteng';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
+//import { FoodMock } from '@assets/images/foodMock';
 import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
@@ -13,9 +13,9 @@ const CardContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100px;
-  & + & {
+  /* & + & {
     margin-top: 20px;
-  }
+  } */
 `;
 const ImgBox = styled.div`
   display: flex;
@@ -23,21 +23,14 @@ const ImgBox = styled.div`
   justify-content: center;
   min-width: 100px;
   height: 100px;
-  background: url('@assets/mock/FoodMock.png'), lightgray 50% / cover no-repeat;
-  border-radius: 10px;
   margin-right: 1.6rem;
 `;
-
-const PlaceName = styled.span`
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  word-break: break-all;
-  text-overflow: ellipsis;
+const RestaurantImage = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
 `;
-
 const ContentsBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,11 +44,11 @@ const User = styled.div`
   display: flex;
   align-items: center;
 `;
-const UserImg = styled.div`
+const UserImg = styled.img`
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background: url('link'), ${colors.gray200} 0% / cover no-repeat;
+  background: ${colors.gray200} 0% / cover no-repeat;
   margin-right: 4px;
 `;
 
@@ -68,29 +61,48 @@ const SearchResultCard = ({
   restaurantInfo,
   onClick,
 }: SearchResultCardProps) => {
-  return (
-    <CardContainer onClick={onClick}>
-      <ImgBox>
-        <Jmteng />
-      </ImgBox>
-      <ContentsBox>
-        <PlaceName className={classNames('text-l-bold', 'gray900')}>
-          {restaurantInfo.name}
-        </PlaceName>
-        <Detail>
-          <span className={classNames('text-m-medium', 'gray700')}>
-            내 위치에서 100m
+  if (restaurantInfo === undefined) {
+    return <>카드 오류에요</>;
+  } else {
+    const distance = parseInt(restaurantInfo.differenceInDistance);
+    const calculateDistance = () => {
+      return '??m';
+      //유저 위치 받아와서 계산한 뒤 반환필요
+    };
+    return (
+      <CardContainer onClick={onClick}>
+        <ImgBox>
+          <RestaurantImage
+            src={
+              restaurantInfo.restaurantImageUrl
+              // FoodMock[restaurantInfo.category as keyof typeof FoodMock] ??
+              // FoodMock.CAFE
+            }
+          />
+        </ImgBox>
+        <ContentsBox>
+          <span className={classNames('text-l-bold', 'gray900')}>
+            {restaurantInfo.name}
           </span>
-          <img src={verticalBarIcon} />
-          <span className={classNames('text-m-medium', 'gray700')}>카테</span>
-        </Detail>
-        <User>
-          <UserImg />
-          <span className={classNames('text-s-medium')}>유저이름</span>
-        </User>
-      </ContentsBox>
-    </CardContainer>
-  );
+          <Detail>
+            <span className={classNames('text-m-medium', 'gray700')}>
+              내 위치에서 {calculateDistance()}
+            </span>
+            <img src={verticalBarIcon} />
+            <span className={classNames('text-m-medium', 'gray700')}>
+              {restaurantInfo.category}
+            </span>
+          </Detail>
+          <User>
+            <UserImg src={restaurantInfo.userProfileImageUrl} />
+            <span className={classNames('text-s-medium')}>
+              {restaurantInfo.userNickName}
+            </span>
+          </User>
+        </ContentsBox>
+      </CardContainer>
+    );
+  }
 };
 
 export default SearchResultCard;
