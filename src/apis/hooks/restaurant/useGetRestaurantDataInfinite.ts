@@ -28,10 +28,14 @@ export const useGetRestaurantDataInfinite = ({
       }),
     {
       getNextPageParam: (data) => {
-        if (data.data.page.pageLast) {
-          return data.data.page.currentPage + 1;
+        const { pageLast, currentPage } = data.data.page;
+
+        if (!pageLast) {
+          return currentPage + 1;
         }
+        return undefined;
       },
+      suspense: true,
     },
   );
   return {

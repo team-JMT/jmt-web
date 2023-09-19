@@ -1,12 +1,12 @@
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
+import MoreIcon from '@assets/icons/MoreIcon';
 import rightArrowIcon from '@assets/icons/rightArrow.svg';
-import shareIcon from '@assets/icons/share.svg';
-import ThreeDotsIcon from '@assets/icons/ThreeDots';
+import Share from '@assets/icons/Share';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
 import NoticeBox from '@components/placeDetail/NoticeBox';
 import BottomBar from '@layouts/PlaceDetail/BottomBar';
-import BottomSheet from '@layouts/PlaceDetail/BottomSheet';
+import PlaceBottomSheet from '@layouts/PlaceDetail/BottomSheet';
 import DetailMenu from '@layouts/PlaceDetail/DetailMenu';
 import ImgContainer from '@layouts/PlaceDetail/ImgContainer';
 import Modal from '@layouts/PlaceDetail/Modal';
@@ -33,12 +33,12 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
     useGetRestaurantDetailData(Number(params.placeId));
 
   // 에러가 발생한 경우
-  if (Boolean(DetailError)) {
+  if (Boolean(DetailError) || DetailData === undefined) {
     return <div>에러가 났어요 </div>;
   } else {
     return (
       <>
-        <BottomSheet />
+        <PlaceBottomSheet />
         <Modal />
         <AppScreen
           appBar={{
@@ -55,7 +55,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
                 className="more-button"
                 onClick={() => openBS('PLACE_DETAIL')}
               >
-                <ThreeDotsIcon />
+                <MoreIcon />
               </div>
             ),
             //https://github.com/daangn/stackflow/blob/main/demo/src/activities/Main.tsx
@@ -63,19 +63,23 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
           }}
         >
           <main className={'safe-area-layout-container'}>
-            <ImgContainer />
+            <ImgContainer images={DetailData?.pictures || []} />
             {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
             <div className={'detail-container'}>
               <div
                 className={'name-box'}
-                onClick={() => push('OtherProfile', { userName: 'hungry' })}
+                onClick={() =>
+                  push('OtherProfile', { userId: DetailData.userId })
+                }
               >
-                <a className={'text-m-medium'}>유저이름&nbsp;&nbsp;</a>
+                <a className={'text-m-medium'}>
+                  {DetailData?.userNickName}&nbsp;&nbsp;
+                </a>
                 <img src={rightArrowIcon} />
               </div>
               <div className={'title-box'}>
                 <a className={'title-s-bold'}>{DetailData?.name}</a>
-                <img src={shareIcon} />
+                <Share />
               </div>
               <div className={'add-box'}>
                 <a className={classNames('text-l-medium', 'gray900')}>

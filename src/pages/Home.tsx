@@ -1,44 +1,98 @@
-import React from 'react';
+import React, { Suspense, useRef, useState } from 'react';
+import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 
-import NaverMap from '@components/common/NaverMap';
-import Tab from '@components/common/Tab/Tab';
-import AddPlaceCard from '@components/home/AddPlaceCard';
 import HomeBottomSheet from '@components/home/BottomSheet';
-import BottomSheetHeader from '@components/home/BottomSheetHeader';
-import HomeAround from '@layouts/Home/HomeAround';
-import HomeSeeAll from '@layouts/Home/HomeSeeAll';
+import FixedPlaceDetail from '@components/home/FixedPlaceDetail';
+import HomeHeader from '@components/home/HomeHeader';
+import HomeMap from '@components/home/HomeMap';
+import HomePlaceList from '@layouts/Home/HomePlaceList';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
-
-import '../styles//common/bottomSheet.css';
-
+import { mapAtom } from '@store/mapAtom';
 import { AnimatePresence } from 'framer-motion';
+import { useAtomValue } from 'jotai';
+
+import {
+  backEnable,
+  getAccessToken,
+  handleNativeShare,
+  navigateNativeRoute,
+  navigationEnable,
+} from '@utils/bridge';
 
 const Home = () => {
-  const [tab, setTab] = React.useState('AROUND');
+  const [tab, setTab] = useState('AROUND');
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
+
+  const bottomRef = useRef<BottomSheetRef>(null);
+  const lat = useAtomValue(mapAtom);
+
+  const handleMarkerClick = () => {
+    bottomRef.current?.snapTo(97);
+  };
 
   return (
     <>
       <AppScreen>
-        <NaverMap />
-        <HomeBottomSheet>
-          <div className={'container-inner'}>
-            <div className={'home-content-container'}>
-              <BottomSheetHeader />
-              <AddPlaceCard />
-              <Tab.Root defaultId={tab} setState={setTab}>
-                <Tab id={'AROUND'} color={'main500'}>
-                  둘러 보기
-                </Tab>
-                <Tab id={'ALL'} color={'main500'}>
-                  전체 보기
-                </Tab>
-              </Tab.Root>
-              <AnimatePresence mode="sync">
-                {tab === 'AROUND' ? <HomeAround /> : <HomeSeeAll />}
-              </AnimatePresence>
+        <AnimatePresence>
+          <HomeHeader />
+          <HomeMap
+            map={map}
+            setMap={setMap}
+            handleMarkerClick={handleMarkerClick}
+          />
+          <FixedPlaceDetail />
+          <HomeBottomSheet ref={bottomRef}>
+            <div className={'container-inner'}>
+              <div className={'home-content-container'}>
+                <button
+                  onClick={() => getAccessToken()}
+                  className={'text-m-medium'}
+                >
+                  getAccessToken
+                </button>
+                <button
+                  onClick={() => backEnable()}
+                  className={'text-m-medium'}
+                >
+                  backEnable
+                </button>
+                <button
+                  onClick={() => backEnable(false)}
+                  className={'text-m-medium'}
+                >
+                  backDisable
+                </button>
+                <button
+                  onClick={() => navigationEnable()}
+                  className={'text-m-medium'}
+                >
+                  navigationEnable
+                </button>
+                <button
+                  onClick={() => navigationEnable(false)}
+                  className={'text-m-medium'}
+                >
+                  navigationDisable
+                </button>
+                <button
+                  onClick={() => handleNativeShare()}
+                  className={'text-m-medium'}
+                >
+                  handleNativeShare
+                </button>
+                <button
+                  onClick={() => navigateNativeRoute('editRestaurantInfo')}
+                  className={'text-m-medium'}
+                >
+                  navigateNativeRoute
+                </button>
+                <Suspense fallback={'loading'}>
+                  <HomePlaceList />
+                </Suspense>
+              </div>
             </div>
-          </div>
-        </HomeBottomSheet>
+          </HomeBottomSheet>
+        </AnimatePresence>
       </AppScreen>
     </>
   );

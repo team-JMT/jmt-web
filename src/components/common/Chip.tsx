@@ -20,7 +20,7 @@ export const StyledChip = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0.4rem 1.2rem 0.4rem 1rem;
+  padding: 0.4rem 1rem 0.4rem 1.2rem;
   white-space: nowrap;
   gap: 0.4rem;
   width: fit-content;

@@ -3,12 +3,16 @@ import { historySyncPlugin } from '@stackflow/plugin-history-sync';
 import { basicRendererPlugin } from '@stackflow/plugin-renderer-basic';
 import { stackflow } from '@stackflow/react';
 
+import LocationMapPreview from '@pages/LocationMapPreview';
+import LocationResult from '@pages/LocationResult';
+import LocationSearch from '@pages/LocationSearch';
 import OtherProfile from '@pages/OtherProfile';
 import SearchResult from '@pages/SearchResult';
 
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import PlaceDetail from '../pages/PlaceDetail';
+import Report from '../pages/Report';
 import Search from '../pages/Search';
 
 export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
@@ -21,10 +25,14 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
     historySyncPlugin({
       routes: {
         Home: '/',
+        LocationSearch: '/location-search',
+        LocationResult: '/location-result/:keyword',
+        LocationMapPreview: '/location-map-preview',
         Search: '/search',
         SearchResult: '/search/:keyword',
         PlaceDetail: '/detail/:placeId',
-        OtherProfile: '/profile/:userName',
+        OtherProfile: '/profile/:userId',
+        Report: '/report/:placeId',
         NotFound: '/error',
       },
       fallbackActivity: () => 'NotFound',
@@ -37,7 +45,11 @@ export const { Stack: HomeStack, useFlow: useHomeFlow } = stackflow({
     SearchResult,
     PlaceDetail,
     OtherProfile,
+    Report,
     NotFound,
+    LocationSearch,
+    LocationResult,
+    LocationMapPreview,
   },
   // initialActivity: () => 'Home',
 });

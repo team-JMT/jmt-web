@@ -6,7 +6,7 @@ export type Pagination = {
 
 export type PageMeta = {
   currentPage: number;
-  empty: number;
+  empty: boolean;
   numberOfElements: number;
   pageFirst: boolean;
   pageLast: boolean;

@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 
+import { highlightText } from '@utils/highlightText';
+
 import { Restaurant } from '../../models/getRestaurantData';
 
 interface PlaceInfoCardProps extends Restaurant {
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+  inputValue?: string;
 }
-const PlaceInfoCard = ({ name, address, onClick }: PlaceInfoCardProps) => {
+const PlaceInfoCard = ({
+  name,
+  address,
+  onClick,
+  inputValue,
+}: PlaceInfoCardProps) => {
   return (
     <CardContainer onClick={onClick}>
-      <div className={'text-l-bold'}>{name}</div>
+      <div className={'text-l-bold'}>{highlightText(name, inputValue)}</div>
       <div className={'text-m-medium'}>내 위치에서 100m</div>
-      <div className={'text-m-medium'}>{address}</div>
     </CardContainer>
   );
 };

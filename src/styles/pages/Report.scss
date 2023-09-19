@@ -1,0 +1,26 @@
+@use '../theme';
+.report-container {
+  margin: 20px 20px 0px 20px;
+}
+.report-text {
+  color: theme.$gray700;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.28px;
+  margin-bottom: 12px;
+}
+.gray-bar {
+  width: calc(100% + 40px);
+  height: 8px;
+  position: relative;
+  left: -20px;
+  background-color: theme.$gray100;
+  margin: 20px 0 24px 0;
+}
+.reason-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

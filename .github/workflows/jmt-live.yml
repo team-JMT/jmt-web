@@ -4,17 +4,11 @@ on:
   push:
     branches:
       - master
-    paths:
-      - "src/**"
-      - ".github/workflows/jmt-live.yml"
   pull_request:
     branches:
       - master
     types:
       - closed
-    paths:
-      - "src/**"
-      - ".github/workflows/jmt-live.yml"
 jobs:
   Deploy_Live_channel:
     if: github.event.pull_request.merged == true
@@ -46,7 +40,7 @@ jobs:
         run: yarn install
       - name: Project Build
         run: yarn build
-      - uses: HyeokE/action-hosting-deploy@main
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         id: run_firebase_deploy
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -55,18 +49,3 @@ jobs:
           projectId: jmt-web
           target: jmt-web
           entryPoint: ${{ env.working-directory }}
-      - name: action-slack
-        uses: 8398a7/action-slack@v3
-        with:
-          status: custom
-          fields: workflow,job,commit,repo,ref,author,took
-          custom_payload: |
-            {
-              attachments: [{
-                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}\n\n @${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}\n\n URL: https://jmt-matzip.dev`,
-              }]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: always()
