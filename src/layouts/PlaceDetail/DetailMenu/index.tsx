@@ -53,7 +53,7 @@ const DetailMenu = () => {
           <LayoutGroup>
             {menuList.map((item, index) => {
               return (
-                <MenuWrapper>
+                <MenuWrapper key={index}>
                   <Menu
                     className={'text-m-bold'}
                     key={index}

@@ -2,7 +2,7 @@ import React from 'react';
 
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 
-import getUrlValue from '@hooks/getUrlValue';
+import getUrlValue from '@utils/getUrlValue';
 
 import {
   Text,
@@ -13,6 +13,7 @@ import {
   UserWrapper,
   UserImg,
   UserText,
+  Introduce,
 } from './styled';
 
 const Recommander = () => {
@@ -44,21 +45,15 @@ const Recommander = () => {
       )}
       <GrayBar />
       <UserWrapper>
-        <UserImg />
+        <UserImg src={DetailData?.userProfileImageUrl} />
         <UserText>
-          <div className={'title-s-bold'}>asdfdf</div>
-          <div className={'gray'}>as</div>
+          <div className={'title-s-bold'}>{DetailData?.userNickName}</div>
+          <div className={'gray'}>추천한 맛집이예요!</div>
         </UserText>
       </UserWrapper>
       <GrayBar />
       <Text className={'text-m-medium'}>멤버의 추천 한마디 ✍️</Text>
-      <div className={'text-l-medium'}>
-        너무 맛있어서 키절 안먹으면 바보 안녕하세요? 너무 맛있어서 키절 안먹으면
-        바보 안녕하세요? 너무 맛있어서 키절 안먹으면 바보 안녕하세요?너 무
-        맛있어서 키절 안먹으면 바보 안녕하세요?너무 맛있어서 키절 안먹으면 바보
-        안녕하세요?너무 맛있어서 키절 안먹으면 바보 안녕하세요?너무 맛있어서
-        키절 안먹으면 바보 안녕하세요?너무 맛있어서 키절
-      </div>
+      <Introduce className={'text-l-medium'}>{DetailData?.introduce}</Introduce>
     </>
   );
 };

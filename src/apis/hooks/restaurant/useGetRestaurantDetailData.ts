@@ -7,7 +7,7 @@ const useGetRestaurantDetailData = (id?: number) => {
   const { data, error, ...rest } = useQuery(
     [Keys.RESTAURANT_DETAIL, id],
     () => getRestaurantDetailData(id!),
-    { enabled: Boolean(id), suspense: true, staleTime: 20000 },
+    { enabled: Boolean(id), suspense: true, staleTime: Infinity },
   );
   return {
     DetailData: data && data.data.data,

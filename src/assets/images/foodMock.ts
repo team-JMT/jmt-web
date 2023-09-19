@@ -8,11 +8,11 @@ import other from './other-food.png';
 import western from './western.png';
 export const FoodMock = {
   CAFE: cafe,
-  CHINESE: chinese,
+  CHINA: chinese,
   FUSION: fusion,
-  JAPANESE: japanese,
-  KOREAN: korean,
-  OTHER: other,
-  WESTERN: western,
+  JAPAN: japanese,
+  KOREA: korean,
+  ETC: other,
+  FOREIGN: western,
   BAR: bar,
 };

@@ -2,17 +2,25 @@ import React, { useEffect, useRef } from 'react';
 
 import { usePostSearchRestaurantInfinite } from '@apis/hooks/restaurant/usePostSearchRestaurantInfinite';
 import DownArrow from '@assets/icons/DownArrow';
-import BottomSheet from '@commons/BottomSheet';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
+import DrinkCategoryFilter from '@components/common/FilterBottomSheet/DrinkCategoryFilter';
+import FoodCategoryFilter from '@components/common/FilterBottomSheet/FoodCategoryFilter';
+import SortBy from '@components/common/FilterBottomSheet/SortBy';
 import PlaceDetailCard from '@components/home/PlaceDetailCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
+import {
+  foodCategoryState,
+  drinkCategoryState,
+  SortKey,
+  sortByState,
+} from '@store/filterAtom';
 import { mapAtom } from '@store/mapAtom';
 import { setPlacesAtom } from '@store/placesAtom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { useSetAtom, useAtomValue } from 'jotai';
+import { useAtom, useSetAtom, useAtomValue } from 'jotai';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
@@ -79,6 +87,10 @@ const HomePlaceList = () => {
     setPlaces(mappingRestaurantData);
   }, [mappingRestaurantData]);
 
+  const [foodState] = useAtom(foodCategoryState);
+  const [drinkState] = useAtom(drinkCategoryState);
+  const [sortState] = useAtom(sortByState);
+
   return (
     <motion.div
       initial="hidden"
@@ -89,14 +101,20 @@ const HomePlaceList = () => {
     >
       <aside className={'see-all-filter'}>
         <Chip onClick={() => handleOpenBottomSheet('SORT_BY')}>
-          가까운 순
+          {SortKey[sortState]}
           <DownArrow />
         </Chip>
         <div className={classNames('filter-divider', 'gray200')} />
-        <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
+        <FilterChip
+          active={foodState !== ''}
+          onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}
+        >
           종류
         </FilterChip>
-        <FilterChip onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}>
+        <FilterChip
+          active={drinkState !== ''}
+          onClick={() => handleOpenBottomSheet('DRINK_CATEGORY')}
+        >
           주류 여부
         </FilterChip>
       </aside>
@@ -123,8 +141,9 @@ const HomePlaceList = () => {
           )}
         </>
       </section>
-      <BottomSheet type={'FOOD_CATEGORY'} content={<div>FOOD_CATEGORY</div>} />
-      <BottomSheet type={'SORT_BY'} content={<div>SORT_BY</div>} />
+      <SortBy />
+      <FoodCategoryFilter />
+      <DrinkCategoryFilter />
     </motion.div>
   );
 };

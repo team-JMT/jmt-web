@@ -10,6 +10,7 @@ export const BottomWrapper = styled.div`
   height: 110px;
   border-top: 1px solid #f1f3f4;
   background: #ffffff;
+  z-index: 5;
 `;
 export const Heart = styled.div`
   display: flex;

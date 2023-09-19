@@ -1,5 +1,9 @@
 import { instance } from '@apis/common/Api';
 import { Pagination, Response } from '@apis/common/types';
+import {
+  RestaurantByUserRequest,
+  RestaurantByUserResponse,
+} from '@apis/responses/Restaurant/GetRestaurantByUser';
 import { GetRestaurantDataResponse } from '@apis/responses/Restaurant/GetRestaurantData';
 import { GetRestaurantSearchResponse } from '@apis/responses/Restaurant/GetRestaurantSearch';
 import {
@@ -8,7 +12,7 @@ import {
 } from '@apis/responses/Restaurant/PostMapSearchRestaurant';
 import qs from 'qs';
 
-import { RestaurantDetail } from '../../../models/restaurantDetail';
+import { RestaurantDetail } from '../../../models/getRestaurantDetail';
 
 export const getRestaurantData = async (params: Pagination) =>
   await instance.get<Response<GetRestaurantDataResponse>>(
@@ -26,6 +30,17 @@ export const searchMapRestaurantData = async ({
     `/api/v1/restaurant/search/map?${qs.stringify(params)}`,
     rest,
   );
+
+export const searchRestaurantByUser = async ({
+  params,
+  userId,
+  ...rest
+}: RestaurantByUserRequest) =>
+  await instance.post<Response<RestaurantByUserResponse>>(
+    `/api/v1/restaurant/search/${userId}?${qs.stringify(params)}`,
+    rest,
+  );
+
 export const getRestaurantDetailData = async (id: number) =>
   await instance.get<Response<RestaurantDetail>>('/api/v1/restaurant/' + id);
 
