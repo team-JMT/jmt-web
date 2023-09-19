@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+  "namespace": "android_app",
+  "package_name": "org.gdsc.jmt.dev",
+  "sha256_cert_fingerprints":
+  ["34:72:76:20:C4:C9:37:3D:F3:27:BB:18:EA:9E:AC:AD:38:BB:28:A0:87:19:FC:F7:37:26:99:E1:10:47:4F:45"]
+}
+}]
