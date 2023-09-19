@@ -43,9 +43,11 @@ export function backEnable(enable = true) {
   } else {
     // android
     console.log('backEnable', enable);
-    window?.webviewBridge?.back({
-      isEnableBack: enable,
-    });
+    window?.webviewBridge?.back(
+      JSON.stringify({
+        isEnableBack: enable,
+      }),
+    );
   }
 }
 
@@ -63,9 +65,11 @@ export function navigationEnable(visible = true) {
   } else {
     // android
     console.log('navigation', visible);
-    window?.webviewBridge?.navigation({
-      isVisible: visible,
-    });
+    window?.webviewBridge?.navigation(
+      JSON.stringify({
+        isVisible: visible,
+      }),
+    );
   }
 }
 
@@ -85,7 +89,7 @@ export function handleNativeShare() {
   }
 }
 
-export function navigateNativeRoute(route: string) {
+export function navigateNativeRoute(route: string, params?: any) {
   if (window.webkit) {
     // ios
     console.log('navigate', route);
@@ -93,15 +97,18 @@ export function navigateNativeRoute(route: string) {
       JSON.stringify({
         event: 'navigate',
         route: route,
+        ...params,
       }),
     );
   } else {
     // android
-
     console.log('navigate', route);
-    window?.webviewBridge?.navigate({
-      route: route,
-    });
+    window?.webviewBridge?.navigate(
+      JSON.stringify({
+        route: route,
+        ...params,
+      }),
+    );
   }
 }
 
