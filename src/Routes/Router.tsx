@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HomeStack } from '../stacks/homeStackFlow';
+import { HomeStack } from '@stacks/homeStackFlow';
 
 const Router = () => {
   return <HomeStack />;

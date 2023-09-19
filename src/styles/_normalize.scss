@@ -44,12 +44,6 @@
   -webkit-tap-highlight-color: transparent;
   transition: color, background-color 0.3s ease-in-out;
   font-family: 'Pretendard', sans-serif;
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-
-}
-*::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
 }
 /* Document
    ========================================================================== */
@@ -104,7 +98,7 @@ h1 {
 hr {
   box-sizing: content-box; /* 1 */
   height: 0; /* 1 */
-  overflow: visible; /* 2 */
+
 }
 
 /**
@@ -236,7 +230,7 @@ html {
 button,
 input {
   /* 1 */
-  overflow: visible;
+
 }
 
 /**
@@ -320,9 +314,7 @@ progress {
    * Remove the default vertical scrollbar in IE 10+.
    */
 
-textarea {
-  overflow: auto;
-}
+
 
 /**
    * 1. Add the correct box sizing in IE 10.

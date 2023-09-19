@@ -1,9 +1,12 @@
 import React from 'react';
 
 import { useGetLocationSearch } from '@apis/hooks/location/useGetLocationSearch';
+import SadImage from '@assets/icons/SadImage';
+import IconNotice from '@commons/IconNotice';
 import LocationResultCard from '@components/locationResult/LocationResultCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { setSelectedLocationAtom } from '@store/locationAtom';
+import classNames from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import { LocationSearchData } from '../../models/locationSearchData';
@@ -21,13 +24,27 @@ const LocationResultList = ({ keyword }: LocationResultListProps) => {
 
   const handleCardClick = (location: LocationSearchData) => {
     setSelectedLocation({
-      placeName: location.place_name,
-      addressName: location.road_address_name ?? location.address_name,
+      placeName: location.placeName,
+      addressName: location.roadAddressName ?? location.addressName,
       x: location.x,
       y: location.y,
     });
     push('LocationMapPreview', {});
   };
+  if (locationSearchData?.length === 0) {
+    return (
+      <section className={'list-center'}>
+        <IconNotice
+          image={<SadImage />}
+          text={
+            <span className={classNames('text-l-bold', 'gray300')}>
+              검색 결과가 없어요
+            </span>
+          }
+        />
+      </section>
+    );
+  }
 
   return (
     <section className={'list-container'}>
@@ -36,9 +53,9 @@ const LocationResultList = ({ keyword }: LocationResultListProps) => {
           <LocationResultCard
             key={index}
             onClick={() => handleCardClick(place)}
-            addressName={place.address_name}
-            roadAddressName={place.road_address_name}
-            placeName={place.place_name}
+            addressName={place.addressName}
+            roadAddressName={place.roadAddressName}
+            placeName={place.placeName}
           />
         ))}
     </section>

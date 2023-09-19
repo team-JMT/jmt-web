@@ -1,7 +1,7 @@
 export type LocationSearchData = {
-  place_name: string;
-  address_name: string;
-  road_address_name: string;
+  placeName: string;
+  addressName: string;
+  roadAddressName: string;
   x: string;
   y: string;
 };

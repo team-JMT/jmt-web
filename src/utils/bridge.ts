@@ -1,20 +1,29 @@
+import { LocationSearchData } from '../models/locationSearchData';
+
 import { nativeInfo } from './storage';
 
 function setAccessToken(accessToken: string) {
   console.log('setAccessToken', accessToken);
+  const prevState = nativeInfo.getData();
   nativeInfo.setData({
+    ...prevState,
     accessToken: accessToken,
+  });
+}
+
+function setUserPosition(userPosition: string) {
+  const position = JSON.parse(userPosition) as LocationSearchData;
+  const prevState = nativeInfo.getData();
+  console.log('setUserPosition', position);
+  nativeInfo.setData({
+    ...prevState,
+    userPosition: position,
   });
 }
 
 function backEvent() {
   console.log('backEvent');
   history.back();
-}
-
-if (window) {
-  window.setAccessToken = setAccessToken;
-  window.backEvent = backEvent;
 }
 
 export function getAccessToken() {
@@ -30,6 +39,21 @@ export function getAccessToken() {
     window?.webviewBridge?.token();
   }
 }
+
+export function getUserPosition() {
+  if (window.webkit) {
+    console.log('userPosition');
+    window.webkit.messageHandlers.callbackHandler.postMessage(
+      JSON.stringify({
+        event: 'userPosition',
+      }),
+    );
+  } else {
+    console.log('userPosition');
+    window?.webviewBridge?.userPosition();
+  }
+}
+
 export function backEnable(enable = true) {
   if (window.webkit) {
     // ios
@@ -51,7 +75,7 @@ export function backEnable(enable = true) {
   }
 }
 
-export function navigationEnable(visible = true) {
+export function navigationHandler(visible = true) {
   if (window.webkit) {
     // ios
     console.log('navigation', visible);
@@ -119,6 +143,12 @@ type NativeRoute = {
     };
   };
 };
+
+if (window) {
+  window.setAccessToken = setAccessToken;
+  window.setUserPosition = setUserPosition;
+  window.backEvent = backEvent;
+}
 
 type NativeRouteKey = keyof NativeRoute;
 type NativeRouteParams<T extends NativeRouteKey> = NativeRoute[T]['params'];

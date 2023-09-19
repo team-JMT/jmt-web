@@ -1,9 +1,12 @@
 import React, { useRef } from 'react';
 
 import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
+import SadImage from '@assets/icons/SadImage';
+import IconNotice from '@commons/IconNotice';
 import SearchResultCard from '@components/searchResult/SearchResultCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { addSearchLogAtom } from '@store/searchLogAtom';
+import classNames from 'classnames';
 import { useSetAtom } from 'jotai/index';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
@@ -30,7 +33,8 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
       return null;
     }
 
-    return restaurantSearchData[0].data.page.pageLast;
+    return restaurantSearchData[restaurantSearchData.length - 1].data.page
+      .pageLast;
   };
 
   const handleIntersect = () => {
@@ -48,6 +52,21 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
     observeRef,
     onIntersect: handleIntersect,
   });
+
+  if (mappingRestaurantSearch?.length === 0) {
+    return (
+      <section className={'list-center'}>
+        <IconNotice
+          image={<SadImage />}
+          text={
+            <span className={classNames('text-l-bold', 'gray300')}>
+              검색 결과가 없어요
+            </span>
+          }
+        />
+      </section>
+    );
+  }
 
   return (
     <section className={'list-container'}>

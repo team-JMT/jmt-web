@@ -28,18 +28,22 @@ export const usePostSearchRestaurantInfinite = ({
   filter,
 }: PostRestaurantSearchRequest) => {
   const { data, ...rest } = useInfiniteQuery(
-    [Keys.RESTAURANT, startLocation, endLocation, filter],
+    [Keys.RESTAURANT, params, filter],
     ({ pageParam = 0 }) =>
       fetchPostSearchRestaurantData({
-        params: { page: pageParam },
+        params: {
+          ...params,
+          page: pageParam,
+        },
         startLocation,
         endLocation,
         filter,
       }),
     {
-      enabled: Boolean(startLocation && endLocation),
+      enabled: false,
       getNextPageParam: (data) => {
         const { pageLast, currentPage } = data.data.page;
+        console.log(pageLast);
         if (!pageLast) {
           return currentPage + 1;
         }

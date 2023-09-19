@@ -1,4 +1,6 @@
-function makeStorage<T>(initialValue: T) {
+import { LocationSearchData } from '../models/locationSearchData';
+
+function makeStorage<T extends Record<string, any>>(initialValue: T) {
   let data = initialValue;
 
   return {
@@ -11,8 +13,16 @@ function makeStorage<T>(initialValue: T) {
 
 type NativeInfo = {
   accessToken: string;
+  userPosition: LocationSearchData;
 };
 
 export const nativeInfo = makeStorage<NativeInfo>({
   accessToken: '',
+  userPosition: {
+    placeName: '',
+    addressName: '',
+    roadAddressName: '',
+    x: '',
+    y: '',
+  },
 });

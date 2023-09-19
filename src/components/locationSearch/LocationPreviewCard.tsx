@@ -8,19 +8,19 @@ import { highlightText } from '@utils/highlightText';
 import { LocationSearchData } from '../../models/locationSearchData';
 
 interface LocationPreviewCardProps
-  extends Pick<LocationSearchData, 'place_name'> {
+  extends Pick<LocationSearchData, 'placeName'> {
   inputValue?: string;
   onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 const LocationPreviewCard = ({
-  place_name,
+  placeName,
   inputValue,
   onClick,
 }: LocationPreviewCardProps) => {
   return (
     <CardContainer onClick={onClick}>
       <span className={'text-l-bold'}>
-        {highlightText(place_name, inputValue)}
+        {highlightText(placeName, inputValue)}
       </span>
     </CardContainer>
   );

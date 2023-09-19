@@ -32,7 +32,7 @@ const HomePlaceList = () => {
 
   const lat = useAtomValue(mapAtom);
   const setPlaces = useSetAtom(setPlacesAtom);
-  const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
+  const { restaurantData, fetchNextPage, isEmpty, refetch } =
     usePostSearchRestaurantInfinite({
       startLocation: lat?.북동_좌표,
       endLocation: lat?.남서_좌표,
@@ -47,17 +47,16 @@ const HomePlaceList = () => {
     });
 
   const mappingRestaurantData = React.useMemo(
-    () => restaurantData?.flatMap((page) => page.data.restaurant),
+    () => restaurantData?.flatMap((page) => page.data.restaurants),
     [restaurantData],
   );
-  console.log('isEmpty', isEmpty);
 
   const isLastPage = () => {
     if (!restaurantData) {
       return null;
     }
 
-    return restaurantData[0].data.page.pageLast;
+    return restaurantData[restaurantData.length - 1].data.page.pageLast;
   };
 
   const handleIntersect = () => {
@@ -76,7 +75,6 @@ const HomePlaceList = () => {
   });
 
   useEffect(() => {
-    console.log('mappingRestaurantData', mappingRestaurantData);
     if (!mappingRestaurantData) {
       return;
     }
@@ -121,7 +119,7 @@ const HomePlaceList = () => {
       <section className={'place-detail-section'}>
         <>
           {isEmpty ? (
-            <div>111</div>
+            <div>비어있어요.</div>
           ) : (
             <>
               {mappingRestaurantData &&
