@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Keys } from '@apis/common/Keys';
 import { useGetCurrentLocation } from '@apis/hooks/location/useGetCurrentLocation';
@@ -8,6 +8,7 @@ import RefreshIcon from '@assets/icons/RefreshIcon';
 import SolidDownArrow from '@assets/icons/SolidDownArrow';
 import { SearchInputMock } from '@commons/input/SearchInput';
 import styled from '@emotion/styled';
+import { getDrinkCategoryAtom, getFoodCategoryAtom } from '@store/filterAtom';
 import { getCurrentLocationAtom } from '@store/locationAtom';
 import { mapAtom } from '@store/mapAtom';
 import { colors } from '@styles/theme/color';
@@ -57,17 +58,23 @@ export const MyPlaceContainer = styled.div`
 const HomeHeader = () => {
   const { push } = useHomeFlow();
   const { addressName } = useAtomValue(getCurrentLocationAtom);
-  const lat = useAtomValue(mapAtom);
+
   const currentLocation = nativeInfo.getData();
   const { currentLocationData } = useGetCurrentLocation(
     currentLocation.userPosition,
   );
+
+  const lat = useAtomValue(mapAtom);
+
+  const isCanDrinkLiquor = useAtomValue(getDrinkCategoryAtom);
+  const categoryFilter = useAtomValue(getFoodCategoryAtom);
+
   const { refetch } = usePostSearchRestaurantInfinite({
     startLocation: lat?.북동_좌표,
     endLocation: lat?.남서_좌표,
     filter: {
-      categoryFilter: undefined,
-      isCanDrinkLiquor: true,
+      categoryFilter: categoryFilter,
+      isCanDrinkLiquor: isCanDrinkLiquor,
     },
     params: {
       page: 0,
@@ -79,6 +86,10 @@ const HomeHeader = () => {
     await refetch();
     await queryClient.invalidateQueries([Keys.RESTAURANT]);
   };
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <Container>

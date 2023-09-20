@@ -11,29 +11,42 @@ export const FoodKey = {
   BAR: '주점',
   ETC: '기타',
 } as const;
-export type FoodCheck = keyof typeof FoodKey | '';
-export const foodCategoryState = atom<FoodCheck>('');
+export type FoodCheck = keyof typeof FoodKey;
+export const foodCategoryState = atom<FoodCheck | undefined>(undefined);
+
+export const getFoodCategoryAtom = atom((get) => {
+  const food = get(foodCategoryState);
+  return food;
+});
 
 export const LiquorKey = {
   POSSIBLE: '주류 가능',
   IMPOSSIBLE: '주류 불가능/모름',
 } as const;
-export type DrinkCheck = keyof typeof LiquorKey | '';
-export const drinkCategoryState = atom<DrinkCheck>('');
+export type DrinkCheck = keyof typeof LiquorKey | undefined;
+export const drinkCategoryState = atom<DrinkCheck | undefined>(undefined);
+
+export const getDrinkCategoryAtom = atom((get) => {
+  const drink = get(drinkCategoryState);
+  return drinkToBoolean(drink);
+});
 
 export const drinkToBoolean = (drink: DrinkCheck) => {
   if (drink === 'POSSIBLE') {
     return true;
-  } else if (drink === 'IMPOSSIBLE') {
+  }
+  if (drink === 'IMPOSSIBLE') {
     return false;
-  } else {
+  }
+
+  if (drink === undefined) {
     return undefined;
   }
 };
 
 export const SortKey = {
   NEAR: '가까운 순',
-  LIEK: '좋아요 순',
+  LIKE: '좋아요 순',
   RECENT: '최신 순',
 } as const;
 export type SortCheck = keyof typeof SortKey;

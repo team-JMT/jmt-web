@@ -2,8 +2,10 @@ import React, { useEffect, useRef } from 'react';
 
 import { usePostSearchRestaurantInfinite } from '@apis/hooks/restaurant/usePostSearchRestaurantInfinite';
 import DownArrow from '@assets/icons/DownArrow';
+import SadImage from '@assets/icons/SadImage';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
+import IconNotice from '@commons/IconNotice';
 import DrinkCategoryFilter from '@components/common/FilterBottomSheet/DrinkCategoryFilter';
 import FoodCategoryFilter from '@components/common/FilterBottomSheet/FoodCategoryFilter';
 import SortBy from '@components/common/FilterBottomSheet/SortBy';
@@ -15,6 +17,8 @@ import {
   drinkCategoryState,
   SortKey,
   sortByState,
+  getDrinkCategoryAtom,
+  getFoodCategoryAtom,
 } from '@store/filterAtom';
 import { mapAtom } from '@store/mapAtom';
 import { setPlacesAtom } from '@store/placesAtom';
@@ -32,13 +36,17 @@ const HomePlaceList = () => {
 
   const lat = useAtomValue(mapAtom);
   const setPlaces = useSetAtom(setPlacesAtom);
+
+  const isCanDrinkLiquor = useAtomValue(getDrinkCategoryAtom);
+  const categoryFilter = useAtomValue(getFoodCategoryAtom);
+
   const { restaurantData, fetchNextPage, isEmpty, refetch } =
     usePostSearchRestaurantInfinite({
       startLocation: lat?.북동_좌표,
       endLocation: lat?.남서_좌표,
       filter: {
-        categoryFilter: undefined,
-        isCanDrinkLiquor: true,
+        categoryFilter: categoryFilter,
+        isCanDrinkLiquor: isCanDrinkLiquor,
       },
       params: {
         page: 0,
@@ -104,13 +112,13 @@ const HomePlaceList = () => {
         </Chip>
         <div className={classNames('filter-divider', 'gray200')} />
         <FilterChip
-          active={foodState !== ''}
+          active={foodState !== undefined}
           onClick={() => handleOpenBottomSheet('FOOD_CATEGORY')}
         >
           종류
         </FilterChip>
         <FilterChip
-          active={drinkState !== ''}
+          active={drinkState !== undefined}
           onClick={() => handleOpenBottomSheet('DRINK_CATEGORY')}
         >
           주류 여부
@@ -119,7 +127,16 @@ const HomePlaceList = () => {
       <section className={'place-detail-section'}>
         <>
           {isEmpty ? (
-            <div>비어있어요.</div>
+            <section className={'list-center'}>
+              <IconNotice
+                image={<SadImage />}
+                text={
+                  <span className={classNames('text-l-bold', 'gray300')}>
+                    검색 결과가 없어요
+                  </span>
+                }
+              />
+            </section>
           ) : (
             <>
               {mappingRestaurantData &&
