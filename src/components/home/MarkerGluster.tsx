@@ -1,4 +1,4 @@
-import { memo, RefObject, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Overlay, useMap, useNavermaps } from 'react-naver-maps';
 
 import { useGetClusterIcon } from '@hooks/useGetClusterIcon';
@@ -11,7 +11,7 @@ function MarkerCluster({
   markers,
   markerInfo,
 }: {
-  markers: Array<RefObject<naver.maps.Marker>>;
+  markers: naver.maps.Marker[];
   markerInfo?: Restaurant[];
 }) {
   const navermaps = useNavermaps();
@@ -24,7 +24,7 @@ function MarkerCluster({
 
   const getCluster = () => {
     const markerList = markers.map((_marker) => {
-      return _marker.current;
+      return _marker;
     });
 
     // @ts-ignore

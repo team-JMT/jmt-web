@@ -18,6 +18,6 @@ export type PostRestaurantSearchRequest = {
   params: Pagination;
 };
 export type PostRestaurantSearchResponse = {
-  restaurant: Restaurant[];
+  restaurants: Restaurant[];
   page: PageMeta;
 };

@@ -89,7 +89,7 @@ const LocationSearch = () => {
       }}
     >
       <main className={'safe-area-layout-container'}>
-        <div className={'container-inner'}>
+        <div className={'container-inner-padding'}>
           <div className={'search-input-wrapper'}>
             <SearchInput
               ref={searchRef}

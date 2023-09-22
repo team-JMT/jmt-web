@@ -21,7 +21,7 @@ const ImgBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  min-width: 100px;
   height: 100px;
   margin-right: 1.6rem;
 `;

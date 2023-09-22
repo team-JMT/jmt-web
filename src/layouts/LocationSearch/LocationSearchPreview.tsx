@@ -30,11 +30,11 @@ const LocationSearchPreview = ({ inputValue }: SearchResultProps) => {
     (e: MouseEvent<HTMLDivElement>) => (place: LocationSearchData) => {
       e.stopPropagation();
       setTimeout(() => {
-        const encodeName = encodeURI(place.place_name);
+        const encodeName = encodeURI(place.placeName);
         push('LocationResult', {
           keyword: encodeName,
         });
-        addLocationSearchLog({ name: place.place_name });
+        addLocationSearchLog({ name: place.placeName });
       }, 0);
     };
 
@@ -44,7 +44,7 @@ const LocationSearchPreview = ({ inputValue }: SearchResultProps) => {
         locationSearchData.map((place, index) => (
           <LocationPreviewCard
             inputValue={inputValue}
-            place_name={place.place_name}
+            placeName={place.placeName}
             onClick={(e) => onSearch(e)(place)}
             key={index}
           />
