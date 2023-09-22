@@ -22,12 +22,14 @@ export type DrinkCheck = keyof typeof LiquorKey | '';
 export const drinkCategoryState = atom<DrinkCheck>('');
 
 export const drinkToBoolean = (drink: DrinkCheck) => {
+  if (drink === '') {
+    return undefined;
+  }
   if (drink === 'POSSIBLE') {
     return true;
-  } else if (drink === 'IMPOSSIBLE') {
+  }
+  if (drink === 'IMPOSSIBLE') {
     return false;
-  } else {
-    return undefined;
   }
 };
 

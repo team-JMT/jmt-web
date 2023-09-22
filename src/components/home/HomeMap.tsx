@@ -1,29 +1,32 @@
-import React, { memo, useCallback, useEffect, useRef } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { NaverMap, useNavermaps, Container as MapDiv } from 'react-naver-maps';
 
 import MarkerCluster from '@components/home/MarkerGluster';
-import { mapAtom } from '@store/mapAtom';
+import { getCurrentLocationAtom } from '@store/locationAtom';
+import { mapLatAtom, naverMapAtom } from '@store/mapAtom';
 import { focusedPlaceAtom, placesAtom } from '@store/placesAtom';
-import { useAtomValue, useSetAtom } from 'jotai';
-
-import { createBounds } from '@utils/createBounds';
+import { useAtomValue, useSetAtom, useAtom } from 'jotai';
+import { throttle } from 'lodash-es';
 
 interface HomeMapProps {
-  map: naver.maps.Map | null;
-  setMap: React.Dispatch<React.SetStateAction<naver.maps.Map | null>>;
   handleMarkerClick?: () => void;
 }
 
-const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
+const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
+  const [map, setMap] = useAtom(naverMapAtom);
   const setFocusedPlace = useSetAtom(focusedPlaceAtom);
-  const places = useAtomValue(placesAtom);
+
+  const [currentLat, setCurrentLat] = useState<
+    naver.maps.Coord | naver.maps.CoordLiteral | undefined
+  >();
 
   const navermaps = useNavermaps();
   const placesAtomValue = useAtomValue(placesAtom);
 
   const markerList = useRef<naver.maps.Marker[]>([]);
 
-  const setLat = useSetAtom(mapAtom);
+  const { x, y } = useAtomValue(getCurrentLocationAtom);
+  const setLat = useSetAtom(mapLatAtom);
 
   const setLatHandler = useCallback(() => {
     const mapLat = map?.getBounds();
@@ -46,13 +49,8 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
   }, [map]);
 
   useEffect(() => {
-    setLatHandler();
-  }, [map]);
-
-  useEffect(() => {
-    const bounds = createBounds(places);
-    map?.fitBounds(bounds);
-  }, []);
+    setCurrentLat(new navermaps.LatLng(Number(y), Number(x)));
+  }, [x, y]);
 
   const addMarkerHandler = useCallback(() => {
     if (!map) {
@@ -70,23 +68,23 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
         position: new navermaps.LatLng(place.y, place.x),
       });
 
-      markerList.current.push(marker);
-
-      navermaps.Event?.addListener(marker, 'click', (e) => {
-        map.panTo(new navermaps.LatLng(place.y, place.x));
-        const idle = navermaps.Event.addListener(map, 'idle', async () => {
+      function getClickHandler(marker: naver.maps.Marker) {
+        return function () {
           setFocusedPlace(place);
-          navermaps.Event.removeListener(idle);
-        });
-        handleMarkerClick && handleMarkerClick();
+          map?.panTo(marker.getOptions('position'));
+          handleMarkerClick && handleMarkerClick();
+        };
+      }
+
+      navermaps.Event?.addListener(marker, 'click', getClickHandler(marker));
+
+      navermaps.Event.addListener(map, 'idle', function () {
+        markerList.current.push(marker);
       });
     });
-  }, [placesAtomValue, map]);
+  }, [placesAtomValue]);
 
   const removeMarkerHandler = useCallback(() => {
-    if (!Array.isArray(markerList.current)) {
-      return;
-    }
     // 기존 마커 있는 경우, 초기화
     if (markerList.current[0]) {
       markerList.current.forEach((e) => {
@@ -98,9 +96,20 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
   }, [markerList]);
 
   useEffect(() => {
+    if (!map) {
+      return;
+    }
+    navermaps.Event?.addListener(
+      map,
+      'bounds_changed',
+      throttle(setLatHandler, 1000),
+    );
+  }, [map]);
+
+  useEffect(() => {
     removeMarkerHandler();
     addMarkerHandler();
-  }, [placesAtomValue, map]);
+  }, [placesAtomValue]);
 
   return (
     <MapDiv
@@ -109,7 +118,7 @@ const HomeMap = ({ handleMarkerClick, setMap, map }: HomeMapProps) => {
         height: '100vh',
       }}
     >
-      <NaverMap ref={setMap} onCenterChanged={() => setLatHandler()}>
+      <NaverMap ref={setMap} center={currentLat}>
         <MarkerCluster markers={markerList.current} />
       </NaverMap>
     </MapDiv>

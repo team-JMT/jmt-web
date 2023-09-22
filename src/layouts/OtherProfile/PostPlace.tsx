@@ -64,8 +64,7 @@ const PostPlace = ({ userId }: UserIdProp) => {
     }
   };
   // 무한 스크롤 로직
-  useInsertionObserver<HTMLDivElement>({
-    observeRef,
+  const { setObserveElement } = useInsertionObserver<HTMLDivElement>({
     onIntersect: handleIntersect,
   });
 
@@ -88,7 +87,7 @@ const PostPlace = ({ userId }: UserIdProp) => {
                   <SearchResultCard restaurantInfo={data} key={index} />
                 ))}
               {!isLastPage() && (
-                <div className={'infinite-observe'} ref={observeRef} />
+                <div className={'infinite-observe'} ref={setObserveElement} />
               )}
             </>
           )}
