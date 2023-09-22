@@ -4,9 +4,6 @@ import { usePostSearchRestaurantInfinite } from '@apis/hooks/restaurant/usePostS
 import DownArrow from '@assets/icons/DownArrow';
 import Chip from '@commons/Chip';
 import FilterChip from '@commons/FilterChip';
-import DrinkCategoryFilter from '@components/common/FilterBottomSheet/DrinkCategoryFilter';
-import FoodCategoryFilter from '@components/common/FilterBottomSheet/FoodCategoryFilter';
-import SortBy from '@components/common/FilterBottomSheet/SortBy';
 import PlaceDetailCard from '@components/home/PlaceDetailCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
@@ -141,9 +138,9 @@ const HomePlaceList = () => {
           )}
         </>
       </section>
-      <SortBy />
+      {/* <SortBy />
       <FoodCategoryFilter />
-      <DrinkCategoryFilter />
+      <DrinkCategoryFilter /> */}
     </motion.div>
   );
 };
