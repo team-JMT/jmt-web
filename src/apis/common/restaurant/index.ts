@@ -44,6 +44,9 @@ export const searchRestaurantByUser = async ({
 export const getRestaurantDetailData = async (id: number) =>
   await instance.get<Response<RestaurantDetail>>('/api/v1/restaurant/' + id);
 
+export const deleteRestaurantData = async (id: number) =>
+  await instance.delete<Response<string>>('/api/v1/restaurant/' + id);
+
 export const getRestaurantSearchData = async (keyword: string) =>
   await instance.get<Response<GetRestaurantSearchResponse>>(
     `/api/v1/restaurant/search`,
