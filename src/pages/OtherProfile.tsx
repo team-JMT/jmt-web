@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 
 import { useSearchRestaurantByUserInfinite } from '@apis/hooks/restaurant/useSearchRestaurantByUserInfinite';
 import useGetUserInfo from '@apis/hooks/user/useGetUserInfo';
@@ -16,6 +16,7 @@ import {
   SortKey,
   drinkCategoryState,
   foodCategoryState,
+  profileId,
   sortByState,
 } from '@store/filterAtom';
 import classNames from 'classnames';
@@ -32,15 +33,15 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
   const [tab, setTab] = React.useState('POST');
 
   const { UserData } = useGetUserInfo(params.userId);
-  const Id = params.userId.toString();
+  const [pastId, setPastId] = useAtom(profileId);
 
-  const [foodState] = useAtom(foodCategoryState);
-  const [drinkState] = useAtom(drinkCategoryState);
+  const [foodState, setFoodState] = useAtom(foodCategoryState);
+  const [drinkState, setDrinkState] = useAtom(drinkCategoryState);
   const [sortState] = useAtom(sortByState);
 
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
     useSearchRestaurantByUserInfinite({
-      userId: Id,
+      userId: params.userId,
       userLocation: {
         x: '127.0596',
         y: '37.6633',
@@ -63,6 +64,14 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
   };
 
   const handleOpenBottomSheet = useSetAtom(openBottomSheet);
+
+  useEffect(() => {
+    if (pastId !== params.userId) {
+      setPastId(params.userId);
+      setFoodState('');
+      setDrinkState('');
+    }
+  }, []);
 
   if (UserData === undefined) {
     return <>오류!</>;
