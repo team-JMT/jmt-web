@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { deleteRestaurantData } from '@apis/common/restaurant';
 import ModalComponent from '@components/common/Modal';
 import styled from '@emotion/styled';
 import { useHomeFlow } from '@stacks/homeStackFlow';
@@ -7,12 +8,18 @@ import { MODAL_KEY, toggleModal } from '@store/modalAtom';
 import { colors } from '@styles/theme/color';
 import { useSetAtom } from 'jotai';
 
+import getUrlValue from '@utils/getUrlValue';
+
 const Modal = () => {
   const { pop } = useHomeFlow();
   const useToggleModal = useSetAtom(toggleModal);
-  const Delete = () => {
+
+  const detailId = getUrlValue();
+  const Delete = async () => {
+    const res = await deleteRestaurantData(detailId);
     useToggleModal(MODAL_KEY.DELETE_CHECK);
     pop();
+    console.log(res);
   };
   return (
     <ModalComponent

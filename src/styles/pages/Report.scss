@@ -1,6 +1,6 @@
 @use '../theme';
 .report-container {
-  margin: 20px 20px 0px 20px;
+  margin: 20px 20px 28px 20px;
 }
 .report-text {
   color: theme.$gray700;
@@ -23,4 +23,29 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+.report-explain {
+  color: theme.$gray500;
+  height: 105px;
+  background-color: theme.$gray100;
+  padding-top: 16px;
+  padding-left: 20px;
+}
+.report-subject {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  height: 110px;
+  width: 100%;
+  padding: 12px 20px;
+  button {
+    display: flex;
+    width: 100%;
+    height: 62px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background: theme.$main500;
+    //main200이 선택되기 전 색깔
+  }
 }
