@@ -48,8 +48,7 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
   };
 
   // 무한 스크롤 로직
-  useInsertionObserver<HTMLDivElement>({
-    observeRef,
+  const { setObserveElement } = useInsertionObserver<HTMLDivElement>({
     onIntersect: handleIntersect,
   });
 
@@ -79,7 +78,7 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
           />
         ))}
       {!isLastPage() && (
-        <div className={'infinite-observer'} ref={observeRef} />
+        <div className={'infinite-observer'} ref={setObserveElement} />
       )}
     </section>
   );
