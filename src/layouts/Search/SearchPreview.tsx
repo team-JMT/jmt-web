@@ -59,8 +59,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
   };
 
   // 무한 스크롤 로직
-  useInsertionObserver<HTMLDivElement>({
-    observeRef,
+  const { setObserveElement } = useInsertionObserver<HTMLDivElement>({
     onIntersect: handleIntersect,
   });
 
@@ -76,7 +75,7 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
           />
         ))}
       {!isLastPage() && (
-        <div className={'infinite-observer'} ref={observeRef} />
+        <div className={'infinite-observer'} ref={setObserveElement} />
       )}
     </motion.div>
   );

@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState } from 'react';
+import React, { Suspense, useCallback, useRef } from 'react';
 import type { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import HomeBottomSheet from '@components/home/BottomSheet';
@@ -12,25 +12,19 @@ import { useCheckTopActivity } from '@hooks/useCheckTopActivity';
 import { useHandleNavigationBar } from '@hooks/useHandleNavigationBar';
 
 const Home = () => {
-  const [map, setMap] = useState<naver.maps.Map | null>(null);
-
   const isHomeTop = useCheckTopActivity('Home');
   const bottomRef = useRef<BottomSheetRef>(null);
 
-  const handleMarkerClick = () => {
+  const handleMarkerClick = useCallback(() => {
     bottomRef.current?.snapTo(97);
-  };
+  }, [bottomRef]);
 
   useHandleNavigationBar();
 
   return (
     <AppScreen>
       <HomeHeader />
-      <HomeMap
-        map={map}
-        setMap={setMap}
-        handleMarkerClick={handleMarkerClick}
-      />
+      <HomeMap handleMarkerClick={handleMarkerClick} />
       <FixedPlaceDetail />
       {isHomeTop && (
         <HomeBottomSheet ref={bottomRef}>

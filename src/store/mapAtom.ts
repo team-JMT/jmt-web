@@ -10,7 +10,7 @@ export type MapAtom = {
     y: string;
   };
 };
-export const mapAtom = atom<MapAtom>({
+export const mapLatAtom = atom<MapAtom>({
   남서_좌표: {
     x: '',
     y: '',
@@ -20,3 +20,5 @@ export const mapAtom = atom<MapAtom>({
     y: '',
   },
 });
+
+export const naverMapAtom = atom<naver.maps.Map | null>(null);

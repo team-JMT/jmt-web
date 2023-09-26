@@ -28,6 +28,7 @@
     "framer-motion": "^10.9.1",
     "jotai": "^2.1.0",
     "localtunnel": "^2.0.2",
+    "lodash-es": "^4.17.21",
     "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.10.6",
+    "@types/lodash-es": "^4.17.9",
     "@types/navermaps": "^3.6.4",
     "@types/node": "^18.15.11",
     "@types/qs": "^6.9.7",
