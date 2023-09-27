@@ -9,7 +9,7 @@ import { SearchInputMock } from '@commons/input/SearchInput';
 import { fadeInOut } from '@components/motion/fade-in-out';
 import styled from '@emotion/styled';
 import { getCurrentLocationAtom } from '@store/locationAtom';
-import { mapLatAtom, naverMapAtom } from '@store/mapAtom';
+import { mapLatAtom } from '@store/mapAtom';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -63,13 +63,16 @@ const HomeHeader = () => {
   const bounds = useAtomValue(mapLatAtom);
 
   const [centerChanged, setCenterChanged] = useState(false);
-  const map = useAtomValue(naverMapAtom);
 
-  const currentLocation = nativeInfo.getData();
-  const { currentLocationData } = useGetCurrentLocation(
-    currentLocation.userPosition,
-  );
+  const { userPosition } = nativeInfo.getData();
+
+  const { currentLocationData, refetch: refetchCurrentPosition } =
+    useGetCurrentLocation(userPosition);
   const { refetch, handleEnable } = usePostSearchDataWithParam();
+
+  useEffect(() => {
+    refetchCurrentPosition();
+  }, [userPosition]);
 
   const handleRefresh = async () => {
     await handleEnable(true);
@@ -82,7 +85,6 @@ const HomeHeader = () => {
     let currentBounds = '';
     return () => {
       if (JSON.stringify(bounds) !== currentBounds) {
-        console.log(1);
         currentBounds = JSON.stringify(bounds);
         setCenterChanged(true);
       }
@@ -101,9 +103,9 @@ const HomeHeader = () => {
       />
       <MyPlaceContainer onClick={() => push('LocationSearch', {})}>
         <span className={classNames('text-m-medium', 'gray900')}>
-          {addressName ??
-            currentLocationData?.address ??
-            currentLocationData?.roadAddress}
+          {addressName.length > 0
+            ? addressName
+            : currentLocationData?.address ?? currentLocationData?.roadAddress}
         </span>
         <SolidDownArrow />
       </MyPlaceContainer>
