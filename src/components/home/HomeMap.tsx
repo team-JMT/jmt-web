@@ -8,6 +8,8 @@ import { focusedPlaceAtom, placesAtom } from '@store/placesAtom';
 import { useAtomValue, useSetAtom, useAtom } from 'jotai';
 import { throttle } from 'lodash-es';
 
+import { nativeInfo } from '@utils/storage';
+
 interface HomeMapProps {
   handleMarkerClick?: () => void;
 }
@@ -26,6 +28,7 @@ const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
   const markerList = useRef<naver.maps.Marker[]>([]);
 
   const { x, y } = useAtomValue(getCurrentLocationAtom);
+
   const setLat = useSetAtom(mapLatAtom);
 
   const setLatHandler = useCallback(() => {
@@ -48,8 +51,20 @@ const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
     }
   }, [map]);
 
+  const { userPosition } = nativeInfo.getData();
   useEffect(() => {
-    setCurrentLat(new navermaps.LatLng(Number(y), Number(x)));
+    const lat = new navermaps.LatLng(
+      Number(userPosition.y),
+      Number(userPosition.x),
+    );
+    if (!x || !y) {
+      map?.setCenter(lat);
+    }
+  }, [map, userPosition]);
+
+  useEffect(() => {
+    const lat = new navermaps.LatLng(Number(y), Number(x));
+    setCurrentLat(lat);
   }, [x, y]);
 
   const addMarkerHandler = useCallback(() => {
@@ -61,9 +76,8 @@ const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
         map: map,
         icon: {
           url: 'assets/PlacePin.svg',
-          size: new navermaps.Size(40, 45),
+          size: new navermaps.Size(50, 50),
           origin: new navermaps.Point(0, 0),
-          anchor: new navermaps.Point(11, 35),
         },
         position: new navermaps.LatLng(place.y, place.x),
       });

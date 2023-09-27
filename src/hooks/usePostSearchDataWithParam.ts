@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { usePostSearchRestaurantInfinite } from '@apis/hooks/restaurant/usePostSearchRestaurantInfinite';
 import {
@@ -9,8 +9,6 @@ import {
 } from '@store/filterAtom';
 import { mapLatAtom } from '@store/mapAtom';
 import { useAtom, useAtomValue } from 'jotai';
-
-import { useConditionalOnceEffect } from '@hooks/useConditionalOnceEffect';
 
 export const usePostSearchDataWithParam = () => {
   const [enable, setEnable] = useState(false);
@@ -41,10 +39,14 @@ export const usePostSearchDataWithParam = () => {
   const checkIsEnable =
     Number(bounds.북동_좌표.x) > 0 && Number(bounds.남서_좌표.y) > 0;
 
-  useConditionalOnceEffect(() => {
-    data.refetch();
-    handleEnable(false);
-  }, checkIsEnable);
+  const checkOnce = useRef(false);
+  useEffect(() => {
+    if (checkIsEnable && !checkOnce.current) {
+      checkOnce.current = true;
+      data.refetch();
+      handleEnable(false);
+    }
+  }, [checkIsEnable, bounds]);
 
   return { ...data, handleEnable };
 };

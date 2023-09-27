@@ -1,13 +1,13 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
 import SadImage from '@assets/icons/SadImage';
 import IconNotice from '@commons/IconNotice';
 import SearchResultCard from '@components/searchResult/SearchResultCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
-import { addSearchLogAtom } from '@store/searchLogAtom';
+import { getCurrentLocationAtom } from '@store/locationAtom';
 import classNames from 'classnames';
-import { useSetAtom } from 'jotai/index';
+import { useAtomValue } from 'jotai/index';
 
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
 
@@ -17,12 +17,16 @@ interface SearchResultListProps {
 
 const SearchResultList = ({ keyword }: SearchResultListProps) => {
   const { push } = useHomeFlow();
-  const addSearchLog = useSetAtom(addSearchLogAtom);
 
-  const observeRef = useRef<HTMLDivElement>(null);
-
+  const { x, y } = useAtomValue(getCurrentLocationAtom);
   const { restaurantSearchData, fetchNextPage } =
-    useGetRestaurantSearchDataInfinite(keyword);
+    useGetRestaurantSearchDataInfinite({
+      keyword: keyword!,
+      userLocation: {
+        x,
+        y,
+      },
+    });
 
   const mappingRestaurantSearch = restaurantSearchData
     ?.flatMap((data) => data.data.restaurants)
