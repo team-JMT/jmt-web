@@ -1,15 +1,17 @@
-import { useStack } from '@stackflow/react';
+import { useEffect } from 'react';
+
+import { useCheckTopActivity } from '@hooks/useCheckTopActivity';
 
 import { navigationHandler } from '@utils/bridge';
 
 export const useHandleNavigationBar = () => {
-  const stack = useStack();
-  const isPlaceDetail = stack.activities.find(
-    (activity) => activity.name === 'PlaceDetail',
-  );
-  if (isPlaceDetail) {
-    navigationHandler(false);
-  } else {
-    navigationHandler(true);
-  }
+  const isPlaceDetail = useCheckTopActivity('PlaceDetail');
+
+  useEffect(() => {
+    if (isPlaceDetail) {
+      navigationHandler(false);
+    } else {
+      navigationHandler(true);
+    }
+  }, [isPlaceDetail]);
 };

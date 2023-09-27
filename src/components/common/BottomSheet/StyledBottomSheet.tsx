@@ -193,11 +193,6 @@ export const StyledBottomSheet = styled(BottomSheet)<{ fullPage: boolean }>`
     padding-top: calc(20px + env(safe-area-inset-top));
     padding-bottom: 8px;
     transition: all 0.2s ease-in-out;
-    ${({ fullPage }) =>
-      fullPage &&
-      css`
-        padding-top: 0;
-      `};
   }
 
   [data-rsbs-header]:before {
