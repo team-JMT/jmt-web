@@ -66,6 +66,13 @@ export const getRestaurantDetailData = async (id: number) =>
     },
   });
 
+export const deleteRestaurantData = async (id: number) =>
+    await instance.delete<Response<string>>('/api/v1/restaurant/' + id,{
+        headers: {
+            Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
+        },
+    });
+
 export const getRestaurantSearchData = async (
   params: GetRestaurantSearchRequest,
 ) =>

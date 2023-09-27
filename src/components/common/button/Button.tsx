@@ -17,6 +17,7 @@ const StyledButton = styled.button`
 
 interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
 const Button = ({ children, ...rest }: Props) => {

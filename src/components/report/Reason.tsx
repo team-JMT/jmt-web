@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 
 import CheckIcon from '@assets/icons/CheckIcon';
 import { css } from '@emotion/react';
@@ -6,22 +6,22 @@ import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 
 interface ChildComponentProps {
-  children: ReactNode;
-  // Add other props here if needed
+  children: string;
+  isActive: boolean;
 }
 
-const Reason: React.FC<ChildComponentProps> = ({ children }) => {
+const Reason = ({ children, isActive }: ChildComponentProps) => {
   const [active, setActive] = useState(false);
 
   return (
     <ReasonBox
-      active={active}
+      active={isActive}
       className={'text-l-medium'}
       onClick={() => {
         setActive(!active);
       }}
     >
-      <CheckIcon check={active} />
+      <CheckIcon check={isActive} />
       {children}
     </ReasonBox>
   );

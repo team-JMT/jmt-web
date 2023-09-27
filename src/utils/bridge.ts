@@ -136,19 +136,19 @@ export function navigateNativeRoute(route: string, params?: any) {
   }
 }
 
-type NativeRoute = {
-  editRestaurantInfo: {
-    params: {
-      restaurantId: string;
-    };
-  };
-};
-
 if (window) {
   window.setAccessToken = setAccessToken;
   window.setUserPosition = setUserPosition;
   window.backEvent = backEvent;
 }
+
+type NativeRoute = {
+  editRestaurant: {
+    params: {
+      restaurantId: string;
+    };
+  };
+};
 
 type NativeRouteKey = keyof NativeRoute;
 type NativeRouteParams<T extends NativeRouteKey> = NativeRoute[T]['params'];
@@ -157,6 +157,12 @@ export function navigateNativeRouteType<T extends NativeRouteKey>(
   route: T,
   params: NativeRouteParams<T>,
 ) {
+  console.log(
+    JSON.stringify({
+      route: route,
+      ...params,
+    }),
+  );
   if (window.webkit) {
     // ios
     window.webkit.messageHandlers.callbackHandler.postMessage(
@@ -169,9 +175,11 @@ export function navigateNativeRouteType<T extends NativeRouteKey>(
   } else {
     // android
     console.log('navigate');
-    window?.webviewBridge?.navigate({
-      route: route,
-      ...params,
-    });
+    window?.webviewBridge?.navigate(
+      JSON.stringify({
+        route: route,
+        ...params,
+      }),
+    );
   }
 }

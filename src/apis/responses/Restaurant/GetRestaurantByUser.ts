@@ -4,7 +4,7 @@ import { Restaurant } from '../../../models/getRestaurantData';
 
 export type RestaurantByUserRequest = {
   params: Pagination;
-  userId: string;
+  userId: number;
   userLocation: {
     x?: string;
     y?: string;

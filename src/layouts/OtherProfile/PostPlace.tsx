@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 
 import { useSearchRestaurantByUserInfinite } from '@apis/hooks/restaurant/useSearchRestaurantByUserInfinite';
 import SearchResultCard from '@components/searchResult/SearchResultCard';
+import { useHomeFlow } from '@stacks/homeStackFlow';
 import {
   foodCategoryState,
   drinkCategoryState,
@@ -17,7 +18,7 @@ interface UserIdProp {
   userId: number;
 }
 const PostPlace = ({ userId }: UserIdProp) => {
-  const Id = userId.toString();
+  const { push } = useHomeFlow();
   const observeRef = useRef<HTMLDivElement>(null);
 
   const [foodState] = useAtom(foodCategoryState);
@@ -26,7 +27,7 @@ const PostPlace = ({ userId }: UserIdProp) => {
 
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
     useSearchRestaurantByUserInfinite({
-      userId: Id,
+      userId: userId,
       userLocation: {
         x: '127.0596',
         y: '37.6633',
@@ -83,8 +84,14 @@ const PostPlace = ({ userId }: UserIdProp) => {
           ) : (
             <>
               {mappingRestaurantData &&
-                mappingRestaurantData.map((data, index) => (
-                  <SearchResultCard restaurantInfo={data} key={index} />
+                mappingRestaurantData.map((data) => (
+                  <SearchResultCard
+                    restaurantInfo={data}
+                    key={data.id}
+                    onClick={() =>
+                      push('PlaceDetail', { placeId: String(data.id) })
+                    }
+                  />
                 ))}
               {!isLastPage() && (
                 <div className={'infinite-observe'} ref={setObserveElement} />

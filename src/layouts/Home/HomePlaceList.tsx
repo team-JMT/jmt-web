@@ -105,9 +105,9 @@ const HomePlaceList = () => {
           )}
         </>
       </section>
-      <SortBy />
+      {/* <SortBy />
       <FoodCategoryFilter />
-      <DrinkCategoryFilter />
+      <DrinkCategoryFilter /> */}
     </motion.div>
   );
 };

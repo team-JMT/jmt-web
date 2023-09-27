@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { colors } from '@styles/theme/color';
 import { motion } from 'framer-motion';
 
 export const LayerWrapper = styled(motion.div)`
@@ -26,4 +27,39 @@ export const CenterInner = styled(motion.div)`
   position: relative;
   top: calc(50vh - 100px);
   z-index: 130;
+`;
+
+export const Title = styled.div`
+  letter-spacing: -0.02em;
+  line-height: 150%;
+  color: ${colors.gray900};
+`;
+export const Explain = styled.div`
+  margin: 12px 0;
+  div {
+    color: ${colors.gray600};
+    font-weight: 500;
+    line-height: 150%;
+    text-align: center;
+    letter-spacing: -0.02em;
+  }
+`;
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+`;
+export const ModalButton = styled.button`
+  width: 140px;
+  height: 48px;
+  padding: 0px;
+  border: 1px solid ${colors.main600};
+  border-radius: 8px;
+  letter-spacing: -0.02em;
+  background: ${colors.white};
+  color: ${colors.main600};
+  & + & {
+    background: ${colors.main500};
+    color: ${colors.white};
+  }
 `;
