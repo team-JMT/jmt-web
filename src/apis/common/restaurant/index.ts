@@ -5,7 +5,10 @@ import {
   RestaurantByUserResponse,
 } from '@apis/responses/Restaurant/GetRestaurantByUser';
 import { GetRestaurantDataResponse } from '@apis/responses/Restaurant/GetRestaurantData';
-import { GetRestaurantSearchResponse } from '@apis/responses/Restaurant/GetRestaurantSearch';
+import {
+  GetRestaurantSearchRequest,
+  GetRestaurantSearchResponse,
+} from '@apis/responses/Restaurant/GetRestaurantSearch';
 import {
   PostRestaurantSearchRequest,
   PostRestaurantSearchResponse,
@@ -63,13 +66,13 @@ export const getRestaurantDetailData = async (id: number) =>
     },
   });
 
-export const getRestaurantSearchData = async (keyword: string) =>
-  await instance.get<Response<GetRestaurantSearchResponse>>(
+export const getRestaurantSearchData = async (
+  params: GetRestaurantSearchRequest,
+) =>
+  await instance.post<Response<GetRestaurantSearchResponse>>(
     `/api/v1/restaurant/search`,
+    params,
     {
-      params: {
-        keyword,
-      },
       headers: {
         Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
       },

@@ -76,9 +76,8 @@ const HomeMap = ({ handleMarkerClick }: HomeMapProps) => {
         map: map,
         icon: {
           url: 'assets/PlacePin.svg',
-          size: new navermaps.Size(40, 45),
+          size: new navermaps.Size(50, 50),
           origin: new navermaps.Point(0, 0),
-          anchor: new navermaps.Point(11, 35),
         },
         position: new navermaps.LatLng(place.y, place.x),
       });

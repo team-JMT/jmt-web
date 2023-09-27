@@ -1,13 +1,14 @@
-import React, { useRef, MouseEvent } from 'react';
+import React, { MouseEvent } from 'react';
 
 import { useGetRestaurantSearchDataInfinite } from '@apis/hooks/restaurant/useGetRestaurantSearchDataInfinite';
 import { fadeInOut } from '@components/motion/fade-in-out';
 import { variantKey } from '@components/motion/variantKey';
 import PlaceInfoCard from '@components/search/PlaceInfoCard';
 import { useHomeFlow } from '@stacks/homeStackFlow';
+import { getCurrentLocationAtom } from '@store/locationAtom';
 import { addSearchLogAtom } from '@store/searchLogAtom';
 import { motion } from 'framer-motion';
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtomValue } from 'jotai';
 
 import useDebounce from '@hooks/useDebounce';
 import { useInsertionObserver } from '@hooks/useInsertionObserver';
@@ -21,10 +22,17 @@ const SearchPreview = ({ inputValue }: SearchResultProps) => {
   const { push, pop } = useHomeFlow();
   const addSearchLog = useSetAtom(addSearchLogAtom);
   const debouncedValue = useDebounce(inputValue, 500);
-  const observeRef = useRef<HTMLDivElement>(null);
+
+  const { x, y } = useAtomValue(getCurrentLocationAtom);
 
   const { restaurantSearchData, fetchNextPage } =
-    useGetRestaurantSearchDataInfinite(debouncedValue);
+    useGetRestaurantSearchDataInfinite({
+      keyword: debouncedValue!,
+      userLocation: {
+        x,
+        y,
+      },
+    });
   const onSearch = (e: MouseEvent<HTMLDivElement>) => (place: Restaurant) => {
     e.stopPropagation();
     setTimeout(() => {
