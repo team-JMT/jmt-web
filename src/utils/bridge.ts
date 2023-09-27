@@ -157,6 +157,12 @@ export function navigateNativeRouteType<T extends NativeRouteKey>(
   route: T,
   params: NativeRouteParams<T>,
 ) {
+  console.log(
+    JSON.stringify({
+      route: route,
+      ...params,
+    }),
+  );
   if (window.webkit) {
     // ios
     window.webkit.messageHandlers.callbackHandler.postMessage(

@@ -48,9 +48,9 @@ const BottomSheet = ({ userId }: { userId: number }) => {
               className={'text-l-medium'}
               onClick={() => {
                 useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
-                  navigateNativeRouteType<'editRestaurant'>('editRestaurant', {
-                      restaurantId: detailId.toString(),
-                  });
+                navigateNativeRouteType<'editRestaurant'>('editRestaurant', {
+                  restaurantId: detailId.toString(),
+                });
               }}
             >
               <PencilIcon />

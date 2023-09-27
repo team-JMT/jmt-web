@@ -9,12 +9,13 @@ export const useHandleNavigationBar = () => {
   const findActivity = stack.activities.filter(
     (activity) => activity.name === 'PlaceDetail' || activity.name === 'Report',
   );
+  const checkIsTop = findActivity.some((activity) => activity.isTop);
 
   useEffect(() => {
-    if (findActivity) {
+    if (checkIsTop) {
       navigationHandler(false);
     } else {
       navigationHandler(true);
     }
-  }, [stack.activities]);
+  }, [checkIsTop]);
 };
