@@ -12,6 +12,8 @@ import {
 } from '@apis/responses/Restaurant/PostMapSearchRestaurant';
 import qs from 'qs';
 
+import { nativeInfo } from '@utils/storage';
+
 import { RestaurantDetail } from '../../../models/getRestaurantDetail';
 
 export const getRestaurantData = async (params: Pagination) =>
@@ -19,6 +21,9 @@ export const getRestaurantData = async (params: Pagination) =>
     '/api/v1/restaurant',
     {
       params,
+      headers: {
+        Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
+      },
     },
   );
 
@@ -29,6 +34,11 @@ export const searchMapRestaurantData = async ({
   await instance.post<Response<PostRestaurantSearchResponse>>(
     `/api/v1/restaurant/search/map?${qs.stringify(params)}`,
     rest,
+    {
+      headers: {
+        Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
+      },
+    },
   );
 
 export const searchRestaurantByUser = async ({
@@ -39,10 +49,19 @@ export const searchRestaurantByUser = async ({
   await instance.post<Response<RestaurantByUserResponse>>(
     `/api/v1/restaurant/search/${userId}?${qs.stringify(params)}`,
     rest,
+    {
+      headers: {
+        Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
+      },
+    },
   );
 
 export const getRestaurantDetailData = async (id: number) =>
-  await instance.get<Response<RestaurantDetail>>('/api/v1/restaurant/' + id);
+  await instance.get<Response<RestaurantDetail>>('/api/v1/restaurant/' + id, {
+    headers: {
+      Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
+    },
+  });
 
 export const getRestaurantSearchData = async (keyword: string) =>
   await instance.get<Response<GetRestaurantSearchResponse>>(
@@ -50,6 +69,9 @@ export const getRestaurantSearchData = async (keyword: string) =>
     {
       params: {
         keyword,
+      },
+      headers: {
+        Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
       },
     },
   );
