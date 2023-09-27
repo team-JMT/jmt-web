@@ -11,3 +11,10 @@ export const getUserInfo = async (id: number) =>
       Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
     },
   });
+
+export const getLoginUserInfo = async () =>
+  await instance.get<Response<UserInfo>>('/api/v1/user/info', {
+      headers: {
+          Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
+      },
+  });

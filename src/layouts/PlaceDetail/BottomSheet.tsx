@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useGetLoginUserInfo from '@apis/hooks/user/useGetLoginUserInfo';
 import PencilIcon from '@assets/icons/PencilIcon';
 import ReportIcon from '@assets/icons/ReportIcon';
 import SmallShare from '@assets/icons/SmallShare';
@@ -15,7 +16,7 @@ import { useSetAtom } from 'jotai';
 import { handleNativeShare, navigateNativeRouteType } from '@utils/bridge';
 import getUrlValue from '@utils/getUrlValue';
 
-const BottomSheet = () => {
+const BottomSheet = ({ userId }: { userId: number }) => {
   const { push, pop } = useHomeFlow();
 
   const useToggleBottomSheet = useSetAtom(toggleBottomSheet);
@@ -23,6 +24,10 @@ const BottomSheet = () => {
 
   const detailId = getUrlValue();
 
+  const loginUser = useGetLoginUserInfo();
+
+  const isWriter = userId === loginUser.UserData?.id;
+  console.log(isWriter);
   return (
     <BottomSheetCompoenet
       type={'PLACE_DETAIL'}
@@ -38,28 +43,32 @@ const BottomSheet = () => {
             <ReportIcon />
             신고하기
           </BottomSheetButton>
-          <BottomSheetButton
-            className={'text-l-medium'}
-            onClick={() => {
-              useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
-              navigateNativeRouteType<'editRestaurant'>('editRestaurant', {
-                restaurantId: detailId.toString(),
-              });
-            }}
-          >
-            <PencilIcon />
-            수정하기
-          </BottomSheetButton>
-          <BottomSheetButton
-            onClick={() => {
-              useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
-              useToggleModal(MODAL_KEY.DELETE_CHECK);
-            }}
-            className={'text-l-medium'}
-          >
-            <TrashIcon />
-            삭제하기
-          </BottomSheetButton>
+          {isWriter && (
+            <BottomSheetButton
+              className={'text-l-medium'}
+              onClick={() => {
+                useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
+                  navigateNativeRouteType<'editRestaurant'>('editRestaurant', {
+                      restaurantId: detailId.toString(),
+                  });
+              }}
+            >
+              <PencilIcon />
+              수정하기
+            </BottomSheetButton>
+          )}
+          {isWriter && (
+            <BottomSheetButton
+              onClick={() => {
+                useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
+                useToggleModal(MODAL_KEY.DELETE_CHECK);
+              }}
+              className={'text-l-medium'}
+            >
+              <TrashIcon />
+              삭제하기
+            </BottomSheetButton>
+          )}
           <BottomSheetButton
             className={'text-l-medium'}
             onClick={() => {
