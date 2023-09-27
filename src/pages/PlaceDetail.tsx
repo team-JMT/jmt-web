@@ -62,37 +62,35 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
             height: '48px',
           }}
         >
-          <main className={'safe-area-layout-container'}>
-            <ImgContainer images={DetailData?.pictures || []} />
-            {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
-            <div className={'detail-container'}>
-              <div
-                className={'name-box'}
-                onClick={() =>
-                  push('OtherProfile', { userId: DetailData.userId })
-                }
-              >
-                <a className={'text-m-medium'}>
-                  {DetailData?.userNickName}&nbsp;&nbsp;
-                </a>
-                <img src={rightArrowIcon} />
-              </div>
-              <div className={'title-box'}>
-                <a className={'title-s-bold'}>{DetailData?.name}</a>
-                <Share />
-              </div>
-              <div className={'add-box'}>
-                <a className={classNames('text-l-medium', 'gray900')}>
-                  위치에서 2020m
-                </a>
-                <img src={verticalBarIcon} />
-                <a className={classNames('text-l-medium', 'gray700')}>
-                  {DetailData?.category}
-                </a>
-              </div>
-              <DetailMenu />
+          <ImgContainer images={DetailData.pictures} />
+          {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
+          <div className={'detail-container'}>
+            <div
+              className={'name-box'}
+              onClick={() =>
+                push('OtherProfile', { userId: DetailData.userId })
+              }
+            >
+              <a className={'text-m-medium'}>
+                {DetailData?.userNickName}&nbsp;&nbsp;
+              </a>
+              <img src={rightArrowIcon} />
             </div>
-          </main>
+            <div className={'title-box'}>
+              <a className={'title-s-bold'}>{DetailData?.name}</a>
+              <Share />
+            </div>
+            <div className={'add-box'}>
+              <a className={classNames('text-l-medium', 'gray900')}>
+                위치에서 2020m
+              </a>
+              <img src={verticalBarIcon} />
+              <a className={classNames('text-l-medium', 'gray700')}>
+                {DetailData?.category}
+              </a>
+            </div>
+            <DetailMenu />
+          </div>
           <BottomBar />
         </AppScreen>
         <NoticeBox isError={Boolean(DetailError)} content={DetailMessage} />
