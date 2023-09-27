@@ -1,14 +1,14 @@
-import { useEffect, useRef } from 'react';
+import { DependencyList, useEffect, useRef } from 'react';
 
 export const useConditionalOnceEffect = (
   callback: () => void,
-  condition: boolean,
+  condition?: DependencyList,
 ) => {
   const checkOnce = useRef(false);
   useEffect(() => {
-    if (condition && !checkOnce.current) {
+    if (!checkOnce.current) {
       checkOnce.current = true;
       callback();
     }
-  }, [condition, callback]);
+  }, condition);
 };
