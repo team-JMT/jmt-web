@@ -31,8 +31,8 @@ const BackModal = () => {
             <ModalButton
               className={'text-m-medium'}
               onClick={() => {
-                pop();
                 useCloseModal(MODAL_KEY.BACK_CHECK);
+                pop();
               }}
             >
               나가기
