@@ -23,6 +23,8 @@ import classNames from 'classnames';
 import { AnimatePresence } from 'framer-motion';
 import { useAtom, useSetAtom } from 'jotai';
 
+import { nativeInfo } from '@utils/storage';
+
 interface OtherProfileProps {
   params: {
     userId: number;
@@ -39,12 +41,13 @@ const OtherProfile = ({ params }: OtherProfileProps) => {
   const [drinkState, setDrinkState] = useAtom(drinkCategoryState);
   const [sortState] = useAtom(sortByState);
 
+  const userLocation = nativeInfo.getData().userPosition;
   const { restaurantData, fetchNextPage, isFetchingNextPage, isEmpty } =
     useSearchRestaurantByUserInfinite({
       userId: params.userId,
       userLocation: {
-        x: '127.0596',
-        y: '37.6633',
+        x: userLocation.x,
+        y: userLocation.y,
       },
       filter: {
         categoryFilter: '',

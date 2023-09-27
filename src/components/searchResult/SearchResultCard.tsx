@@ -2,55 +2,23 @@ import React from 'react';
 
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
 //import { FoodMock } from '@assets/images/foodMock';
-import styled from '@emotion/styled';
-import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
+
+import calculateDistance from '@utils/calculateDistance';
+import distanceConverter from '@utils/distanceConverter';
+import { nativeInfo } from '@utils/storage';
 
 import { Restaurant } from '../../models/getRestaurantData';
 
-const CardContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100px;
-  /* & + & {
-    margin-top: 20px;
-  } */
-`;
-const ImgBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 100px;
-  height: 100px;
-  margin-right: 1.6rem;
-`;
-const RestaurantImage = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  object-fit: cover;
-`;
-const ContentsBox = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const Detail = styled.div`
-  display: flex;
-  margin: 2px 0 8px;
-  gap: 12px;
-`;
-const User = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const UserImg = styled.img`
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background: ${colors.gray200} 0% / cover no-repeat;
-  margin-right: 4px;
-`;
+import {
+  CardContainer,
+  ContentsBox,
+  Detail,
+  ImgBox,
+  RestaurantImage,
+  User,
+  UserImg,
+} from './styled';
 
 interface SearchResultCardProps {
   restaurantInfo: Restaurant;
@@ -64,11 +32,23 @@ const SearchResultCard = ({
   if (restaurantInfo === undefined) {
     return <>카드 오류에요</>;
   } else {
-    const distance = parseInt(restaurantInfo.differenceInDistance);
-    const calculateDistance = () => {
-      return '??m';
-      //유저 위치 받아와서 계산한 뒤 반환필요
+    const existDistance = () => {
+      let distance: number;
+      if (restaurantInfo.differenceInDistance === '') {
+        const userLocation = nativeInfo.getData().userPosition;
+        const location = {
+          userPositionX: userLocation.x,
+          userPositionY: userLocation.y,
+          placeX: restaurantInfo.x,
+          placeY: restaurantInfo.y,
+        };
+        distance = calculateDistance(location);
+      } else {
+        distance = parseInt(restaurantInfo.differenceInDistance);
+      }
+      return distanceConverter(distance);
     };
+
     return (
       <CardContainer onClick={onClick}>
         <ImgBox>
@@ -86,7 +66,7 @@ const SearchResultCard = ({
           </span>
           <Detail>
             <span className={classNames('text-m-medium', 'gray700')}>
-              내 위치에서 {calculateDistance()}
+              내 위치에서 {existDistance()}
             </span>
             <img src={verticalBarIcon} />
             <span className={classNames('text-m-medium', 'gray700')}>

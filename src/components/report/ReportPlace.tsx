@@ -7,17 +7,11 @@ import styled from '@emotion/styled';
 import { colors } from '@styles/theme/color';
 import classNames from 'classnames';
 
-import { RestaurantDetail } from '../../models/getRestaurantDetail';
+import calculateDistance from '@utils/calculateDistance';
+import distanceConverter from '@utils/distanceConverter';
+import { nativeInfo } from '@utils/storage';
 
-const calculateDistance = (distance: number) => {
-  if (distance >= 1000) {
-    return (distance / 1000).toFixed(2) + 'km';
-  } else if (distance < 1000) {
-    return distance + 'm';
-  } else {
-    return '??m';
-  }
-};
+import { RestaurantDetail } from '../../models/getRestaurantDetail';
 
 interface ReportPlaceProps {
   restaurantInfo: RestaurantDetail;
@@ -28,8 +22,14 @@ const ReportPlace = ({ restaurantInfo, onClick }: ReportPlaceProps) => {
   if (restaurantInfo === undefined) {
     return <>카드 오류에요</>;
   } else {
-    const distance = parseInt(restaurantInfo.differenceInDistance);
-
+    const userLocation = nativeInfo.getData().userPosition;
+    const location = {
+      userPositionX: userLocation.x,
+      userPositionY: userLocation.y,
+      placeX: restaurantInfo.x,
+      placeY: restaurantInfo.y,
+    };
+    const distance = calculateDistance(location);
     return (
       <CardContainer onClick={onClick}>
         <ImgBox>
@@ -48,7 +48,7 @@ const ReportPlace = ({ restaurantInfo, onClick }: ReportPlaceProps) => {
           </span>
           <Detail>
             <span className={classNames('text-m-medium', 'gray700')}>
-              내 위치에서 {calculateDistance(distance)}
+              내 위치에서 {distanceConverter(distance)}
             </span>
             <img src={verticalBarIcon} />
             <span className={classNames('text-m-medium', 'gray700')}>

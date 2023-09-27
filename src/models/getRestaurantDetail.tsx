@@ -15,5 +15,4 @@ export type RestaurantDetail = {
   userId: number;
   userNickName: string;
   userProfileImageUrl: string;
-  differenceInDistance: string;
 };

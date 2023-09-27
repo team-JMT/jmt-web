@@ -17,6 +17,9 @@ import classNames from 'classnames';
 import { useSetAtom } from 'jotai';
 
 import '../styles/pages/PlaceDetail.scss';
+import calculateDistance from '@utils/calculateDistance';
+import distanceConverter from '@utils/distanceConverter';
+import { nativeInfo } from '@utils/storage';
 
 interface PlaceDetailProps {
   params: {
@@ -36,6 +39,14 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
   if (Boolean(DetailError) || DetailData === undefined) {
     return <div>에러가 났어요 </div>;
   } else {
+    const userLocation = nativeInfo.getData().userPosition;
+    const location = {
+      userPositionX: userLocation.x,
+      userPositionY: userLocation.y,
+      placeX: DetailData.x,
+      placeY: DetailData.y,
+    };
+    const distance = calculateDistance(location);
     return (
       <>
         <PlaceBottomSheet />
@@ -63,7 +74,6 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
           }}
         >
           <ImgContainer images={DetailData.pictures} />
-          {/* 이미지 배열의 길이가 0일 경우 imgContainer는 나타나지 않게 하기*/}
           <div className={'detail-container'}>
             <div
               className={'name-box'}
@@ -72,21 +82,21 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
               }
             >
               <a className={'text-m-medium'}>
-                {DetailData?.userNickName}&nbsp;&nbsp;
+                {DetailData.userNickName}&nbsp;&nbsp;
               </a>
               <img src={rightArrowIcon} />
             </div>
             <div className={'title-box'}>
-              <a className={'title-s-bold'}>{DetailData?.name}</a>
+              <a className={'title-s-bold'}>{DetailData.name}</a>
               <Share />
             </div>
             <div className={'add-box'}>
               <a className={classNames('text-l-medium', 'gray900')}>
-                위치에서 2020m
+                위치에서 {distanceConverter(distance)}
               </a>
               <img src={verticalBarIcon} />
               <a className={classNames('text-l-medium', 'gray700')}>
-                {DetailData?.category}
+                {DetailData.category}
               </a>
             </div>
             <DetailMenu />
