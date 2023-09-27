@@ -22,9 +22,6 @@ const BottomSheet = () => {
   const useToggleModal = useSetAtom(toggleModal);
 
   const detailId = getUrlValue();
-  const params = {
-    restaurantId: detailId.toString(),
-  };
 
   return (
     <BottomSheetCompoenet
@@ -45,7 +42,9 @@ const BottomSheet = () => {
             className={'text-l-medium'}
             onClick={() => {
               useToggleBottomSheet(BOTTOM_SHEET_KEY.PLACE_DETAIL);
-              navigateNativeRouteType('editRestaurantInfo', params);
+              navigateNativeRouteType<'editRestaurant'>('editRestaurant', {
+                restaurantId: detailId.toString(),
+              });
             }}
           >
             <PencilIcon />

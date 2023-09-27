@@ -1,5 +1,5 @@
 import React, { Suspense, useCallback, useRef } from 'react';
-import type { BottomSheetRef } from 'react-spring-bottom-sheet';
+import { BottomSheetRef } from 'react-spring-bottom-sheet';
 
 import HomeBottomSheet from '@components/home/BottomSheet';
 import FixedPlaceDetail from '@components/home/FixedPlaceDetail';
@@ -26,6 +26,7 @@ const Home = () => {
       <HomeHeader />
       <HomeMap handleMarkerClick={handleMarkerClick} />
       <FixedPlaceDetail />
+
       {isHomeTop && (
         <HomeBottomSheet ref={bottomRef}>
           <div className={'container-inner'}>

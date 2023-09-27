@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import useGetRestaurantDetailData from '@apis/hooks/restaurant/useGetRestaurantDetailData';
 import LeftArrowIcon from '@assets/icons/LeftArrowIcon';
+import Button from '@commons/button/Button';
 import Reason from '@components/report/Reason';
 import ReportPlace from '@components/report/ReportPlace';
 import BackModal from '@layouts/Report/BackModal';
@@ -110,7 +111,7 @@ const Report = () => {
             3. 신고는 익명으로 처리됩니다.
           </div>
           <div className={'report-subject'}>
-            <button
+            <Button
               className={classNames('title-s-medium', 'white')}
               disabled={report === ''}
               onClick={() => {
@@ -122,7 +123,7 @@ const Report = () => {
               }}
             >
               제출하기
-            </button>
+            </Button>
           </div>
         </main>
       </AppScreen>

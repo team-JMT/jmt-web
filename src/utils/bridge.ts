@@ -143,7 +143,7 @@ if (window) {
 }
 
 type NativeRoute = {
-  editRestaurantInfo: {
+  editRestaurant: {
     params: {
       restaurantId: string;
     };
@@ -169,9 +169,11 @@ export function navigateNativeRouteType<T extends NativeRouteKey>(
   } else {
     // android
     console.log('navigate');
-    window?.webviewBridge?.navigate({
-      route: route,
-      ...params,
-    });
+    window?.webviewBridge?.navigate(
+      JSON.stringify({
+        route: route,
+        ...params,
+      }),
+    );
   }
 }

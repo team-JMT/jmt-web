@@ -1,15 +1,20 @@
+import { useEffect } from 'react';
+
 import { useStack } from '@stackflow/react';
 
 import { navigationHandler } from '@utils/bridge';
 
 export const useHandleNavigationBar = () => {
   const stack = useStack();
-  const isPlaceDetail = stack.activities.find(
-    (activity) => activity.name === 'PlaceDetail',
+  const findActivity = stack.activities.filter(
+    (activity) => activity.name === 'PlaceDetail' || activity.name === 'Report',
   );
-  if (isPlaceDetail) {
-    navigationHandler(false);
-  } else {
-    navigationHandler(true);
-  }
+
+  useEffect(() => {
+    if (findActivity) {
+      navigationHandler(false);
+    } else {
+      navigationHandler(true);
+    }
+  }, [stack.activities]);
 };

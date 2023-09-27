@@ -6,3 +6,10 @@ export type GetRestaurantSearchResponse = {
   restaurants: Restaurant[];
   page: PageMeta;
 };
+export type GetRestaurantSearchRequest = {
+  keyword: string;
+  userLocation: {
+    x: string;
+    y: string;
+  };
+};

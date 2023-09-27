@@ -9,12 +9,17 @@ import {
   GetLocationSearchResponse,
 } from '@apis/responses/Location/GetLocationSearch';
 
+import { nativeInfo } from '@utils/storage';
+
 export const getCurrentLocation = async (location: GetCurrentLocationRequest) =>
   await instance.get<Response<GetCurrentLocationResponse>>(
     '/api/v1/location/current',
     {
       params: {
         ...location,
+      },
+      headers: {
+        Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
       },
     },
   );
@@ -25,6 +30,9 @@ export const getLocationSearch = async (query: GetLocationSearchRequest) =>
     {
       params: {
         ...query,
+      },
+      headers: {
+        Authorization: `Bearer ${nativeInfo.getData().accessToken}`,
       },
     },
   );

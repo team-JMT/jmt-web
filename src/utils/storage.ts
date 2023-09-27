@@ -18,12 +18,12 @@ type NativeInfo = {
 
 export const nativeInfo = makeStorage<NativeInfo>({
   accessToken:
-    'eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6InRlc3RAbmF2ZXIuY29tIiwiYXV0aCI6Ik1FTUJFUiIsImV4cCI6MTY5NTgzMjg5N30.LBEcljx2u2fSuXoy_DCRndRjkH2ZJ9kZtMG0YfIW_YGhuX7pMmk4CvSpmy5w8bZDgfRHsEhQMjAz8wilyaVnhA',
+    'eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6InRlc3RAbmF2ZXIuY29tIiwiYXV0aCI6Ik1FTUJFUiIsImV4cCI6MTY5NTgzOTIyOX0.anFYmt1OgWn9K9cJ4zUdStVCuQgMQf6N8NlfacNKTvOwqrIUo_FCmLa1lq5nDa3yNwZUd19yh7PI-VyLx8rL4Q',
   userPosition: {
     placeName: '',
     addressName: '',
     roadAddressName: '',
-    x: '127.0596',
-    y: '37.6633',
-  }, //x,y값 테스트용으로 넣어놓았습니다.
+    x: '',
+    y: '',
+  },
 });
