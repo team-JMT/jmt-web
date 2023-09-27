@@ -5,3 +5,6 @@ import { UserInfo } from '../../models/getUserInfo';
 
 export const getUserInfo = async (id: number) =>
   await instance.get<Response<UserInfo>>('/api/v1/user/info/' + id);
+
+export const getLoginUserInfo = async () =>
+  await instance.get<Response<UserInfo>>('/api/v1/user/info');

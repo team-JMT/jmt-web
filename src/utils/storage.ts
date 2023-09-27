@@ -18,7 +18,7 @@ type NativeInfo = {
 
 export const nativeInfo = makeStorage<NativeInfo>({
   accessToken:
-    'eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6InRlc3RAbmF2ZXIuY29tIiwiYXV0aCI6Ik1FTUJFUiIsImV4cCI6MTY5NTgzMjg5N30.LBEcljx2u2fSuXoy_DCRndRjkH2ZJ9kZtMG0YfIW_YGhuX7pMmk4CvSpmy5w8bZDgfRHsEhQMjAz8wilyaVnhA',
+    'eyJhbGciOiJIUzUxMiJ9.eyJlbWFpbCI6InRlc3RAbmF2ZXIuY29tIiwiYXV0aCI6Ik1FTUJFUiIsImV4cCI6MTY5NTgzODA5Mn0.OtSMsmwkO6TQwEkRwX1km6-nlgjSLGsmN1JvFgQWll-36Q68VDOs3hUV24LXY7TaKmewixcA7z11Ie__HkXgVw',
   userPosition: {
     placeName: '',
     addressName: '',

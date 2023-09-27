@@ -49,7 +49,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
     const distance = calculateDistance(location);
     return (
       <>
-        <PlaceBottomSheet />
+        <PlaceBottomSheet userId={DetailData.userId} />
         <Modal />
         <AppScreen
           appBar={{
