@@ -5,7 +5,7 @@ import PencilIcon from '@assets/icons/PencilIcon';
 import ReportIcon from '@assets/icons/ReportIcon';
 import SmallShare from '@assets/icons/SmallShare';
 import TrashIcon from '@assets/icons/TrashIcon';
-import BottomSheetCompoenet from '@components/common/BottomSheet';
+import BottomSheet from '@components/common/BottomSheet';
 import styled from '@emotion/styled';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { BOTTOM_SHEET_KEY, toggleBottomSheet } from '@store/bottomSheetAtom';
@@ -16,7 +16,7 @@ import { useSetAtom } from 'jotai';
 import { handleNativeShare, navigateNativeRouteType } from '@utils/bridge';
 import getUrlValue from '@utils/getUrlValue';
 
-const BottomSheet = ({ userId }: { userId: number }) => {
+const PlaceDetailMenuBottomSheet = ({ userId }: { userId: number }) => {
   const { push, pop } = useHomeFlow();
 
   const useToggleBottomSheet = useSetAtom(toggleBottomSheet);
@@ -27,9 +27,9 @@ const BottomSheet = ({ userId }: { userId: number }) => {
   const loginUser = useGetLoginUserInfo();
 
   const isWriter = userId === loginUser.UserData?.id;
-  console.log(isWriter);
+
   return (
-    <BottomSheetCompoenet
+    <BottomSheet
       type={'PLACE_DETAIL'}
       content={
         <BottomSheetWrapper>
@@ -85,7 +85,7 @@ const BottomSheet = ({ userId }: { userId: number }) => {
   );
 };
 
-export default BottomSheet;
+export default PlaceDetailMenuBottomSheet;
 
 const BottomSheetWrapper = styled(motion.div)`
   margin-bottom: 36px;
