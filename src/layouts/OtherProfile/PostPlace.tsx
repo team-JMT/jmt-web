@@ -96,6 +96,7 @@ const PostPlace = ({ userId }: UserIdProp) => {
               {!isLastPage() && (
                 <div className={'infinite-observe'} ref={setObserveElement} />
               )}
+              <div className="tabbar-area" />
             </>
           )}
         </>
