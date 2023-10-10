@@ -46,7 +46,7 @@ const ImgContainer: React.FC<ImgContainerProps> = ({ images }) => {
     setPage([page + newDirection, newDirection]);
   };
 
-  return images.length > 0 ? (
+  return images.length >= 2 ? (
     <ImgWrapper>
       <AnimatePresence initial={false} custom={direction}>
         <PlaceImg
@@ -83,7 +83,12 @@ const ImgContainer: React.FC<ImgContainerProps> = ({ images }) => {
       </ImgNumber>
     </ImgWrapper>
   ) : (
-    <></>
+    <ImgWrapper>
+      <PlaceImg src={images[imageIndex]} />
+      <ImgNumber className={'text-s-bold'}>
+        1<span className="gray"> / {images.length}</span>
+      </ImgNumber>
+    </ImgWrapper>
   );
 };
 

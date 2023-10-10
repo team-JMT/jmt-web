@@ -73,7 +73,11 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
             height: '48px',
           }}
         >
-          <ImgContainer images={DetailData.pictures} />
+          {DetailData.pictures.length >= 1 ? (
+            <ImgContainer images={DetailData.pictures} />
+          ) : (
+            <></>
+          )}
           <div className={'detail-container'}>
             <div
               className={'name-box'}
