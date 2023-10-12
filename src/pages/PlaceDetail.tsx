@@ -105,7 +105,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
             </div>
             <DetailMenu />
           </div>
-          <BottomBar />
+          <BottomBar name={DetailData.name} x={DetailData.x} y={DetailData.y} />
         </AppScreen>
         <NoticeBox isError={Boolean(DetailError)} content={DetailMessage} />
       </>
