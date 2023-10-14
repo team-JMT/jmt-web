@@ -6,10 +6,10 @@ import Share from '@assets/icons/Share';
 import verticalBarIcon from '@assets/icons/verticalBar.svg';
 import NoticeBox from '@components/placeDetail/NoticeBox';
 import BottomBar from '@layouts/PlaceDetail/BottomBar';
-import PlaceBottomSheet from '@layouts/PlaceDetail/BottomSheet';
 import DetailMenu from '@layouts/PlaceDetail/DetailMenu';
 import ImgContainer from '@layouts/PlaceDetail/ImgContainer';
 import Modal from '@layouts/PlaceDetail/Modal';
+import PlaceBottomSheet from '@layouts/PlaceDetail/PlaceDetailMenuBottomSheet';
 import { AppScreen } from '@stackflow/plugin-basic-ui';
 import { useHomeFlow } from '@stacks/homeStackFlow';
 import { openBottomSheet } from '@store/bottomSheetAtom';
@@ -73,7 +73,11 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
             height: '48px',
           }}
         >
-          <ImgContainer images={DetailData.pictures} />
+          {DetailData.pictures.length >= 1 ? (
+            <ImgContainer images={DetailData.pictures} />
+          ) : (
+            <></>
+          )}
           <div className={'detail-container'}>
             <div
               className={'name-box'}
@@ -101,7 +105,7 @@ const PlaceDetail = ({ params }: PlaceDetailProps) => {
             </div>
             <DetailMenu />
           </div>
-          <BottomBar />
+          <BottomBar name={DetailData.name} x={DetailData.x} y={DetailData.y} />
         </AppScreen>
         <NoticeBox isError={Boolean(DetailError)} content={DetailMessage} />
       </>
